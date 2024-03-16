@@ -115,25 +115,39 @@ func requestTestCheck(completionHandler: @escaping (Bool) -> Void) {
         completionHandler(false) // URL 생성에 실패한 경우
     }
 }
-
-func requestIdCheck(CheckId: String, completionHandrler: @escaping (Bool) -> Void) {
+// SigunUpView 에서 사용되고 있음
+// f 부분이 생소할 수 있는데 f 부분은 클로저를 말함.
+// 비동기 요청의 결과가 성공적이었는지 여부에 따라 true 또는 false 를 반환함.
+// 여기서 사용된 @escaping 속성은 해당 클로저가 함수 실행이 끝난 뒤에도 호출될 수 있음을 의미함.
+//클로저란 이름없는 함수라고 생각 하면서 보면 될듯 그래도 이해하기 좀 어려움 처음에
+func requestIdCheck(CheckId: String, f: @escaping (Bool) -> Void) {
     print("request ID Check")
+//    URL 구성
     if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/\(CheckId)/check"){
         print(url)
+//        생성된 URL 로 URLRequest 객채를 생성하고
         var request = URLRequest(url: url)
+//        메서드를 GET으로 설정함
         request.httpMethod = "GET"
+//        shared = URLSession 을 여는 명령
+//        dataTask  비동기적으로 웹 요청을 수행하는 함수 여기서 클로저가 사용됨 해당 클로저는 data res er 세가지 매개 변수를 가지고 있다.
         URLSession.shared.dataTask(with: request) {data, res, er in
             if let er = er {
                 print("err :\(er)")
                 return
             }
+//            guard 에 대한 설명 :
+//            guard 는 Swift 에서 조건을 검사하는 데 사용됨 보통 guard 조건 else {처리} 형식임
+//            조건이 true 일때 다음 코드로 넘어가고 아니면 else 가 실행되는거
+//            밑에 코드로 예를 들면 res 가 HTTPURLResponse 타입으로 반환되고 값이 200 ~ 299 값이라면 넘어간다는 말임 그이외는 else 문을 탄다는거임
+//            as 에 대한 설명 : 타입 케스팅 검사를 하는거임 변수의 타입에 들어갈 수 있는지 확인한다고 생각하면 됨 res 가 HTTPURLResponse 타입이 맞는지 아닌지 검사하는거
             guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
                 print("er http request failed")
-                completionHandrler(false)
+                f(false)
                 return
             }
             guard let data = data else{
-                completionHandrler(false)
+                f(false)
                 return
             }
             guard let json = try? JSONDecoder().decode(KPApiStructFrom<IDCheckResponse>.self, from: data) else{
@@ -142,9 +156,9 @@ func requestIdCheck(CheckId: String, completionHandrler: @escaping (Bool) -> Voi
             }
             print("중복확인 테스트 status : \(json.status)")
             if json.status == 200{
-                completionHandrler(true)
+                f(true)
             }else{
-                completionHandrler(false)
+                f(false)
             }
         }.resume()
     }

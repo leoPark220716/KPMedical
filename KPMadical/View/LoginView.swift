@@ -7,12 +7,18 @@
 
 import SwiftUI
 extension Notification.Name {
-    static let CloseLoginChanel = Notification.Name("test")
-//    NotificationCenter.default.post(name: .CloseLoginChanel, object: nil)
+    static let CloseLoginChanel = Notification.Name("CloseLoginView")
 }
-
 func getDeviceUUID() -> String {
     return UIDevice.current.identifierForVendor!.uuidString
+}
+protocol asdf {
+    var asdf: String {get}
+}
+extension Int: asdf {
+    var asdf: String {
+        return String(self)
+    }
 }
 
 struct LoginView: View {
@@ -51,7 +57,7 @@ struct LoginView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(checkBool ? Color.gray : Color.red, lineWidth: 2)
                         )
-                        .padding(.horizontal) // Apply horizontal padding only
+                        .padding(.horizontal)
                     Button(action: {
                         requestLogin(account: email, password: password, uid: getDeviceUUID()){ isSuccess, token in
                             print("print is Success\(isSuccess)")
@@ -69,7 +75,6 @@ struct LoginView: View {
                             }
                             
                         }
-                        // Perform login action
                     }) {
                         Text("로그인")
                             .foregroundColor(.white)
@@ -78,8 +83,6 @@ struct LoginView: View {
                             .background(Color("ConceptColor"))
                             .cornerRadius(25)
                     }
-                    
-
                     Text("비밀번호를 잊으셨나요?")
                         .foregroundColor(.blue)
                     Divider()
@@ -100,11 +103,11 @@ struct LoginView: View {
                     }
                     
                 }.toastView(toast: $toast)
-                .padding(.horizontal) // Apply padding only to the horizontal edges
-                .padding(.top, 20) // Adjust top padding to bring elements closer
+                .padding(.horizontal)
+                .padding(.top, 20)
                 
             }
-        }.onReceive(NotificationCenter.default.publisher(for: .test)){ _ in
+        }.onReceive(NotificationCenter.default.publisher(for: .CloseLoginChanel)){ _ in
             closeLoginView()
         }
         
