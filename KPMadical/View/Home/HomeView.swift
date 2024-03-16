@@ -8,12 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    var logined: Bool
+    @State private var showSignUp = false
     var body: some View {
-        Text("Home화면")
+        ZStack{
+            Color(.init(white: 0, alpha: 0.05)).ignoresSafeArea()
+            VStack{
+                Text("Home화면")
+                    .onTapGesture {
+                        if !logined {
+                            showSignUp = true
+                        }
+                    }
+                    .fullScreenCover(isPresented: $showSignUp){
+                        LoginView()
+                    }
+            }
+        }
     }
 }
 
+
 #Preview {
-    HomeView()
+    HomeView(logined: false)
 }

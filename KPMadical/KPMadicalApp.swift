@@ -11,7 +11,7 @@ import SwiftUI
 struct KPMadicalApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }

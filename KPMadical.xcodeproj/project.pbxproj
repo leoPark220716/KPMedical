@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E219B2A2BA08FFD00D79DE3 /* Test.swift */; };
+		1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 1E219B2D2BA0977100D79DE3 /* AFNetworking */; };
+		1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B37482BA039DA00B8EFA4 /* Chat.swift */; };
+		1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B374A2BA0403500B8EFA4 /* SplashView.swift */; };
+		1E64CBF22BA050B50053A555 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* Profile.swift */; };
+		1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF32BA051740053A555 /* LoginManager.swift */; };
+		1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D1292BA31B0300C78CEC /* LoginView.swift */; };
+		1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */; };
+		1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F79172B9F322000F4C230 /* Hospital.swift */; };
+		1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9681EE2BA19400003F8E4B /* AccountView.swift */; };
+		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
+		1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */; };
+		1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */; };
 		1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB632B9F1F9300E923D9 /* KPMadicalApp.swift */; };
 		1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB652B9F1F9300E923D9 /* ContentView.swift */; };
 		1EE9CB682B9F1F9400E923D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EE9CB672B9F1F9400E923D9 /* Assets.xcassets */; };
@@ -34,6 +47,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E219B2A2BA08FFD00D79DE3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		1E2B37482BA039DA00B8EFA4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		1E2B374A2BA0403500B8EFA4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		1E64CBF12BA050B50053A555 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		1E64CBF32BA051740053A555 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		1E89D1292BA31B0300C78CEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOPTView.swift; sourceTree = "<group>"; };
+		1E8F79172B9F322000F4C230 /* Hospital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hospital.swift; sourceTree = "<group>"; };
+		1E9681EE2BA19400003F8E4B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountModel.swift; sourceTree = "<group>"; };
+		1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		1EE9CB602B9F1F9300E923D9 /* KPMadical.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KPMadical.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE9CB632B9F1F9300E923D9 /* KPMadicalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalApp.swift; sourceTree = "<group>"; };
 		1EE9CB652B9F1F9300E923D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +97,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2B37462BA0392200B8EFA4 /* MyHospital */ = {
+			isa = PBXGroup;
+			children = (
+				1E8F79172B9F322000F4C230 /* Hospital.swift */,
+			);
+			path = MyHospital;
+			sourceTree = "<group>";
+		};
+		1E2B37472BA039C600B8EFA4 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		1E64CBF02BA050A60053A555 /* Acount */ = {
+			isa = PBXGroup;
+			children = (
+				1E64CBF12BA050B50053A555 /* Profile.swift */,
+			);
+			path = Acount;
+			sourceTree = "<group>";
+		};
+		1E8F79142B9F31E800F4C230 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E64CBF02BA050A60053A555 /* Acount */,
+				1E2B37472BA039C600B8EFA4 /* Chat */,
+				1E8F79152B9F31F700F4C230 /* Home */,
+				1E8F79162B9F320300F4C230 /* SginUp */,
+				1E2B37462BA0392200B8EFA4 /* MyHospital */,
+				1EE9CB652B9F1F9300E923D9 /* ContentView.swift */,
+				1E89D1292BA31B0300C78CEC /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1E8F79152B9F31F700F4C230 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1EE63E072B9F46510026B4DE /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		1E8F79162B9F320300F4C230 /* SginUp */ = {
+			isa = PBXGroup;
+			children = (
+				1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */,
+				1E9681EE2BA19400003F8E4B /* AccountView.swift */,
+				1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */,
+			);
+			path = SginUp;
+			sourceTree = "<group>";
+		};
+		1EE63E092B9F47BE0026B4DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */,
+				1E64CBF32BA051740053A555 /* LoginManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1EE9CB572B9F1F9300E923D9 = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +185,13 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1E2B374A2BA0403500B8EFA4 /* SplashView.swift */,
+				1EE63E092B9F47BE0026B4DE /* Model */,
+				1E8F79142B9F31E800F4C230 /* View */,
 				1EE9CB632B9F1F9300E923D9 /* KPMadicalApp.swift */,
-				1EE9CB652B9F1F9300E923D9 /* ContentView.swift */,
 				1EE9CB672B9F1F9400E923D9 /* Assets.xcassets */,
 				1EE9CB692B9F1F9400E923D9 /* Preview Content */,
+				1E219B2A2BA08FFD00D79DE3 /* Test.swift */,
 			);
 			path = KPMadical;
 			sourceTree = "<group>";
@@ -143,6 +237,9 @@
 			dependencies = (
 			);
 			name = KPMadical;
+			packageProductDependencies = (
+				1E219B2D2BA0977100D79DE3 /* AFNetworking */,
+			);
 			productName = KPMadical;
 			productReference = 1EE9CB602B9F1F9300E923D9 /* KPMadical.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +312,9 @@
 				Base,
 			);
 			mainGroup = 1EE9CB572B9F1F9300E923D9;
+			packageReferences = (
+				1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */,
+			);
 			productRefGroup = 1EE9CB612B9F1F9300E923D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,7 +357,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
+				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
+				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
+				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
+				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
+				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
+				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
+				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
+				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
+				1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */,
+				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
+				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KPMadical/Preview Content\"";
@@ -428,6 +541,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -435,7 +549,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Teamnova.KPMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = KpMadical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -448,6 +562,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KPMadical/Preview Content\"";
@@ -457,6 +572,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -464,7 +580,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Teamnova.KPMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = KpMadical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -588,6 +704,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AFNetworking/AFNetworking.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1E219B2D2BA0977100D79DE3 /* AFNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */;
+			productName = AFNetworking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1EE9CB582B9F1F9300E923D9 /* Project object */;
 }
