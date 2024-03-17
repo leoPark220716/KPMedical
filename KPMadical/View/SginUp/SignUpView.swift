@@ -141,6 +141,7 @@ struct SignUpTextField: View{
     @State var isChecked: Bool = true
     @StateObject private var idFieldModel = IDFieldModel()
     @StateObject private var passFiledModel = PassFiledModel()
+    @State var nextFiled: Bool = false
     var body: some View{
         VStack(alignment: .leading, spacing: 5){
             Text(title)
@@ -150,12 +151,17 @@ struct SignUpTextField: View{
                         .focused($focus, equals: FocusEnum)
                         .keyboardType(isNumberInput ? .numberPad : .default)
                         .onReceive(Just(text)) {
+                            print("onReceive \(nextFiled)")
                             text = String($0.prefix(limit))
-                            if focus == .dobfiled{
-                                if text.count == limit {
+                            if focus == .dobfiled && nextFiled{
+                                if text.count == limit && nextFiled{
                                     moveToNextFocus()
                                 }
                             }
+                        }
+                        .onTapGesture{
+                            nextFiled = false
+                            print("onTapGesture \(nextFiled)")
                         }
                         .autocapitalization(.none)
                         .padding(12)
@@ -463,13 +469,11 @@ struct SignUpView: View {
                     print("passCheck : \(passCheck)")
                     print("name Count : \(name.count < 1)")
                     print("dob count : \(birthday.count != 6 && sex.count != 1)")
-                    print("dob count : \(phoneNumber.count != 11)")
-                    
+                    print("phoneNumber count : \(phoneNumber.count != 11)")
                     validateAndFocus()
                 }
             }
             .navigationTitle("회원가입")
-                //
             
         }
     }

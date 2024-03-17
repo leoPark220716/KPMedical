@@ -20,7 +20,6 @@ struct ContentView: View {
 //    @Environment(\.dismiss) private var dismiss  // 뷰를 닫기 위한 환경 변수 추가
     var body: some View {
 //        그냥 테스트 해보기
-//        ??
         NavigationStack{
             TabView {
                 HomeView(logined: loginManager.LoginStatus)
