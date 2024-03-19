@@ -17,6 +17,8 @@
 		1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */; };
 		1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F79172B9F322000F4C230 /* Hospital.swift */; };
 		1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9681EE2BA19400003F8E4B /* AccountView.swift */; };
+		1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */; };
+		1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA232BA88719009076F1 /* UserDataHandle.swift */; };
 		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
 		1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */; };
 		1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */; };
@@ -56,6 +58,8 @@
 		1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOPTView.swift; sourceTree = "<group>"; };
 		1E8F79172B9F322000F4C230 /* Hospital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hospital.swift; sourceTree = "<group>"; };
 		1E9681EE2BA19400003F8E4B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
+		1EA0CA232BA88719009076F1 /* UserDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataHandle.swift; sourceTree = "<group>"; };
 		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountModel.swift; sourceTree = "<group>"; };
 		1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -153,6 +157,15 @@
 			path = SginUp;
 			sourceTree = "<group>";
 		};
+		1EA0CA202BA8341C009076F1 /* SqLite */ = {
+			isa = PBXGroup;
+			children = (
+				1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */,
+				1EA0CA232BA88719009076F1 /* UserDataHandle.swift */,
+			);
+			path = SqLite;
+			sourceTree = "<group>";
+		};
 		1EE63E092B9F47BE0026B4DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +198,7 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1EA0CA202BA8341C009076F1 /* SqLite */,
 				1E2B374A2BA0403500B8EFA4 /* SplashView.swift */,
 				1EE63E092B9F47BE0026B4DE /* Model */,
 				1E8F79142B9F31E800F4C230 /* View */,
@@ -361,12 +375,14 @@
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
+				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
 				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
+				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
 				1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */,
 				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,

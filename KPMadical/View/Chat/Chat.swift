@@ -11,20 +11,22 @@ struct Chat: View {
     @State private var isVisible: Bool = false // 뷰의 표시 여부를 결정하는 상태 변수
 
      var body: some View {
-         VStack {
-            
-             Button("클릭 시 사라짐") {
-                 isVisible = true // 버튼 클릭 시 isVisible의 값을 반전시켜 뷰를 표시하거나 숨김
+         
+             VStack {
+                
+                 Button("클릭 시 사라짐") {
+                     isVisible = true // 버튼 클릭 시 isVisible의 값을 반전시켜 뷰를 표시하거나 숨김
+                 }
+    //             .fullScreenCover(isPresented: $isVisible){
+    //                 LoginView()
+    //             }
+                 .padding()
+                 .background(Color.blue)
+                 .foregroundColor(.white)
+                 .clipShape(Capsule()) // 버튼 디자인을 조금 더 꾸며주기 위해 추가
              }
-             .fullScreenCover(isPresented: $isVisible){
-                 ParentView()
-             }
-             .padding()
-             .background(Color.blue)
-             .foregroundColor(.white)
-             .clipShape(Capsule()) // 버튼 디자인을 조금 더 꾸며주기 위해 추가
          }
-     }
+     
  }
 
 

@@ -51,6 +51,8 @@ struct SingupRequest: Codable {
 struct loginResponse: Codable {
     let access_token: String
     let name: String
+    let dob:String
+    let sex_code: String
 }
 struct IDCheckResponse: Codable {
     let account: String
@@ -314,7 +316,7 @@ func requestSignUp(account: String, password: String, moblie: String, name: Stri
         }.resume()
     }
 }
-func requestLogin(account: String,password: String, uid: String, completionHandrler: @escaping (Bool, String) -> Void) {
+func requestLogin(account: String,password: String, uid: String,userstate:UserObservaleObject, completionHandrler: @escaping (Bool, String) -> Void) {
     print("request ID Check")
     if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access"){
         let logmodul: LoginModul = .init(account: account, password: password, uid: uid)
@@ -348,6 +350,8 @@ func requestLogin(account: String,password: String, uid: String, completionHandr
             if decoder.status != 201 {
                 completionHandrler(false,"false")
             }else{
+                userstate.SetData(name: decoder.data.name, dob: decoder.data.dob, sex: decoder.data.sex_code, token: decoder.data.access_token, isLoggedIn: true)
+                print(userstate.name)
                 completionHandrler(true,decoder.data.access_token)
                 
             }

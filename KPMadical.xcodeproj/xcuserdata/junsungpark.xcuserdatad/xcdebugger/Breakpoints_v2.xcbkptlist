@@ -16,24 +16,145 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "init(limit:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1A22B94B-F0C9-4D7C-99A1-0B9787965CB0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/CountModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
             landmarkName = "value"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - 73b30fc5b109be6a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of KPMadical.TextLimiter.value : Swift.String"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/CountModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - 82feaaff3ff9f11c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.value.getter : Swift.String"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/CountModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - b66605ebc6f8e3e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.value.setter : Swift.String"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/CountModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - 96e4ec8591f6c7f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.value.modify : Swift.String"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/CountModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - 272aaccede8f0d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.value.modify : Swift.String with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - ecf79b774dbb61c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.$value.getter : Combine.Published&lt;Swift.String&gt;.Publisher"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/CountModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - c3dfb2316f8ecaf0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.$value.setter : Combine.Published&lt;Swift.String&gt;.Publisher"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - 1eb7d336eb77bbff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.$value.modify : Combine.Published&lt;Swift.String&gt;.Publisher"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "1530891A-24E1-46A5-BECD-4D35862F540B - c93e2a79c30c7504"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.TextLimiter.$value.modify : Combine.Published&lt;Swift.String&gt;.Publisher with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,8 +183,8 @@
             filePath = "KPMadical/Model/LoginManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "requestGet(url:completionHandler:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -78,8 +199,8 @@
             filePath = "KPMadical/Model/LoginManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
             landmarkName = "requestGet(url:completionHandler:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -94,8 +215,8 @@
             filePath = "KPMadical/Model/LoginManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "requestGet(url:completionHandler:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -110,8 +231,8 @@
             filePath = "KPMadical/Model/LoginManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "requestGet(url:completionHandler:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -126,8 +247,8 @@
             filePath = "KPMadical/Model/LoginManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "requestGet(url:completionHandler:)"
             landmarkType = "9">
             <Locations>
@@ -161,6 +282,36 @@
                   endingLineNumber = "207"
                   offsetFromSymbolStart = "1032">
                </Location>
+               <Location
+                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a9007673a9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "377"
+                  endingLineNumber = "377"
+                  offsetFromSymbolStart = "804">
+               </Location>
+               <Location
+                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a9007673a9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "377"
+                  endingLineNumber = "377"
+                  offsetFromSymbolStart = "1032">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -174,8 +325,8 @@
             filePath = "KPMadical/View/SginUp/SignUpView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
             landmarkName = "SignUpView"
             landmarkType = "14">
             <Locations>
@@ -208,6 +359,21 @@
                   startingLineNumber = "377"
                   endingLineNumber = "377"
                   offsetFromSymbolStart = "800">
+               </Location>
+               <Location
+                  uuid = "5F72FD62-C392-4547-81A9-A38FDB12F255 - fa6af9579efdfb5f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.SignUpView.init(naviPath: SwiftUI.Binding&lt;SwiftUI.NavigationPath&gt;, birthday: Swift.String, sex: Swift.String, message: Swift.String, phoneNumber: Swift.String, name: Swift.String, id: Swift.String, password: Swift.String, Checkpassword: Swift.String) -&gt; KPMadical.SignUpView"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/View/SginUp/SignUpView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "365"
+                  endingLineNumber = "365"
+                  offsetFromSymbolStart = "832">
                </Location>
             </Locations>
          </BreakpointContent>

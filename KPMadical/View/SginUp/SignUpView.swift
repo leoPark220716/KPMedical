@@ -343,17 +343,21 @@ enum FocusableField: Hashable {
     case sexcodefiled
     
 }
+extension Notification.Name {
+    static let CloseSignUpChanel = Notification.Name("CloseSignUpView")
+}
 struct SignUpView: View {
-    @Environment(\.dismiss) private var dismiss
-    @State var birthday = ""
-    @State var sex = ""
-    @State var message = ""
-    @State var phoneNumber = ""
-    @State var name = ""
-    @State var id = ""
-    @State var password = ""
-    @State var Checkpassword = ""
+    @Binding var path: NavigationPath
+    @Binding var id:String
+    @Binding var Checkpassword:String
+    @Binding var name:String
+    @Binding var birthday :String
+    @Binding var sex :String
+    @Binding var smsCheck: Bool
+    @Binding var phoneNumber:String
     
+    @Binding var password:String
+    @Binding var message :String
     //    뷰 유동적으로 보이게 하는 불리언값들
     @State private var dobView = false
     @State private var mobileView = false
@@ -363,10 +367,8 @@ struct SignUpView: View {
     
     //    아이디 중복확인 했는지 안했는지 불리언, 휴대폰 인증 불리언
     @State private var idCheck = false
-    @State private var smsCheck = false
     @State private var passCheck = false
     
-    @State private var smsCheckNum = "123456"
     @FocusState private var focus: FocusableField?
     
     private var isFormValid: Bool{
@@ -406,76 +408,91 @@ struct SignUpView: View {
     @State private var LinkActive = false
     var body: some View {
         // 전체 배경색과 안전 영역 무시 설정
-        //        NavigationStack{
-        ZStack {
-            // ScrollView와 하단 버튼을 포함하는 VStack
-            VStack {
-                ScrollView {
-                    // 입력 필드를 담고 있는 VStack
-                    VStack(spacing: 16) {
-                        if mobileView{
-                            SignUpTextField(title: "휴대폰", placeholder: "휴대폰 번호", text: $phoneNumber, isNumberInput: true, validator: {$0.count == 11},limit: 11,FocusEnum: .mobilefiled, focus: _focus)
-                        }
-                        if dobView{
-                            HStack{
-                                SignUpTextField(title: "주민등록번호", placeholder: "주민번호 앞자리", text: $birthday, isNumberInput: true, validator: { $0.count == 6 },limit: 6, FocusEnum: .dobfiled, focus: _focus)
-                                    .frame(width: UIScreen.main.bounds.width / 2 - 30)
-                                Text("-")
-                                    .padding(.top)
-                                SignUpTextField(title: "", placeholder: "1", text: $sex, isNumberInput: true, validator: { $0.count == 1 },limit: 1, FocusEnum: .sexcodefiled,focus: _focus)
-                                    .frame(width: 40)
-                                Text("● ● ● ● ● ●")
-                                    .padding(.top)
+            ZStack {
+                // ScrollView와 하단 버튼을 포함하는 VStack
+                VStack {
+                    ScrollView {
+                        // 입력 필드를 담고 있는 VStack
+                        VStack(spacing: 16) {
+                            if mobileView{
+                                SignUpTextField(title: "휴대폰", placeholder: "휴대폰 번호", text: $phoneNumber, isNumberInput: true, validator: {$0.count == 11},limit: 11,FocusEnum: .mobilefiled, focus: _focus)
                             }
+                            if dobView{
+                                HStack{
+                                    SignUpTextField(title: "주민등록번호", placeholder: "주민번호 앞자리", text: $birthday, isNumberInput: true, validator: { $0.count == 6 },limit: 6, FocusEnum: .dobfiled, focus: _focus)
+                                        .frame(width: UIScreen.main.bounds.width / 2 - 30)
+                                    Text("-")
+                                        .padding(.top)
+                                    SignUpTextField(title: "", placeholder: "1", text: $sex, isNumberInput: true, validator: { $0.count == 1 },limit: 1, FocusEnum: .sexcodefiled,focus: _focus)
+                                        .frame(width: 40)
+                                    Text("● ● ● ● ● ●")
+                                        .padding(.top)
+                                }
+                            }
+                            if nameView{
+                                SignUpTextField(title: "이름", placeholder: "이름", text: $name, isNumberInput: false, validator: {$0.count > 0},limit: 11, FocusEnum: .namefiled,focus: _focus)
+                            }
+                            if passwordView{
+                                PassTextField(title: "비밀번호", placeholder: "비밀번호", text: $password,checktext: $Checkpassword, isNumberInput: false, validator: {$0.count >= 8},limit: 30,FocusEnum: .passwordfiled,focus: _focus, isChecked: $passCheck)
+                            }
+                            IdTextField(title: "아이디", placeholder: "아이디", text: $id, isNumberInput: false, validator: {$0.count >= 6},limit: 30, FocusEnum: .accountfiled,focus: _focus, isChecked: $idCheck)
                         }
-                        if nameView{
-                            SignUpTextField(title: "이름", placeholder: "이름", text: $name, isNumberInput: false, validator: {$0.count > 0},limit: 11, FocusEnum: .namefiled,focus: _focus)
-                        }
-                        if passwordView{
-                            PassTextField(title: "비밀번호", placeholder: "비밀번호", text: $password,checktext: $Checkpassword, isNumberInput: false, validator: {$0.count >= 8},limit: 30,FocusEnum: .passwordfiled,focus: _focus, isChecked: $passCheck)
-                        }
-                        IdTextField(title: "아이디", placeholder: "아이디", text: $id, isNumberInput: false, validator: {$0.count >= 6},limit: 30, FocusEnum: .accountfiled,focus: _focus, isChecked: $idCheck)
+                        .padding()
                     }
-                    .padding()
-                }
-                .onAppear(){
-                    focus = .accountfiled
-                }
-                HStack {
-                    if CheckList {
-                        NavigationLink(destination: SingleOTPView(account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck,smsCheckInt: $smsCheckNum, mobileNum: $phoneNumber)){
+                    .onAppear(){
+                        focus = .accountfiled
+                    }
+                    HStack {
+//                        if CheckList {
+//                            NavigationLink(destination: SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)){
+//                                Spacer()
+//                                Text("확인")
+//                                    .foregroundColor(.white)
+//                                    .padding(.vertical, 10)
+//                                    .font(.system(size: 18, weight: .semibold))
+//                                Spacer()
+//                            }
+//                        }
+//                        else {
                             Spacer()
                             Text("확인")
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)
                                 .font(.system(size: 18, weight: .semibold))
                             Spacer()
+//                        }
+                    }
+                    .background(isFormValid ? Color("ConceptColor") : Color.gray)
+                    .background(Color("ConceptColor"))
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if CheckList{
+                            path.append(Destination.signUpOPT)
                         }
-                    }else {
-                        Spacer()
-                        Text("확인")
-                            .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                            .font(.system(size: 18, weight: .semibold))
-                        Spacer()
+                        print("GetText")
+                        print("isFormValid : \(isFormValid)")
+                        print("CheckList : \(CheckList)")
+                        print("idCheck : \(idCheck)")
+                        print("passCheck : \(passCheck)")
+                        print("name Count : \(name.count < 1)")
+                        print("dob count : \(birthday.count != 6 && sex.count != 1)")
+                        print("phoneNumber count : \(phoneNumber.count != 11)")
+                        validateAndFocus()
                     }
                 }
-                .background(isFormValid ? Color("ConceptColor") : Color.gray)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    print("isFormValid : \(isFormValid)")
-                    print("CheckList : \(CheckList)")
-                    print("idCheck : \(idCheck)")
-                    print("passCheck : \(passCheck)")
-                    print("name Count : \(name.count < 1)")
-                    print("dob count : \(birthday.count != 6 && sex.count != 1)")
-                    print("phoneNumber count : \(phoneNumber.count != 11)")
-                    validateAndFocus()
+                .navigationDestination(for: Destination.self) { dse in
+                    switch dse {
+                    case .signUp:
+                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
+//                        SignUpView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)
+                    case .signUpOPT:
+                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
+                    }
                 }
+                .navigationTitle("회원가입")
+                
             }
-            .navigationTitle("회원가입")
-            
-        }
+        
     }
     
 //    nameView passwordView dobView mobileView
@@ -581,8 +598,6 @@ private func handleAction() {
 }
 
 
-#Preview {
-    SignUpView()
-}
+
 
 

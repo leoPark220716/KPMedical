@@ -9,6 +9,7 @@ import SwiftUI
 extension Notification.Name {
     static let CloseLoginChanel = Notification.Name("CloseLoginView")
 }
+
 func getDeviceUUID() -> String {
     return UIDevice.current.identifierForVendor!.uuidString
 }
@@ -22,15 +23,17 @@ extension Int: asdf {
 }
 
 struct LoginView: View {
+    @ObservedObject var authViewModel: UserObservaleObject
+    @ObservedObject var sign: singupOb
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var checkBool: Bool = true
-    @Environment(\.dismiss) private var closeLoginView  // 뷰를 닫기 위한 환경 변수 추가
+    @Environment(\.dismiss) private var closeLoginView  // 뷰를 닫기 위한 환경 변수
     @FocusState private var focusID
     @State private var toast: FancyToast? = nil
-    
+    @State private var path = NavigationPath()
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path){
             ZStack {
                 VStack(spacing: 20) { // Reduce spacing between elements in VStack
                     Spacer()
@@ -59,12 +62,13 @@ struct LoginView: View {
                         )
                         .padding(.horizontal)
                     Button(action: {
-                        requestLogin(account: email, password: password, uid: getDeviceUUID()){ isSuccess, token in
+                        requestLogin(account: email, password: password, uid: getDeviceUUID(),userstate: authViewModel){ isSuccess, token in
                             print("print is Success\(isSuccess)")
                             if isSuccess {
+                                authViewModel.isLoggedIn = true
+                                
                                 print("Yes")
                                 print(token)
-                                closeLoginView()
                             }else{
                                 toast = FancyToast(type: .error, title: "아이디 또는 비밀번호가 올바르지 않습니다.", message: "올바른 아이디, 비밀번호를 작성해주세요")
                                 print("no")
@@ -96,28 +100,68 @@ struct LoginView: View {
                     }
                     
                     Spacer()
-
-                    NavigationLink(destination: SignUpView()) {
+//                    NavigationLink(destination: SignUpView(path: $path)) {
                         Text("아직 회원이 아니신가요? 가입하기")
                             .foregroundColor(.blue)
-                    }
+                            .onTapGesture {
+                                path.append(Destination.signUp)
+                            }
+//                    }
+//                    NavigationLink("아직 회원이 아니신가요? 가입하기"){
+//                        SignUpView(path: $path)
+//                    }
                     
                 }.toastView(toast: $toast)
                 .padding(.horizontal)
                 .padding(.top, 20)
-                
             }
-        }.onReceive(NotificationCenter.default.publisher(for: .CloseLoginChanel)){ _ in
-            closeLoginView()
+            .navigationDestination(for: Destination.self) { dse in
+                switch dse {
+                case .signUp:
+                    SignUpView(path: $path,id: $sign.id, Checkpassword: $sign.Checkpassword,name: $sign.name , birthday: $sign.birthday ,sex: $sign.sex ,smsCheck: $sign.smsCheck,phoneNumber: $sign.phoneNumber, password: $sign.password,message:$sign.message) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
+
+                case .signUpOPT:
+                    SingleOTPView(path: $path,account: $sign.id,password: $sign.Checkpassword,name: $sign.name, dob: $sign.birthday,sex_code: $sign.sex, smsCheck: $sign.smsCheck, mobileNum: $sign.phoneNumber) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
+                }
+            }
         }
         
     }
 }
-
+struct DetailView1: View {
+    var body: some View {
+        VStack {
+            Text("Detail Page")
+                .font(.largeTitle)
+                .padding()
+            
+            Divider()
+            
+            // 내용 목록
+            List {
+                Text("Item 1")
+                Text("Item 2")
+                Text("Item 3")
+            }
+            
+            Spacer() // 아래쪽으로 내용을 밀어냄
+        }
+        .navigationBarTitle("Detail View", displayMode: .inline)
+        .navigationBarItems(leading: Button(action: {
+            // 여기에 뒤로 가기 액션을 추가
+        }) {
+            Text("Back")
+        })
+    }
+}
+enum Destination {
+    case signUp
+    case signUpOPT
+    // 다른 뷰 식별자를 추가할 수 있습니다.
+}
 struct SocialLoginButton: View {
     let systemName: String
     let color: Color
-
     var body: some View {
         Image(systemName: systemName)
             .foregroundColor(.white)
@@ -126,9 +170,11 @@ struct SocialLoginButton: View {
             .clipShape(Circle())
     }
 }
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
+//#Preview {
+//    LoginView()
+//}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView(naviPath: NavigationPath)
+//    }
+//}

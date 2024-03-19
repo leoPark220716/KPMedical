@@ -14,6 +14,7 @@ enum BottomTab{
     case home,chat,hospital, account
 }
 struct ContentView: View {
+    @ObservedObject var authViewModel: UserObservaleObject
     @StateObject private var countModel = CountModel(sentCount: 0)
     @StateObject private var loginManager = LoginManager(LoginStatus: false)
     @State private var tabState: BottomTab = .home
@@ -22,7 +23,7 @@ struct ContentView: View {
 //        그냥 테스트 해보기
         NavigationStack{
             TabView {
-                HomeView(logined: loginManager.LoginStatus)
+                HomeView(authViewModel: authViewModel, logined: loginManager.LoginStatus)
                     .tabItem {
                         Label("홈", systemImage: "house")
                     }
@@ -43,7 +44,7 @@ struct ContentView: View {
         }
     }
 }
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
 

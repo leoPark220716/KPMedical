@@ -9,11 +9,18 @@ import SwiftUI
 import Combine
 struct SplashView: View {
     @State var isActive: Bool = false
+    let UserData = LocalDataBase.DataBase
+    @StateObject private var sign = singupOb()
+    @StateObject private var userInfo = UserObservaleObject()
     var body: some View {
             ZStack {
                 Color("SplashBack").edgesIgnoringSafeArea(.all) // 화면 전체에 색상 적용
                 if self.isActive {
-                    ContentView()
+                    if userInfo.isLoggedIn {
+                        ContentView(authViewModel: userInfo)
+                    }else{
+                        LoginView(authViewModel: userInfo, sign: sign)
+                    }
                 } else {
                     VStack {
                         Text("KP Madical")
@@ -30,9 +37,15 @@ struct SplashView: View {
                 }
             }
             .onAppear {
+                UserData.readUserDb(userstate: userInfo)
 //                스플래시 기능임
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     withAnimation {
+                        print(userInfo.isLoggedIn)
+                        print(userInfo.name)
+                        print(userInfo.dob)
+                        print(userInfo.sex)
+                        print(userInfo.token)
                         self.isActive = true
                     }
                 }
@@ -158,7 +171,6 @@ struct FancyToastModifier: ViewModifier {
             let task = DispatchWorkItem {
                dismissToast()
             }
-            
             workItem = task
             DispatchQueue.main.asyncAfter(deadline: .now() + toast.duration, execute: task)
         }
@@ -173,6 +185,8 @@ struct FancyToastModifier: ViewModifier {
         workItem = nil
     }
 }
+
+
 
 extension View {
     func toastView(toast: Binding<FancyToast?>) -> some View {

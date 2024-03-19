@@ -8,20 +8,21 @@
 import SwiftUI
 import Combine
 struct SingleOTPView: View {
+    @Binding var path: NavigationPath
     @Binding var account: String
     @Binding var password: String
     @Binding var name: String
     @Binding var dob: String
     @Binding var sex_code: String
-
     @Binding var smsCheck: Bool
-    @Binding var smsCheckInt: String
     @Binding var mobileNum: String
+    
     @State private var otp: String = ""
     @State private var Token: String = ""
     @State private var timeRemaining = 60
     @State private var CheckBool: Bool = false
     @State private var CheckClick: Bool = false
+    @State private var GoContentView = false
     @Environment(\.dismiss) var dismiss
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @FocusState private var otpFocused: Bool
@@ -54,9 +55,16 @@ struct SingleOTPView: View {
                     }
                     .onAppear{
                         otpFocused = true
+                        print("account")
+                        print(account)
+                        print(password)
+                        print(name)
+                        print(dob)
                         requestMoblieCheck(mobile: mobileNum) { isSuccess, response in
                             if isSuccess{
                                 Token = response
+                            }else{
+                                print("getFalse")
                             }
                         }
                     }
@@ -86,7 +94,7 @@ struct SingleOTPView: View {
                                 isSuccess, res in
                                 if isSuccess {
                                     print("SIgunUp OK")
-                                    NotificationCenter.default.post(name: .CloseLoginChanel, object: nil)
+                                    path = NavigationPath()
                                 }
                             }
                         }else{
