@@ -157,11 +157,3 @@ struct SocialLoginButton: View {
             .clipShape(Circle())
     }
 }
-//#Preview {
-//    LoginView()
-//}
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginView(naviPath: NavigationPath)
-//    }
-//}

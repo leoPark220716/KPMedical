@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */; };
 		1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E219B2A2BA08FFD00D79DE3 /* Test.swift */; };
 		1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 1E219B2D2BA0977100D79DE3 /* AFNetworking */; };
 		1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E267BE32BA9C07900280170 /* SQlite_UserData.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNVSTack.swift; sourceTree = "<group>"; };
 		1E219B2A2BA08FFD00D79DE3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		1E267BE32BA9C07900280170 /* SQlite_UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQlite_UserData.swift; sourceTree = "<group>"; };
 		1E2B37482BA039DA00B8EFA4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				1E219B2A2BA08FFD00D79DE3 /* Test.swift */,
 				1E4C28182BA9F413005461D1 /* TestFunc.swift */,
+				1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */,
 			);
 			path = TestFile;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
+				1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
 				1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */,

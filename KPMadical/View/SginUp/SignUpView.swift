@@ -443,24 +443,12 @@ struct SignUpView: View {
                         focus = .accountfiled
                     }
                     HStack {
-//                        if CheckList {
-//                            NavigationLink(destination: SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)){
-//                                Spacer()
-//                                Text("확인")
-//                                    .foregroundColor(.white)
-//                                    .padding(.vertical, 10)
-//                                    .font(.system(size: 18, weight: .semibold))
-//                                Spacer()
-//                            }
-//                        }
-//                        else {
                             Spacer()
                             Text("확인")
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)
                                 .font(.system(size: 18, weight: .semibold))
                             Spacer()
-//                        }
                     }
                     .background(isFormValid ? Color("ConceptColor") : Color.gray)
                     .background(Color("ConceptColor"))
@@ -483,10 +471,9 @@ struct SignUpView: View {
                 .navigationDestination(for: Destination.self) { dse in
                     switch dse {
                     case .signUp:
-                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
-//                        SignUpView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)
+                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)
                     case .signUpOPT:
-                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber) // 'DetailView'는 여러분이 네비게이션하고자 하는 대상 뷰입니다.
+                        SingleOTPView(path: $path,account:$id,password: $Checkpassword,name: $name, dob: $birthday,sex_code: $sex, smsCheck: $smsCheck, mobileNum: $phoneNumber)
                     }
                 }
                 .navigationTitle("회원가입")
@@ -494,8 +481,6 @@ struct SignUpView: View {
             }
         
     }
-    
-//    nameView passwordView dobView mobileView
     private func validateAndFocus() {
         if !idCheck {
             print("accountfiled")
