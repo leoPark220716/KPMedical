@@ -10,7 +10,7 @@ import SwiftUI
 struct TestNVSTack: View {
     var body: some View {
         NavigationStack{
-            NavigationLink(destination: t()){
+            NavigationLink(destination: FindHospitalView()){
                 SearchHpView()
             }
         }

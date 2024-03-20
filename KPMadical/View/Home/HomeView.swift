@@ -21,7 +21,9 @@ struct HomeView: View {
                     NavigationLink(destination: Chat()) {
                         TreatmentCardView(CurrentHospital: "xx병원", CurrentCheckUp: "xx", Currentdisease: "xx", CurrentDoc: "의사명", Currentmedical: "진료과", ImageURL: "https://picsum.photos/200/300")
                     }
-                    SearchHpView()
+                    NavigationLink(destination: FindHospitalView()){
+                        SearchHpView()
+                    }
                     Spacer()
                     HStack{
                         calendarView()

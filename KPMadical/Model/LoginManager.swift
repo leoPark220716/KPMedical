@@ -30,18 +30,6 @@ struct LoginModul: Codable {
     let password: String
     let uid: String
 }
-struct TestResponse<T: Codable>: Codable {
-    let status: Int
-    let success: String
-    let message: String
-    let data: [T]
-}
-struct KPApiStructFrom<T: Codable>: Codable {
-    let status: Int
-    let success: String
-    let message: String
-    let data: T
-}
 // 자동로그인 파싱값
 struct AutoLoginModel: Codable {
     let access_token: String
@@ -96,37 +84,6 @@ struct Response: Codable {
     let success: Bool
     let result: String
     let message: String
-}
-func requestTestCheck(completionHandler: @escaping (Bool) -> Void) {
-    print("GetSTSTS")
-    if let url = URL(string: "https://kp-medicals.com/api/test/select") {
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) { data, res, er in
-            guard let data = data else {
-                completionHandler(false)
-                return
-            }
-            guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
-                print("err http request failed")
-                completionHandler(false)
-                return
-            }
-            let decoder = JSONDecoder()
-            if let json = try? decoder.decode(TestResponse<DataItem>.self, from: data) {
-                print("유효성 검사 응답 값 " + json.success)
-                if json.success == "success"{
-                    completionHandler(true)
-                }else{
-                    completionHandler(false)
-                }
-            } else {
-                completionHandler(false)
-            }
-        }.resume()
-    } else {
-        completionHandler(false) // URL 생성에 실패한 경우
-    }
 }
 // 디바이스 고유 넘버
 func getDeviceUUID() -> String {
@@ -234,25 +191,7 @@ func requestSmsCheck(mobile: String,Token: String, CheckNum: String, completionH
         }.resume()
     }
 }
-func requsetTest(){
-    print("GetSTSTS")
-    if let url = URL(string: "https://kp-medicals.com/api/test/select"){
-        var request = URLRequest.init(url: url)
-        request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request){ (data, res, er) in
-            guard let data = data else { return }
-            guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else
-            { print("err http request failed")
-                return
-            }
-            let decoder = JSONDecoder()
-            if let json = try? decoder.decode(TestResponse<DataItem>.self, from: data) {
-                print(json.success)
-                
-            }
-        }.resume()
-    }
-}
+
 struct singupResponse: Codable{
     let account: String
 }

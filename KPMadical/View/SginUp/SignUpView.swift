@@ -451,7 +451,6 @@ struct SignUpView: View {
                             Spacer()
                     }
                     .background(isFormValid ? Color("ConceptColor") : Color.gray)
-                    .background(Color("ConceptColor"))
                     .contentShape(Rectangle())
                     .onTapGesture {
                         if CheckList{

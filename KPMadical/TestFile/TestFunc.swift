@@ -11,27 +11,6 @@ import Foundation
 struct HospitalData: Codable {
     var data: [Hospitals]
 }
-
-// Define the structure for each hospital
-// Codable : 구조체를 Josn decode encode 를 원할하게 해주는 형태로 만들어줌
-// Indetifiable 각각의 고유 id 가 필요한 Swift 프로토콜
-// Equatable : 해당 구조체로 만들어진 객체가 같은지 비교할 수 있게 하는 기능을 달아줌
-struct Hospitals: Codable, Identifiable, Equatable {
-    var id = UUID() // SwiftUI List에서 사용하기 위한 유니크 아이덴티파이어
-    var hospital_name: String
-    var hospital_image: String
-    var startTime: String
-    var endTime: String
-    var hospital_skill: [String]
-    var hospital_id: String
-    var address: String
-    var longitude: String
-    var latitude: String
-//    CodingKey 열거형은 Json 의 키와 모델의 프로퍼티 이름이 다를 때 사용된다.
-    enum CodingKeys: String, CodingKey {
-        case hospital_name, hospital_image,startTime,endTime, hospital_skill, hospital_id, address, longitude, latitude
-    }
-}
 //현재 기준 한국시간 가져오기
 func getTime() -> String {
     let date = DateFormatter()
