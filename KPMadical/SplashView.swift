@@ -39,7 +39,6 @@ struct SplashView: View {
             .onAppear {
                 UserData.createTable()
                 UserData.readUserDb(userState: userInfo)
-                
                 AoutoLogin.CheckToken(token: userInfo.token, uid: getDeviceUUID()) { check,TokenCheck,token in
                     if check{
                         //  객체에 저장된 정보 그대로 유지

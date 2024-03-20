@@ -8,156 +8,11 @@
 import SwiftUI
 
 struct FindHospitalView: View {
-    var jsonString: String = """
-{
-  "data": [
-    {
-      "hospital_name": "1",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "22:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    },
-        {
-          "hospital_name": "2",
-          "hospital_image": "dsfafd",
-        "startTime" : "09:00",
-        "endTime" : "19:00",
-          "hospital_skill": [
-            "안과",
-            "비뇨기과",
-            "내과"
-          ],
-          "hospital_id": "91",
-          "address": "서울시 성북구 관양동",
-          "longitude": "38.123512523",
-          "latitude": "126.123512523"
-        }
-,{
-      "hospital_name": "3",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "19:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    },
-    {
-      "hospital_name": "4",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "19:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    }
-,{
-      "hospital_name": "5",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-        "endTime" : "11:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    }
-,{
-      "hospital_name": "6",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "19:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    }
-,{
-      "hospital_name": "7",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "19:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    }
-,{
-      "hospital_name": "8",
-      "hospital_image": "dsfafd",
-    "startTime" : "09:00",
-    "endTime" : "19:00",
-      "hospital_skill": [
-        "안과",
-        "비뇨기과",
-        "내과",
-        "성형외과",
-        "신경외과",
-        "산부인과"
-      ],
-      "hospital_id": "91",
-      "address": "서울시 성북구 관양동",
-      "longitude": "38.123512523",
-      "latitude": "126.123512523"
-    }
-]
-}
-"""
+//    병원 배열
     @State var hospitals: [Hospitals] = []
-    @State var hospitals2: [Hospitals] = []
+    @State private var departSheetShow = false
     let requestList = HospitalHTTPRequest()
+    @State var selectedDepartment: Department?
     @State private var selectedTab = 0
     var body: some View {
         NavigationStack {
@@ -200,7 +55,7 @@ struct FindHospitalView: View {
                         .frame(width: 150)
                         Spacer()
                         HStack{
-                            Text("진료과")
+                            Text(selectedDepartment?.name ?? "진료과")
                                 .font(.system(size: 13))
                                 .padding(.leading,10)
                                 .padding(.vertical, 4)
@@ -214,19 +69,33 @@ struct FindHospitalView: View {
                         .cornerRadius(10)
                         .padding(.trailing)
                         .shadow(color: .gray.opacity(0.3), radius: 10, x: 10, y: 10)
+                        .onTapGesture {
+                            departSheetShow.toggle()
+                        }
+//                        테스트까지 주석 여기부터
+                        .sheet(isPresented: $departSheetShow){
+                            departmentsChooseSheetView(selectedDepartment: $selectedDepartment, onDepartmentSelect: { department in
+                                self.selectedDepartment = department
+                                print("id = \(selectedDepartment?.rawValue ?? -1)")
+                            })
+                            .presentationDetents([.height(400),.medium,.large])
+                            .presentationDragIndicator(.automatic)
+                        }
+//                        여기까지
                     }
                 }
-//                리스트뷰
+                //                리스트뷰
                 List(hospitals.indices, id: \.self) {index in
                     FindHosptialItem(hospital: $hospitals[index])
-//                    맨 하단 이벤트 
+                    //                    맨 하단 이벤트
                         .onAppear {
-//                            if hospitals[index] == hospitals.last {
-//                                self.hospitals2 = load_HospitalData(jsonString: jsonString) ?? []
-//                                print(hospitals.last ?? "default value")
-//                                print("isBottom")
-//                                hospitals.append(contentsOf: hospitals2)
-//                            }
+                            //                            패이징 처리 여기서 하면됨
+                            //                            if hospitals[index] == hospitals.last {
+                            //                                self.hospitals2 = load_HospitalData(jsonString: jsonString) ?? []
+                            //                                print(hospitals.last ?? "default value")
+                            //                                print("isBottom")
+                            //                                hospitals.append(contentsOf: hospitals2)
+                            //                            }
                         }
                         .background(
                             NavigationLink("",destination : Chat())
@@ -242,7 +111,7 @@ struct FindHospitalView: View {
                             print("Failed Recevied Hospital: \(error)")
                         }
                     }
-//                    self.hospitals = load_HospitalData(jsonString: jsonString) ?? []
+                    //                    self.hospitals = load_HospitalData(jsonString: jsonString) ?? []
                 }
                 .listStyle(InsetListStyle())
                 .padding(.top, 10)

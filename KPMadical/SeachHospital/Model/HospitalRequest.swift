@@ -17,7 +17,7 @@ struct Hospitals: Codable, Identifiable, Equatable {
     var hospital_name: String
     var icon: String  // JSON에서 "icon" 필드와 일치
     var location: String
-    var department_id: [Int]
+    var department_id: [String]
     var start_time: String  // "start_time"으로 수정
     var end_time: String  // "end_time"으로 수정
 
@@ -25,6 +25,9 @@ struct Hospitals: Codable, Identifiable, Equatable {
     enum CodingKeys: String, CodingKey {
         case hospital_id, hospital_name, icon, location, department_id, start_time, end_time
     }
+}
+struct Hospital_Data: Codable {
+    let hospitals: [Hospitals]
 }
 class HospitalHTTPRequest {
     typealias HospitalListCompletion = (Result<[Hospitals], Error>) -> Void
@@ -57,9 +60,9 @@ class HospitalHTTPRequest {
                 }
                 do {
                     let decoder = JSONDecoder()
-                    let json = try decoder.decode(KPApiStructFromGetArray<Hospitals>.self, from: data)
+                    let json = try decoder.decode(KPApiStructFrom<Hospital_Data>.self, from: data)
                     DispatchQueue.main.sync{
-                        completion(.success(json.data))
+                        completion(.success(json.data.hospitals))
                     }
                 } catch {
                     print("JSON Error: \(error)")

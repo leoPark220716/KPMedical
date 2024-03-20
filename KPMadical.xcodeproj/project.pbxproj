@@ -13,6 +13,7 @@
 		1E18A2ED2BAAF8CD00466221 /* FindHosptialItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2EC2BAAF8CD00466221 /* FindHosptialItem.swift */; };
 		1E18A2F02BAB1C1300466221 /* HospitalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */; };
 		1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */; };
+		1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */; };
 		1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E219B2A2BA08FFD00D79DE3 /* Test.swift */; };
 		1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 1E219B2D2BA0977100D79DE3 /* AFNetworking */; };
 		1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E267BE32BA9C07900280170 /* SQlite_UserData.swift */; };
@@ -63,6 +64,7 @@
 		1E18A2EC2BAAF8CD00466221 /* FindHosptialItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHosptialItem.swift; sourceTree = "<group>"; };
 		1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalRequest.swift; sourceTree = "<group>"; };
 		1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonPasingMainModel.swift; sourceTree = "<group>"; };
+		1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = departmentsChooseSheetView.swift; sourceTree = "<group>"; };
 		1E219B2A2BA08FFD00D79DE3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		1E267BE32BA9C07900280170 /* SQlite_UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQlite_UserData.swift; sourceTree = "<group>"; };
 		1E2B37482BA039DA00B8EFA4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				1E18A2E82BAAF44800466221 /* FindHospitalView.swift */,
 				1E18A2EC2BAAF8CD00466221 /* FindHosptialItem.swift */,
+				1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			children = (
 				1E2B374A2BA0403500B8EFA4 /* SplashView.swift */,
 				1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */,
+				1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */,
 				1E18A2E62BAAF41700466221 /* SeachHospital */,
 				1E4C28172BA9F3CC005461D1 /* TestFile */,
 				1EA0CA202BA8341C009076F1 /* SqLite */,
@@ -261,7 +265,6 @@
 				1EE9CB632B9F1F9300E923D9 /* KPMadicalApp.swift */,
 				1EE9CB672B9F1F9400E923D9 /* Assets.xcassets */,
 				1EE9CB692B9F1F9400E923D9 /* Preview Content */,
-				1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */,
 			);
 			path = KPMadical;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */,
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,

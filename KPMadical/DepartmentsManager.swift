@@ -6,8 +6,10 @@
 //
 
 import Foundation
-enum Department: Int {
-    case general = 0, internalMedicine, neurology, mentalHealth, surgery, orthopedics, neurosurgery, cardiovascularSurgery, plasticSurgery, anesthesiology, obstetricsAndGynecology, pediatrics, ophthalmology, otolaryngology, dermatology, urology, radiology, integratedRadiology, pathology, diagnosticLaboratory, tuberculosis, rehabilitation, nuclearMedicine, familyMedicine, emergencyMedicine, occupationalEnvironmentalMedicine, preventiveMedicine, otherDentistry, otherTraditional, other1 = 31, other2 = 40, health, other3, dentalHealthFacility, traditionalHealthFacility, dentistry = 49, oralMaxillofacialSurgery, prosthodontics, orthodontics, pediatricDentistry, periodontics, endodontics, oralMedicine, radiologyDentistry, oralPathology, preventiveDentistry, subDentistry, integratedDentistry, traditionalInternalMedicine = 80, traditionalGynecology, traditionalPediatrics, traditionalOphthalmologyOtorhinolaryngologyDermatology, traditionalNeuropsychiatry, acupuncture, traditionalRehabilitationMedicine, constitution, traditionalEmergency, anotherEmergency = 89, traditionalSubtotal, otherIntegrated
+import SwiftUI
+
+enum Department: Int, CaseIterable {
+    case general = 0, internalMedicine, neurology, mentalHealth, surgery, orthopedics, neurosurgery, cardiovascularSurgery, plasticSurgery, anesthesiology, obstetricsAndGynecology, pediatrics, ophthalmology, otolaryngology, dermatology, urology, radiology, integratedRadiology, pathology, diagnosticLaboratory, tuberculosis, rehabilitation, nuclearMedicine, familyMedicine, emergencyMedicine, occupationalEnvironmentalMedicine, preventiveMedicine, health, dentalHealthFacility, traditionalHealthFacility, dentistry, oralMaxillofacialSurgery, prosthodontics, orthodontics, pediatricDentistry, periodontics, endodontics, oralMedicine, radiologyDentistry, oralPathology, preventiveDentistry, subDentistry, integratedDentistry, traditionalInternalMedicine, traditionalGynecology, traditionalPediatrics, traditionalOphthalmologyOtorhinolaryngologyDermatology, traditionalNeuropsychiatry, acupuncture, traditionalRehabilitationMedicine, constitution, traditionalEmergency1, traditionalEmergency2, traditionalSubtotal
 
     var name: String {
         switch self {
@@ -38,12 +40,7 @@ enum Department: Int {
         case .emergencyMedicine: return "응급의학과"
         case .occupationalEnvironmentalMedicine: return "직업환경의학과"
         case .preventiveMedicine: return "예방의학과"
-        case .otherDentistry: return "기타1(치과)"
-        case .otherTraditional: return "기타4(한방)"
-        case .other1: return "기타2"
-        case .other2: return "기타2" // Check this, seems like a duplicate
         case .health: return "보건"
-        case .other3: return "기타3"
         case .dentalHealthFacility: return "보건기관치과"
         case .traditionalHealthFacility: return "보건기관한방"
         case .dentistry: return "치과"
@@ -67,10 +64,10 @@ enum Department: Int {
         case .acupuncture: return "침구과"
         case .traditionalRehabilitationMedicine: return "한방재활의학과"
         case .constitution: return "사상체질과"
-        case .traditionalEmergency: return "한방응급"
-        case .anotherEmergency: return "한방응급" // Check for duplicate or different context
-        case .traditionalSubtotal: return "한방소계"
-        case .otherIntegrated: return "기타통합"
+        case .traditionalEmergency1: return "한방응급"
+        case .traditionalEmergency2: return "한방응급" // 주의: 실제 사용시 구별 필요
+        case .traditionalSubtotal: return "한방소"
+
         }
     }
     static func departmentName(fromId id: Int) -> String? {
