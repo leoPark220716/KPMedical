@@ -22,25 +22,31 @@ struct ContentView: View {
     var body: some View {
 //        그냥 테스트 해보기
         NavigationStack{
-            TabView {
-                HomeView(authViewModel: authViewModel, logined: loginManager.LoginStatus)
-                    .tabItem {
-                        Label("홈", systemImage: "house")
-                    }
-                Chat()
-                    .badge(countModel.sentCount)
-                    .tabItem {
-                        Label("상담", systemImage: "message")
-                    }
-                Hospital(Count: countModel)
-                    .tabItem {
-                        Label("내병원", systemImage: "stethoscope")
-                    }
-                Profile()
-                    .tabItem {
-                        Label("내정보", systemImage: "person.crop.circle")
-                    }
+            ZStack{
+                Color.white.edgesIgnoringSafeArea(.all)
+                TabView {
+                    HomeView(authViewModel: authViewModel, logined: loginManager.LoginStatus)
+                        .tabItem {
+                            Label("홈", systemImage: "house")
+                        }
+                    Chat()
+                        .badge(countModel.sentCount)
+                        .tabItem {
+                            Label("상담", systemImage: "message")
+                        }
+                    Hospital(Count: countModel)
+                        .tabItem {
+                            Label("내병원", systemImage: "stethoscope")
+                        }
+                    AccountView(authViewModel: authViewModel)
+                        .tabItem {
+                            Label("내정보", systemImage: "person.crop.circle")
+                        }
+                    
+                }
             }
+            .navigationTitle("\(authViewModel.name)님 안녕하세요!") // 이 부분을 ScrollView 밖으로 이동
+            .navigationBarTitleDisplayMode(.inline) // 필요한 경우 타이틀 표시 모드를 조정
         }
     }
 }

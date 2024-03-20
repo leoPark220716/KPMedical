@@ -13,13 +13,18 @@ class UserObservaleObject: ObservableObject {
     @Published var sex: String = ""
     @Published var token: String = ""
     @Published var isLoggedIn = false
-    func SetData(name: String, dob:String, sex:String, token:String, isLoggedIn: Bool){
+    func SetData(name: String, dob: String, sex: String, token: String) {
         self.name = name
         self.dob = dob
         self.sex = sex
         self.token = token
-        self.isLoggedIn = isLoggedIn
     }
+    func SetLoggedIn(logged: Bool) {
+        DispatchQueue.main.async {
+            self.isLoggedIn = logged
+        }
+    }
+
 }
 
 class singupOb: ObservableObject {

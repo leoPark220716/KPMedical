@@ -12,41 +12,151 @@ struct HomeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var showSignUp = false
     @State private var goLogin = false
+    let userDb = LocalDataBase.shared
+
     var body: some View {
-        NavigationView() {
-            VStack {
-                HStack{
-                    Text("팀노바님")
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
-                        .foregroundColor(.gray)
-                        .bold()
-                        .padding(.leading)
-                    Text("안녕하세요!")
-                        .font(.system(size: 20))
-                        .foregroundColor(.gray)
-                        .bold()
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    NavigationLink(destination: Chat()) {
+                        TreatmentCardView(CurrentHospital: "xx병원", CurrentCheckUp: "xx", Currentdisease: "xx", CurrentDoc: "의사명", Currentmedical: "진료과", ImageURL: "https://picsum.photos/200/300")
+                    }
+                    SearchHpView()
                     Spacer()
+                    HStack{
+                        calendarView()
+                        PillView()
+                    }
+                    .padding(.top)
                 }
-                .padding([.top, .leading])
-                NavigationLink(destination: Chat()){
-                    TreatmentCardView(CurrentHospital: "xx병원", CurrentCheckUp: "xx", Currentdisease: "xx", CurrentDoc: "의사명", Currentmedical: "진료과",ImageURL: "https://picsum.photos/200/300")
-                }
-//                NavigationLink(destination: Chat()){
-                ShowingHospitalView(ImageURL: "https://picsum.photos/200/300").onTapGesture {
-                    authViewModel.isLoggedIn = false
-                }
-//                }
-                Spacer()
-            }
-            .onAppear(){
-                NotificationCenter.default.post(name: .CloseLoginChanel, object: nil)
-            }
+            }.background(Color(.init(white: 0, alpha: 0.05))
+                .ignoresSafeArea())
         }
     }
 }
-
-
+// 성훈 코딩 끝나면 상황에 따라 추가할 부분
+//NavigationLink(destination: Chat()){
+//    ShowingHospitalView(ImageURL: "https://picsum.photos/200/300").onTapGesture {
+//        userDb.removeAllUserDB()
+//        authViewModel.SetLoggedIn(logged: false)
+//    }
+//}
+struct calendarView: View{
+    var body: some View{
+        RoundedRectangle(cornerRadius: 20)
+            .fill(Color.white)
+            .frame(width: 150,height: 110)
+            .shadow(radius: 40,
+                    x: 10, y:10)
+            .overlay(
+                ZStack{
+                    Image("Pill") // 여기서 "backgroundImage"는 교체해야 할 배경 이미지의 이름입니다.
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 170,height: 170)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                         // 이미지가 화면 전체를 채우도록 설정
+                    VStack(spacing: 0){
+                        HStack{
+                            Text("처방내역")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .bold()
+                                .padding([.leading,.top])
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+            )
+            .padding(.horizontal)
+    }
+}
+struct PillView: View{
+    var body: some View{
+        RoundedRectangle(cornerRadius: 20)
+            .fill(Color.white)
+            .frame(width: 150,height: 110)
+            .shadow(radius: 40,
+                    x: 10, y:10)
+            .overlay(
+                ZStack{
+                    Image("date_") // 여기서 "backgroundImage"는 교체해야 할 배경 이미지의 이름입니다.
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 170,height: 170)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                         // 이미지가 화면 전체를 채우도록 설정
+                    VStack(spacing: 0){
+                        HStack{
+                            Text("예약현황")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .bold()
+                                .padding([.leading,.top])
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+            )
+            .padding(.horizontal)
+    }
+}
+struct SearchHpView: View {
+    var body: some View {RoundedRectangle(cornerRadius: 20)
+            .fill(Color.white)
+            .frame(height: 200)
+            .shadow(radius: 10,
+                    x: 5, y:5)
+            .overlay(
+                ZStack{
+                    Image("SelectHP") // 여기서 "backgroundImage"는 교체해야 할 배경 이미지의 이름입니다.
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 200)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    // 이미지가 화면 전체를 채우도록 설정
+                    VStack(spacing: 0){
+                        HStack{
+                            Text("손쉽게 원하는 병원을")
+                                .font(.system(size: 20))
+                                .fontWeight(.bold)
+                                .foregroundColor(.gray)
+                                .bold()
+                                .padding([.leading, .top])
+                            Spacer()
+                        }
+                        HStack{
+                            Text("병원찾기")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .bold()
+                                .padding(.leading)
+                            Spacer()
+                        }
+                        Spacer()
+                        HStack() {
+                            Spacer()
+                            Text("진료내역 확인")
+                                .foregroundColor(.white)
+                                .padding(.vertical, 12)
+                                .font(.system(size: 20, weight: .semibold))
+                            Spacer()
+                        }
+                        .background(Color("ConceptColor"))
+                        .cornerRadius(10)
+                        .padding([.bottom, .horizontal])
+                    }
+                }
+            )
+            .padding([.bottom,.horizontal])
+            
+    }
+}
 struct TreatmentCardView: View {
     @State var CurrentHospital: String = ""
     @State var CurrentCheckUp: String = ""
@@ -57,7 +167,7 @@ struct TreatmentCardView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
             .fill(Color.white)
-            .frame(height: 240)
+            .frame(height: 230)
             .shadow(radius: 10,
                     x: 5, y:5)
             .overlay(
@@ -126,7 +236,7 @@ struct TreatmentCardView: View {
                         Spacer()
                         Text("진료내역 확인")
                             .foregroundColor(.white)
-                            .padding(.vertical, 15)
+                            .padding(.vertical, 12)
                             .font(.system(size: 20, weight: .semibold))
                         Spacer()
                     }
@@ -215,56 +325,6 @@ struct ShowingHospitalView: View {
                 }
             )
             .padding()
-    }
-}
-struct CardView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.white)
-                        .shadow(radius: 5)
-                    VStack {
-                        HStack {
-                            Image("SNUH") // Replace "SNUH" with your actual image name
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(25)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                        }.padding()
-
-                        HStack {
-                            Text("XX 병원")
-                                .fontWeight(.bold)
-                            Text("중상: 도두리기")
-                            Text("병명: 아테스페 발병")
-                        }
-                        HStack {
-                            Button("파파라") {
-                                // Action for first button
-                            }
-                            .buttonStyle(.bordered)
-                            Button("방방봅") {
-                                // Action for second button
-                            }
-                            .buttonStyle(.bordered)
-                        }
-                    }.padding()
-                }
-                .frame(height: 150)
-
-                NavigationLink(destination: Text("진료내역 화면")) {
-                    Text("진료내역 확인")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                }
-            }.padding()
-        }
     }
 }
 

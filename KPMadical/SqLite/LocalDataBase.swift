@@ -15,119 +15,133 @@ struct UserDb_Sqlite{
     var sex: String
     var token: String
 }
-class LocalDataBase {
-    static let DataBase = LocalDataBase()
+
+class LocalDataBase: ObservableObject {
     
-    var db : OpaquePointer?
+    static let shared = LocalDataBase()
     
-    let UserdatabaseName = "user.sqlite"
+    var db: OpaquePointer?
     
-    init() {
-        self.db = createDB()
-    }
+    let userDatabaseName = "User_info.sqlite"
     
-    deinit{
-        sqlite3_close(db)
-    }
-    //    디비 생성 함수.
-//    씨발 ㄴ
-    private func createDB() -> OpaquePointer? {
-        var db: OpaquePointer? = nil
-        do{
-            let dbPath: String = try FileManager.default.url(
-                for: .documentDirectory,
-                in: . userDomainMask,
-                appropriateFor: nil,
-                create: false).appendingPathComponent(UserdatabaseName).path
-            
-            if sqlite3_open(dbPath,&db) == SQLITE_OK {
-                print("create DB Successfuly. path : \(dbPath)")
-                return db
-            }
-        }
-        catch {
-            print("Err while Creating Database : \(error.localizedDescription)")
-        }
-        return nil
-    }
-//    SQlite 사용 user 정보 담는 DB 생성
     func createTable(){
-        let MakeUserDb = """
-    CREATE TABLE IF NOT EXISTS user(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    dob TEXT NOT NULL,
-    sex TEXT NOT NULL,
-    Token TEXT NOT NULL
-    );
-    """
-        var statement: OpaquePointer? = nil
-        if sqlite3_prepare(self.db, MakeUserDb, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Creating table has been succesfully done \(String(describing: self.db))")
-            }else{
-                let errMessage = String(cString: sqlite3_errmsg(db))
-                print("creating table false : \(errMessage)")
+            let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("User_info.sqlite")
+            if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
+                print("table not exsist")
             }
-        }else{
-            let errorMessage = String(cString: sqlite3_errmsg(self.db))
-            print("\nsqlite3_prepare failure while creating table: \(errorMessage)")
-        }
-        sqlite3_finalize(statement)
-    }
-    func insertUserDB(name: String, dob: String, sex: String, Token: String) {
-        let insertQuery = "insert into user(id, name, dob, sex, Token) values(?,?,?,?,?);"
-        var statement: OpaquePointer? = nil
+            let CREATE_QUERY_TEXT : String = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, dob TEXT NOT NULL, sex TEXT NOT NULL, Token TEXT NOT NULL)"
+            print(CREATE_QUERY_TEXT)
+            if sqlite3_exec(db, CREATE_QUERY_TEXT, nil, nil, nil) != SQLITE_OK {
+                let errMsg = String(cString:sqlite3_errmsg(db))
+                print("db table create error : \(errMsg)")
+            }
         
-        if sqlite3_prepare_v2(self.db, insertQuery, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, name, -1, nil)
-            sqlite3_bind_text(statement, 3, dob, -1, nil)
-            sqlite3_bind_text(statement, 4, sex, -1, nil)
-            sqlite3_bind_text(statement, 5, Token, -1, nil)
-        }
-        else {
-            print("sqlite binding failure")
-        }
-        if sqlite3_step(statement) == SQLITE_DONE {
-            print("sqlite insertion success")
-        }else{
-            print("sqlite step failure")
-        }
     }
-    func readUserDb(userstate:UserObservaleObject){
-        let query: String = "SELECT * FROM user ORDER BY id DESC LIMIT 1;"
-        var statement: OpaquePointer? = nil
-        
-        
-        if sqlite3_prepare(self.db, query, -1, &statement, nil) != SQLITE_OK {
-            let errMessage = String(cString: sqlite3_errmsg(db)!)
-            userstate.isLoggedIn = false
-            print("err : \(errMessage)")
+    func insert(name: String, dob: String, sex: String, token: String){
+            var stmt : OpaquePointer?
+            
+            let INSERT_QUERY_TEXT : String = "INSERT INTO user (name, dob, sex, Token) VALUES (?, ?, ?, ?)"
+
+        if sqlite3_prepare_v2(self.db, INSERT_QUERY_TEXT, -1, &stmt, nil) != SQLITE_OK {
+                let errMsg = String(cString: sqlite3_errmsg(db)!)
+                print("error preparing insert:v1 \(errMsg)")
+                return
+            }
+            let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+            
+            if sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT) != SQLITE_OK{
+                let errMsg = String(cString : sqlite3_errmsg(db)!)
+                print("failture binding name: \(errMsg)")
+                return
+            }
+
+            if sqlite3_bind_text(stmt, 2, dob, -1, SQLITE_TRANSIENT) != SQLITE_OK{
+                let errMsg = String(cString : sqlite3_errmsg(db)!)
+                print("failture binding name: \(errMsg)")
+                return
+            }
+            
+            if sqlite3_bind_text(stmt, 3, sex, -1, SQLITE_TRANSIENT) != SQLITE_OK{
+                let errMsg = String(cString : sqlite3_errmsg(db)!)
+                print("failture binding name: \(errMsg)")
+                return
+            }
+            if sqlite3_bind_text(stmt, 4, token, -1, SQLITE_TRANSIENT) != SQLITE_OK{
+            let errMsg = String(cString : sqlite3_errmsg(db)!)
+            print("failture binding name: \(errMsg)")
+            return
+            }
+            if sqlite3_step(stmt) != SQLITE_DONE {
+                let errMsg = String(cString : sqlite3_errmsg(db)!)
+                print("insert fail :: \(errMsg)")
+                return
+            }
+        print("Success insert")
         }
-        while sqlite3_step(statement) == SQLITE_ROW{
-            _ = sqlite3_column_int(statement, 0)
-            let name = String(cString: sqlite3_column_text(statement, 1))
-            let dob = String(cString: sqlite3_column_text(statement, 2))
-            let sex = String(cString: sqlite3_column_text(statement, 3))
-            let token = String(cString: sqlite3_column_text(statement, 4))
-            userstate.SetData(name: name, dob: dob, sex: sex, token: token, isLoggedIn: true)
-        }
-        sqlite3_finalize(statement)
-    }
-//    컬럼 추가
     
-//    func addColumnToUserTable() {
-//        let alterTableStatementStr = "ALTER TABLE user ADD COLUMN Token TEXT NOT NULL"
-//        var alterTableStatement: OpaquePointer? = nil
-//        if sqlite3_prepare_v2(self.db, alterTableStatementStr, -1, &alterTableStatement, nil) == SQLITE_OK {
-//            if sqlite3_step(alterTableStatement) == SQLITE_DONE {
-//                print("Added a column to user table successfully.")
-//            } else {
-//                print("Could not add a column to user table.")
-//            }
-//        } else {
-//            print("ALTER TABLE statement could not be prepared.")
-//        }
-//        sqlite3_finalize(alterTableStatement)
-//    }
+    func readUserDb(userState: UserObservaleObject) {
+        print("Call readUserDb")
+        let query = "SELECT * FROM user ORDER BY id DESC LIMIT 1;"
+        var statement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
+            while sqlite3_step(statement) == SQLITE_ROW {
+                let name = String(cString: sqlite3_column_text(statement, 1))
+                let dob = String(cString: sqlite3_column_text(statement, 2))
+                let sex = String(cString: sqlite3_column_text(statement, 3))
+                let token = String(cString: sqlite3_column_text(statement, 4))
+                userState.SetData(name: name, dob: dob, sex: sex, token: token)
+                print("name : \(name)")
+                print("name : \(dob)")
+                print("name : \(sex)")
+                print("name : \(token)")
+            }
+        } else {
+            let errMessage = String(cString: sqlite3_errmsg(db))
+            print("Error reading user DB: \(errMessage)")
+            userState.isLoggedIn = false
+        }
+        sqlite3_finalize(statement)
+    }
+    
+    func removeAllUserDB() {
+        print("Call removeAllUserDB")
+        let query = "DELETE FROM user;"
+        var statement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("Successfully deleted all users")
+            } else {
+                let errorMessage = String(cString: sqlite3_errmsg(db))
+                print("Error deleting users: \(errorMessage)")
+            }
+        } else {
+            let errMessage = String(cString: sqlite3_errmsg(db))
+            print("Error preparing delete: \(errMessage)")
+        }
+        sqlite3_finalize(statement)
+    }
+    
+    func updateToken(token: String) {
+        print("Call updateToken")
+        let query = "UPDATE user SET Token = ? ORDER BY id DESC LIMIT 1;"
+        var statement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_text(statement, 1, (token as NSString).utf8String, -1, nil)
+            
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("Successfully updated token")
+            } else {
+                let errorMessage = String(cString: sqlite3_errmsg(db))
+                print("Error updating token: \(errorMessage)")
+            }
+        } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("Error preparing update: \(errorMessage)")
+        }
+        sqlite3_finalize(statement)
+        sqlite3_close(self.db)
+    }
 }

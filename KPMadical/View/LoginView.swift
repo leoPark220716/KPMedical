@@ -10,9 +10,6 @@ extension Notification.Name {
     static let CloseLoginChanel = Notification.Name("CloseLoginView")
 }
 
-func getDeviceUUID() -> String {
-    return UIDevice.current.identifierForVendor!.uuidString
-}
 protocol asdf {
     var asdf: String {get}
 }
@@ -23,6 +20,7 @@ extension Int: asdf {
 }
 
 struct LoginView: View {
+    let UserData = LocalDataBase.shared
     @ObservedObject var authViewModel: UserObservaleObject
     @ObservedObject var sign: singupOb
     @State private var email: String = ""
@@ -41,7 +39,7 @@ struct LoginView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color("ConceptColor"))
-
+                    
                     TextField("아이디", text: $email)
                         .focused($focusID)
                         .padding()
@@ -65,19 +63,15 @@ struct LoginView: View {
                         requestLogin(account: email, password: password, uid: getDeviceUUID(),userstate: authViewModel){ isSuccess, token in
                             print("print is Success\(isSuccess)")
                             if isSuccess {
-                                authViewModel.isLoggedIn = true
-                                
-                                print("Yes")
-                                print(token)
+                                UserData.insert(name: authViewModel.name, dob: authViewModel.dob, sex: authViewModel.sex, token: authViewModel.token)
+                                authViewModel.SetLoggedIn(logged: true)
                             }else{
                                 toast = FancyToast(type: .error, title: "아이디 또는 비밀번호가 올바르지 않습니다.", message: "올바른 아이디, 비밀번호를 작성해주세요")
                                 print("no")
                                 checkBool = false
                                 password = ""
                                 focusID = true
-                                
                             }
-                            
                         }
                     }) {
                         Text("로그인")
@@ -92,24 +86,17 @@ struct LoginView: View {
                     Divider()
                     Text("간편 로그인")
                         .foregroundColor(.gray)
-
                     HStack(spacing: 20) {
                         SocialLoginButton(systemName: "message.fill", color: .pink)
                         SocialLoginButton(systemName: "f.circle.fill", color: .blue)
                         SocialLoginButton(systemName: "g.circle.fill", color: .red)
                     }
-                    
                     Spacer()
-//                    NavigationLink(destination: SignUpView(path: $path)) {
                         Text("아직 회원이 아니신가요? 가입하기")
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 path.append(Destination.signUp)
                             }
-//                    }
-//                    NavigationLink("아직 회원이 아니신가요? 가입하기"){
-//                        SignUpView(path: $path)
-//                    }
                     
                 }.toastView(toast: $toast)
                 .padding(.horizontal)

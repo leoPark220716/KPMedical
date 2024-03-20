@@ -176,148 +176,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "489E13F6-A873-4AA1-BF23-C9EFDBC1B7B7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/LoginManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "requestGet(url:completionHandler:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7AB5899B-49D5-43F5-911F-87265DF57FCD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/LoginManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
-            landmarkName = "requestGet(url:completionHandler:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1E6ADBF7-BDE6-4B12-BE31-BFEB1699D2C4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/LoginManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
-            landmarkName = "requestGet(url:completionHandler:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DD0B422D-1945-41AA-A650-606D6B785CD0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/LoginManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
-            landmarkName = "requestGet(url:completionHandler:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/Model/LoginManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
-            landmarkName = "requestGet(url:completionHandler:)"
-            landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a90076740a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
-                  moduleName = "KPMadical"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "207"
-                  endingLineNumber = "207"
-                  offsetFromSymbolStart = "804">
-               </Location>
-               <Location
-                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a90076740a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
-                  moduleName = "KPMadical"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "207"
-                  endingLineNumber = "207"
-                  offsetFromSymbolStart = "1032">
-               </Location>
-               <Location
-                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a9007673a9e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
-                  moduleName = "KPMadical"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "377"
-                  endingLineNumber = "377"
-                  offsetFromSymbolStart = "804">
-               </Location>
-               <Location
-                  uuid = "A5FFBF7D-2AF8-4AD1-A79C-3E5161CB336D - 2a256a9007673a9e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in KPMadical.requestGet(url: Swift.String, completionHandler: (Swift.Bool, Any) -&gt; ()) -&gt; ()"
-                  moduleName = "KPMadical"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Model/LoginManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "377"
-                  endingLineNumber = "377"
-                  offsetFromSymbolStart = "1032">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5F72FD62-C392-4547-81A9-A38FDB12F255"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -374,6 +232,101 @@
                   startingLineNumber = "365"
                   endingLineNumber = "365"
                   offsetFromSymbolStart = "832">
+               </Location>
+               <Location
+                  uuid = "5F72FD62-C392-4547-81A9-A38FDB12F255 - b745c8903be7274c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.SignUpView.init(path: SwiftUI.Binding&lt;SwiftUI.NavigationPath&gt;, id: SwiftUI.Binding&lt;Swift.String&gt;, Checkpassword: SwiftUI.Binding&lt;Swift.String&gt;, name: SwiftUI.Binding&lt;Swift.String&gt;, birthday: SwiftUI.Binding&lt;Swift.String&gt;, sex: SwiftUI.Binding&lt;Swift.String&gt;, smsCheck: SwiftUI.Binding&lt;Swift.Bool&gt;, phoneNumber: SwiftUI.Binding&lt;Swift.String&gt;, password: SwiftUI.Binding&lt;Swift.String&gt;, message: SwiftUI.Binding&lt;Swift.String&gt;) -&gt; KPMadical.SignUpView"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/View/SginUp/SignUpView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "365"
+                  endingLineNumber = "365"
+                  offsetFromSymbolStart = "820">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0B0BC02-5371-4B10-8D36-3D3FF0D320A4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/SplashView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19C4BEEF-EB0B-4F93-AEA9-1F1F5D49D90E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/SplashView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7DB535B6-7924-4C93-BDA0-C8870C555188"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/SplashView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "7DB535B6-7924-4C93-BDA0-C8870C555188 - 5b8d491d2fb9260a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in KPMadical.SplashView.body.getter : some"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/SplashView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  uuid = "7DB535B6-7924-4C93-BDA0-C8870C555188 - 3f2eba6db8834f14"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Bool, Swift.String) -&gt; () in closure #2 () -&gt; () in KPMadical.SplashView.body.getter : some"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/SplashView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "108">
                </Location>
             </Locations>
          </BreakpointContent>
