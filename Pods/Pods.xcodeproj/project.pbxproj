@@ -1,0 +1,1051 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		72E614C823EA09AB1AAE80D5CD8A4C58 /* NMapsGeometry */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EB98AD101AB530610FAEE48FABDF7F57 /* Build configuration list for PBXAggregateTarget "NMapsGeometry" */;
+			buildPhases = (
+				06DEA16D4139F67FC0E17642FDBEECD0 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = NMapsGeometry;
+		};
+		8E049F5F4E3BDC647F924FEF22D49D90 /* NMapsMap */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 73E737D5F21341C24A13EBC70CD8D471 /* Build configuration list for PBXAggregateTarget "NMapsMap" */;
+			buildPhases = (
+				B521269790554904B95202DE2D5AC59C /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+				258F097AFE79EE06421A954BF7063DC2 /* PBXTargetDependency */,
+			);
+			name = NMapsMap;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		04A15BFA8ED3E2E8AFD8CF6996505E93 /* Pods-KPMadicalTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC4B791FFE562AD5FDB36489C3E981 /* Pods-KPMadicalTests-dummy.m */; };
+		05E3D5A5E8DBD0884962C9F611B59DAE /* Pods-KPMadical-KPMadicalUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 573BEA44E32F5295D907E91F62433E66 /* Pods-KPMadical-KPMadicalUITests-dummy.m */; };
+		28EE5AC570A0011339B0B40C7E288DF6 /* Pods-KPMadical-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0309E95595EDBD9CA195CB9B2ED5AE /* Pods-KPMadical-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2FD517B426E18D2E57BCCFCD26A31889 /* Pods-KPMadicalTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B81FA9C9AF6A6FB6C07B48CCF77ABD /* Pods-KPMadicalTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EC216C7FCBD0CDC709CF1F67F179036 /* Pods-KPMadical-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C217ECEE743300852E986780EEF3F2 /* Pods-KPMadical-dummy.m */; };
+		5FADBB34962A9B6DA33CB18FFA4C1046 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		91B4E8AFE46BE651EF7287471599B0E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		A905968606DE00FF56612DA9100979C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		C199F5079EA5736F706F0D6D48AB4263 /* Pods-KPMadical-KPMadicalUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D25B7E082570334A6D9090EFC0680F1 /* Pods-KPMadical-KPMadicalUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E02192ED740397774D439E1BA814EF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72E614C823EA09AB1AAE80D5CD8A4C58;
+			remoteInfo = NMapsGeometry;
+		};
+		5A0DAC57AEF129D32DE3C69AB49DF410 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B9AEB0095271819370D923785311C4F;
+			remoteInfo = "Pods-KPMadical";
+		};
+		658947D54C8C7E0ACAE540AAD2605759 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E049F5F4E3BDC647F924FEF22D49D90;
+			remoteInfo = NMapsMap;
+		};
+		704646BB88A1BF210E3273EF57AABE0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E049F5F4E3BDC647F924FEF22D49D90;
+			remoteInfo = NMapsMap;
+		};
+		7F00C360A1E47BCFA7970B4BBEC51126 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72E614C823EA09AB1AAE80D5CD8A4C58;
+			remoteInfo = NMapsGeometry;
+		};
+		FF15F893FBCA405FAAC55D2407570459 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72E614C823EA09AB1AAE80D5CD8A4C58;
+			remoteInfo = NMapsGeometry;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		067BE6C10B5F97AA18FF516F8CD271C3 /* Pods-KPMadical-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KPMadical-frameworks.sh"; sourceTree = "<group>"; };
+		0970046F7060534BA9B286629593DA0C /* NMapsMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMapsMap.debug.xcconfig; sourceTree = "<group>"; };
+		17C217ECEE743300852E986780EEF3F2 /* Pods-KPMadical-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KPMadical-dummy.m"; sourceTree = "<group>"; };
+		1A326C79B1B897CBCFDC36BFF5174A43 /* NMapsGeometry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMapsGeometry.debug.xcconfig; sourceTree = "<group>"; };
+		23B4716739E34E3C17B3523CA7144704 /* Pods-KPMadical-KPMadicalUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KPMadical-KPMadicalUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		485FAE6318CCD7779377C7AA4A7B3528 /* NMapsGeometry.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = NMapsGeometry.xcframework; path = framework/NMapsGeometry.xcframework; sourceTree = "<group>"; };
+		4D7370990CBF7BE5751AFAA2762C68D8 /* Pods-KPMadicalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadicalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F0C55D25B9900DE7936740E68EFDFCF /* NMapsMap.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = NMapsMap.xcframework; path = framework/NMapsMap.xcframework; sourceTree = "<group>"; };
+		53BB18D8DE6118DEC0AAC01027DBECA8 /* NMapsMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMapsMap.release.xcconfig; sourceTree = "<group>"; };
+		573BEA44E32F5295D907E91F62433E66 /* Pods-KPMadical-KPMadicalUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KPMadical-KPMadicalUITests-dummy.m"; sourceTree = "<group>"; };
+		5760CE09C93D7ADDA59860C04F26B866 /* Pods-KPMadical-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadical-Info.plist"; sourceTree = "<group>"; };
+		5E26C9EF722D6422ECBD7CD5C5F17FD1 /* Pods-KPMadicalTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KPMadicalTests.modulemap"; sourceTree = "<group>"; };
+		69D501E065D7EAE9FD73994D1C9A5AA7 /* Pods-KPMadical-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadical-acknowledgements.plist"; sourceTree = "<group>"; };
+		71BC4B791FFE562AD5FDB36489C3E981 /* Pods-KPMadicalTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KPMadicalTests-dummy.m"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		78DD983964E9D9F10FE082F0C8F15F91 /* Pods-KPMadical-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KPMadical-acknowledgements.markdown"; sourceTree = "<group>"; };
+		7CCDB99445E8534D609FA980A3E0E3F7 /* Pods-KPMadicalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadicalTests.release.xcconfig"; sourceTree = "<group>"; };
+		7D0309E95595EDBD9CA195CB9B2ED5AE /* Pods-KPMadical-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KPMadical-umbrella.h"; sourceTree = "<group>"; };
+		7D25B7E082570334A6D9090EFC0680F1 /* Pods-KPMadical-KPMadicalUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KPMadical-KPMadicalUITests-umbrella.h"; sourceTree = "<group>"; };
+		7F89040B8DC7FC773592AA5FE110E9DF /* NMapsGeometry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMapsGeometry.release.xcconfig; sourceTree = "<group>"; };
+		8210E6F371DA0A70FE2B7996D2117586 /* Pods-KPMadical-KPMadicalUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadical-KPMadicalUITests-Info.plist"; sourceTree = "<group>"; };
+		83C9302F59C9B6AFACA409AE7F135E25 /* Pods-KPMadical-KPMadicalUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KPMadical-KPMadicalUITests.modulemap"; sourceTree = "<group>"; };
+		84B81FA9C9AF6A6FB6C07B48CCF77ABD /* Pods-KPMadicalTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KPMadicalTests-umbrella.h"; sourceTree = "<group>"; };
+		92A408FB8FF0BD8F4F4376B94B007ADF /* Pods-KPMadicalTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-KPMadicalTests"; path = Pods_KPMadicalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		983BF56A59A021797090B8CD12B9A318 /* Pods-KPMadicalTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadicalTests-Info.plist"; sourceTree = "<group>"; };
+		983FCEF2808419DF12F69DFEBD7685D4 /* NMapsMap-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "NMapsMap-xcframeworks.sh"; sourceTree = "<group>"; };
+		9A0BAC97179BD34D535ED81F1D9415DD /* Pods-KPMadical-KPMadicalUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-KPMadical-KPMadicalUITests"; path = Pods_KPMadical_KPMadicalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B54C10FBFBE0B1E71C451A2230352776 /* Pods-KPMadical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadical.release.xcconfig"; sourceTree = "<group>"; };
+		CD9FB1195BF325448EF02565071A74C3 /* Pods-KPMadical.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KPMadical.modulemap"; sourceTree = "<group>"; };
+		D44F659A0535B40D0B18AA8BDA525684 /* Pods-KPMadical.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadical.debug.xcconfig"; sourceTree = "<group>"; };
+		DB1A939F636129EEE1FAA0F1AFC553F1 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadical-KPMadicalUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DDCE750008E7010D0A05E63D86E201F7 /* Pods-KPMadical-KPMadicalUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadical-KPMadicalUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E101130795B024FC83E4F774AA209B18 /* NMapsGeometry-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "NMapsGeometry-xcframeworks.sh"; sourceTree = "<group>"; };
+		F4461EE2B70A145B8989CA9FEF4E9548 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KPMadical-KPMadicalUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F476A8C769EFE1852685CD68DCA0077A /* Pods-KPMadical-KPMadicalUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KPMadical-KPMadicalUITests-frameworks.sh"; sourceTree = "<group>"; };
+		F8B3D565B1BE14288772E4A52DEEDF32 /* Pods-KPMadical */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-KPMadical"; path = Pods_KPMadical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9F950B76168825503478B5488D0F44E /* Pods-KPMadicalTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KPMadicalTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FF8CE104001CD4328FA7E67425AD5CCA /* Pods-KPMadicalTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KPMadicalTests-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		936697EB70A86F0D9F06EA9AF23F5F2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91B4E8AFE46BE651EF7287471599B0E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3EC8E2A3419DF9E774625D0773B32E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A905968606DE00FF56612DA9100979C4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF3C6D20D1088FDBCE4F7672B5F21F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FADBB34962A9B6DA33CB18FFA4C1046 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01243EB0F84C278CB65A71F941A55CB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F8B3D565B1BE14288772E4A52DEEDF32 /* Pods-KPMadical */,
+				9A0BAC97179BD34D535ED81F1D9415DD /* Pods-KPMadical-KPMadicalUITests */,
+				92A408FB8FF0BD8F4F4376B94B007ADF /* Pods-KPMadicalTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		169A894F474781F666BE8D90408D3828 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E101130795B024FC83E4F774AA209B18 /* NMapsGeometry-xcframeworks.sh */,
+				1A326C79B1B897CBCFDC36BFF5174A43 /* NMapsGeometry.debug.xcconfig */,
+				7F89040B8DC7FC773592AA5FE110E9DF /* NMapsGeometry.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/NMapsGeometry";
+			sourceTree = "<group>";
+		};
+		1AD90FFD647983B9ADEE1FD00710E87D /* Pods-KPMadicalTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E26C9EF722D6422ECBD7CD5C5F17FD1 /* Pods-KPMadicalTests.modulemap */,
+				F9F950B76168825503478B5488D0F44E /* Pods-KPMadicalTests-acknowledgements.markdown */,
+				FF8CE104001CD4328FA7E67425AD5CCA /* Pods-KPMadicalTests-acknowledgements.plist */,
+				71BC4B791FFE562AD5FDB36489C3E981 /* Pods-KPMadicalTests-dummy.m */,
+				983BF56A59A021797090B8CD12B9A318 /* Pods-KPMadicalTests-Info.plist */,
+				84B81FA9C9AF6A6FB6C07B48CCF77ABD /* Pods-KPMadicalTests-umbrella.h */,
+				4D7370990CBF7BE5751AFAA2762C68D8 /* Pods-KPMadicalTests.debug.xcconfig */,
+				7CCDB99445E8534D609FA980A3E0E3F7 /* Pods-KPMadicalTests.release.xcconfig */,
+			);
+			name = "Pods-KPMadicalTests";
+			path = "Target Support Files/Pods-KPMadicalTests";
+			sourceTree = "<group>";
+		};
+		25B56312D79088C322C5B52238334BCC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2FE65985C01476131D3AC219F92CC3CF /* NMapsGeometry */,
+				487B37947971C0C75B135158191A5547 /* NMapsMap */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2ED541A35C7BD1778556550CF4846D2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F0C55D25B9900DE7936740E68EFDFCF /* NMapsMap.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2FE65985C01476131D3AC219F92CC3CF /* NMapsGeometry */ = {
+			isa = PBXGroup;
+			children = (
+				DC955F600E602E5041F1000DC79753BB /* Frameworks */,
+				169A894F474781F666BE8D90408D3828 /* Support Files */,
+			);
+			name = NMapsGeometry;
+			path = NMapsGeometry;
+			sourceTree = "<group>";
+		};
+		487B37947971C0C75B135158191A5547 /* NMapsMap */ = {
+			isa = PBXGroup;
+			children = (
+				2ED541A35C7BD1778556550CF4846D2F /* Frameworks */,
+				A3E28C362EAC5C5A2CCC22EE5E2FDA30 /* Support Files */,
+			);
+			name = NMapsMap;
+			path = NMapsMap;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		57E848BAFA1048D9A773A7CB0C84EB1B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				978A9223B8990C31BCC822F5B68EC15A /* Pods-KPMadical */,
+				B47E41B38D473DA4CF72555C3F9C3972 /* Pods-KPMadical-KPMadicalUITests */,
+				1AD90FFD647983B9ADEE1FD00710E87D /* Pods-KPMadicalTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		978A9223B8990C31BCC822F5B68EC15A /* Pods-KPMadical */ = {
+			isa = PBXGroup;
+			children = (
+				CD9FB1195BF325448EF02565071A74C3 /* Pods-KPMadical.modulemap */,
+				78DD983964E9D9F10FE082F0C8F15F91 /* Pods-KPMadical-acknowledgements.markdown */,
+				69D501E065D7EAE9FD73994D1C9A5AA7 /* Pods-KPMadical-acknowledgements.plist */,
+				17C217ECEE743300852E986780EEF3F2 /* Pods-KPMadical-dummy.m */,
+				067BE6C10B5F97AA18FF516F8CD271C3 /* Pods-KPMadical-frameworks.sh */,
+				5760CE09C93D7ADDA59860C04F26B866 /* Pods-KPMadical-Info.plist */,
+				7D0309E95595EDBD9CA195CB9B2ED5AE /* Pods-KPMadical-umbrella.h */,
+				D44F659A0535B40D0B18AA8BDA525684 /* Pods-KPMadical.debug.xcconfig */,
+				B54C10FBFBE0B1E71C451A2230352776 /* Pods-KPMadical.release.xcconfig */,
+			);
+			name = "Pods-KPMadical";
+			path = "Target Support Files/Pods-KPMadical";
+			sourceTree = "<group>";
+		};
+		A3E28C362EAC5C5A2CCC22EE5E2FDA30 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				983FCEF2808419DF12F69DFEBD7685D4 /* NMapsMap-xcframeworks.sh */,
+				0970046F7060534BA9B286629593DA0C /* NMapsMap.debug.xcconfig */,
+				53BB18D8DE6118DEC0AAC01027DBECA8 /* NMapsMap.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/NMapsMap";
+			sourceTree = "<group>";
+		};
+		B47E41B38D473DA4CF72555C3F9C3972 /* Pods-KPMadical-KPMadicalUITests */ = {
+			isa = PBXGroup;
+			children = (
+				83C9302F59C9B6AFACA409AE7F135E25 /* Pods-KPMadical-KPMadicalUITests.modulemap */,
+				23B4716739E34E3C17B3523CA7144704 /* Pods-KPMadical-KPMadicalUITests-acknowledgements.markdown */,
+				DDCE750008E7010D0A05E63D86E201F7 /* Pods-KPMadical-KPMadicalUITests-acknowledgements.plist */,
+				573BEA44E32F5295D907E91F62433E66 /* Pods-KPMadical-KPMadicalUITests-dummy.m */,
+				F476A8C769EFE1852685CD68DCA0077A /* Pods-KPMadical-KPMadicalUITests-frameworks.sh */,
+				8210E6F371DA0A70FE2B7996D2117586 /* Pods-KPMadical-KPMadicalUITests-Info.plist */,
+				7D25B7E082570334A6D9090EFC0680F1 /* Pods-KPMadical-KPMadicalUITests-umbrella.h */,
+				DB1A939F636129EEE1FAA0F1AFC553F1 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */,
+				F4461EE2B70A145B8989CA9FEF4E9548 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */,
+			);
+			name = "Pods-KPMadical-KPMadicalUITests";
+			path = "Target Support Files/Pods-KPMadical-KPMadicalUITests";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				25B56312D79088C322C5B52238334BCC /* Pods */,
+				01243EB0F84C278CB65A71F941A55CB4 /* Products */,
+				57E848BAFA1048D9A773A7CB0C84EB1B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC955F600E602E5041F1000DC79753BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				485FAE6318CCD7779377C7AA4A7B3528 /* NMapsGeometry.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		44BA61AE9EE1CDB54932DD200D7C6E9C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28EE5AC570A0011339B0B40C7E288DF6 /* Pods-KPMadical-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AC4F3172C7C1FB92BE4949B426B08AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FD517B426E18D2E57BCCFCD26A31889 /* Pods-KPMadicalTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B58DA4FBFD0B484B8B0645FBE1CD2945 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C199F5079EA5736F706F0D6D48AB4263 /* Pods-KPMadical-KPMadicalUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1B9AEB0095271819370D923785311C4F /* Pods-KPMadical */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2282B489DF13153CA330A98AEB3B154A /* Build configuration list for PBXNativeTarget "Pods-KPMadical" */;
+			buildPhases = (
+				44BA61AE9EE1CDB54932DD200D7C6E9C /* Headers */,
+				7DBC7E1A2921F8E14F13A41B2468CE49 /* Sources */,
+				936697EB70A86F0D9F06EA9AF23F5F2B /* Frameworks */,
+				7C5D38644B259F361315426EC0F179E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2079C525D0A4B36F45CFB3F6974B746D /* PBXTargetDependency */,
+				9F42EB8ACC319661D57BD7CC29E27C92 /* PBXTargetDependency */,
+			);
+			name = "Pods-KPMadical";
+			productName = Pods_KPMadical;
+			productReference = F8B3D565B1BE14288772E4A52DEEDF32 /* Pods-KPMadical */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9854C973BEE683D6798CFC738700BC8 /* Pods-KPMadicalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF756F58261380740FD136A7DCC1B125 /* Build configuration list for PBXNativeTarget "Pods-KPMadicalTests" */;
+			buildPhases = (
+				9AC4F3172C7C1FB92BE4949B426B08AF /* Headers */,
+				FBB787060C1E32ED04D3AA96C23BFE25 /* Sources */,
+				CF3C6D20D1088FDBCE4F7672B5F21F63 /* Frameworks */,
+				E9ECFFC62349BCDD2C1F43B216A7BFC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5EB5BCAC149B373A213F25E8328E67F2 /* PBXTargetDependency */,
+			);
+			name = "Pods-KPMadicalTests";
+			productName = Pods_KPMadicalTests;
+			productReference = 92A408FB8FF0BD8F4F4376B94B007ADF /* Pods-KPMadicalTests */;
+			productType = "com.apple.product-type.framework";
+		};
+		B97E9B556868CC7208D6E04756B32552 /* Pods-KPMadical-KPMadicalUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D2F42BEAF023B8CB43A710681B0CA9C /* Build configuration list for PBXNativeTarget "Pods-KPMadical-KPMadicalUITests" */;
+			buildPhases = (
+				B58DA4FBFD0B484B8B0645FBE1CD2945 /* Headers */,
+				1931305FD5B9D821D0CB52E60F4ED204 /* Sources */,
+				C3EC8E2A3419DF9E774625D0773B32E1 /* Frameworks */,
+				CA3BF6B42B8A38DF1FD553B88D67C840 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4177558C1D077426443B4ACE618674DB /* PBXTargetDependency */,
+				22AFE9D67A901C920EE6900D4B0E8A88 /* PBXTargetDependency */,
+			);
+			name = "Pods-KPMadical-KPMadicalUITests";
+			productName = Pods_KPMadical_KPMadicalUITests;
+			productReference = 9A0BAC97179BD34D535ED81F1D9415DD /* Pods-KPMadical-KPMadicalUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 01243EB0F84C278CB65A71F941A55CB4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				72E614C823EA09AB1AAE80D5CD8A4C58 /* NMapsGeometry */,
+				8E049F5F4E3BDC647F924FEF22D49D90 /* NMapsMap */,
+				1B9AEB0095271819370D923785311C4F /* Pods-KPMadical */,
+				B97E9B556868CC7208D6E04756B32552 /* Pods-KPMadical-KPMadicalUITests */,
+				A9854C973BEE683D6798CFC738700BC8 /* Pods-KPMadicalTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C5D38644B259F361315426EC0F179E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA3BF6B42B8A38DF1FD553B88D67C840 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9ECFFC62349BCDD2C1F43B216A7BFC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06DEA16D4139F67FC0E17642FDBEECD0 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/NMapsGeometry/NMapsGeometry-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/NMapsGeometry/NMapsGeometry-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/NMapsGeometry/NMapsGeometry-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B521269790554904B95202DE2D5AC59C /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/NMapsMap/NMapsMap-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/NMapsMap/NMapsMap-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/NMapsMap/NMapsMap-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1931305FD5B9D821D0CB52E60F4ED204 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05E3D5A5E8DBD0884962C9F611B59DAE /* Pods-KPMadical-KPMadicalUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DBC7E1A2921F8E14F13A41B2468CE49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EC216C7FCBD0CDC709CF1F67F179036 /* Pods-KPMadical-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBB787060C1E32ED04D3AA96C23BFE25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A15BFA8ED3E2E8AFD8CF6996505E93 /* Pods-KPMadicalTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2079C525D0A4B36F45CFB3F6974B746D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMapsGeometry;
+			target = 72E614C823EA09AB1AAE80D5CD8A4C58 /* NMapsGeometry */;
+			targetProxy = FF15F893FBCA405FAAC55D2407570459 /* PBXContainerItemProxy */;
+		};
+		22AFE9D67A901C920EE6900D4B0E8A88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMapsMap;
+			target = 8E049F5F4E3BDC647F924FEF22D49D90 /* NMapsMap */;
+			targetProxy = 704646BB88A1BF210E3273EF57AABE0A /* PBXContainerItemProxy */;
+		};
+		258F097AFE79EE06421A954BF7063DC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMapsGeometry;
+			target = 72E614C823EA09AB1AAE80D5CD8A4C58 /* NMapsGeometry */;
+			targetProxy = 7F00C360A1E47BCFA7970B4BBEC51126 /* PBXContainerItemProxy */;
+		};
+		4177558C1D077426443B4ACE618674DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMapsGeometry;
+			target = 72E614C823EA09AB1AAE80D5CD8A4C58 /* NMapsGeometry */;
+			targetProxy = 0E02192ED740397774D439E1BA814EF5 /* PBXContainerItemProxy */;
+		};
+		5EB5BCAC149B373A213F25E8328E67F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-KPMadical";
+			target = 1B9AEB0095271819370D923785311C4F /* Pods-KPMadical */;
+			targetProxy = 5A0DAC57AEF129D32DE3C69AB49DF410 /* PBXContainerItemProxy */;
+		};
+		9F42EB8ACC319661D57BD7CC29E27C92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMapsMap;
+			target = 8E049F5F4E3BDC647F924FEF22D49D90 /* NMapsMap */;
+			targetProxy = 658947D54C8C7E0ACAE540AAD2605759 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		032504F201C69275441D32C68CCD1F0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		138EE7F5840AEF4E4028CA5FAAE9EE6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F89040B8DC7FC773592AA5FE110E9DF /* NMapsGeometry.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4122D12474652D4B94029A59C0DC6010 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A326C79B1B897CBCFDC36BFF5174A43 /* NMapsGeometry.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		48F67AB1E5DBE79CCF2F86C75296AB01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		4E5E8FCCBFE5172C03CB328CB29106E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B54C10FBFBE0B1E71C451A2230352776 /* Pods-KPMadical.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadical/Pods-KPMadical-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadical/Pods-KPMadical.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6E852266D84CD24187DEBB9AE14CC26B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4461EE2B70A145B8989CA9FEF4E9548 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7548B18065C4C71F96C49E2F3F5D3670 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CCDB99445E8534D609FA980A3E0E3F7 /* Pods-KPMadicalTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8B485137433EF40810D2385FBFB35776 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D7370990CBF7BE5751AFAA2762C68D8 /* Pods-KPMadicalTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B37F604D1E91E3DF281F0CD53C81769F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB1A939F636129EEE1FAA0F1AFC553F1 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C9A231AB72F2C2B62C19115CCEB01D6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D44F659A0535B40D0B18AA8BDA525684 /* Pods-KPMadical.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KPMadical/Pods-KPMadical-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KPMadical/Pods-KPMadical.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E683018BA3CA2E27A39E5DF5619B90F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0970046F7060534BA9B286629593DA0C /* NMapsMap.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE5D137BA104CCBECE001BF38C0AEB3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53BB18D8DE6118DEC0AAC01027DBECA8 /* NMapsMap.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2282B489DF13153CA330A98AEB3B154A /* Build configuration list for PBXNativeTarget "Pods-KPMadical" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9A231AB72F2C2B62C19115CCEB01D6F /* Debug */,
+				4E5E8FCCBFE5172C03CB328CB29106E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48F67AB1E5DBE79CCF2F86C75296AB01 /* Debug */,
+				032504F201C69275441D32C68CCD1F0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73E737D5F21341C24A13EBC70CD8D471 /* Build configuration list for PBXAggregateTarget "NMapsMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E683018BA3CA2E27A39E5DF5619B90F6 /* Debug */,
+				FE5D137BA104CCBECE001BF38C0AEB3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D2F42BEAF023B8CB43A710681B0CA9C /* Build configuration list for PBXNativeTarget "Pods-KPMadical-KPMadicalUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37F604D1E91E3DF281F0CD53C81769F /* Debug */,
+				6E852266D84CD24187DEBB9AE14CC26B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF756F58261380740FD136A7DCC1B125 /* Build configuration list for PBXNativeTarget "Pods-KPMadicalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B485137433EF40810D2385FBFB35776 /* Debug */,
+				7548B18065C4C71F96C49E2F3F5D3670 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB98AD101AB530610FAEE48FABDF7F57 /* Build configuration list for PBXAggregateTarget "NMapsGeometry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4122D12474652D4B94029A59C0DC6010 /* Debug */,
+				138EE7F5840AEF4E4028CA5FAAE9EE6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

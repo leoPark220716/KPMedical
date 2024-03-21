@@ -6,26 +6,36 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct Chat: View {
     @State private var isVisible: Bool = false // 뷰의 표시 여부를 결정하는 상태 변수
-
-     var body: some View {
-         
-             VStack {
-                
-                 Button("클릭 시 사라짐") {
-                     isVisible = true // 버튼 클릭 시 isVisible의 값을 반전시켜 뷰를 표시하거나 숨김
-                 }
-    //             .fullScreenCover(isPresented: $isVisible){
-    //                 LoginView()
-    //             }
-                 .padding()
-                 .background(Color.blue)
-                 .foregroundColor(.white)
-                 .clipShape(Capsule()) // 버튼 디자인을 조금 더 꾸며주기 위해 추가
-             }
-         }
+    @StateObject private var locationService = LocationService()
+    @State private var userLocation: CLLocationCoordinate2D?
+    
+    var body: some View {
+          VStack {
+              if let currentLocation = locationService.currentLocation {
+                  Text("Latitude: \(currentLocation.latitude)")
+                  Text("Longitude: \(currentLocation.longitude)")
+              } else {
+                  Text("Determining your location...")
+              }
+              if let address = locationService.address{
+                  Text("주소 : \(address)")
+              }else{
+                  Text("주소 찾는중입니다")
+              }
+              if let Naver_Adress = locationService.address_Naver{
+                  Text("네이버 주소 : \(Naver_Adress)")
+              }else{
+                  Text("주소 찾는중입니다")
+              }
+          }
+          .onAppear {
+              locationService.requestLocation()
+          }
+      }
      
  }
 
@@ -41,6 +51,7 @@ import Combine
 extension Notification.Name {
     static let closeParentView = Notification.Name("closeParentView")
 }
+//
 
 
 struct ParentView: View {

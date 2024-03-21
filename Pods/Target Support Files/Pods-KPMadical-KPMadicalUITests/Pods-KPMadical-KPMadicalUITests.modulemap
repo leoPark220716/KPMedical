@@ -1,0 +1,6 @@
+framework module Pods_KPMadical_KPMadicalUITests {
+  umbrella header "Pods-KPMadical-KPMadicalUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -14,12 +14,14 @@
 		1E18A2F02BAB1C1300466221 /* HospitalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */; };
 		1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */; };
 		1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */; };
+		1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2F82BAB4FF100466221 /* LocationManager.swift */; };
 		1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E219B2A2BA08FFD00D79DE3 /* Test.swift */; };
-		1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 1E219B2D2BA0977100D79DE3 /* AFNetworking */; };
 		1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E267BE32BA9C07900280170 /* SQlite_UserData.swift */; };
 		1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B37482BA039DA00B8EFA4 /* Chat.swift */; };
 		1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B374A2BA0403500B8EFA4 /* SplashView.swift */; };
 		1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C28182BA9F413005461D1 /* TestFunc.swift */; };
+		1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */; };
+		1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */; };
 		1E64CBF22BA050B50053A555 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* Profile.swift */; };
 		1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF32BA051740053A555 /* LoginManager.swift */; };
 		1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D1292BA31B0300C78CEC /* LoginView.swift */; };
@@ -28,6 +30,11 @@
 		1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9681EE2BA19400003F8E4B /* AccountView.swift */; };
 		1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */; };
 		1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA232BA88719009076F1 /* UserDataHandle.swift */; };
+		1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */; };
+		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
+		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
+		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
+		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
 		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
 		1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */; };
 		1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */; };
@@ -38,6 +45,9 @@
 		1EE9CB752B9F1F9500E923D9 /* KPMadicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB742B9F1F9500E923D9 /* KPMadicalTests.swift */; };
 		1EE9CB7F2B9F1F9500E923D9 /* KPMadicalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */; };
 		1EE9CB812B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */; };
+		739231EE60A79DA6B8E2CAF7 /* Pods_KPMadical.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */; };
+		A22EA01CA4E3FF01AC28ECBE /* Pods_KPMadical_KPMadicalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92453263B4E8151CFE61DE14 /* Pods_KPMadical_KPMadicalUITests.framework */; };
+		E86779F9099BDBB5A21F2BA5 /* Pods_KPMadicalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF3F7D5410777EDD934C705 /* Pods_KPMadicalTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		039AAD269B7660B4E20A2BCE /* Pods-KPMadical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical.release.xcconfig"; path = "Target Support Files/Pods-KPMadical/Pods-KPMadical.release.xcconfig"; sourceTree = "<group>"; };
+		0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNVSTack.swift; sourceTree = "<group>"; };
 		1E18A2E82BAAF44800466221 /* FindHospitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHospitalView.swift; sourceTree = "<group>"; };
 		1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsManager.swift; sourceTree = "<group>"; };
@@ -65,11 +77,15 @@
 		1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalRequest.swift; sourceTree = "<group>"; };
 		1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonPasingMainModel.swift; sourceTree = "<group>"; };
 		1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = departmentsChooseSheetView.swift; sourceTree = "<group>"; };
+		1E18A2F52BAB4A5E00466221 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1E18A2F82BAB4FF100466221 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		1E219B2A2BA08FFD00D79DE3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		1E267BE32BA9C07900280170 /* SQlite_UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQlite_UserData.swift; sourceTree = "<group>"; };
 		1E2B37482BA039DA00B8EFA4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		1E2B374A2BA0403500B8EFA4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		1E4C28182BA9F413005461D1 /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
+		1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManager.swift; sourceTree = "<group>"; };
+		1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailView.swift; sourceTree = "<group>"; };
 		1E64CBF12BA050B50053A555 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1E64CBF32BA051740053A555 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		1E89D1292BA31B0300C78CEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -78,6 +94,11 @@
 		1E9681EE2BA19400003F8E4B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		1EA0CA232BA88719009076F1 /* UserDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataHandle.swift; sourceTree = "<group>"; };
+		1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocoder.swift; sourceTree = "<group>"; };
+		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
+		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
+		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
+		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
 		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountModel.swift; sourceTree = "<group>"; };
 		1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -91,6 +112,13 @@
 		1EE9CB7A2B9F1F9500E923D9 /* KPMadicalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KPMadicalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITests.swift; sourceTree = "<group>"; };
 		1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		288BCD2F320B991BCA0167B8 /* Pods-KPMadicalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadicalTests.release.xcconfig"; path = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.release.xcconfig"; sourceTree = "<group>"; };
+		5BF3F7D5410777EDD934C705 /* Pods_KPMadicalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadicalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92453263B4E8151CFE61DE14 /* Pods_KPMadical_KPMadicalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadical_KPMadicalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B1C0D7E7460000191793F8 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical-KPMadicalUITests.debug.xcconfig"; path = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C5E44CEAB874C3DFE3389C70 /* Pods-KPMadicalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadicalTests.debug.xcconfig"; path = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D7BF35D3E3B2BAB6D22E8098 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical-KPMadicalUITests.release.xcconfig"; path = "Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F189F829A88EBCC3BB5FE1AA /* Pods-KPMadical.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical.debug.xcconfig"; path = "Target Support Files/Pods-KPMadical/Pods-KPMadical.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E219B2E2BA0977100D79DE3 /* AFNetworking in Frameworks */,
+				739231EE60A79DA6B8E2CAF7 /* Pods_KPMadical.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E86779F9099BDBB5A21F2BA5 /* Pods_KPMadicalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A22EA01CA4E3FF01AC28ECBE /* Pods_KPMadical_KPMadicalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +164,9 @@
 				1E18A2E82BAAF44800466221 /* FindHospitalView.swift */,
 				1E18A2EC2BAAF8CD00466221 /* FindHosptialItem.swift */,
 				1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */,
+				1ECC00922BAC0809009B2006 /* NaverMap.swift */,
+				1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */,
+				1ED7958A2BACE70900084CAE /* keywordSearch.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,8 +175,18 @@
 			isa = PBXGroup;
 			children = (
 				1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */,
+				1ED7958C2BACE71C00084CAE /* keywordModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1E18A2F72BAB4FE100466221 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1E18A2F82BAB4FF100466221 /* LocationManager.swift */,
+				1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */,
+			);
+			path = LocationManager;
 			sourceTree = "<group>";
 		};
 		1E2B37462BA0392200B8EFA4 /* MyHospital */ = {
@@ -172,6 +215,14 @@
 			path = TestFile;
 			sourceTree = "<group>";
 		};
+		1E4FA0E52BAC7D0F000D3A27 /* TabViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */,
+			);
+			path = TabViewManager;
+			sourceTree = "<group>";
+		};
 		1E64CBF02BA050A60053A555 /* Acount */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +236,6 @@
 			children = (
 				1E64CBF02BA050A60053A555 /* Acount */,
 				1E2B37472BA039C600B8EFA4 /* Chat */,
-				1E8F79152B9F31F700F4C230 /* Home */,
 				1E8F79162B9F320300F4C230 /* SginUp */,
 				1E2B37462BA0392200B8EFA4 /* MyHospital */,
 				1EE9CB652B9F1F9300E923D9 /* ContentView.swift */,
@@ -197,7 +247,8 @@
 		1E8F79152B9F31F700F4C230 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				1EE63E072B9F46510026B4DE /* HomeView.swift */,
+				1EB02A122BAC5ACC00E7BC6A /* Model */,
+				1EB02A112BAC5AC100E7BC6A /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -222,6 +273,22 @@
 			path = SqLite;
 			sourceTree = "<group>";
 		};
+		1EB02A112BAC5AC100E7BC6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EE63E072B9F46510026B4DE /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1EB02A122BAC5ACC00E7BC6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1EE63E092B9F47BE0026B4DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +305,8 @@
 				1EE9CB732B9F1F9500E923D9 /* KPMadicalTests */,
 				1EE9CB7D2B9F1F9500E923D9 /* KPMadicalUITests */,
 				1EE9CB612B9F1F9300E923D9 /* Products */,
+				C20FF78453C69FD9FDF4D006 /* Pods */,
+				BBA6485E063F4C460D4A364D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,9 +323,13 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1E4FA0E52BAC7D0F000D3A27 /* TabViewManager */,
+				1E18A2F72BAB4FE100466221 /* LocationManager */,
+				1E18A2F52BAB4A5E00466221 /* Info.plist */,
 				1E2B374A2BA0403500B8EFA4 /* SplashView.swift */,
 				1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */,
 				1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */,
+				1E8F79152B9F31F700F4C230 /* Home */,
 				1E18A2E62BAAF41700466221 /* SeachHospital */,
 				1E4C28172BA9F3CC005461D1 /* TestFile */,
 				1EA0CA202BA8341C009076F1 /* SqLite */,
@@ -294,6 +367,29 @@
 			path = KPMadicalUITests;
 			sourceTree = "<group>";
 		};
+		BBA6485E063F4C460D4A364D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */,
+				92453263B4E8151CFE61DE14 /* Pods_KPMadical_KPMadicalUITests.framework */,
+				5BF3F7D5410777EDD934C705 /* Pods_KPMadicalTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C20FF78453C69FD9FDF4D006 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F189F829A88EBCC3BB5FE1AA /* Pods-KPMadical.debug.xcconfig */,
+				039AAD269B7660B4E20A2BCE /* Pods-KPMadical.release.xcconfig */,
+				97B1C0D7E7460000191793F8 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */,
+				D7BF35D3E3B2BAB6D22E8098 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */,
+				C5E44CEAB874C3DFE3389C70 /* Pods-KPMadicalTests.debug.xcconfig */,
+				288BCD2F320B991BCA0167B8 /* Pods-KPMadicalTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,18 +397,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EE9CB842B9F1F9500E923D9 /* Build configuration list for PBXNativeTarget "KPMadical" */;
 			buildPhases = (
+				23AC1D7D2CB04385A7427469 /* [CP] Check Pods Manifest.lock */,
 				1EE9CB5C2B9F1F9300E923D9 /* Sources */,
 				1EE9CB5D2B9F1F9300E923D9 /* Frameworks */,
 				1EE9CB5E2B9F1F9300E923D9 /* Resources */,
+				852DC245A6E9066EF3026FA6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = KPMadical;
-			packageProductDependencies = (
-				1E219B2D2BA0977100D79DE3 /* AFNetworking */,
-			);
 			productName = KPMadical;
 			productReference = 1EE9CB602B9F1F9300E923D9 /* KPMadical.app */;
 			productType = "com.apple.product-type.application";
@@ -321,6 +416,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EE9CB872B9F1F9500E923D9 /* Build configuration list for PBXNativeTarget "KPMadicalTests" */;
 			buildPhases = (
+				4D7EBABC440F0A386AD5C3EE /* [CP] Check Pods Manifest.lock */,
 				1EE9CB6C2B9F1F9500E923D9 /* Sources */,
 				1EE9CB6D2B9F1F9500E923D9 /* Frameworks */,
 				1EE9CB6E2B9F1F9500E923D9 /* Resources */,
@@ -339,9 +435,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EE9CB8A2B9F1F9500E923D9 /* Build configuration list for PBXNativeTarget "KPMadicalUITests" */;
 			buildPhases = (
+				5B907F7FC9378FF846E3A217 /* [CP] Check Pods Manifest.lock */,
 				1EE9CB762B9F1F9500E923D9 /* Sources */,
 				1EE9CB772B9F1F9500E923D9 /* Frameworks */,
 				1EE9CB782B9F1F9500E923D9 /* Resources */,
+				48300363A541DC8CFA82F282 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -385,9 +483,6 @@
 				Base,
 			);
 			mainGroup = 1EE9CB572B9F1F9300E923D9;
-			packageReferences = (
-				1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */,
-			);
 			productRefGroup = 1EE9CB612B9F1F9300E923D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -425,6 +520,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23AC1D7D2CB04385A7427469 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KPMadical-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48300363A541DC8CFA82F282 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D7EBABC440F0A386AD5C3EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KPMadicalTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B907F7FC9378FF846E3A217 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KPMadical-KPMadicalUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		852DC245A6E9066EF3026FA6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1EE9CB5C2B9F1F9300E923D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -433,6 +631,7 @@
 				1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */,
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
+				1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
 				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
@@ -447,14 +646,21 @@
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
 				1E18A2F02BAB1C1300466221 /* HospitalRequest.swift in Sources */,
 				1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */,
+				1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
+				1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
 				1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */,
 				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
+				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,
+				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
+				1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */,
 				1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */,
 				1E18A2ED2BAAF8CD00466221 /* FindHosptialItem.swift in Sources */,
+				1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */,
+				1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +734,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -591,7 +797,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -612,6 +818,7 @@
 		};
 		1EE9CB852B9F1F9500E923D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F189F829A88EBCC3BB5FE1AA /* Pods-KPMadical.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -622,6 +829,10 @@
 				DEVELOPMENT_TEAM = N762C9YWP9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KPMadical/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -633,7 +844,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = KpMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMadical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -643,6 +854,7 @@
 		};
 		1EE9CB862B9F1F9500E923D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 039AAD269B7660B4E20A2BCE /* Pods-KPMadical.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -653,6 +865,10 @@
 				DEVELOPMENT_TEAM = N762C9YWP9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KPMadical/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -664,7 +880,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = KpMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMadical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -674,6 +890,7 @@
 		};
 		1EE9CB882B9F1F9500E923D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5E44CEAB874C3DFE3389C70 /* Pods-KPMadicalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -694,6 +911,7 @@
 		};
 		1EE9CB892B9F1F9500E923D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 288BCD2F320B991BCA0167B8 /* Pods-KPMadicalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -714,6 +932,7 @@
 		};
 		1EE9CB8B2B9F1F9500E923D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97B1C0D7E7460000191793F8 /* Pods-KPMadical-KPMadicalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -732,6 +951,7 @@
 		};
 		1EE9CB8C2B9F1F9500E923D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7BF35D3E3B2BAB6D22E8098 /* Pods-KPMadical-KPMadicalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -788,25 +1008,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AFNetworking/AFNetworking.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1E219B2D2BA0977100D79DE3 /* AFNetworking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E219B2C2BA0977100D79DE3 /* XCRemoteSwiftPackageReference "AFNetworking" */;
-			productName = AFNetworking;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1EE9CB582B9F1F9300E923D9 /* Project object */;
 }

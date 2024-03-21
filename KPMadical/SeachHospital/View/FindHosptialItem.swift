@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FindHosptialItem: View{
-    @Binding var hospital: Hospitals
+    @Binding var hospital: HospitalDataManager.Hospitals
+//    병원 관리 데이터 (예약 전체적인 정보 담겨있음)
     @State var WorkingState: Bool?
     var body: some View{
         VStack {

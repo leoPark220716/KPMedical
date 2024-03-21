@@ -9,7 +9,7 @@ import Foundation
 
 // Define the root structure of the JSON data
 struct HospitalData: Codable {
-    var data: [Hospitals]
+    var data: [HospitalDataManager.Hospitals]
 }
 //현재 기준 한국시간 가져오기
 func getTime() -> String {

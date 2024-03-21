@@ -13,11 +13,21 @@ class UserObservaleObject: ObservableObject {
     @Published var sex: String = ""
     @Published var token: String = ""
     @Published var isLoggedIn = false
+    @Published var recommendHospitalUrl1 = ""
+    @Published var recommendHospitalUrl2 = ""
+    @Published var recommendHospitalUrl3 = ""
     func SetData(name: String, dob: String, sex: String, token: String) {
         self.name = name
         self.dob = dob
         self.sex = sex
         self.token = token
+    }
+    func SetRecommendHospitalUrl(url1: String, url2: String, url3: String){
+        DispatchQueue.main.async{
+            self.recommendHospitalUrl1 = url1
+            self.recommendHospitalUrl2 = url2
+            self.recommendHospitalUrl3 = url3
+        }
     }
     func SetLoggedIn(logged: Bool) {
         DispatchQueue.main.async {
