@@ -34,9 +34,7 @@ class UserObservaleObject: ObservableObject {
             self.isLoggedIn = logged
         }
     }
-
 }
-
 class singupOb: ObservableObject {
     @Published var birthday = ""
     @Published var sex = ""

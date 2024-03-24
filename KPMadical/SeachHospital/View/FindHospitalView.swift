@@ -21,6 +21,7 @@ struct FindHospitalView: View {
     @State var order = "name"
     //    좌표 찾기 객체, 해당 객체 안에서 Naver API 사용하여 좌표를 주소로 반환
     @StateObject private var locationService = LocationService()
+    @State private var selectedNumber = 0
     @State private var userLocation: CLLocationCoordinate2D?
     var body: some View {
         NavigationStack {
@@ -90,7 +91,7 @@ struct FindHospitalView: View {
                         .sheet(isPresented: $departSheetShow){
                             departmentsChooseSheetView(selectedDepartment: $selectedDepartment, onDepartmentSelect: { department in
                                 self.selectedDepartment = department
-                                viewModel.selectedTab = 3
+                                viewModel.selectedTab = viewModel.selectedTab
                                 department_id = String(selectedDepartment!.rawValue)
                                 print("id = \(selectedDepartment?.rawValue ?? -1)")
                             })

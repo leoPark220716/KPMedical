@@ -70,7 +70,7 @@ struct KeywordSearch: View {
                         Spacer() // 오른쪽 공간을 추가하여 중앙 정렬
                     }
                     .padding() // 추가적인 패딩을 제공하여 더 좋은 UI를 제공
-                }else{
+                }else if !viewModel.hospitals.isEmpty && !searchText.isEmpty && viewModel.showList{
                     List(viewModel.hospitals.indices, id: \.self) {index in
                         FindHosptialItem(hospital: $viewModel.hospitals[index])
                             .background(

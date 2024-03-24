@@ -33,7 +33,6 @@ class keywordModel: ObservableObject {
         // 요청이 성공하면 `@Published var hospitals`를 업데이트합니다.
         print(keyword)
         requestList.CallHospitalList(orderBy: "name", x: "", y: "", keyword: keyword, department_id: "") { result in
-            
             switch result {
             case .success(let hospitals):
                 DispatchQueue.main.async {

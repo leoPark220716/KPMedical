@@ -47,8 +47,7 @@ struct HomeView: View {
                 }
             }
         }.background(Color(.init(white: 0, alpha: 0.05))
-            .ignoresSafeArea())
-        
+            )
     }
 }
 // 성훈 코딩 끝나면 상황에 따라 추가할 부분
