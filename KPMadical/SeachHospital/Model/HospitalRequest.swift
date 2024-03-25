@@ -27,122 +27,101 @@ struct HospitalDataManager{
             case hospital_id, hospital_name, icon, location, department_id, start_time, end_time
         }
     }
-    // 최상위 응답 구조체
-    //data  안 필드가 배열이 아닐때
-    //KPApiStructFrom
-    //data  안 필드가 배열일 때
-    // 'data' 필드의 구조체
-    struct HospitalDetailsData: Codable {
-        var hospital: HospitalDetail
-        var doctors: [DoctorDetail]
-        var error_code: Int
-        var error_stack: String
+    
+    struct Hospital_Data: Codable {
+        let hospitals: [Hospitals]
     }
-
-    // 병원에 대한 구조체
-    struct HospitalDetail: Codable {
+    
+    struct HospitalDataClass: Codable {
+        let hospital: Hospital_Detail
+        let doctors: [Doctor]
+        let error_code :Int
+        let error_stack :String
+        
+        init() {
+            self.hospital = Hospital_Detail() // 여기서 '...'은 Hospital_Detail의 기본값을 나타냄
+            self.doctors = [] // 빈 배열 또는 기본 의사 목록
+            self.error_code = 0 // 기본 오류 코드 값
+            self.error_stack = "" // 기본 오류 스택 값
+        }
+    }
+    struct Hospital_Detail: Codable {
         var hospital_id: Int
         var hospital_name: String
         var location: String
         var x: Double
         var y: Double
+        var phone: String
         var department_id: [String]
-        var img_url: [String]
+        var marked: Int
+        init(hospital_id: Int = 0,
+                hospital_name: String = "",
+                location: String = "",
+                x: Double = 0.0,
+                y: Double = 0.0,
+                department_id: [String] = [],
+                marked: Int = 0) {
+               self.hospital_id = hospital_id
+               self.hospital_name = hospital_name
+               self.location = location
+               self.x = x
+               self.y = y
+               self.phone = ""
+               self.department_id = department_id
+               self.marked = marked
+           }
     }
-
-    // 의사에 대한 구조체
-    struct DoctorDetail: Codable {
+    struct Doctor: Codable{
         var staff_id: Int
         var name: String
         var icon: String
         var department_id: [String]
-        var main_schedules: [ScheduleDetail]
-        var sub_schedules: [ScheduleDetail]
+        var main_schedules: [Schedule]
+        var sub_schedules: [Schedule]
     }
-
-    // 일정에 대한 구조체
-    struct ScheduleDetail: Codable {
-        var schedule_id: Int
-        var hospital_id: Int
-        var staff_id: Int
-        var start_date: String?
-        var end_date: String?
-        var start_time1: String
-        var end_time1: String
-        var start_time2: String?
-        var end_time2: String?
-        var date: String?
-        var time_slot: String
-        var max_reservation: Int
-        var dayoff: String
-        var name: String
-    }
-
-    struct Hospital_Data: Codable {
-        let hospitals: [Hospitals]
-    }
-    struct Response_Data: Codable {
-        let status: Int
-        let success: String
-        let message: String
-        let data: HospitalData
-    }
-
-    
-    struct HospitalData: Codable {
-        let hospital: Hospital
-        let doctors: [Doctor]
-        let error_code: Int
-        let error_stack: String
-        
-    }
-
-    struct Hospital: Codable {
-        let hospital_id: Int
-        let hospital_name: String
-        let location: String
-        let x: Double
-        let y: Double
-        let department_id: [String]
-        let img_url: [String]
-    }
-
-    struct Doctor: Codable {
-        let staff_id: Int
-        let name: String
-        let icon: String
-        let department_id: [String]
-        let main_schedules: [Schedule]
-        let sub_schedules: [Schedule]
-    }
-
     struct Schedule: Codable {
-        let schedule_id: Int
-        let hospital_id: Int
-        let staff_id: Int
-        let start_date: String?
-        let end_date: String?
-        let start_time1: String
-        let end_time1: String
-        let start_time2: String?
-        let end_time2: String?
+        let scheduleId: Int
+        let hospitalId: Int
+        let staffId: Int
+        let startDate: String?
+        let endDate: String?
         let date: String?
-        let time_slot: String
-        let max_reservation: Int
+        let startTime1: String
+        let endTime1: String
+        let startTime2: String
+        let endTime2: String
+        let timeSlot: String
+        let maxReservation: Int
         let dayoff: String
         let name: String
+
+        enum CodingKeys: String, CodingKey {
+            case scheduleId = "schedule_id"
+            case hospitalId = "hospital_id"
+            case staffId = "staff_id"
+            case startDate = "start_date"
+            case endDate = "end_date"
+            case date
+            case startTime1 = "start_time1"
+            case endTime1 = "end_time1"
+            case startTime2 = "start_time2"
+            case endTime2 = "end_time2"
+            case timeSlot = "time_slot"
+            case maxReservation = "max_reservation"
+            case dayoff, name
+        }
     }
 }
 class HospitalDataManagerClass {
-    var hospitalData: HospitalDataManager.HospitalData?
-
-    func updateHospitalData(with data: HospitalDataManager.HospitalData) {
-        self.hospitalData = data
-    }
-
-    func clearHospitalData() {
-        self.hospitalData = nil
-    }
+//    var hospitalData: HospitalDataManager.HospitalData?
+//
+//    func updateHospitalData(with data: HospitalDataManager.HospitalData) {
+//        self.hospitalData = data
+//    }
+//
+//    func clearHospitalData() {
+//        self.hospitalData = nil
+//    }
 }
 
 class HospitalHTTPRequest {
@@ -222,10 +201,11 @@ class HospitalHTTPRequest {
             }
         }
     }
-    func HospitalDetailHTTPRequest(hospitalId:String, httpHandler: @escaping (HospitalDataManager.HospitalData )-> Void) {
+    func HospitalDetailHTTPRequest(hospitalId:Int,token:String,uuid:String, httpHandler: @escaping (HospitalDataManager.HospitalDataClass )-> Void) {
         print("Call Hospital Detail")
-        print("https://kp-medicals.com/api/medical-wallet/hospitals/detail?hospital_id=\(hospitalId)")
-        if let url = URL(string: "https://kp-medicals.com/api/medical-wallet/hospitals/detail?hospital_id=\(hospitalId)") {
+        let urlString = "https://kp-medicals.com/api/medical-wallet/hospitals/detail?access_token=\(token)&uid=\(uuid)&hospital_id=\(hospitalId)"
+        print(urlString)
+        if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             URLSession.shared.dataTask(with: request) { data, res, er in
@@ -244,7 +224,7 @@ class HospitalHTTPRequest {
                 }
                 do {
                     let decoder = JSONDecoder()
-                    let json = try decoder.decode(HospitalDataManager.Response_Data.self, from: data)
+                    let json = try decoder.decode(KPApiStructFrom<HospitalDataManager.HospitalDataClass>.self, from: data)
                     httpHandler(json.data)
                 }catch{
                     print("Json Errro Hsdata \(error)")

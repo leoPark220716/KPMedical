@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 class UserObservaleObject: ObservableObject {
     @Published var name: String = ""
     @Published var dob: String = ""
@@ -45,4 +45,8 @@ class singupOb: ObservableObject {
     @Published var password = ""
     @Published var smsCheck = false
     @Published var Checkpassword = ""
+}
+// 디바이스 고유 넘버
+func getDeviceUUID() -> String {
+    return UIDevice.current.identifierForVendor!.uuidString
 }

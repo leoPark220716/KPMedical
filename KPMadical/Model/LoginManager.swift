@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+
 
 class LoginManager: ObservableObject{
     @Published var LoginStatus: Bool
@@ -86,9 +86,7 @@ struct Response: Codable {
     let message: String
 }
 // 디바이스 고유 넘버
-func getDeviceUUID() -> String {
-    return UIDevice.current.identifierForVendor!.uuidString
-}
+
 // SigunUpView 에서 사용되고 있음
 // f 부분이 생소할 수 있는데 f 부분은 클로저를 말함.
 // 비동기 요청의 결과가 성공적이었는지 여부에 따라 true 또는 false 를 반환함.

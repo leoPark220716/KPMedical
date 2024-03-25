@@ -9,16 +9,29 @@ class LocationService: NSObject, CLLocationManagerDelegate, ObservableObject {
     @Published var address_Naver: String?
     @Published var latitude: String?
     @Published var longitude: String?
+    @Published var isAuthorized: Bool = false
     private let Navergeo = NaverGeocoder()
     
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization() // 위치 서비스 사용 동의 요청
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
     func requestLocation() {
         locationManager.requestLocation() // 단일 위치 요청
+    }
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager){
+        switch manager.authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                isAuthorized = true
+                locationManager.startUpdatingLocation() // 위치 업데이트 시작
+            case .notDetermined, .restricted, .denied:
+                isAuthorized = false
+            @unknown default:
+                isAuthorized = false
+            }
     }
 
     // CLLocationManagerDelegate 메소드

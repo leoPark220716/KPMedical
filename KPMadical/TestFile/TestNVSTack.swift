@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct TestNVSTack: View {
-    var body: some View {
-        NavigationStack{
-            NavigationLink(destination: FindHospitalView()){
-                SearchHpView()
-            }
-        }
-    }
-}
+//struct TestNVSTack: View {
+//    var body: some View {
+//        NavigationStack{
+//            NavigationLink(destination: FindHospitalView()){
+//                SearchHpView()
+//            }
+//        }
+//    }
+//}
 
-#Preview {
-    TestNVSTack()
-}
+//#Preview {
+//    TestNVSTack()
+//}
 struct lab: View {
     var body: some View {
         Text("Hello, World!")

@@ -45,7 +45,7 @@ struct ContentView: View {
                     }
                     //                    Hospital(Count: countModel)
                     NavigationStack{
-                        FindHospitalView()
+                        FindHospitalView(userInfo:authViewModel)
                     }
                     .tabItem {
                         Label("내병원", systemImage: "stethoscope")
@@ -59,7 +59,7 @@ struct ContentView: View {
                     
                 }
             case .findHospital:
-                FindHospitalView()
+                FindHospitalView(userInfo:authViewModel)
             }
             
             

@@ -7,6 +7,8 @@
 import SwiftUI
 import CoreLocation
 struct FindHospitalView: View {
+//    유저 관리
+    @ObservedObject var userInfo: UserObservaleObject
     //    병원 배열
     @State var hospitals: [HospitalDataManager.Hospitals] = []
     @State private var departSheetShow = false
@@ -26,7 +28,7 @@ struct FindHospitalView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0){
-                NavigationLink(destination: KeywordSearch()){
+                NavigationLink(destination: KeywordSearch(userInfo: userInfo)){
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -106,7 +108,7 @@ struct FindHospitalView: View {
                     //                            패이징 처리 여기서 하면됨
                     //                    HospitalDetailView 맨 하단에 코드있음
                         .background(
-                            NavigationLink("",destination : HospitalDetailView())
+                            NavigationLink("",destination : HospitalDetailView(userInfo:userInfo,StartTime:$hospitals[index].start_time,EndTime:$hospitals[index].end_time, HospitalId: $hospitals[index].hospital_id, MainImage: $hospitals[index].icon))
                                 .opacity(0)
                         )
                 }

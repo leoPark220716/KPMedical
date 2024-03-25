@@ -35,6 +35,7 @@
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
+		1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */; };
 		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
 		1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */; };
 		1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		039AAD269B7660B4E20A2BCE /* Pods-KPMadical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical.release.xcconfig"; path = "Target Support Files/Pods-KPMadical/Pods-KPMadical.release.xcconfig"; sourceTree = "<group>"; };
 		0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E14AEB62BB028F7009A0325 /* Scadul.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scadul.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNVSTack.swift; sourceTree = "<group>"; };
 		1E18A2E82BAAF44800466221 /* FindHospitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHospitalView.swift; sourceTree = "<group>"; };
 		1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsManager.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
+		1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailModel.swift; sourceTree = "<group>"; };
 		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountModel.swift; sourceTree = "<group>"; };
 		1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 				1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */,
 				1ECC00922BAC0809009B2006 /* NaverMap.swift */,
 				1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */,
+				1E14AEB62BB028F7009A0325 /* Scadul.playground */,
 				1ED7958A2BACE70900084CAE /* keywordSearch.swift */,
 			);
 			path = View;
@@ -176,6 +180,7 @@
 			children = (
 				1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */,
 				1ED7958C2BACE71C00084CAE /* keywordModel.swift */,
+				1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -630,6 +635,7 @@
 			files = (
 				1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */,
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
+				1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
