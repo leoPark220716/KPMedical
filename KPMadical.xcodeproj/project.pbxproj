@@ -32,6 +32,7 @@
 		1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA232BA88719009076F1 /* UserDataHandle.swift */; };
 		1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */; };
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
+		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
@@ -98,6 +99,7 @@
 		1EA0CA232BA88719009076F1 /* UserDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataHandle.swift; sourceTree = "<group>"; };
 		1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocoder.swift; sourceTree = "<group>"; };
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
+		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorItemView.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */,
 				1ECC00922BAC0809009B2006 /* NaverMap.swift */,
 				1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */,
+				1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */,
 				1E14AEB62BB028F7009A0325 /* Scadul.playground */,
 				1ED7958A2BACE70900084CAE /* keywordSearch.swift */,
 			);
@@ -661,6 +664,7 @@
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
+				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 				1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */,
 				1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */,

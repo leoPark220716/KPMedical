@@ -1,26 +1,22 @@
 //
-//  FindHosptialItem.swift
+//  DoctorItemView.swift
 //  KPMadical
 //
-//  Created by Junsung Park on 3/20/24.
+//  Created by Junsung Park on 3/26/24.
 //
 
 import SwiftUI
 
-struct FindHosptialItem: View{
-    @Binding var hospital: HospitalDataManager.Hospitals
+struct DoctorItemView: View {
+    @Binding var DoctorProfile: HospitalDataManager.Doctor
     var TimeHelper = TimeManager()
-//    병원 관리 데이터 (예약 전체적인 정보 담겨있음)
     @State var WorkingState: Bool?
     var body: some View{
         VStack {
             HStack{
                 VStack(alignment: .leading){
-                    Text(hospital.hospital_name)
+                    Text(DoctorProfile.name)
                         .font(.headline)
-                        .bold()
-                    Text(hospital.location)
-                        .font(.subheadline)
                         .bold()
                         HStack{
                             Image(systemName: "stopwatch")
@@ -31,12 +27,12 @@ struct FindHosptialItem: View{
                                 .foregroundColor(WorkingState ?? false ? Color(.blue) : Color(.gray))
                                 .font(.subheadline)
                                 .bold()
-                            Text(WorkingState ?? false ? "\(hospital.start_time)~\(hospital.end_time)" : "")
+                            Text(WorkingState ?? false ? "\(DoctorProfile.main_schedules[0].startTime1)~\(DoctorProfile.main_schedules[0].endTime2)" : "")
                                 .font(.subheadline)
                         }
                         .padding(.top, 2)
                     HStack {
-                        ForEach(hospital.department_id.prefix(4), id: \.self) { id in
+                        ForEach(DoctorProfile.department_id.prefix(4), id: \.self) { id in
                             let intid = Int(id)
                             if let department = Department(rawValue: intid ?? 0) {
                                 Text(department.name)
@@ -48,27 +44,28 @@ struct FindHosptialItem: View{
                                     .foregroundColor(.blue)
                             }
                         }
-                        if hospital.department_id.count > 4 {
+                        if DoctorProfile.department_id.count > 4 {
                             Text("...")
                         }
                     }
                 }
                 Spacer()
-                AsyncImage(url: URL(string: hospital.icon)) { image in
+                AsyncImage(url: URL(string: DoctorProfile.icon)) { image in
                     image.resizable() // 이미지를 resizable로 만듭니다.
-                         .aspectRatio(contentMode: .fit) // 이미지의 종횡비를 유지하면서 프레임에 맞게 조정합니다.
+                        .aspectRatio(contentMode: .fill) // 이미지를 채우는 내용에 맞게 조정합니다. (원형에 맞추기 위해)
                 } placeholder: {
                     ProgressView() // 이미지 로딩 중 표시할 뷰
                 }
-                .frame(width: 90, height: 90) // 여기에서 이미지의 프레임 크기를 지정합니다.
-                .cornerRadius(25) // 이미지의 모서리를 둥글게 합니다.
-                .padding() // 주변에 패딩을 추가합니다.
+                .frame(width: 100, height: 100) // 여기에서 이미지의 프레임 크기를 지정합니다. 동일한 너비와 높이를 주어 원형을 만듭니다.
+                .clipShape(Circle()) // 이미지를 원형으로 자릅니다.
+                .overlay(Circle().stroke(Color.black, lineWidth: 1)) // 원형의 테두리를 추가할 수 있습니다.
                 .shadow(radius: 10, x: 5, y: 5) // 그림자 효과를 추가합니다.
+                .padding() // 주변에 패딩을 추가합니다.
             }
         }
         .padding(.vertical,5)
         .onAppear(){
-            WorkingState = TimeHelper.checkTimeIn(startTime: hospital.start_time, endTime: hospital.end_time)
+            WorkingState = TimeHelper.checkTimeIn(startTime: DoctorProfile.main_schedules[0].startTime1, endTime: DoctorProfile.main_schedules[0].endTime2)
         }
     }
 }

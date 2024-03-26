@@ -17,8 +17,9 @@ struct HospitalDetailView: View {
     let requestData = HospitalHTTPRequest()
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
     @State var HospitalDetailData = HospitalDataManager.HospitalDataClass()
-//    의사 스케줄 반영에 따른 시간표 출력 배열
+    //    의사 스케줄 반영에 따른 시간표 출력 배열
     @State var HospitalSchedules: [HospitalDataManager.Schedule] = []
+    @State var DoctorProfile: [HospitalDataManager.Doctor] = []
     var colors = ["red", "green"]
     let testImage = "https://public-kp-medicals.s3.ap-northeast-2.amazonaws.com/hospital_imgs/default_hospital.png"
     var body: some View {
@@ -30,14 +31,16 @@ struct HospitalDetailView: View {
                     .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
                     .cornerRadius(10)
                     .padding(.horizontal)
-                PikerView_Selection(HospitalDetailData: $HospitalDetailData,coord: $mapCoord, HospitalSchedules: $HospitalSchedules)
+                
+                PikerView_Selection(HospitalDetailData: $HospitalDetailData, coord: $mapCoord, HospitalSchedules: $HospitalSchedules,DoctorProfile: $DoctorProfile)
+                
             }
             .onAppear{
                 requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
                     self.HospitalDetailData = data
                     mapCoord = NMGLatLng(lat: HospitalDetailData.hospital.y, lng: HospitalDetailData.hospital.x)
-                    print(mapCoord.lat)
-                    print(mapCoord.lng)
+                    self.HospitalSchedules = HospitalDetailData.doctors.flatMap { $0.main_schedules }
+                    self.DoctorProfile = HospitalDetailData.doctors
                 }
             }
         }
@@ -50,19 +53,20 @@ struct HospitalDetail_Top: View{
     @Binding var EndTime: String
     @Binding var MainImage: String
     @State var WorkingState: Bool?
+    let timeManager = TimeManager()
     var body: some View{
         VStack(alignment: .leading){
             ZStack {
-                    AsyncImage(url: URL(string: MainImage)) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
-                            .clipped()
-                    } placeholder: {
-                        ProgressView() // 이미지 로딩 중 표시할 뷰
-                    }
+                AsyncImage(url: URL(string: MainImage)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 200)
+                        .clipped()
+                } placeholder: {
+                    ProgressView() // 이미지 로딩 중 표시할 뷰
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
             Text(HospitalDetailData.hospital.hospital_name)
                 .font(.system(size: 20))
                 .padding([.top,.leading])
@@ -109,7 +113,7 @@ struct HospitalDetail_Top: View{
         .padding(.top)
         .background(Color.white)
         .onAppear{
-            WorkingState = checkTimeIn(startTime: StartTime, endTime: EndTime)
+            WorkingState = timeManager.checkTimeIn(startTime: StartTime, endTime: EndTime)
         }
     }
 }
@@ -118,6 +122,7 @@ struct PikerView_Selection: View{
     @State private var selection = Selection.Intro
     @Binding var coord: NMGLatLng
     @Binding var HospitalSchedules: [HospitalDataManager.Schedule]
+    @Binding var DoctorProfile: [HospitalDataManager.Doctor]
     var body: some View{
         VStack(alignment:.leading){
             HStack{
@@ -158,7 +163,7 @@ struct PikerView_Selection: View{
             case .Intro:
                 IntroView(HospitalDetailData: $HospitalDetailData,coord: $coord, HospitalSchedules: $HospitalSchedules)
             case .doc:
-                DoctorListView()
+                DoctorListView(DoctorProfile: $DoctorProfile)
             }
         }
     }
@@ -170,57 +175,12 @@ struct IntroView: View{
     @Binding var HospitalDetailData: HospitalDataManager.HospitalDataClass
     @Binding var coord: NMGLatLng
     @Binding var HospitalSchedules: [HospitalDataManager.Schedule]
-    let days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
-    let hours = ["10:00 ~ 21:00", "10:00 ~ 21:00", "10:00 ~ 21:00", "10:00 ~ 21:00", "10:00 ~ 21:00", "10:00 ~ 21:00", "휴무"]
-//    전화번호 파싱
-    func formatKoreanPhoneNumber(_ numberString: String) -> String {
-        let cleanPhoneNumber = numberString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-
-        // 지역번호가 있는 경우
-        if cleanPhoneNumber.count == 9 { // 지역번호 + 7자리 번호
-            let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 2)
-            return "\(cleanPhoneNumber.prefix(2))-\(cleanPhoneNumber[index...].prefix(3))-\(cleanPhoneNumber.suffix(4))"
-        } else if cleanPhoneNumber.count == 10 { // 02 지역번호 또는 휴대폰 번호
-            if cleanPhoneNumber.hasPrefix("02") { // 서울 지역번호
-                let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 2)
-                return "\(cleanPhoneNumber.prefix(2))-\(cleanPhoneNumber[index...].prefix(4))-\(cleanPhoneNumber.suffix(4))"
-            } else { // 다른 지역번호 또는 휴대폰 번호
-                let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
-                return "\(cleanPhoneNumber.prefix(3))-\(cleanPhoneNumber[index...].prefix(3))-\(cleanPhoneNumber.suffix(4))"
-            }
-        } else if cleanPhoneNumber.count == 11 { // 휴대폰 번호
-            let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
-            return "\(cleanPhoneNumber.prefix(3))-\(cleanPhoneNumber[index...].prefix(4))-\(cleanPhoneNumber.suffix(4))"
-        } else { // 다른 형식의 번호
-            return numberString // 원본 번호를 그대로 반환
-        }
-    }
     var body: some View{
         Text("진료시간")
             .bold()
             .padding(.leading,30)
             .padding(.top,8)
-        VStack(alignment: .leading, spacing: 10) {
-            ForEach(0..<days.count, id: \.self) { index in
-                HStack {
-                    Spacer()
-                    Text(days[index])
-                        .font(.system(size: 13))
-                        .foregroundColor(index == 6 ? .red : .black) // 일요일은 빨간색으로 표시
-                        .frame(width: 50, alignment: .leading) // 요일 텍스트의 너비를 고정하고 왼쪽 정렬
-                    Spacer()
-                    Text(hours[index])
-                        .font(.system(size: 13))
-                        .foregroundColor(index == 6 ? .red : .black) // 일요일은 빨간색으로 표시
-                        .frame(width: 110, alignment: .center) // 시간 텍스트의 너비를 고정하고 오른쪽 정렬
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity) // HStack을 최대 너비로 설정
-            }
-        }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue.opacity(0.1)))
-        .padding(.horizontal)
+        HospitalScheduleView(HospitalSchedules: $HospitalSchedules)
         Rectangle()
             .frame(height: 1)
             .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
@@ -272,12 +232,127 @@ struct IntroView: View{
                 .cornerRadius(20)
             Spacer() // 우측에 공간 추가
         }
-        
-        
+    }
+}
+struct HospitalScheduleView: View{
+    @Binding var HospitalSchedules: [HospitalDataManager.Schedule]
+    let days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    @State var storeHours: [(day: String, open: String, close: String, holiday: Bool)] = []
+    let timeManager = TimeManager()
+    var body: some View{
+        if !HospitalSchedules.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(storeHours, id: \.day) { schedule in
+                    HStack {
+                        Spacer()
+                        Text(schedule.day)
+                            .font(.system(size: 13))
+                            .foregroundColor(schedule.day == "일요일" ? .red : .black)
+                            .frame(width: 50, alignment: .leading)
+                            .fontWeight(schedule.day == timeManager.String_currentWeekday() ? .bold : .regular)
+                        Spacer()
+                        Text(schedule.holiday ? "휴무" : "\(schedule.open)~\(schedule.close)")
+                            .font(.system(size: 13))
+                            .foregroundColor(schedule.day == "일요일" ? .red : .black)
+                            .frame(width: 110, alignment: .center)
+                            .fontWeight(schedule.day == timeManager.String_currentWeekday() ? .bold : .regular)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .onAppear {
+                storeHours = [] // 배열을 초기화
+                for index in 0..<7 {
+                    let isDayOffForAll = HospitalSchedules.allSatisfy { schedule in
+                        let dayOffIndex = schedule.dayoff.index(schedule.dayoff.startIndex, offsetBy: index)
+                        return schedule.dayoff[dayOffIndex] == "1"
+                    }
+                    if isDayOffForAll {
+                        storeHours.append((days[index], "", "", true))
+                    } else {
+                        let workingSchedules = HospitalSchedules.filter { schedule in
+                            let dayOffIndex = schedule.dayoff.index(schedule.dayoff.startIndex, offsetBy: index)
+                            return schedule.dayoff[dayOffIndex] == "0"
+                        }
+                        let latestStart = workingSchedules.map { $0.startTime1 }.min() ?? "24:00"
+                        let earliestEnd = workingSchedules.map { $0.endTime2 }.max() ?? "00:00"
+                        storeHours.append((days[index], latestStart, earliestEnd, false))
+                    }
+                }
+            }
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue.opacity(0.1)))
+            .padding(.horizontal)
+        }
+        else{
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(storeHours, id: \.day) { schedule in
+                    HStack {
+                        Spacer()
+                        Text(schedule.day)
+                            .font(.system(size: 13))
+                            .foregroundColor(schedule.day == "일요일" ? .red : .black)
+                            .frame(width: 50, alignment: .leading)
+                        Spacer()
+                        Text(schedule.holiday ? "휴무" : "\(schedule.open)~\(schedule.close)")
+                            .font(.system(size: 13))
+                            .foregroundColor(schedule.day == "일요일" ? .red : .black)
+                            .frame(width: 110, alignment: .center)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .onAppear {
+                storeHours = [] // 배열을 초기화
+                for index in 0..<7 {
+                    storeHours.append((days[index], "11:00", "11:00", false))
+                }
+            }
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue.opacity(0.1)))
+            .padding(.horizontal)
+        }
     }
 }
 struct DoctorListView: View{
+    @Binding var DoctorProfile: [HospitalDataManager.Doctor]
+    let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
     var body: some View{
-        Text("2")
+        ForEach(DoctorProfile.indices, id: \.self) { item in
+            DoctorItemView(DoctorProfile: $DoctorProfile[item])
+                .padding(.leading)
+        }
     }
+}
+//    전화번호 파싱
+func formatKoreanPhoneNumber(_ numberString: String) -> String {
+    let cleanPhoneNumber = numberString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    
+    // 지역번호가 있는 경우
+    if cleanPhoneNumber.count == 9 { // 지역번호 + 7자리 번호
+        let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 2)
+        return "\(cleanPhoneNumber.prefix(2))-\(cleanPhoneNumber[index...].prefix(3))-\(cleanPhoneNumber.suffix(4))"
+    } else if cleanPhoneNumber.count == 10 { // 02 지역번호 또는 휴대폰 번호
+        if cleanPhoneNumber.hasPrefix("02") { // 서울 지역번호
+            let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 2)
+            return "\(cleanPhoneNumber.prefix(2))-\(cleanPhoneNumber[index...].prefix(4))-\(cleanPhoneNumber.suffix(4))"
+        } else { // 다른 지역번호 또는 휴대폰 번호
+            let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+            return "\(cleanPhoneNumber.prefix(3))-\(cleanPhoneNumber[index...].prefix(3))-\(cleanPhoneNumber.suffix(4))"
+        }
+    } else if cleanPhoneNumber.count == 11 { // 휴대폰 번호
+        let index = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+        return "\(cleanPhoneNumber.prefix(3))-\(cleanPhoneNumber[index...].prefix(4))-\(cleanPhoneNumber.suffix(4))"
+    } else { // 다른 형식의 번호
+        return numberString // 원본 번호를 그대로 반환
+    }
+}
+func currentWeekday() -> Int {
+    var calendar = Calendar.current
+    calendar.timeZone = TimeZone(identifier: "Asia/Seoul")! // 한국 시간대 설정
+    let weekDay = calendar.component(.weekday, from: Date())
+    // Swift에서의 weekDay는 일요일을 1로 시작합니다. 월요일을 1로 조정합니다.
+    return weekDay == 1 ? 7 : weekDay - 1 // 일요일을 7로, 나머지는 1 (월요일)부터 6 (토요일)로 조정
 }

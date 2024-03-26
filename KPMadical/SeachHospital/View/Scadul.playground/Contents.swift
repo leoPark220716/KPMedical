@@ -114,32 +114,40 @@ let testSchedules = [
      "dayoff": "0010001",
      "name": "김성훈"]
     ]
-var commonDaysOffTest: [String] = []
-var storeHoursTest: [(day: String, open: String, close: String, holyday : Bool)] = []
-
-for index in 0..<7 {
-    let isDayOffForAll = testSchedules.allSatisfy { schedule in
-        guard let dayOffString = schedule["dayoff"] as? String else { return false }
-        let dayOffIndex = dayOffString.index(dayOffString.startIndex, offsetBy: index)
-        return dayOffString[dayOffIndex] == "1"
+//var commonDaysOffTest: [String] = []
+//var storeHoursTest: [(day: String, open: String, close: String, holyday : Bool)] = []
+//
+//for index in 0..<7 {
+//    let isDayOffForAll = testSchedules.allSatisfy { schedule in
+//        guard let dayOffString = schedule["dayoff"] as? String else { return false }
+//        let dayOffIndex = dayOffString.index(dayOffString.startIndex, offsetBy: index)
+//        return dayOffString[dayOffIndex] == "1"
+//    }
+//
+//    if isDayOffForAll {
+//        storeHoursTest.append((daysOfWeek[index], "", "", true))
+//    } else {
+//        let workingSchedules = testSchedules.filter { schedule in
+//            guard let dayOffString = schedule["dayoff"] as? String else { return false }
+//            let dayOffIndex = dayOffString.index(dayOffString.startIndex, offsetBy: index)
+//            return dayOffString[dayOffIndex] == "0"
+//        }
+//        let latestStart = workingSchedules.compactMap { $0["start_time1"] as? String }.min() ?? "24:00"
+//        let earliestEnd = workingSchedules.compactMap { $0["end_time2"] as? String }.max() ?? "00:00"
+//
+//        storeHoursTest.append((daysOfWeek[index], latestStart, earliestEnd, false))
+//    }
+//}
+//
+//storeHoursTest.forEach { day, open, close, holyday in
+//    print("\(day)일: 개점시간 \(open), 폐점시간 \(close) 휴무 \(holyday)")
+//}
+func currentWeekday() -> Int {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul")! // 한국 시간대 설정
+        let weekDay = calendar.component(.weekday, from: Date())
+        // Swift에서의 weekDay는 일요일을 1로 시작합니다. 월요일을 1로 조정합니다.
+        return weekDay == 1 ? 7 : weekDay - 1 // 일요일을 7로, 나머지는 1 (월요일)부터 6 (토요일)로 조정
     }
 
-    if isDayOffForAll {
-        storeHoursTest.append((daysOfWeek[index], "", "", true))
-    } else {
-        let workingSchedules = testSchedules.filter { schedule in
-            guard let dayOffString = schedule["dayoff"] as? String else { return false }
-            let dayOffIndex = dayOffString.index(dayOffString.startIndex, offsetBy: index)
-            return dayOffString[dayOffIndex] == "0"
-        }
-        let latestStart = workingSchedules.compactMap { $0["start_time1"] as? String }.min() ?? "24:00"
-        let earliestEnd = workingSchedules.compactMap { $0["end_time2"] as? String }.max() ?? "00:00"
-
-        storeHoursTest.append((daysOfWeek[index], latestStart, earliestEnd, false))
-    }
-}
-
-print("모두가 쉬는 요일: \(commonDaysOffTest)")
-storeHoursTest.forEach { day, open, close, holyday in
-    print("\(day)일: 개점시간 \(open), 폐점시간 \(close) 휴무 \(holyday)")
-}
+print("오늘은 \(currentWeekday())입니다.")
