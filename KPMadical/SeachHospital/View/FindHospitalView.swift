@@ -7,7 +7,8 @@
 import SwiftUI
 import CoreLocation
 struct FindHospitalView: View {
-//    유저 관리
+    //    유저 관리
+    @State var path = NavigationPath()
     @ObservedObject var userInfo: UserObservaleObject
     //    병원 배열
     @State var hospitals: [HospitalDataManager.Hospitals] = []
@@ -26,9 +27,9 @@ struct FindHospitalView: View {
     @State private var selectedNumber = 0
     @State private var userLocation: CLLocationCoordinate2D?
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack(spacing: 0){
-                NavigationLink(destination: KeywordSearch(userInfo: userInfo)){
+                NavigationLink(destination: KeywordSearch(path: $path, userInfo: userInfo)){
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -56,9 +57,9 @@ struct FindHospitalView: View {
                                 Text("주소를 찾을수 없습니다.")
                                     .font(.system(size: 14))
                             }
-//                            Text("수정")
-//                                .font(.system(size: 12))
-//                                .foregroundColor(.blue)
+                            //                            Text("수정")
+                            //                                .font(.system(size: 12))
+                            //                                .foregroundColor(.blue)
                         }
                         .padding(.top,10)
                         Spacer()
@@ -102,15 +103,22 @@ struct FindHospitalView: View {
                         }
                     }
                 }
-                //                리스트뷰 병원 나열
                 List(hospitals.indices, id: \.self) {index in
-                    FindHosptialItem(hospital: $hospitals[index])
-                    //                            패이징 처리 여기서 하면됨
-                    //                    HospitalDetailView 맨 하단에 코드있음
-                        .background(
-                            NavigationLink("",destination : HospitalDetailView(userInfo:userInfo,StartTime:$hospitals[index].start_time,EndTime:$hospitals[index].end_time, HospitalId: $hospitals[index].hospital_id, MainImage: $hospitals[index].icon))
-                                .opacity(0)
-                        )
+                    FindHosptialItem(hospital: $hospitals[index]).background(
+                        NavigationLink(value: index){
+                        } .opacity(0)
+                    )
+                    .onAppear {
+                        if hospitals[index] == hospitals.last {
+                            print(hospitals.last ?? "default value")
+                            print("isBottom")
+                        }
+                    }
+                }.navigationDestination(for: Int.self){index in
+                    HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
+                }
+                .onAppear{
+                    path = .init()
                 }
                 .listStyle(InsetListStyle())
                 .padding(.top, 10)

@@ -9,42 +9,93 @@ import SwiftUI
 import NMapsMap
 
 struct HospitalDetailView: View {
+    @Binding var path: NavigationPath
     @ObservedObject var userInfo: UserObservaleObject
-    @Binding var StartTime: String
-    @Binding var EndTime: String
-    @Binding var HospitalId: Int
-    @Binding var MainImage: String
+    @State var StartTime: String
+    @State var EndTime: String
+    @State var HospitalId: Int
+    @State var MainImage: String
     let requestData = HospitalHTTPRequest()
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
-    @State var HospitalDetailData = HospitalDataManager.HospitalDataClass()
+//    데이터 헨들러 디텔뷰에서 들어갈 때 해당 객체로 데이터 다 다룰듯
+    @ObservedObject var hospitalDataHandler = HospitalDataHandler() // 변경됨
     //    의사 스케줄 반영에 따른 시간표 출력 배열
     @State var HospitalSchedules: [HospitalDataManager.Schedule] = []
+    //    의사 프로필 데이터
     @State var DoctorProfile: [HospitalDataManager.Doctor] = []
-    var colors = ["red", "green"]
-    let testImage = "https://public-kp-medicals.s3.ap-northeast-2.amazonaws.com/hospital_imgs/default_hospital.png"
     var body: some View {
-        ScrollView{
+        ZStack{
             VStack{
-                HospitalDetail_Top(HospitalDetailData: $HospitalDetailData,StartTime: $StartTime,EndTime: $EndTime,MainImage: $MainImage)
-                Rectangle()
-                    .frame(height: 1)
-                    .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                
-                PikerView_Selection(HospitalDetailData: $HospitalDetailData, coord: $mapCoord, HospitalSchedules: $HospitalSchedules,DoctorProfile: $DoctorProfile)
-                
-            }
-            .onAppear{
-                requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
-                    self.HospitalDetailData = data
-                    mapCoord = NMGLatLng(lat: HospitalDetailData.hospital.y, lng: HospitalDetailData.hospital.x)
-                    self.HospitalSchedules = HospitalDetailData.doctors.flatMap { $0.main_schedules }
-                    self.DoctorProfile = HospitalDetailData.doctors
+                ScrollView{
+                    VStack{
+                        if hospitalDataHandler.CheckLoadingState{
+                            HospitalDetail_Top(HospitalDetailData: $hospitalDataHandler.HospitalDetailData,StartTime: $StartTime,EndTime: $EndTime,MainImage: $MainImage)
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                            
+                            PikerView_Selection(HospitalDetailData: $hospitalDataHandler.HospitalDetailData, coord: $mapCoord, HospitalSchedules: $HospitalSchedules,DoctorProfile: $DoctorProfile)
+                        }
+                    }
+                }.navigationTitle(hospitalDataHandler.CheckLoadingState ? hospitalDataHandler.HospitalDetailData.hospital.hospital_name : "")
+                HStack{
+                    Spacer()
+        //            NavigationLink(destination: Chat()) {
+                        Text("상담하기")
+                            .padding()
+                            .font(.system(size: 14))
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(Color.blue.opacity(0.5))
+                            .background(Color.white)
+                            .cornerRadius(5)
+                            .bold()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.blue.opacity(0.5), lineWidth: 1)
+                            )
+                            .onTapGesture {
+                                path = .init()
+                            }
+        //            }
+                    NavigationLink(destination: ChooseDepartment(userInfo: userInfo, HospitalInfo: hospitalDataHandler)){
+                        Text("예약하기")
+                            .padding()
+                            .font(.system(size: 14))
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(Color.white)
+                            .background(Color.blue.opacity(0.5))
+                            .cornerRadius(5)
+                            .bold()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.blue.opacity(0.5), lineWidth: 1)
+                            )
+                    }
+                    Spacer()
                 }
             }
+            if !hospitalDataHandler.CheckLoadingState {
+                    ProgressView("Loading...")
+                        .scaleEffect(2) // 크기를 조정하려면 scaleEffect 사용
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.black.opacity(0.5)) // 반투명 배경
+                        .foregroundColor(.white)
+                }
         }
-        .navigationTitle(HospitalDetailData.hospital.hospital_name)
+        .onAppear{
+            requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
+                self.hospitalDataHandler.HospitalDetailData = data
+                mapCoord = NMGLatLng(lat: hospitalDataHandler.HospitalDetailData.hospital.y, lng: hospitalDataHandler.HospitalDetailData.hospital.x)
+                self.HospitalSchedules = hospitalDataHandler.HospitalDetailData.doctors.flatMap { $0.main_schedules }
+                self.DoctorProfile = hospitalDataHandler.HospitalDetailData.doctors
+                hospitalDataHandler.LoadingCheck()
+            }
+        }
+        .onDisappear{
+            path = .init()
+        }
     }
 }
 struct HospitalDetail_Top: View{
@@ -318,7 +369,6 @@ struct HospitalScheduleView: View{
 }
 struct DoctorListView: View{
     @Binding var DoctorProfile: [HospitalDataManager.Doctor]
-    let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
     var body: some View{
         ForEach(DoctorProfile.indices, id: \.self) { item in
             DoctorItemView(DoctorProfile: $DoctorProfile[item])

@@ -19,6 +19,9 @@
 		1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E267BE32BA9C07900280170 /* SQlite_UserData.swift */; };
 		1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B37482BA039DA00B8EFA4 /* Chat.swift */; };
 		1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B374A2BA0403500B8EFA4 /* SplashView.swift */; };
+		1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E370E9A2BB29460001BA38E /* ChooseDepartment.swift */; };
+		1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E370E9C2BB2946C001BA38E /* ChooseDate.swift */; };
+		1E370E9F2BB2A148001BA38E /* HospitalDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E370E9E2BB2A148001BA38E /* HospitalDataHandler.swift */; };
 		1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C28182BA9F413005461D1 /* TestFunc.swift */; };
 		1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */; };
 		1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */; };
@@ -86,6 +89,9 @@
 		1E267BE32BA9C07900280170 /* SQlite_UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQlite_UserData.swift; sourceTree = "<group>"; };
 		1E2B37482BA039DA00B8EFA4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		1E2B374A2BA0403500B8EFA4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		1E370E9A2BB29460001BA38E /* ChooseDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDepartment.swift; sourceTree = "<group>"; };
+		1E370E9C2BB2946C001BA38E /* ChooseDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDate.swift; sourceTree = "<group>"; };
+		1E370E9E2BB2A148001BA38E /* HospitalDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataHandler.swift; sourceTree = "<group>"; };
 		1E4C28182BA9F413005461D1 /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
 		1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManager.swift; sourceTree = "<group>"; };
 		1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailView.swift; sourceTree = "<group>"; };
@@ -174,6 +180,8 @@
 				1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */,
 				1E14AEB62BB028F7009A0325 /* Scadul.playground */,
 				1ED7958A2BACE70900084CAE /* keywordSearch.swift */,
+				1E370E9A2BB29460001BA38E /* ChooseDepartment.swift */,
+				1E370E9C2BB2946C001BA38E /* ChooseDate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 				1E18A2EF2BAB1C1300466221 /* HospitalRequest.swift */,
 				1ED7958C2BACE71C00084CAE /* keywordModel.swift */,
 				1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */,
+				1E370E9E2BB2A148001BA38E /* HospitalDataHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -650,6 +659,7 @@
 				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
 				1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */,
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
+				1E370E9F2BB2A148001BA38E /* HospitalDataHandler.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
@@ -657,6 +667,7 @@
 				1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */,
 				1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
+				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
 				1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
 				1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */,
@@ -666,6 +677,7 @@
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
+				1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */,
 				1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */,
 				1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */,
 				1E18A2ED2BAAF8CD00466221 /* FindHosptialItem.swift in Sources */,
@@ -759,7 +771,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -816,7 +828,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -849,6 +861,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -885,6 +898,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

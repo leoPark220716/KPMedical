@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct KeywordSearch: View {
+    @Binding var path: NavigationPath
     @ObservedObject var userInfo: UserObservaleObject
     @State private var searchText = ""
     @ObservedObject private var viewModel = keywordModel()
@@ -75,7 +76,7 @@ struct KeywordSearch: View {
                     List(viewModel.hospitals.indices, id: \.self) {index in
                         FindHosptialItem(hospital: $viewModel.hospitals[index])
                             .background(
-                                NavigationLink("",destination : HospitalDetailView(userInfo:userInfo,StartTime: $viewModel.hospitals[index].start_time,EndTime: $viewModel.hospitals[index].end_time,HospitalId: $viewModel.hospitals[index].hospital_id, MainImage: $viewModel.hospitals[index].icon))
+                                NavigationLink("",destination : HospitalDetailView(path: $path, userInfo:userInfo,StartTime: viewModel.hospitals[index].start_time,EndTime: viewModel.hospitals[index].end_time,HospitalId: viewModel.hospitals[index].hospital_id, MainImage: viewModel.hospitals[index].icon))
                                     .opacity(0)
                             )
                     }
