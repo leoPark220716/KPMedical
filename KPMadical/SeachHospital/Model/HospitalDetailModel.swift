@@ -9,11 +9,26 @@ import Foundation
 import NMapsMap
 import UIKit
 
-struct HospitalDetailInfo {
-    var startTime: String
-    var endTime: String
-    var hospitalId: Int
-    var mainImage: String
+struct reservationInfo {
+    var hospital_id: Int
+    var staff_id: Int
+    var date: String
+    var time: String
+    var purpose: String
+    var time_slot: String
+    var department_id: String
+    init() {
+        self.hospital_id = 0
+        self.staff_id = 0
+        self.date = ""
+        self.time = ""
+        self.purpose = ""
+        self.time_slot = ""
+        self.department_id = ""
+    }
+    mutating func setDate(date: String){
+        self.date = date
+    }
 }
 
 class TimeManager{

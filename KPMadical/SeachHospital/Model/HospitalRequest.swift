@@ -111,6 +111,19 @@ struct HospitalDataManager{
             case dayoff, name
         }
     }
+    struct RequestReservations: Codable{
+        var access_token: String
+        var reservations: [Reservation]
+        var error_code: Int
+        var error_stack: String
+    }
+    struct Reservation: Codable {
+        var reservation_id: Int
+            var hospital_id: Int
+            var staff_id: Int
+            var date: String
+            var time: String
+    }
 }
 class HospitalDataManagerClass {
 //    var hospitalData: HospitalDataManager.HospitalData?
@@ -246,6 +259,39 @@ class HospitalHTTPRequest {
         // 파라미터 추가
         url.append("\(key)=\(value)")
         return url
+    }
+    func GetReservations(token: String, uid:String, date:String, staff_id: String, httpHandler: @escaping ([HospitalDataManager.Reservation]) -> Void){
+     let urlString = "https://kp-medicals.com/api/medical-wallet/hospitals/reservations/list/doctor?access_token=\(token)&uid=\(uid)&date=\(date)&staff_id=\(staff_id)"
+        print(urlString)
+        if let url = URL(string: urlString) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            URLSession.shared.dataTask(with: request){ data, res, er in
+                if let er = er {
+                    print("err : \(er) ")
+                    return
+                }
+                guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
+                    print("res err \(String(describing: res))")
+                    return
+                }
+                guard let data = data else{
+                    let dataError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data"])
+                    print("\(dataError)")
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode(KPApiStructFrom<HospitalDataManager.RequestReservations>.self, from: data)
+                    httpHandler(json.data.reservations)
+                }catch {
+                    print("JsonErr \(error)")
+                }
+            }
+        }else{
+            let urlError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+            print("ErrUrl\(urlError)")
+        }
     }
 }
 

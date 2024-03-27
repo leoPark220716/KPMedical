@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ChooseDepartment: View {
+    @Binding var path: NavigationPath
     @ObservedObject var userInfo: UserObservaleObject
     @ObservedObject var HospitalInfo: HospitalDataHandler
     @State private var selectedId: Int? = nil
+//    Toast 메시지
+    @State private var toast: FancyToast? = nil
+    @Binding var info: reservationInfo
     var body: some View {
         ScrollView{
             VStack(alignment:.center){
@@ -20,6 +24,7 @@ struct ChooseDepartment: View {
                         DepartmentView(name: department.name, isSelected: selectedId == Int(id))
                             .onTapGesture {
                                 self.selectedId = Int(id)
+                                info.department_id = id
                             }
                     }
                 }
@@ -27,38 +32,60 @@ struct ChooseDepartment: View {
             .padding(.top)
             .navigationTitle("진료과를 선택해주세요")
         }
+        .toastView(toast: $toast)
         HStack{
             Spacer()
-            Text("의료진")
-                .padding(13)
-                .font(.system(size: 20))
-                .bold()
-                .frame(maxWidth: .infinity)
-                .foregroundColor(Color.white)
-                .background(Color("ConceptColor"))
-                .cornerRadius(5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.blue.opacity(0.8), lineWidth: 1)
-                )
-            Text("진료일")
-                .padding(13)
-                .font(.system(size: 20))
-                .bold()
-                .frame(maxWidth: .infinity)
-                .foregroundColor(Color.white)
-                .background(Color("ConceptColor"))
-                .cornerRadius(5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.blue.opacity(0.8), lineWidth: 1)
-                )
+            if selectedId != nil{
+                NavigationLink(value: HospitalDataHandler.ChooseDateOrDoctor.doctor){
+                    Text("의료진")
+                        .modifier(ButtonStyleModifier(isEnabled: true))
+                }
+                NavigationLink(value: HospitalDataHandler.ChooseDateOrDoctor.date_day){
+                    Text("진료일")
+                        .modifier(ButtonStyleModifier(isEnabled: true))
+                }
+            }else{
+                Text("의료진")
+                    .modifier(ButtonStyleModifier(isEnabled: true))
+                    .onTapGesture {
+                        toast = FancyToast(type: .error, title: "진료과를 선택하지 않았습니다.", message: "진료과를 선택해주세요.")
+                    }
+                Text("진료일")
+                    .modifier(ButtonStyleModifier(isEnabled: true))
+                    .onTapGesture {
+                        toast = FancyToast(type: .error, title: "진료과를 선택하지 않았습니다.", message: "진료과를 선택해주세요.")
+                    }
+            }
             Spacer()
+        }
+        .navigationDestination(for:HospitalDataHandler.ChooseDateOrDoctor.self){ value in
+            switch value{
+            case .date_day:
+                ChooseDate(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo,CheckFirst: true,info: $info)
+            case .doctor:
+                ChooseDorcor(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo,CheckFirst: true,info: $info)
+            }
         }
     }
 }
+struct ButtonStyleModifier: ViewModifier {
+    var isEnabled: Bool
 
-
+    func body(content: Content) -> some View {
+        content
+            .padding(13)
+            .font(.system(size: 20))
+            .bold()
+            .frame(maxWidth: .infinity)
+            .foregroundColor(isEnabled ? Color.white : Color.gray)
+            .background(Color("ConceptColor"))
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(isEnabled ? Color.blue.opacity(0.8) : Color.gray.opacity(0.8), lineWidth: 1)
+            )
+    }
+}
 struct DepartmentView: View {
     let name: String
     var isSelected: Bool

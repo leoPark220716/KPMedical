@@ -26,6 +26,7 @@ struct FindHospitalView: View {
     @StateObject private var locationService = LocationService()
     @State private var selectedNumber = 0
     @State private var userLocation: CLLocationCoordinate2D?
+    @State private var selectedHospital: Int? = nil
     var body: some View {
         NavigationStack(path: $path) {
             VStack(spacing: 0){
@@ -104,21 +105,24 @@ struct FindHospitalView: View {
                     }
                 }
                 List(hospitals.indices, id: \.self) {index in
-                    FindHosptialItem(hospital: $hospitals[index]).background(
-                        NavigationLink(value: index){
-                        } .opacity(0)
-                    )
+                    FindHosptialItem(hospital: $hospitals[index])
+                        .onTapGesture {
+                            path.append(index)
+                        }
+//                        .background(
+//                        NavigationLink(value: index){
+//                        } .opacity(0)
+//                    )
                     .onAppear {
                         if hospitals[index] == hospitals.last {
                             print(hospitals.last ?? "default value")
                             print("isBottom")
                         }
                     }
-                }.navigationDestination(for: Int.self){index in
-                    HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
+                    
                 }
-                .onAppear{
-                    path = .init()
+                .navigationDestination(for: Int.self){index in
+                    HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
                 }
                 .listStyle(InsetListStyle())
                 .padding(.top, 10)

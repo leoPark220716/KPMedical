@@ -27,16 +27,25 @@
 		1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */; };
 		1E64CBF22BA050B50053A555 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* Profile.swift */; };
 		1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF32BA051740053A555 /* LoginManager.swift */; };
+		1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E777C222BB322E100B2BC39 /* CustomCalender.swift */; };
+		1E7B10542BB2EE9E006C4FCA /* ChooseDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B10532BB2EE9E006C4FCA /* ChooseDoctor.swift */; };
+		1E7B10572BB2F563006C4FCA /* HospitalDetailTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B10562BB2F563006C4FCA /* HospitalDetailTop.swift */; };
+		1E7B10592BB2F5A8006C4FCA /* PikerViewSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B10582BB2F5A8006C4FCA /* PikerViewSelection.swift */; };
+		1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B105A2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift */; };
+		1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B105C2BB2F659006C4FCA /* HospitalScheduleView.swift */; };
+		1E7B105F2BB2F688006C4FCA /* DoctorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B105E2BB2F688006C4FCA /* DoctorListView.swift */; };
 		1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D1292BA31B0300C78CEC /* LoginView.swift */; };
 		1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */; };
 		1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F79172B9F322000F4C230 /* Hospital.swift */; };
 		1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9681EE2BA19400003F8E4B /* AccountView.swift */; };
+		1E985FA42BB300BB004B516E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E985FA32BB300BB004B516E /* ToastView.swift */; };
 		1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */; };
 		1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA232BA88719009076F1 /* UserDataHandle.swift */; };
 		1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */; };
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
 		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
+		1ED344C42BB3F6AA0037C9D5 /* ChooseTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
 		1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */; };
@@ -97,16 +106,25 @@
 		1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailView.swift; sourceTree = "<group>"; };
 		1E64CBF12BA050B50053A555 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1E64CBF32BA051740053A555 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		1E777C222BB322E100B2BC39 /* CustomCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalender.swift; sourceTree = "<group>"; };
+		1E7B10532BB2EE9E006C4FCA /* ChooseDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDoctor.swift; sourceTree = "<group>"; };
+		1E7B10562BB2F563006C4FCA /* HospitalDetailTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailTop.swift; sourceTree = "<group>"; };
+		1E7B10582BB2F5A8006C4FCA /* PikerViewSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PikerViewSelection.swift; sourceTree = "<group>"; };
+		1E7B105A2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailIntroView.swift; sourceTree = "<group>"; };
+		1E7B105C2BB2F659006C4FCA /* HospitalScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalScheduleView.swift; sourceTree = "<group>"; };
+		1E7B105E2BB2F688006C4FCA /* DoctorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorListView.swift; sourceTree = "<group>"; };
 		1E89D1292BA31B0300C78CEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOPTView.swift; sourceTree = "<group>"; };
 		1E8F79172B9F322000F4C230 /* Hospital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hospital.swift; sourceTree = "<group>"; };
 		1E9681EE2BA19400003F8E4B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		1E985FA32BB300BB004B516E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		1EA0CA232BA88719009076F1 /* UserDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataHandle.swift; sourceTree = "<group>"; };
 		1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocoder.swift; sourceTree = "<group>"; };
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
-		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorItemView.swift; sourceTree = "<group>"; };
+		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorItemView.swift; path = ../DoctorItemView.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
+		1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTime.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
 		1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailModel.swift; sourceTree = "<group>"; };
@@ -172,16 +190,17 @@
 		1E18A2E72BAAF42C00466221 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E7B10552BB2F528006C4FCA /* DetailViewSep */,
 				1E18A2E82BAAF44800466221 /* FindHospitalView.swift */,
 				1E18A2EC2BAAF8CD00466221 /* FindHosptialItem.swift */,
 				1E18A2F32BAB34DF00466221 /* departmentsChooseSheetView.swift */,
 				1ECC00922BAC0809009B2006 /* NaverMap.swift */,
-				1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */,
-				1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */,
 				1E14AEB62BB028F7009A0325 /* Scadul.playground */,
 				1ED7958A2BACE70900084CAE /* keywordSearch.swift */,
 				1E370E9A2BB29460001BA38E /* ChooseDepartment.swift */,
 				1E370E9C2BB2946C001BA38E /* ChooseDate.swift */,
+				1E7B10532BB2EE9E006C4FCA /* ChooseDoctor.swift */,
+				1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				1E219B2A2BA08FFD00D79DE3 /* Test.swift */,
+				1E777C222BB322E100B2BC39 /* CustomCalender.swift */,
 				1E4C28182BA9F413005461D1 /* TestFunc.swift */,
 				1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */,
 			);
@@ -248,6 +268,20 @@
 			path = Acount;
 			sourceTree = "<group>";
 		};
+		1E7B10552BB2F528006C4FCA /* DetailViewSep */ = {
+			isa = PBXGroup;
+			children = (
+				1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */,
+				1E7B10562BB2F563006C4FCA /* HospitalDetailTop.swift */,
+				1E7B10582BB2F5A8006C4FCA /* PikerViewSelection.swift */,
+				1E7B105A2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift */,
+				1E7B105C2BB2F659006C4FCA /* HospitalScheduleView.swift */,
+				1E7B105E2BB2F688006C4FCA /* DoctorListView.swift */,
+				1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */,
+			);
+			path = DetailViewSep;
+			sourceTree = "<group>";
+		};
 		1E8F79142B9F31E800F4C230 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +290,6 @@
 				1E8F79162B9F320300F4C230 /* SginUp */,
 				1E2B37462BA0392200B8EFA4 /* MyHospital */,
 				1EE9CB652B9F1F9300E923D9 /* ContentView.swift */,
-				1E89D1292BA31B0300C78CEC /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,6 +306,7 @@
 		1E8F79162B9F320300F4C230 /* SginUp */ = {
 			isa = PBXGroup;
 			children = (
+				1E89D1292BA31B0300C78CEC /* LoginView.swift */,
 				1EE63E0C2B9F4E460026B4DE /* SignUpView.swift */,
 				1E9681EE2BA19400003F8E4B /* AccountView.swift */,
 				1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */,
@@ -355,6 +389,7 @@
 				1EE9CB632B9F1F9300E923D9 /* KPMadicalApp.swift */,
 				1EE9CB672B9F1F9400E923D9 /* Assets.xcassets */,
 				1EE9CB692B9F1F9400E923D9 /* Preview Content */,
+				1E985FA32BB300BB004B516E /* ToastView.swift */,
 			);
 			path = KPMadical;
 			sourceTree = "<group>";
@@ -418,7 +453,7 @@
 				1EE9CB5C2B9F1F9300E923D9 /* Sources */,
 				1EE9CB5D2B9F1F9300E923D9 /* Frameworks */,
 				1EE9CB5E2B9F1F9300E923D9 /* Resources */,
-				852DC245A6E9066EF3026FA6 /* [CP] Embed Pods Frameworks */,
+				0D25F5AC921FC6DD06D8501B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -456,7 +491,7 @@
 				1EE9CB762B9F1F9500E923D9 /* Sources */,
 				1EE9CB772B9F1F9500E923D9 /* Frameworks */,
 				1EE9CB782B9F1F9500E923D9 /* Resources */,
-				48300363A541DC8CFA82F282 /* [CP] Embed Pods Frameworks */,
+				648270D1B71E2D24F30D8F56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,6 +573,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D25F5AC921FC6DD06D8501B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		23AC1D7D2CB04385A7427469 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -558,23 +610,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		48300363A541DC8CFA82F282 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4D7EBABC440F0A386AD5C3EE /* [CP] Check Pods Manifest.lock */ = {
@@ -621,21 +656,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		852DC245A6E9066EF3026FA6 /* [CP] Embed Pods Frameworks */ = {
+		648270D1B71E2D24F30D8F56 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical/Pods-KPMadical-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KPMadical-KPMadicalUITests/Pods-KPMadical-KPMadicalUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -647,9 +682,12 @@
 			files = (
 				1E18A2F42BAB34DF00466221 /* departmentsChooseSheetView.swift in Sources */,
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
+				1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */,
 				1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */,
+				1E7B105F2BB2F688006C4FCA /* DoctorListView.swift in Sources */,
+				1ED344C42BB3F6AA0037C9D5 /* ChooseTime.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
 				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
@@ -660,11 +698,14 @@
 				1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */,
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
 				1E370E9F2BB2A148001BA38E /* HospitalDataHandler.swift in Sources */,
+				1E7B10592BB2F5A8006C4FCA /* PikerViewSelection.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
+				1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
 				1E18A2F02BAB1C1300466221 /* HospitalRequest.swift in Sources */,
 				1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */,
+				1E7B10572BB2F563006C4FCA /* HospitalDetailTop.swift in Sources */,
 				1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
 				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
@@ -675,7 +716,10 @@
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
+				1E985FA42BB300BB004B516E /* ToastView.swift in Sources */,
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
+				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
+				1E7B10542BB2EE9E006C4FCA /* ChooseDoctor.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 				1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */,
 				1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */,
@@ -771,7 +815,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -828,7 +872,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

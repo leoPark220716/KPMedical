@@ -66,6 +66,7 @@ struct FindHosptialItem: View{
                 .shadow(radius: 10, x: 5, y: 5) // 그림자 효과를 추가합니다.
             }
         }
+        .background(Color.white)
         .padding(.vertical,5)
         .onAppear(){
             WorkingState = TimeHelper.checkTimeIn(startTime: hospital.start_time, endTime: hospital.end_time)
