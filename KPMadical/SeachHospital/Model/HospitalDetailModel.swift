@@ -17,6 +17,10 @@ struct reservationInfo {
     var purpose: String
     var time_slot: String
     var department_id: String
+    
+    var hospital_name: String
+    var doc_name: String
+    
     init() {
         self.hospital_id = 0
         self.staff_id = 0
@@ -25,6 +29,8 @@ struct reservationInfo {
         self.purpose = ""
         self.time_slot = ""
         self.department_id = ""
+        self.hospital_name = ""
+        self.doc_name = ""
     }
     mutating func setDate(date: String){
         self.date = date

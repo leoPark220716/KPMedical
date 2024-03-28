@@ -124,6 +124,22 @@ struct HospitalDataManager{
             var date: String
             var time: String
     }
+    struct reservationResponse: Codable{
+        var access_token: String
+        var reservation_id: Int
+        var error_code: Int
+        var error_stack: String
+    }
+    struct reservationRequest: Codable{
+        var access_token: String
+        var uid: String
+        var hospital_id: Int
+        var staff_id: Int
+        var date: String
+        var time: String
+        var purpose: String
+        var time_slot: String
+    }
 }
 class HospitalDataManagerClass {
 //    var hospitalData: HospitalDataManager.HospitalData?
@@ -287,10 +303,51 @@ class HospitalHTTPRequest {
                 }catch {
                     print("JsonErr \(error)")
                 }
-            }
+            }.resume()
         }else{
             let urlError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             print("ErrUrl\(urlError)")
+        }
+    }
+    
+    func SaveReservation(token:String, uid:String, hospital_id: Int, staff_id:Int,date:String,time:String,purpose:String,time_slot:String, HttpHandler: @escaping (Bool) -> Void){
+        if let url = URL(string: "https://kp-medicals.com/api/medical-wallet/hospitals/reservations"){
+            let PostData: HospitalDataManager.reservationRequest = .init(access_token: token, uid: uid, hospital_id: hospital_id, staff_id: staff_id, date: date, time: time, purpose: purpose, time_slot: time_slot)
+            var request = URLRequest.init(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let requestData = try? JSONEncoder().encode(PostData){
+                request.httpBody = requestData
+                if let JsonString = String(data: requestData, encoding: .utf8){
+                    print(JsonString)
+                }
+            }
+            URLSession.shared.dataTask(with: request) {data, res, er in
+                if let er = er {
+                    print("err :\(er)")
+                    return
+                }
+                guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
+                    print("er http request failed\(String(describing: res))")
+                    HttpHandler(false)
+                    return
+                }
+                guard let data = data else{
+                    print("er http request failed\(String(describing: res))")
+                    HttpHandler(false)
+                    return
+                }
+                let decoder = JSONDecoder()
+                if let json = try? decoder.decode(KPApiStructFrom<HospitalDataManager.reservationResponse>.self, from: data){
+                    if json.success == "success"{
+                        print(json.data)
+                        HttpHandler(true)
+                    }else{
+                        print(json.data)
+                        HttpHandler(false)
+                    }
+                }
+            }.resume()
         }
     }
 }

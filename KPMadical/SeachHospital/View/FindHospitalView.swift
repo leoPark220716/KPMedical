@@ -109,10 +109,6 @@ struct FindHospitalView: View {
                         .onTapGesture {
                             path.append(index)
                         }
-//                        .background(
-//                        NavigationLink(value: index){
-//                        } .opacity(0)
-//                    )
                     .onAppear {
                         if hospitals[index] == hospitals.last {
                             print(hospitals.last ?? "default value")

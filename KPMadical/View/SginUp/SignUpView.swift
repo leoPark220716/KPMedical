@@ -12,7 +12,6 @@ import Combine
 class IDFieldModel: ObservableObject {
     @Published var text = ""
     @Published var isTextValid = false
-    
     private var cancellables: Set<AnyCancellable> = []
     
     init() {

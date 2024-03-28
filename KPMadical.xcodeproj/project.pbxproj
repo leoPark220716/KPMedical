@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E130CA72BB5CE5A004F7C36 /* ReservationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */; };
 		1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */; };
 		1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E82BAAF44800466221 /* FindHospitalView.swift */; };
 		1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */; };
@@ -59,6 +60,12 @@
 		1EE9CB752B9F1F9500E923D9 /* KPMadicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB742B9F1F9500E923D9 /* KPMadicalTests.swift */; };
 		1EE9CB7F2B9F1F9500E923D9 /* KPMadicalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */; };
 		1EE9CB812B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */; };
+		1EFFBBF22BB599A50079B6EE /* symptomTextFiledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF12BB599A50079B6EE /* symptomTextFiledView.swift */; };
+		1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */; };
+		1EFFBBF72BB5BD720079B6EE /* myreservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF62BB5BD720079B6EE /* myreservationView.swift */; };
+		1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF92BB5BFA30079B6EE /* reservationItemView.swift */; };
+		1EFFBBFD2BB5C5280079B6EE /* reservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBFC2BB5C5280079B6EE /* reservationModel.swift */; };
+		1EFFBBFF2BB5C6070079B6EE /* requestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBFE2BB5C6070079B6EE /* requestModel.swift */; };
 		739231EE60A79DA6B8E2CAF7 /* Pods_KPMadical.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */; };
 		A22EA01CA4E3FF01AC28ECBE /* Pods_KPMadical_KPMadicalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92453263B4E8151CFE61DE14 /* Pods_KPMadical_KPMadicalUITests.framework */; };
 		E86779F9099BDBB5A21F2BA5 /* Pods_KPMadicalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF3F7D5410777EDD934C705 /* Pods_KPMadicalTests.framework */; };
@@ -84,6 +91,7 @@
 /* Begin PBXFileReference section */
 		039AAD269B7660B4E20A2BCE /* Pods-KPMadical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadical.release.xcconfig"; path = "Target Support Files/Pods-KPMadical/Pods-KPMadical.release.xcconfig"; sourceTree = "<group>"; };
 		0BA82E20DC078E4F34E64FE0 /* Pods_KPMadical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailView.swift; sourceTree = "<group>"; };
 		1E14AEB62BB028F7009A0325 /* Scadul.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scadul.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNVSTack.swift; sourceTree = "<group>"; };
 		1E18A2E82BAAF44800466221 /* FindHospitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHospitalView.swift; sourceTree = "<group>"; };
@@ -141,6 +149,12 @@
 		1EE9CB7A2B9F1F9500E923D9 /* KPMadicalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KPMadicalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITests.swift; sourceTree = "<group>"; };
 		1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1EFFBBF12BB599A50079B6EE /* symptomTextFiledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = symptomTextFiledView.swift; sourceTree = "<group>"; };
+		1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reservationSuccessView.swift; sourceTree = "<group>"; };
+		1EFFBBF62BB5BD720079B6EE /* myreservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myreservationView.swift; sourceTree = "<group>"; };
+		1EFFBBF92BB5BFA30079B6EE /* reservationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reservationItemView.swift; sourceTree = "<group>"; };
+		1EFFBBFC2BB5C5280079B6EE /* reservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reservationModel.swift; sourceTree = "<group>"; };
+		1EFFBBFE2BB5C6070079B6EE /* requestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestModel.swift; sourceTree = "<group>"; };
 		288BCD2F320B991BCA0167B8 /* Pods-KPMadicalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadicalTests.release.xcconfig"; path = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.release.xcconfig"; sourceTree = "<group>"; };
 		5BF3F7D5410777EDD934C705 /* Pods_KPMadicalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadicalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92453263B4E8151CFE61DE14 /* Pods_KPMadical_KPMadicalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadical_KPMadicalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +215,8 @@
 				1E370E9C2BB2946C001BA38E /* ChooseDate.swift */,
 				1E7B10532BB2EE9E006C4FCA /* ChooseDoctor.swift */,
 				1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */,
+				1EFFBBF12BB599A50079B6EE /* symptomTextFiledView.swift */,
+				1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -380,6 +396,7 @@
 				1E2B374A2BA0403500B8EFA4 /* SplashView.swift */,
 				1E18A2F12BAB1D9100466221 /* JsonPasingMainModel.swift */,
 				1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */,
+				1EFFBBF52BB5BD1A0079B6EE /* MyReservation */,
 				1E8F79152B9F31F700F4C230 /* Home */,
 				1E18A2E62BAAF41700466221 /* SeachHospital */,
 				1E4C28172BA9F3CC005461D1 /* TestFile */,
@@ -417,6 +434,34 @@
 				1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */,
 			);
 			path = KPMadicalUITests;
+			sourceTree = "<group>";
+		};
+		1EFFBBF52BB5BD1A0079B6EE /* MyReservation */ = {
+			isa = PBXGroup;
+			children = (
+				1EFFBBFB2BB5C50F0079B6EE /* reservationModel */,
+				1EFFBBF62BB5BD720079B6EE /* myreservationView.swift */,
+				1EFFBBF82BB5BF670079B6EE /* View */,
+			);
+			path = MyReservation;
+			sourceTree = "<group>";
+		};
+		1EFFBBF82BB5BF670079B6EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EFFBBF92BB5BFA30079B6EE /* reservationItemView.swift */,
+				1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1EFFBBFB2BB5C50F0079B6EE /* reservationModel */ = {
+			isa = PBXGroup;
+			children = (
+				1EFFBBFC2BB5C5280079B6EE /* reservationModel.swift */,
+				1EFFBBFE2BB5C6070079B6EE /* requestModel.swift */,
+			);
+			path = reservationModel;
 			sourceTree = "<group>";
 		};
 		BBA6485E063F4C460D4A364D /* Frameworks */ = {
@@ -691,13 +736,18 @@
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
 				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
+				1EFFBBF72BB5BD720079B6EE /* myreservationView.swift in Sources */,
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
+				1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */,
+				1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */,
 				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
 				1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */,
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
+				1EFFBBFD2BB5C5280079B6EE /* reservationModel.swift in Sources */,
 				1E370E9F2BB2A148001BA38E /* HospitalDataHandler.swift in Sources */,
+				1EFFBBF22BB599A50079B6EE /* symptomTextFiledView.swift in Sources */,
 				1E7B10592BB2F5A8006C4FCA /* PikerViewSelection.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
@@ -708,6 +758,7 @@
 				1E7B10572BB2F563006C4FCA /* HospitalDetailTop.swift in Sources */,
 				1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
+				1EFFBBFF2BB5C6070079B6EE /* requestModel.swift in Sources */,
 				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
 				1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
@@ -716,6 +767,7 @@
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* Profile.swift in Sources */,
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
+				1E130CA72BB5CE5A004F7C36 /* ReservationDetailView.swift in Sources */,
 				1E985FA42BB300BB004B516E /* ToastView.swift in Sources */,
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,

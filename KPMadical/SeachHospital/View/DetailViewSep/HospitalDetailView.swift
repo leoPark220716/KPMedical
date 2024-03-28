@@ -100,6 +100,7 @@ struct HospitalDetailView: View {
                 self.DoctorProfile = hospitalDataHandler.HospitalDetailData.doctors
                 hospitalDataHandler.LoadingCheck()
                 info.hospital_id = HospitalId
+                info.hospital_name = data.hospital.hospital_name
             }
         }
     }

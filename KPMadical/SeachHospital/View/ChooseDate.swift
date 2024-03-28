@@ -60,7 +60,14 @@ struct ChooseDate: View {
                         )
                         .padding(.trailing)
                         .onTapGesture {
-                            info.setDate(date:formatDate(selectedDate!))
+                            if isTap {
+                                info.setDate(date:formatDate(selectedDate!))
+                                if CheckFirst{
+                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Doctor)
+                                }else{
+                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Time)
+                                }
+                            }
                             print("info.date : \(info.date)")
                             print("info.hospital_id :\(info.hospital_id)")
                             print("info.staff_id : \(info.staff_id)")
@@ -73,15 +80,15 @@ struct ChooseDate: View {
                 case .Doctor:
                     ChooseDorcor(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
                 case .Time:
-                    ChooseTime()
+                    ChooseTime(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
                 }
             }
         }
         .onAppear{
             info.date = ""
             if CheckFirst{
-                HospitalSchedules = HospitalInfo.GetMainSchdules()
-                HospitalSubSchedules = HospitalInfo.GetSubSchedules()
+                HospitalSchedules = HospitalInfo.GetMainSchdules(departId: info.department_id)
+                HospitalSubSchedules = HospitalInfo.GetSubSchedules(departId: info.department_id)
                 doctors = HospitalInfo.GetDoctors()
                 // 메인 스케줄 기반 휴일
                 for index in 0..<7 {
@@ -106,7 +113,6 @@ struct ChooseDate: View {
                 }
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                
                 // 모든 의사의 sub_schedules를 조사하여 병원이 문을 닫아야 하는 날짜를 파악합니다.
                 var datesWhenAllDoctorsOff = [String: Int]() // 의사들이 휴무인 날짜와 그 날 휴무인 의사 수를 저장합니다.
                 var datesWhenAnyDoctorWorks = Set<String>() // 적어도 한 명의 의사가 출근하는 날짜를 저장합니다.
@@ -123,7 +129,6 @@ struct ChooseDate: View {
                         }
                     }
                 }
-                
                 // 모든 의사가 휴무인 날짜만을 추출합니다.
                 for (date, count) in datesWhenAllDoctorsOff {
                     if count == doctors.count && !datesWhenAnyDoctorWorks.contains(date) {
@@ -170,7 +175,6 @@ struct ChooseDate: View {
                         print("무족건 문 닫는날 \(date)")
                     }
                 }
-                
             }
             isReadyToShowCalendar = true
         }

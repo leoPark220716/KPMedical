@@ -36,6 +36,9 @@ struct HomeView: View {
                 HStack{
                     calendarView()
                     PillView()
+                        .onTapGesture {
+                            router.currentView = .MyReservation
+                        }
                 }
                 .padding(.top)
             }

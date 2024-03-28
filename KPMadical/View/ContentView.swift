@@ -60,8 +60,9 @@ struct ContentView: View {
                 }
             case .findHospital:
                 FindHospitalView(userInfo:authViewModel)
+            case .MyReservation:
+                myreservationView(userInfo: authViewModel)
             }
-            
             
         }
         
