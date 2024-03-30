@@ -125,6 +125,11 @@ struct ReservationDetailView: View {
                                 NMFMapViewRepresentable(coord: $mapCoord)
                                     .frame(width: 350, height: 160) // 원하는 크기 설정
                                     .cornerRadius(20)
+                                    .onAppear{
+                                        DispatchQueue.main.async{
+                                        mapCoord = NMGLatLng(lat: hospitalDataHandler.HospitalDetailData.hospital.y, lng: hospitalDataHandler.HospitalDetailData.hospital.x)
+                                        }
+                                    }
                                 Spacer() // 우측에 공간 추가
                             }
                             HStack{
@@ -203,7 +208,6 @@ struct ReservationDetailView: View {
         .onAppear{
             requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
                 self.hospitalDataHandler.HospitalDetailData = data
-                mapCoord = NMGLatLng(lat: hospitalDataHandler.HospitalDetailData.hospital.y, lng: hospitalDataHandler.HospitalDetailData.hospital.x)
                 responseOk = true
             }
         }

@@ -1,20 +1,24 @@
 PODS:
+  - CryptoSwift (1.8.1)
   - NMapsGeometry (1.0.1)
   - NMapsMap (3.18.0):
     - NMapsGeometry
 
 DEPENDENCIES:
+  - CryptoSwift (~> 1.8.1)
   - NMapsMap
 
 SPEC REPOS:
   trunk:
+    - CryptoSwift
     - NMapsGeometry
     - NMapsMap
 
 SPEC CHECKSUMS:
+  CryptoSwift: b9c701d6f5011df23794dbf7f2e480a77835d83d
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: 36dc18a1f5f315121b33fccd2398c7a702bf0fc8
 
-PODFILE CHECKSUM: aa14a18223248e091d03217b7dadacf9ca986e00
+PODFILE CHECKSUM: 36b15fbb096fe16873ec45293624e8ac97deef5d
 
 COCOAPODS: 1.15.2

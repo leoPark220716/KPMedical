@@ -13,12 +13,6 @@ struct DoctorListView: View{
         if !DoctorProfile.isEmpty{
             ForEach(DoctorProfile.indices, id: \.self) { item in
                 DoctorItemView(DoctorProfile: $DoctorProfile[item])
-                    .padding(.leading)
-                Rectangle()
-                    .frame(height: 1)
-                    .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
             }
         }else{
             Spacer()

@@ -92,7 +92,7 @@ struct HospitalDetailView: View {
                     .foregroundColor(.white)
             }
         }
-        .onAppear{     
+        .onAppear{
             requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
                 self.hospitalDataHandler.HospitalDetailData = data
                 mapCoord = NMGLatLng(lat: hospitalDataHandler.HospitalDetailData.hospital.y, lng: hospitalDataHandler.HospitalDetailData.hospital.x)
