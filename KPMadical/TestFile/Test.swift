@@ -13,6 +13,7 @@ struct cryptoTest: View {
     let keyChainClass = KeystoreKeyChain()
     let keyChai = AES256Util()
     let ss = RSATest()
+    let getKeystore = GetKeystore()
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -36,8 +37,16 @@ struct cryptoTest: View {
                 
             }.padding()
                 .onAppear{
-                    print(decryptAES256() ?? "없음")
-                    
+                    //                    인찬이 암호화 한 데이터 비밀키로 해독
+                    //                    print(decryptAES256() ?? "없음")
+                    //                    내 개인키 암호화 데이터 출력
+                    //                    getKeystore.GetKeystorePrivateKey()
+                    //                    getKeystore.resolveData()
+                    Task{
+                        await
+                        getKeystore.ContractCreate2()
+                        
+                    }
                 }
         }
     }
@@ -138,6 +147,7 @@ struct Test3View: View {
                 return
             }
             self.address = PublcKeyAddress.address
+            print(PublcKeyAddress.address)
         }
     }
     func fetchBalance() async {
@@ -229,7 +239,7 @@ struct WalletRecoveryView: View {
             Text("복구된 주소: \(recoveredAddress)")
         }.padding()
     }
-    
+//    지갑 복구
     func recoverWallet() {
         let password = "strong password" // 복구 시 사용할 패스워드, 생성 시와 동일해야 함
         do {
@@ -253,7 +263,7 @@ struct WalletRecoveryView: View {
 
 class KeystoreKeyChain {
     
-    
+//    키체인 keystore 저장
     func saveToKeyChain(keystoreData: Data, service: String, account: String) ->OSStatus {
         let query: [String:Any] = [
             //            저장하는 아이템 타입 정의
@@ -270,7 +280,7 @@ class KeystoreKeyChain {
         //        새로운 Keychain 추가.
         return SecItemAdd(query as CFDictionary, nil)
     }
-    
+//    키체인에 저장된 keystore 가져오기
     func loadFromKeychain(service: String, account: String) ->Data?{
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -316,12 +326,13 @@ class KeystoreKeyChain {
 
             // 트랜잭션 옵션 생성 및 체인 ID 설정
             
-            
+            let currentNonce = try await web3.eth.getTransactionCount(for: accountAddress, onBlock: .latest)
             // 개인키 데이터를 사용하여 필요한 작업 수행
             // 예: 트랜잭션 서명, 메시지 서명 등
             // 여기서는 개인키의 데이터 길이만 출력합니다(보안상 실제 키 값을 출력하지 않음).
             print("개인키 데이터 길이: \(privateKeyData.count) 바이트")
             var transaction = CodableTransaction.emptyTransaction
+            transaction.nonce = currentNonce
             transaction.chainID = BigUInt(142536)
             transaction.value = BigUInt("1000000000000000000")
             transaction.gasLimit = BigUInt(21000)

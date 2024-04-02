@@ -10,6 +10,7 @@ import web3swift
 import Web3Core
 import Security
 import CryptoKit
+import BigInt
 
 class RSATest{
     let baseKey = "MIICXgIBAAKBgQCkYaHh2oi5lFWEncs1Gjqxh44zpVwvfmZWQSIqwSN9IiXY/MsWNqjsaPA7dApNKPN8XANvBRhXY1sr6IasOqyp3UUy7hDTvSDeUwimTS5D0xEG0oHORJYT7GrWioo7gP5TGDXzg9QuiNEDt/DN0w3QUfk8wdFGd79uRufFMQ2KewIDAQABAoGBAKJwpKNm7HPPhM7fi973A4dJ+JlK0JVSaFjWVqg/Yg2XQCV0clCKRVYRwUxPOJrVW//Jgc8lDs/UrFTwnJz4AoTjFj0WiS1gRMgDgWRbChOHClbGgCvUvIVkmglH5lm8OmgkCVXJUkqmj49zOAYmwKte937YX316eyjHUU1b8jXBAkEA8Sic+g+O3zNV44iBRlBL7Y8aIvJS19Qw9NmtxUY6jjBEMsGdqKKIf8sHdOfxFRNy+a8niD7qffLyaSWoP1WYGwJBAK5/ajIagy2iDDkmoN5hSNfPs7i3LfXxxnBNSvaTQ6Scz9OR2ywW1hpP+q14x0553DKwrzizZN+yBreLpc67vSECQQCKaNLfuno3pJERDFGV95P8fntzvzzI3uJSRXU0mkAVR6J8tx8zoEVTg0V+VXjKreT5ZQv9aI7RRtTWgGR2JTwtAkEAnTZUUiHKz8EwrAjeZJxXiYAq1p/Ku8wBUcqBYFfbWKKjJ2VAhp9odDpcig/H2S83MUA4DaiqmFOHc7RQRUqloQJAU1hpHPBobdwEBP/Yol1l7G/e94guPbidUfJQIHg0prtzpMZQ6Eh00ojKLEnWXhlV6SMeTV92FqZSwDUeBABiOw=="
@@ -27,7 +28,7 @@ class RSATest{
     let target = "QnPV7AIBUyDtpcVs2IVZLy+l4BGTX2KQ2dn2a5vSQy07e5A6C2t9Tlh4sXmVP5+AmC0RK+PstNScN3WXVszEtwfCOzv2qyi2gJofcEoBWTgI5b+2ApjuzKj11PFQ5t0+U4uIF2h6xtBxGlQmDnCyB8ZygY4COmR9lIIza09p2S4="
     
     // Construct DER data from the remaining PEM data
-//    내 개인키로 대칭키 복호화
+    //    내 개인키로 대칭키 복호화
     func prkeyDecoding() {
         guard let encryptedData = Data(base64Encoded: target) else {
             print("Base64 디코딩 실패")
@@ -52,7 +53,7 @@ class RSATest{
         }
         
         let algo: SecKeyAlgorithm = .rsaEncryptionPKCS1
-//            .rsaEncryptionOAEPSHA1
+        //            .rsaEncryptionOAEPSHA1
         guard SecKeyIsAlgorithmSupported(privateKey, .decrypt, algo) else {
             print("알고리즘 지원 안됨")
             return
@@ -69,7 +70,7 @@ class RSATest{
             print("복호화된 데이터를 문자열로 변환 실패")
         }
     }
-
+    
     //    상대 공개키로 암호화
     func createRSA(){
         let der = Data(base64Encoded: publicKeyBase64, options: .ignoreUnknownCharacters)!
@@ -289,9 +290,9 @@ func decryptAES256() -> String? {
         // AES 객체 생성
         let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
         // 데이터 복호화
-//        let decryptedBytes = try aes.decrypt(encryptedData.bytes)
+        //        let decryptedBytes = try aes.decrypt(encryptedData.bytes)
         let decryptedBytes = try aes.decrypt(encryptedData.bytes)
-    
+        
         // 복호화된 데이터를 문자열로 변환
         if let decryptedString = String(data: Data(decryptedBytes), encoding: .utf8) {
             // 성공적으로 문자열로 변환됨
@@ -418,3 +419,301 @@ class AES256Util {
 //guard let key = mySecretKeyString.sha256().bytes.prefix(32).array else {
 //    fatalError("Failed to generate key")
 //}
+class GetKeystore: KeystoreKeyChain{
+    
+    func GetKeystorePrivateKey(){
+        let NonceString = "1997b0211a19980131252955df21d7f3"
+        //        z키 스토어 데이터 불러오기
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical", account: "test") else {
+            print("Failed to load keystore")
+            return
+        }
+        //        키스토어 데이터를 바탕으로 keystore 객채 생성
+        guard let keystore = BIP32Keystore(keystoreData) else{
+            print("keystore 불러오기 실패")
+            return
+        }
+        //        키스토어 에 있는 공개 주소 가져오기
+        guard let accountAddress = keystore.addresses?.first else {
+            print("계정 주소 불러오기 실패")
+            return
+        }
+        //        iv 값 textByte 가져오기
+        guard let iv = NonceString.hexaBytes else {
+            print("Invalid IV")
+            return
+        }
+        do{
+            //            개정 주소에 해당하는 개인키 데이터 가져오기
+            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
+            //            개인키 String 값으로 변환
+            let privateKeyHexString = privateKeyData.toHexString()
+            //            변환된 개인키를 가지고 sha256 비밀키 생성
+            let secKey = Array(privateKeyHexString.sha256().bytes.prefix(32))
+            
+            //            비밀키로 특정 데이터 암호화 (RSA 비밀키 암호화 예정)
+            let dataToEncrypt = "Hello, world!".data(using: .utf8)!
+            // secKey를 기반으로 SymmetricKey 생성
+            //            let symmetricKey = SymmetricKey(data: secKey)
+            
+            let aes = try AES(key: secKey, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let encryptedData = try aes.encrypt(dataToEncrypt.bytes)
+            let encryptedDataAsDataObject = Data(encryptedData)
+            // Data 객체를 Base64 인코딩된 문자열로 변환
+            let stringData = encryptedDataAsDataObject.base64EncodedString()
+            // 암호화된 데이터를 Base64 인코딩된 문자열로 출력
+            print(stringData)
+        } catch{
+            print("Error \(error)")
+        }
+    }
+    //    저장된 RSA 개인키 해독
+    func resolveData(){
+        let decodeString = "bX+v5/fYEHEs9Jq0Yx0i8Q=="
+        let NonceString = "1997b0211a19980131252955df21d7f3"
+        //        z키 스토어 데이터 불러오기
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical", account: "test") else {
+            print("Failed to load keystore")
+            return
+        }
+        //        키스토어 데이터를 바탕으로 keystore 객채 생성
+        guard let keystore = BIP32Keystore(keystoreData) else{
+            print("keystore 불러오기 실패")
+            return
+        }
+        //        키스토어 에 있는 공개 주소 가져오기
+        guard let accountAddress = keystore.addresses?.first else {
+            print("계정 주소 불러오기 실패")
+            return
+        }
+        //        해독할 데이터
+        guard let encryptedData = Data(base64Encoded: decodeString) else{
+            print("decode base64 실패")
+            return
+        }
+        //        iv 값
+        guard let iv = NonceString.hexaBytes else {
+            print("Invalid IV")
+            return
+        }
+        do{
+            //            개정 주소에 해당하는 개인키 데이터 가져오기
+            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
+            //            개인키 String 값으로 변환
+            let privateKeyHexString = privateKeyData.toHexString()
+            //            변환된 개인키를 가지고 sha256 비밀키 생성
+            let secKey = Array(privateKeyHexString.sha256().bytes.prefix(32))
+            // secKey를 기반으로 SymmetricKey 생성
+            let aes = try AES(key: secKey, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let decrypteBytes = try aes.decrypt(encryptedData.bytes)
+            if let decryptString = String(data: Data(decrypteBytes), encoding: .utf8){
+                print(decryptString)
+            }
+            //            let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: encryptedData)
+            
+        } catch{
+            print("Error \(error)")
+        }
+        
+    }
+    func ContractCreate() async{
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical", account: "test") else {
+            print("Failed to load keystore")
+            return
+        }
+        guard let providerURL = URL(string: "http://203.234.103.157:3222") else {
+            print("Invalid URL or address")
+            return
+        }
+        do {
+            let keystore = BIP32Keystore(keystoreData)!
+            let keystoreManager = KeystoreManager([keystore])
+            let provider = try await Web3HttpProvider(url: providerURL, network: nil, keystoreManager: keystoreManager)
+            let web3 = Web3(provider: provider)
+            guard let accountAddress = keystore.addresses?.first else {
+                print("계정 주소를 찾을 수 없습니다.")
+                return
+            }
+            guard let abiUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "json"), let abiString = try? String(contentsOf: abiUrl) else{
+                print("ABI 파일 실패")
+                return
+            }
+            print("ABI String : \(abiString)")
+            
+            guard let bytecodeUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "bin"),
+                  let bytecodeString = try? "0x"+String(contentsOf: bytecodeUrl) else {
+                print("Bytecode 파일을 로드할 수 없습니다.")
+                return
+            }
+            guard let bytecodeData = Data.fromHex(bytecodeString) else {
+                print("바이트코드 문자열을 Data로 변환할 수 없습니다.")
+                return
+            }
+            
+            // 개인키 추출
+            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
+            let privateKeyHexString = privateKeyData.toHexString()
+            print("Private KeyString: \(privateKeyHexString)")
+            
+            // 트랜잭션 옵션 생성 및 체인 ID 설정
+            
+            // 개인키 데이터를 사용하여 필요한 작업 수행
+            // 예: 트랜잭션 서명, 메시지 서명 등
+            // 여기서는 개인키의 데이터 길이만 출력합니다(보안상 실제 키 값을 출력하지 않음).
+            let maxGasPrice = BigUInt(50) * BigUInt(10).power(9) // 예: 50 Gwei
+            let gasLimit = BigUInt(1000000) // 예: 1000000
+
+            let gasPrice = try await web3.eth.gasPrice()
+            guard gasPrice <= maxGasPrice else {
+                   print("Current gas price (\(gasPrice)) exceeds the configured max gas price (\(maxGasPrice))")
+                   return
+               }
+            
+            let currentNonce = try await web3.eth.getTransactionCount(for: accountAddress, onBlock: .latest)
+            var transaction = CodableTransaction.emptyTransaction
+            transaction.nonce = currentNonce
+            transaction.to = .contractDeploymentAddress()
+//            transaction.data = bytecodeData + Data(["hashString"])
+            transaction.chainID = BigUInt(142536)
+            transaction.gasLimit = gasLimit
+            transaction.gasPrice = gasPrice
+            transaction.from = keystore.addresses?.first
+            try transaction.sign(privateKey: privateKeyData)
+            print("개인키 데이터 길이: \(privateKeyData.count) 바이트")
+            guard let transactionEncode = transaction.encode() else{
+                print("트렌젝션 인코딩 실패")
+                return
+            }
+            
+            let result = try await web3.eth.send(raw: transactionEncode)
+            print("Transaction successful with hash: \(result.hash)")
+            guard let resultData = Data.fromHex(result.hash) else { return  }
+            do{
+                let receipt = try await getTransactionReceipt(web3: web3, transactionHash: resultData)
+                print("트랜잭션 로그: \(String(describing: receipt?.logs))")
+                print("트랜잭션 로그: \(String(describing: receipt?.status))")
+            }catch{
+                print("receipt \(error.localizedDescription)")
+            }
+        } catch {
+            print("Transaction failed with error: \(error.localizedDescription)")
+        }
+    }
+    func waitForTransactionReceipt(web3: Web3, transactionHash: Data) async throws -> TransactionReceipt {
+        let pollingTask = TransactionPollingTask(transactionHash: transactionHash, web3Instance: web3)
+        let receipt = try await pollingTask.wait()
+        return receipt
+    }
+    func getTransactionReceipt(web3: Web3, transactionHash: Data) async throws -> TransactionReceipt? {
+        
+        // 영수증 조회를 위한 반복 시도
+        for _ in 0..<10 {
+            if let receipt = try? await web3.eth.transactionReceipt(transactionHash) {
+                return receipt
+            }
+            // 영수증이 아직 준비되지 않았다면 잠시 대기
+            try await Task.sleep(nanoseconds: 2_000_000_000) // 예: 2초 대기
+        }
+        return nil // 영수증을 받지 못한 경우
+    }
+    func returnData(hexString: String) -> Data {
+        // `0x` 접두사를 제거한 새로운 문자열을 생성합니다.
+        let cleanHexString = hexString.trimmingCharacters(in: CharacterSet(charactersIn: "0x"))
+
+        let len = cleanHexString.count / 2
+        var data = Data(capacity: len)
+        for i in 0..<len {
+            let j = cleanHexString.index(cleanHexString.startIndex, offsetBy: i*2)
+            let k = cleanHexString.index(j, offsetBy: 2)
+            let bytes = cleanHexString[j..<k]
+            if let byte = UInt8(bytes, radix: 16) {
+                data.append(byte)
+            } else {
+                // 올바르지 않은 16진수 문자열인 경우 빈 Data 객체를 반환합니다.
+                return Data()
+            }
+        }
+        return data
+    }
+    func ContractCreate2() async{
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical", account: "test") else {
+            print("Failed to load keystore")
+            return
+        }
+        guard let providerURL = URL(string: "http://203.234.103.157:3222") else {
+            print("Invalid URL or address")
+            return
+        }
+        do {
+            let keystore = BIP32Keystore(keystoreData)!
+            let keystoreManager = KeystoreManager([keystore])
+            let provider = try await Web3HttpProvider(url: providerURL, network: nil, keystoreManager: keystoreManager)
+            let web3 = Web3(provider: provider)
+            guard let accountAddress = keystore.addresses?.first else {
+                print("계정 주소를 찾을 수 없습니다.")
+                return
+            }
+            guard let abiUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "json"), let abiString = try? String(contentsOf: abiUrl) else{
+                print("ABI 파일 실패")
+                return
+            }
+            print("ABI String : \(abiString)")
+            
+            guard let bytecodeUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "bin"),
+                  let bytecodeString = try? "0x"+String(contentsOf: bytecodeUrl) else {
+                print("Bytecode 파일을 로드할 수 없습니다.")
+                return
+            }
+            guard let bytecodeData = Data.fromHex(bytecodeString) else {
+                print("바이트코드 문자열을 Data로 변환할 수 없습니다.")
+                return
+            }
+            
+            // 개인키 추출
+            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
+            let privateKeyHexString = privateKeyData.toHexString()
+            print("Private KeyString: \(privateKeyHexString)")
+            let maxGasPrice = BigUInt(50) * BigUInt(10).power(9) // 예: 50 Gwei
+            
+
+            let gasPrice = try await web3.eth.gasPrice()
+            guard gasPrice <= maxGasPrice else {
+                   print("Current gas price (\(gasPrice)) exceeds the configured max gas price (\(maxGasPrice))")
+                   return
+               }
+            
+            let currentNonce = try await web3.eth.getTransactionCount(for: accountAddress, onBlock: .latest)
+
+            let contract = Web3.Contract(web3: web3, abiString: abiString,at: accountAddress,abiVersion: 2)
+            let deployOption = contract?.prepareDeploy(bytecode: bytecodeData, constructor: contract?.contract.constructor, parameters: ["hashdata"])
+            deployOption?.transaction.nonce = currentNonce
+            print(currentNonce)
+            deployOption?.transaction.chainID = BigUInt(142536)
+            deployOption?.transaction.to = .contractDeploymentAddress()
+            deployOption?.transaction.from = accountAddress
+            
+//            try deployOption?.transaction.sign(privateKey: privateKeyData)
+//            guard let transactionEncode = deployOption?.transaction.encode() else{
+//                print("트랜잭션 인코딩 실패")
+//                return
+//            }
+            if let result = try await deployOption?.writeToChain(password: "strong password", sendRaw: true){
+                print("Transaction successful with hash: \(result.hash)")
+                guard let resultData = Data.fromHex(result.hash) else { return  }
+                do{
+                    let receipt = try await getTransactionReceipt(web3: web3, transactionHash: resultData)
+                    print("트랜잭션 로그: \(String(describing: receipt?.logs))")
+                    print("트랜잭션 로그: \(String(describing: receipt?.contractAddress))")
+                }catch{
+                    print("receipt \(error.localizedDescription)")
+                }
+            }else{
+                print("트랜잭션 실행 실패")
+            }
+            
+        } catch {
+            print("Transaction failed with error: \(error.localizedDescription)")
+        }
+    }
+
+}
