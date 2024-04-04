@@ -18,7 +18,7 @@ struct SplashView: View {
                 Color("SplashBack").edgesIgnoringSafeArea(.all) // 화면 전체에 색상 적용
                 if self.isActive {
                     if userInfo.isLoggedIn {
-                        ContentView(authViewModel: userInfo)
+                        ContentView(authViewModel: userInfo, tabState: BottomTab .home)
                     }else{
                         LoginView(authViewModel: userInfo, sign: sign)
                     }

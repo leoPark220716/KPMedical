@@ -17,9 +17,9 @@ struct KPMadicalApp: App {
     var router = GlobalViewRouter()
     var body: some Scene {
         WindowGroup {
-//            SplashView()
-//                .environmentObject(router)
-            cryptoTest()
+            SplashView()
+                .environmentObject(router)
+//            cryptoTest()
         }
     }
 }

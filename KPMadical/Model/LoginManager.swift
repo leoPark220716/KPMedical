@@ -284,7 +284,7 @@ func requestLogin(account: String,password: String, uid: String,userstate:UserOb
                 return
             }
             guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
-                print("er http request failed")
+                print("er http request failed\(String(describing: res))")
                 completionHandrler(false,"1")
                 return
             }

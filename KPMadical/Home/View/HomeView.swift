@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var url1 = "https://example.com/default-image.png"
     @State private var url2 = "https://example.com/default-image.png"
     @State private var url3 = "https://example.com/default-image.png"
+    @State private var departSheetShow = false
     let userDb = LocalDataBase.shared
     @EnvironmentObject var router: GlobalViewRouter
     var body: some View {
@@ -25,6 +26,9 @@ struct HomeView: View {
                 //                        일시적으로 여기에다 잠시 나중에 최근 진료기록 확인할 수 있으면 TreatmentCardView 주석 해제
                 //                TreatmentCardView(CurrentHospital: "xx병원", CurrentCheckUp: "xx", Currentdisease: "xx", CurrentDoc: "의사명", Currentmedical: "진료과", ImageURL: "https://picsum.photos/200/300")
                 ShowingHospitalView(ImageURL1: $url1,ImageURL2: $url2,ImageURL3: $url3)
+                    .onTapGesture {
+                        departSheetShow.toggle()
+                    }
                 //                }
                 //                NavigationLink(destination: FindHospitalView()){
                 SearchHpView()

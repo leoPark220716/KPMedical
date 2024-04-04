@@ -16,6 +16,7 @@ class RSATest{
     let baseKey = "MIICXgIBAAKBgQCkYaHh2oi5lFWEncs1Gjqxh44zpVwvfmZWQSIqwSN9IiXY/MsWNqjsaPA7dApNKPN8XANvBRhXY1sr6IasOqyp3UUy7hDTvSDeUwimTS5D0xEG0oHORJYT7GrWioo7gP5TGDXzg9QuiNEDt/DN0w3QUfk8wdFGd79uRufFMQ2KewIDAQABAoGBAKJwpKNm7HPPhM7fi973A4dJ+JlK0JVSaFjWVqg/Yg2XQCV0clCKRVYRwUxPOJrVW//Jgc8lDs/UrFTwnJz4AoTjFj0WiS1gRMgDgWRbChOHClbGgCvUvIVkmglH5lm8OmgkCVXJUkqmj49zOAYmwKte937YX316eyjHUU1b8jXBAkEA8Sic+g+O3zNV44iBRlBL7Y8aIvJS19Qw9NmtxUY6jjBEMsGdqKKIf8sHdOfxFRNy+a8niD7qffLyaSWoP1WYGwJBAK5/ajIagy2iDDkmoN5hSNfPs7i3LfXxxnBNSvaTQ6Scz9OR2ywW1hpP+q14x0553DKwrzizZN+yBreLpc67vSECQQCKaNLfuno3pJERDFGV95P8fntzvzzI3uJSRXU0mkAVR6J8tx8zoEVTg0V+VXjKreT5ZQv9aI7RRtTWgGR2JTwtAkEAnTZUUiHKz8EwrAjeZJxXiYAq1p/Ku8wBUcqBYFfbWKKjJ2VAhp9odDpcig/H2S83MUA4DaiqmFOHc7RQRUqloQJAU1hpHPBobdwEBP/Yol1l7G/e94guPbidUfJQIHg0prtzpMZQ6Eh00ojKLEnWXhlV6SMeTV92FqZSwDUeBABiOw=="
     let publicKeyBase64 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyfpz1n52R3EOO4qdvzBSDOP98oyAnWJWbvtD9U+LYHbVWg03hDrhBVr0p3cvasBCfFjv6jJ7jdN5Hkptj5Qf76g9BQH72Hodevc5zEi379h9ZTmP0oTtLxw9U13MyPCPwFSC0kyeWrqZc0KSmbLbDxe/7tYv+AbqdpL2pvTDQ/wIDAQAB"
     
+    let htpubkey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2xkBSA2x9IGy5Z/NjHH6Pzy04Gpyqrfk/XoYPWu5v10CY9CGX7aVHDilSKMIE7PiidNEyj+vd+htsGIKuJW4/R/lXu3w+KxM14ob4tOyqEFdCHDtP1HGLnRB9PP5od+pz6c0e//ElxA2kUwoeQzxxe5jvY/usUTKHIVNfGQ1otqa8+TtzsCsbQ2jgZ9x/vIps9d6pmGbQz+y+MxfYfLKqEEiOX8ieKzg7kHuUbWpFvGRJzoEqBdRMscVO+Mf75OEuQ0Kp2LocxMpFoYykNljwVFzUZdenIhO1z06gPVZkUweBUs2vFhEG8CffwkNZn7fbOTw27sWorUdiz7MSsyNMwIDAQAB"
     
     
     let message = "IYsWjpiQFw/JXRhDAX5vcMr6DHbWdwr2yRQohR7mORyZuKN5vke4IhVgOQfKrz9Hl6ejSUCgABN71lhkUo52SHxFNp1KIUqYhvJeEQl+ubw2RN5NgeGfe4LREnHvpx6fOzuWyomf+EuwL8zHD/bDv8BpN/J9ofJL0HFzcTFISoc="
@@ -73,7 +74,7 @@ class RSATest{
     
     //    상대 공개키로 암호화
     func createRSA(){
-        let der = Data(base64Encoded: publicKeyBase64, options: .ignoreUnknownCharacters)!
+        let der = Data(base64Encoded: htpubkey, options: .ignoreUnknownCharacters)!
         let attributes: [String: Any] = [
             String(kSecAttrKeyType): kSecAttrKeyTypeRSA,
             String(kSecAttrKeyClass): kSecAttrKeyClassPublic,
@@ -81,12 +82,12 @@ class RSATest{
         ]
         let key = SecKeyCreateWithData(der as CFData, attributes as CFDictionary, nil)!
         // An example message to encrypt
-        let plainText = "박지원".data(using: .utf8)!
+        let plainText = "박지원 사랑해".data(using: .utf8)!
         
         //        되는거
         let PK = SecKeyCreateEncryptedData(key, .rsaEncryptionPKCS1, plainText as CFData, nil)! as Data
         let asdfg = PK.base64EncodedString()
-        
+        print("PK : \(asdfg)")
         
         
         
@@ -117,41 +118,6 @@ class RSATest{
         //            print("Base64 디코딩 실패")
         //        }
         
-        //
-        //
-        //
-        ////
-        //        do{
-        //            // Alice Generates a Private Key
-        //            let alicesPrivateKey = try RSA(keySize: 1024)
-        //            let privateKeyData = try alicesPrivateKey.externalRepresentation()
-        //            // Data 객체를 Base64 인코딩된 문자열로 변환합니다.
-        //            let privateKeyBase64 = privateKeyData.base64EncodedString()
-        //            // Alice shares her **public** key with Bob
-        //            let alicesPublicKeyData = try alicesPrivateKey.publicKeyExternalRepresentation()
-        //            let publicKeyBase64 = alicesPublicKeyData.base64EncodedString()
-        //            // Bob receives the raw external representation of Alices public key and imports it
-        //            let bobsImportOfAlicesPublicKey = try RSA(rawRepresentation: alicesPublicKeyData)
-        //
-        //            // Bob can now encrypt a message for Alice using her public key
-        //            let message = "박지원"
-        //            let privateMessage = try bobsImportOfAlicesPublicKey.encrypt(message.bytes)
-        //
-        //            // This results in some encrypted output like this
-        //            // URcRwG6LfH63zOQf2w+HIllPri9Rb6hFlXbi/bh03zPl2MIIiSTjbAPqbVFmoF3RmDzFjIarIS7ZpT57a1F+OFOJjx50WYlng7dioKFS/rsuGHYnMn4csjCRF6TAqvRQcRnBueeINRRA8SLaLHX6sZuQkjIE5AoHJwgavmiv8PY=
-        //
-        //            // Bob can now send this encrypted message to Alice without worrying about people being able to read the original contents
-        //
-        //            // Alice receives the encrypted message and uses her private key to decrypt the data and recover the original message
-        //            let originalDecryptedMessage = try alicesPrivateKey.decrypt(privateMessage)
-        //            print("private Key : \(privateKeyBase64)")
-        //            print("public Key : \(publicKeyBase64)")
-        //            print("privateMessage : \(privateMessage)")
-        //            print(String(data: Data(originalDecryptedMessage), encoding: .utf8))
-        //            // "Hi Alice! This is Bob!"
-        //        } catch{
-        //            print("failed")
-        //        }
     }
     //     키 생성
     func generateRSAKeyPair(keySize: Int = 1024) -> (publicKey: SecKey?, privateKey: SecKey?) {
@@ -469,10 +435,10 @@ class GetKeystore: KeystoreKeyChain{
     }
     //    저장된 RSA 개인키 해독
     func resolveData(){
-        let decodeString = "bX+v5/fYEHEs9Jq0Yx0i8Q=="
+        let decodeString = "pI317yXuWJ0dkRnsXX4A9PbY+XVIDXSnDayJwgbx5E4F9KzsSnRVlioYJdSjeWbY7icppeLa24IjJKbhV8wX62ud1VuyciC+mKTZhKWNmgrge9GytfmajUt/LyLuYtpxtBa4U+GNEjnfasGojpeiU0wL+Hf5n1YD/3jzbrvcKCj2iSYLI3vlWH5n60xisYCu5P1zl0Z7rF6SsEQWKcTugYTlPhxEwHkPZ0hv/2OELMNjv42a8zZNmFdMNCrKgpibXJBu2XUPFcMIASvzGKucVOY/ai3Ngy26BUGiwhw0Ih74kWw/2qj5OogP+Tv5Kmqs9Pq2T+IYm0CSJ/fhZNi/ZrLo2XVkts2Tp5McY+gu3PRpZy5c2K3fRJOAGt8bP4ZgD1AxB1N2GDMmRntQTfFd5IYWTzF77CDRFdG4a3OPgFySVm9105JRTdNfpu8Z/EudjT5U8y/fBn7ADCj/eewdMZ77f9vjZXFjxVgdq5ntX/QIC7iPgHB/qdJexqrsPtms5oO5iLwxemO+VB1LO4PDkDiE909ICIpBgEa+hZoIjIoFh7GLK2I+eaEaHoO7qFPfyCLohPCU8utnqFYPjb/Ke+w3olo4lABjDH/tkfD3odG+5CzPZMBID25d7BI6p069HCm15fPjdloMvcdH69vB0zhWO5MFc7tgzBAE1HshGp+7c2PWIDGSZn8BLJOLaB06h2Uf5i9uxK9N/R9D/kb7MIwyWneWeNYS3Lp1ciCCn1TkxWhwUg5gIXqibxBVZrWYddny4ZKF2M0FGu3iGis8DdEgCTmZNfygKf82CuqQ0fxVLica56k3z0SxWJLrtoivJHnSbVI6akoQrXDkDs5c8s5ta/hpSyjMbVFPl1+KQN8nWasCfEBqmq1ZNuJ8Hn0DtOncyTK8zOKL8a8xMIv6xdrqDFm8NqWgCdFnQ5q5R3rSTl1k7N24AeK8vrOetyg2g1X/fEmsrOkaKY1LfMcNw+1kDBPSa8C5TO4iZjm9Zoc8MXMDBQxOBfVvI/UECVJ6LsPTYDI7BhFA885CvyktipuVLo42zP+NroILhUs57RPOWNP7lLtjk8ubtwlS3Ajd"
         let NonceString = "1997b0211a19980131252955df21d7f3"
         //        z키 스토어 데이터 불러오기
-        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical", account: "test") else {
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical_Wallet", account: "EF00C6C495EDBFF01ACCC7650A1B5128") else {
             print("Failed to load keystore")
             return
         }
@@ -498,7 +464,7 @@ class GetKeystore: KeystoreKeyChain{
         }
         do{
             //            개정 주소에 해당하는 개인키 데이터 가져오기
-            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
+            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "asdfasdf12@@", account: accountAddress)
             //            개인키 String 값으로 변환
             let privateKeyHexString = privateKeyData.toHexString()
             //            변환된 개인키를 가지고 sha256 비밀키 생성
@@ -668,11 +634,7 @@ class GetKeystore: KeystoreKeyChain{
                 print("바이트코드 문자열을 Data로 변환할 수 없습니다.")
                 return
             }
-            
-            // 개인키 추출
-            let privateKeyData = try keystore.UNSAFE_getPrivateKeyData(password: "strong password", account: accountAddress)
-            let privateKeyHexString = privateKeyData.toHexString()
-            print("Private KeyString: \(privateKeyHexString)")
+
             let maxGasPrice = BigUInt(50) * BigUInt(10).power(9) // 예: 50 Gwei
             
 
@@ -685,18 +647,12 @@ class GetKeystore: KeystoreKeyChain{
             let currentNonce = try await web3.eth.getTransactionCount(for: accountAddress, onBlock: .latest)
 
             let contract = Web3.Contract(web3: web3, abiString: abiString,at: accountAddress,abiVersion: 2)
-            let deployOption = contract?.prepareDeploy(bytecode: bytecodeData, constructor: contract?.contract.constructor, parameters: ["hashdata"])
+            let deployOption = contract?.prepareDeploy(bytecode: bytecodeData, constructor: contract?.contract.constructor, parameters: ["환자 RSA 공개키"])
             deployOption?.transaction.nonce = currentNonce
             print(currentNonce)
             deployOption?.transaction.chainID = BigUInt(142536)
             deployOption?.transaction.to = .contractDeploymentAddress()
             deployOption?.transaction.from = accountAddress
-            
-//            try deployOption?.transaction.sign(privateKey: privateKeyData)
-//            guard let transactionEncode = deployOption?.transaction.encode() else{
-//                print("트랜잭션 인코딩 실패")
-//                return
-//            }
             if let result = try await deployOption?.writeToChain(password: "strong password", sendRaw: true){
                 print("Transaction successful with hash: \(result.hash)")
                 guard let resultData = Data.fromHex(result.hash) else { return  }

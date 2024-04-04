@@ -17,7 +17,7 @@ struct ContentView: View {
     @ObservedObject var authViewModel: UserObservaleObject
     @StateObject private var countModel = CountModel(sentCount: 0)
     @StateObject private var loginManager = LoginManager(LoginStatus: false)
-    @State private var tabState: BottomTab = .home
+    @State var tabState: BottomTab
     @EnvironmentObject var router: GlobalViewRouter
     @State private var isTabBarHidden = false
     //    @Environment(\.dismiss) private var dismiss  // 뷰를 닫기 위한 환경 변수 추가
@@ -27,7 +27,7 @@ struct ContentView: View {
             Color.white.edgesIgnoringSafeArea(.all)
             switch router.currentView {
             case .tab:
-                TabView (selection: $tabState){
+                TabView (selection: $router.exportTapView){
                     NavigationStack{
                         HomeView(authViewModel: authViewModel, logined: loginManager.LoginStatus)
                             .navigationTitle("\(authViewModel.name)님 안녕하세요!") // 이 부분을 ScrollView 밖으로 이동
@@ -36,6 +36,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("홈", systemImage: "house")
                     }
+                    .tag(BottomTab .home)
                     NavigationStack{
                         Chat()
                     }
@@ -43,6 +44,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("상담", systemImage: "message")
                     }
+                    .tag(BottomTab .chat)
                     //                    Hospital(Count: countModel)
                     NavigationStack{
                         FindHospitalView(userInfo:authViewModel)
@@ -50,18 +52,20 @@ struct ContentView: View {
                     .tabItem {
                         Label("내병원", systemImage: "stethoscope")
                     }
-                    NavigationStack{
-                        AccountView(authViewModel: authViewModel)
-                    }
-                    .tabItem {
-                        Label("내정보", systemImage: "person.crop.circle")
-                    }
+                    .tag(BottomTab .hospital)
+                    AccountView(authViewModel: authViewModel)
+                        .tabItem {
+                            Label("내정보", systemImage: "person.crop.circle")
+                        }
+                        .tag(BottomTab .account)
                     
                 }
             case .findHospital:
                 FindHospitalView(userInfo:authViewModel)
             case .MyReservation:
                 myreservationView(userInfo: authViewModel)
+            case .myWallet:
+                KNPWalletView(userInfo:authViewModel)
             }
             
         }
