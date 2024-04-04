@@ -14,6 +14,8 @@ struct AccountView: View {
     @EnvironmentObject var router: GlobalViewRouter
     let CheckPassword = AppPasswordKeyChain()
     @State var isOPT = false
+    @State var create = true
+    let appKeyChain = AppPasswordKeyChain()
     var body: some View {
         NavigationStack(path: $path){
             VStack(alignment: .leading){
@@ -28,7 +30,7 @@ struct AccountView: View {
                 .padding(.top)
                 .background(Color.white)
                 .onTapGesture {
-                    print("내정보")
+                    appKeyChain.deleteAllKeyChainItems()
                 }
                 HStack{
                     Image(systemName: "menubar.dock.rectangle")
@@ -46,15 +48,19 @@ struct AccountView: View {
                         return
                     }
                     if CheckPassword.checkPasswordExists(account: account.account){
-                        print("isE")
-                        router.currentView = .myWallet
+                        print("있음")
+                        create = false
+                        isOPT.toggle()
                     }else{
                         isOPT.toggle()
                     }
-                    print("KnP Wallet")
                 }
                 .sheet(isPresented: $isOPT){
-                    AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 생성해주세요.",isCreate: true)
+                    if create{
+                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 생성해주세요.",isCreate: $create)
+                    }else{
+                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 입력해주세요.",isCreate: $create)
+                    }
                 }
                 
                 HStack{
@@ -70,10 +76,11 @@ struct AccountView: View {
                 .onTapGesture {
                     print("진료기록")
                 }
-                Text("임시 로그아웃").onTapGesture {
-                    authViewModel.SetLoggedIn(logged: false)
-                    UserDb.removeAllUserDB()
-                }
+//                Text("임시 로그아웃").onTapGesture {
+                    
+//                    authViewModel.SetLoggedIn(logged: false)
+//                    UserDb.removeAllUserDB()
+//                }
                 Spacer()
             }
             .onAppear{
@@ -84,62 +91,4 @@ struct AccountView: View {
         }
     }
 }
-struct ViewTest: View{
-    @State var path = NavigationPath()
-    var body: some View{
-        NavigationStack(path: $path){
-            VStack(alignment: .leading){
-                HStack{
-                    Image(systemName: "person.crop.circle.fill")
-                        .foregroundStyle(Color("ConceptColor"))
-                        .font(.system(size: 25))
-                        .padding(.leading)
-                    Text("내 정보")
-                    Spacer()
-                }
-                .padding(.top)
-                .background(Color.white)
-                .onTapGesture {
-                    print("내정보")
-                }
-                HStack{
-                    Image(systemName: "menubar.dock.rectangle")
-                        .foregroundStyle(Color("ConceptColor"))
-                        .font(.system(size: 21))
-                        .padding(.leading)
-                    Text("KnP Wallet")
-                    Spacer()
-                }
-                .padding(.top)
-                .background(Color.white)
-                .onTapGesture {
-                
-                    print("KnP Wallet")
-                }
-                
-                HStack{
-                    Image(systemName: "doc.text")
-                        .foregroundStyle(Color("ConceptColor"))
-                        .font(.system(size: 27))
-                        .padding(.leading)
-                    Text("진료기록")
-                    Spacer()
-                }
-                .padding(.top)
-                .background(Color.white)
-                .onTapGesture {
-                    print("진료기록")
-                }
-                Spacer()
-            }
-            
-        }
-    }
-}
 
-struct ViewTestPreviews: PreviewProvider {
-    static var previews: some View {
-        ViewTest()
-            
-    }
-}

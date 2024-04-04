@@ -11,7 +11,7 @@ import Web3Core
 import BigInt
 
 class KeystoreKeyChain {
-//    키체인 keystore 저장
+    //    키체인 keystore 저장
     func saveToKeyChain(keystoreData: Data, service: String, account: String) ->OSStatus {
         let query: [String:Any] = [
             //            저장하는 아이템 타입 정의
@@ -19,7 +19,7 @@ class KeystoreKeyChain {
             //            서비스 식별 문자열 정의
             kSecAttrService as String: service,
             //            계정 식별 문자열 정의
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: "knp.kpmadical.com.Wallet_Keystore_\(account)",
             //            실제 저장하는 데이터 정의
             kSecValueData as String: keystoreData
         ]
@@ -28,12 +28,12 @@ class KeystoreKeyChain {
         //        새로운 Keychain 추가.
         return SecItemAdd(query as CFDictionary, nil)
     }
-//    키체인에 저장된 keystore 가져오기
+    //    키체인에 저장된 keystore 가져오기
     func loadFromKeychain(service: String, account: String) ->Data?{
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: "knp.kpmadical.com.Wallet_Keystore_\(account)",
             kSecReturnData as String: kCFBooleanTrue!,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
@@ -45,5 +45,35 @@ class KeystoreKeyChain {
             return nil
         }
         return item as? Data
+    }
+    //    키체인에 keystore 비밀번호 저장
+    func saveKeystorePassword(password: String, account: String) -> Bool{
+        guard let passwordData = password.data(using: .utf8) else{
+            print("passward Data 변환 실패")
+            return false
+        }
+        let query: [String:Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: "knp.kpmadical.com.Wallet_Keystore_Password_\(account)",
+            kSecValueData as String: passwordData
+        ]
+        SecItemDelete(query as CFDictionary)
+        let status = SecItemAdd(query as CFDictionary, nil)
+        return status == errSecSuccess
+    }
+    //     키체인 키스토어 비밀번호 가져오기
+    func GetPasswordKeystore(account: String) -> (seccess: Bool, password: String) {
+        let query: [String:Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: "knp.kpmadical.com.Wallet_Keystore_Password_\(account)",
+            kSecReturnData as String: kCFBooleanTrue!,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        guard status == errSecSuccess, let passwordData = item as? Data, let savedPassword = String(data: passwordData, encoding: .utf8) else {
+                return (false, "")
+            }
+        return (true, savedPassword)
     }
 }

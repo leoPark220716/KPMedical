@@ -64,6 +64,26 @@ class KNPWallet: RSAKeyManager{
             return (false,"","")
         }
     }
+    func GetWalletPublicKey(account: String) -> (success: Bool, addres: String) {
+        let password = GetPasswordKeystore(account: account)
+        if !password.seccess{
+            return (false,"")
+        }
+        guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical_Wallet", account: account) else {
+            print("Failed to load keystore")
+            return (false, "")
+        }
+        guard let keystore = BIP32Keystore(keystoreData)else{
+            print("키스토어 생성 실패")
+            return (false, "")
+        }
+        guard let accountAddress = keystore.addresses?.first else {
+            print("계정 주소를 찾을 수 없습니다.")
+            return (false, "")
+        }
+        return (true,accountAddress.address)
+        
+    }
     //    JWT 토큰을 가지고 유저 Account 추출
     func GetUserAccountString(token: String) -> (status: Bool,account:String){
         let sections = token.components(separatedBy: ".")
@@ -254,7 +274,11 @@ class KNPWallet: RSAKeyManager{
             // Wallet key 생성 실패 시 처리
             return false
         }
-        
+        let saveKeystorepassword = saveKeystorePassword(password: password, account: account.account)
+        if !saveKeystorepassword{
+            print("키스토어 비밀번호 저장 실패")
+            return false
+        }
         // RSA 공개키 및 개인키 생성 후 키체인에 저장
         let RSAKeys = generateRSAKeyPair(account: account.account)
         if !RSAKeys.success {

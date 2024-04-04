@@ -13,17 +13,23 @@ struct KNPWalletView: View {
     @State var path = NavigationPath()
     @State var Items: [WalletDataStruct.AccessItem] = []
     @State var pass: String = ""
+    @State var WalletAddres = ""
+    @State var ContractAddres = ""
+    @State var HaveWallet = false
+    let model = KNPWallet()
     var body: some View {
         NavigationStack(path:$path){
             ScrollView{
                 VStack{
-                    dontHaveWalletView
-//                    walletAddressView
-//                    walletAccessList
+                    if HaveWallet{
+                        walletAddressView
+                        walletAccessList
+                    }else{
+                        dontHaveWalletView
+                    }
                     Spacer()
                 }
                 .onAppear{
-                    
                     var tempItems: [WalletDataStruct.AccessItem] = []
                     for _ in 1...10 {
                         let item = WalletDataStruct.AccessItem(HospitalName: "진해병원", Purpose: "진료데이터", State: "완료", Date: "3.20")
@@ -53,6 +59,34 @@ struct KNPWalletView: View {
                 default: EmptyView()
                 }
             }
+        }
+        .onAppear{
+            print("Apper")
+            let account = model.GetUserAccountString(token: userInfo.token)
+            if !account.status{
+                print("어카운트 실패")
+                HaveWallet = false
+                return
+            }
+            let addr = model.GetWalletPublicKey(account: account.account)
+            if !addr.success{
+                print("공개키 가져오기 실패")
+                HaveWallet = false
+                return
+            }
+            Task{
+                let WalletAddr = await model.walletHttp.CheckAndGetContractAddress(token: userInfo.token, uid: getDeviceUUID(), address: addr.addres)
+                if !WalletAddr.success{
+                    print("Http요청 실패")
+                    HaveWallet = false
+                    return
+                }
+                WalletAddres = WalletAddr.addres
+                ContractAddres = WalletAddr.contract
+                HaveWallet = true
+            }
+            
+            
         }
     }
     var dontHaveWalletView: some View{
@@ -111,7 +145,7 @@ struct KNPWalletView: View {
                 .bold()
                 .font(.title3)
             HStack{
-                Text("0x123123123123123123123123")
+                Text(WalletAddres)
                 Spacer()
                 Image(systemName: "doc.on.doc")
                     .foregroundStyle(Color.blue)
@@ -127,7 +161,7 @@ struct KNPWalletView: View {
                 .bold()
                 .font(.title3)
             HStack{
-                Text("0x123123123123123123123123")
+                Text(ContractAddres)
                 Spacer()
                 Image(systemName: "doc.on.doc")
                     .foregroundStyle(Color.blue)

@@ -68,4 +68,21 @@ class AppPasswordKeyChain{
             return (false,"")
         }
     }
+//    모든 키체인 데이터 삭제
+    func deleteAllKeyChainItems(){
+        let secItemClasses = [kSecClassGenericPassword, kSecClassInternetPassword, kSecClassCertificate, kSecClassKey, kSecClassIdentity]
+            for secItemClass in secItemClasses {
+                let dictionary = [kSecClass as String: secItemClass]
+                let status = SecItemDelete(dictionary as CFDictionary)
+                
+                switch status {
+                case errSecSuccess:
+                    print("\(secItemClass) items deleted successfully.")
+                case errSecItemNotFound:
+                    print("No items were found to delete for \(secItemClass).")
+                default:
+                    print("An error occurred while deleting items for \(secItemClass): \(status)")
+                }
+            }
+    }
 }

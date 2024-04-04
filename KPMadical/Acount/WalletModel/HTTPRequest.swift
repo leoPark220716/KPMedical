@@ -45,6 +45,7 @@ class WalletAPIRequest{
             return false
         }
     }
+//    복구 요청
     func RecoverWalletWithRSA(token: String, uid: String, address:String, rsa: String, type: Int) async -> (success:Bool, rsaEncrypt: String) {
         if let url = URL(string: "https://kp-medicals.com/api/medical-wallet/users/wallet") {
             do {
@@ -80,6 +81,7 @@ class WalletAPIRequest{
             return (false,"")
         }
     }
+//    스마트 컨트랙트 주소 저장
     func SaveContractAddress(token: String, uid: String, contract: String) async -> Bool{
         if let url = URL(string: "https://kp-medicals.com/api/medical-wallet/users/contract"){
             do{
@@ -111,6 +113,37 @@ class WalletAPIRequest{
             return false
         }
     }
+    func CheckAndGetContractAddress(token: String, uid: String, address: String) async -> (success: Bool, addres: String,contract: String){
+        if let url = URL(string: "https://kp-medicals.com/api/medical-wallet/users/cryptos?access_token=\(token)&uid=\(uid)"){
+            do{
+                var request = URLRequest.init(url: url)
+                request.httpMethod = "GET"
+                let (data,response) = try await URLSession.shared.data(for: request)
+                guard let HttpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= HttpResponse.statusCode else{
+                    print("CheckAndGetContractAddress HTTP request \(String(describing: response))")
+                    return (false,"","")
+                }
+                guard let jsonData = try? JSONDecoder().decode(KPApiStructFrom<WalletSaveResponseData>.self, from: data) else{
+                    return (false,"","")
+                }
+                guard let serverAddress = jsonData.data.address else{
+                    print("주소 없음")
+                    return (false,"","")
+                }
+                guard let contractAddr = jsonData.data.contract else{
+                    print("컨트랙트 주소 없음")
+                    return (false,"","")
+                }
+                return (serverAddress == address, serverAddress, contractAddr)
+                
+            }catch{
+                print("CheckAndGetContractAddress Err \(error)")
+                return (false,"","")
+            }
+        }else{
+            return (false,"","")
+        }
+    }
 
     struct SaveWalletData: Codable{
         var access_token: String
@@ -122,6 +155,7 @@ class WalletAPIRequest{
     struct WalletSaveResponseData: Codable{
         var access_token: String
         var encrypt_rsa: String
+        var address: String?
         var contract: String?
         var error_code: Int
         var error_stack: String
