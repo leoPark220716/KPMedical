@@ -38,6 +38,32 @@ struct KNPWalletView: View {
                     self.Items = tempItems
                 }
             }
+            .onAppear{
+                print("Apper")
+                let account = model.GetUserAccountString(token: userInfo.token)
+                if !account.status{
+                    print("어카운트 실패")
+                    HaveWallet = false
+                    return
+                }
+                let addr = model.GetWalletPublicKey(account: account.account)
+                if !addr.success{
+                    print("공개키 가져오기 실패")
+                    HaveWallet = false
+                    return
+                }
+                Task{
+                    let WalletAddr = await model.walletHttp.CheckAndGetContractAddress(token: userInfo.token, uid: getDeviceUUID(), address: addr.addres)
+                    if !WalletAddr.success{
+                        print("Http요청 실패")
+                        HaveWallet = false
+                        return
+                    }
+                    WalletAddres = WalletAddr.addres
+                    ContractAddres = WalletAddr.contract
+                    HaveWallet = true
+                }
+            }
             .navigationTitle("KPM Wallet")
             .toolbar{
                 ToolbarItem(placement: .navigation){
@@ -59,34 +85,6 @@ struct KNPWalletView: View {
                 default: EmptyView()
                 }
             }
-        }
-        .onAppear{
-            print("Apper")
-            let account = model.GetUserAccountString(token: userInfo.token)
-            if !account.status{
-                print("어카운트 실패")
-                HaveWallet = false
-                return
-            }
-            let addr = model.GetWalletPublicKey(account: account.account)
-            if !addr.success{
-                print("공개키 가져오기 실패")
-                HaveWallet = false
-                return
-            }
-            Task{
-                let WalletAddr = await model.walletHttp.CheckAndGetContractAddress(token: userInfo.token, uid: getDeviceUUID(), address: addr.addres)
-                if !WalletAddr.success{
-                    print("Http요청 실패")
-                    HaveWallet = false
-                    return
-                }
-                WalletAddres = WalletAddr.addres
-                ContractAddres = WalletAddr.contract
-                HaveWallet = true
-            }
-            
-            
         }
     }
     var dontHaveWalletView: some View{

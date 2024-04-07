@@ -38,7 +38,7 @@ struct ContentView: View {
                     }
                     .tag(BottomTab .home)
                     NavigationStack{
-                        Chat()
+                        MyChaiItem()
                     }
                     .badge(countModel.sentCount)
                     .tabItem {

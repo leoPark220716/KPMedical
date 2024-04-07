@@ -57,6 +57,8 @@
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
 		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
+		1ED17A5D2BC296E00028AE83 /* MyChaiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */; };
+		1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */; };
 		1ED344C42BB3F6AA0037C9D5 /* ChooseTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
@@ -158,6 +160,8 @@
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
 		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorItemView.swift; path = ../DoctorItemView.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
+		1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChaiItem.swift; sourceTree = "<group>"; };
+		1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChatItem.swift; sourceTree = "<group>"; };
 		1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTime.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
+				1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */,
+				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -351,7 +357,6 @@
 		1E8F79142B9F31E800F4C230 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E2B37472BA039C600B8EFA4 /* Chat */,
 				1E8F79162B9F320300F4C230 /* SginUp */,
 				1E2B37462BA0392200B8EFA4 /* MyHospital */,
 				1EE9CB652B9F1F9300E923D9 /* ContentView.swift */,
@@ -469,6 +474,7 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1E2B37472BA039C600B8EFA4 /* Chat */,
 				1E2E987F2BBEDC0C00986597 /* AppKeyChain */,
 				1EFC07E02BBC38CE00ED9F3D /* SmartContract */,
 				1E4FA0E52BAC7D0F000D3A27 /* TabViewManager */,
@@ -857,6 +863,7 @@
 				1E2E98852BBEE01200986597 /* AppPasswordView.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
+				1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */,
 				1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */,
 				1EAEF48B2BBD885100F06BFB /* mnemonicView.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
@@ -883,6 +890,7 @@
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
 				1EAEF4922BBDAE3100F06BFB /* RSAManager.swift in Sources */,
+				1ED17A5D2BC296E00028AE83 /* MyChaiItem.swift in Sources */,
 				1E7B10542BB2EE9E006C4FCA /* ChooseDoctor.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 				1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */,

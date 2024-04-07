@@ -65,10 +65,11 @@ class KNPWallet: RSAKeyManager{
         }
     }
     func GetWalletPublicKey(account: String) -> (success: Bool, addres: String) {
-        let password = GetPasswordKeystore(account: account)
-        if !password.seccess{
-            return (false,"")
-        }
+//        let password = GetPasswordKeystore(account: account)
+//        if !password.seccess{
+//            print("?? \(password.password)")
+//            return (false,"")
+//        }
         guard let keystoreData = loadFromKeychain(service: "com.knp.KpMadical_Wallet", account: account) else {
             print("Failed to load keystore")
             return (false, "")
@@ -81,6 +82,7 @@ class KNPWallet: RSAKeyManager{
             print("계정 주소를 찾을 수 없습니다.")
             return (false, "")
         }
+        print("공개키 키복 \(accountAddress.address)")
         return (true,accountAddress.address)
         
     }
