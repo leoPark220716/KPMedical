@@ -8,7 +8,7 @@
 import Foundation
 
 enum NoTabViews{
-    case findHospital, tab, MyReservation, myWallet
+    case findHospital, tab, MyReservation, myWallet, chat
 }
 // 전역 상태를 관리하는 클래스 정의
 class GlobalViewRouter: ObservableObject {

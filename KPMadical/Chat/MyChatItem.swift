@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct MyChaiItem: View {
+struct MyChatItem: View {
+    @Binding var testArr: TestChatData
     var body: some View {
-        HStack(alignment: .bottom){
+        HStack(alignment: .bottom,spacing: 3){
             Spacer()
             VStack(alignment: .trailing){
                 Text("1")
                     .foregroundStyle(.red)
-                    .font(.system(size: 16))
-                Text("오후 9:25")
                     .font(.system(size: 14))
+                Text("오후 9:25")
+                    .font(.system(size: 13))
             }
-            Text("asdfklasdmfklmaskdlfaafafafadsfklasdmflkasmdflkmasdlkfmalks;dm;lkasdm;lkasdmf;ladmsl;kamsdfmasdmflamsdflkamsdfklma")
+            Text(testArr.text)
                 .font(.system(size: 17))
                 .padding(10)
                 .foregroundColor(.black)
@@ -30,6 +31,8 @@ struct MyChaiItem: View {
     }
 }
 
-#Preview {
-    MyChaiItem()
+struct MyChatItem_Previews: PreviewProvider {
+    static var previews: some View {
+        MyChatItem(testArr: .constant(TestChatData(text: "asdfklfklma",My: 1,id: 1)))
+    }
 }

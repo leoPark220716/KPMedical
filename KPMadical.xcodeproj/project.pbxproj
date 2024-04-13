@@ -30,6 +30,12 @@
 		1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C28182BA9F413005461D1 /* TestFunc.swift */; };
 		1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */; };
 		1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */; };
+		1E5A3C082BCA9E6E00DA761F /* SocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C072BCA9E6E00DA761F /* SocketConnection.swift */; };
+		1E5A3C0A2BCAADCB00DA761F /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C092BCAADCB00DA761F /* ChatList.swift */; };
+		1E5A3C0C2BCAD53200DA761F /* GallerriTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */; };
+		1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */; };
+		1E5A3C102BCAE19E00DA761F /* photoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */; };
+		1E5A3C122BCAE2C700DA761F /* ㅇㅇ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */; };
 		1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* WalletPassword.swift */; };
 		1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF32BA051740053A555 /* LoginManager.swift */; };
 		1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E777C222BB322E100B2BC39 /* CustomCalender.swift */; };
@@ -57,7 +63,7 @@
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
 		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
-		1ED17A5D2BC296E00028AE83 /* MyChaiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */; };
+		1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */; };
 		1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */; };
 		1ED344C42BB3F6AA0037C9D5 /* ChooseTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
@@ -133,6 +139,12 @@
 		1E4C28182BA9F413005461D1 /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
 		1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManager.swift; sourceTree = "<group>"; };
 		1E4FA0E82BACA198000D3A27 /* HospitalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailView.swift; sourceTree = "<group>"; };
+		1E5A3C072BCA9E6E00DA761F /* SocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketConnection.swift; sourceTree = "<group>"; };
+		1E5A3C092BCAADCB00DA761F /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerriTest.swift; sourceTree = "<group>"; };
+		1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imagePick.swift; sourceTree = "<group>"; };
+		1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoPicker.swift; sourceTree = "<group>"; };
+		1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ㅇㅇ.swift"; sourceTree = "<group>"; };
 		1E64CBF12BA050B50053A555 /* WalletPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPassword.swift; sourceTree = "<group>"; };
 		1E64CBF32BA051740053A555 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		1E777C222BB322E100B2BC39 /* CustomCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalender.swift; sourceTree = "<group>"; };
@@ -160,7 +172,7 @@
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
 		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorItemView.swift; path = ../DoctorItemView.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
-		1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChaiItem.swift; sourceTree = "<group>"; };
+		1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatItem.swift; sourceTree = "<group>"; };
 		1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChatItem.swift; sourceTree = "<group>"; };
 		1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTime.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
@@ -289,8 +301,9 @@
 			isa = PBXGroup;
 			children = (
 				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
-				1ED17A5C2BC296E00028AE83 /* MyChaiItem.swift */,
+				1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */,
 				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
+				1E5A3C092BCAADCB00DA761F /* ChatList.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -318,6 +331,10 @@
 				1E219B2A2BA08FFD00D79DE3 /* Test.swift */,
 				1E4C28182BA9F413005461D1 /* TestFunc.swift */,
 				1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */,
+				1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */,
+				1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */,
+				1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */,
+				1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */,
 			);
 			path = TestFile;
 			sourceTree = "<group>";
@@ -328,6 +345,14 @@
 				1E4FA0E62BAC7D1A000D3A27 /* TabViewManager.swift */,
 			);
 			path = TabViewManager;
+			sourceTree = "<group>";
+		};
+		1E5A3C062BCA9E5B00DA761F /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				1E5A3C072BCA9E6E00DA761F /* SocketConnection.swift */,
+			);
+			path = Socket;
 			sourceTree = "<group>";
 		};
 		1E64CBF02BA050A60053A555 /* Acount */ = {
@@ -474,6 +499,7 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1E5A3C062BCA9E5B00DA761F /* Socket */,
 				1E2B37472BA039C600B8EFA4 /* Chat */,
 				1E2E987F2BBEDC0C00986597 /* AppKeyChain */,
 				1EFC07E02BBC38CE00ED9F3D /* SmartContract */,
@@ -836,6 +862,7 @@
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
 				1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */,
 				1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */,
+				1E5A3C0A2BCAADCB00DA761F /* ChatList.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1EAEF48E2BBD8F5600F06BFB /* WalletModel.swift in Sources */,
 				1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */,
@@ -862,10 +889,12 @@
 				1E2E987E2BBE949F00986597 /* recoverWalletView.swift in Sources */,
 				1E2E98852BBEE01200986597 /* AppPasswordView.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
+				1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
 				1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */,
 				1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */,
 				1EAEF48B2BBD885100F06BFB /* mnemonicView.swift in Sources */,
+				1E5A3C102BCAE19E00DA761F /* photoPicker.swift in Sources */,
 				1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */,
 				1E18A2F02BAB1C1300466221 /* HospitalRequest.swift in Sources */,
 				1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */,
@@ -882,6 +911,7 @@
 				1E2E98812BBEDC4400986597 /* SecurityKey.swift in Sources */,
 				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
+				1E5A3C082BCA9E6E00DA761F /* SocketConnection.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */,
 				1E8760992BB7D8BF0021F70A /* TimeItemsView.swift in Sources */,
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,
@@ -890,15 +920,17 @@
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
 				1EAEF4922BBDAE3100F06BFB /* RSAManager.swift in Sources */,
-				1ED17A5D2BC296E00028AE83 /* MyChaiItem.swift in Sources */,
+				1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */,
 				1E7B10542BB2EE9E006C4FCA /* ChooseDoctor.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 				1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */,
 				1E18A2F92BAB4FF100466221 /* LocationManager.swift in Sources */,
 				1E18A2F22BAB1D9100466221 /* JsonPasingMainModel.swift in Sources */,
 				1E18A2ED2BAAF8CD00466221 /* FindHosptialItem.swift in Sources */,
+				1E5A3C0C2BCAD53200DA761F /* GallerriTest.swift in Sources */,
 				1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */,
 				1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */,
+				1E5A3C122BCAE2C700DA761F /* ㅇㅇ.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

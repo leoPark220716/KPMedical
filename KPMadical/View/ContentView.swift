@@ -38,7 +38,7 @@ struct ContentView: View {
                     }
                     .tag(BottomTab .home)
                     NavigationStack{
-                        MyChaiItem()
+                        ChatList()
                     }
                     .badge(countModel.sentCount)
                     .tabItem {
@@ -66,6 +66,8 @@ struct ContentView: View {
                 myreservationView(userInfo: authViewModel)
             case .myWallet:
                 KNPWalletView(userInfo:authViewModel)
+            case .chat:
+                Chat()
             }
             
         }
