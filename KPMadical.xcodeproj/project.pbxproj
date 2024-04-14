@@ -79,6 +79,7 @@
 		1EE9CB752B9F1F9500E923D9 /* KPMadicalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB742B9F1F9500E923D9 /* KPMadicalTests.swift */; };
 		1EE9CB7F2B9F1F9500E923D9 /* KPMadicalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */; };
 		1EE9CB812B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */; };
+		1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */; };
 		1EF3ABEC2BB8551600B6DE56 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF3ABEB2BB8551600B6DE56 /* web3swift */; };
 		1EFC07EA2BBC39A900ED9F3D /* PersonalRecords.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */; };
 		1EFC07EB2BBC39A900ED9F3D /* PersonalRecords.abi in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */; };
@@ -191,6 +192,7 @@
 		1EE9CB7A2B9F1F9500E923D9 /* KPMadicalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KPMadicalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE9CB7E2B9F1F9500E923D9 /* KPMadicalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITests.swift; sourceTree = "<group>"; };
 		1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocket.swift; sourceTree = "<group>"; };
 		1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = PersonalRecords.bin; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.bin"; sourceTree = "<group>"; };
 		1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PersonalRecords.abi; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.abi"; sourceTree = "<group>"; };
 		1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PersonalRecords.json; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.json"; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		1E2B37472BA039C600B8EFA4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				1EEFB3662BCBC1D800A0641B /* ChatDataModel */,
 				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
 				1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */,
 				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
@@ -548,6 +551,14 @@
 				1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */,
 			);
 			path = KPMadicalUITests;
+			sourceTree = "<group>";
+		};
+		1EEFB3662BCBC1D800A0641B /* ChatDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */,
+			);
+			path = ChatDataModel;
 			sourceTree = "<group>";
 		};
 		1EFC07E02BBC38CE00ED9F3D /* SmartContract */ = {
@@ -874,6 +885,7 @@
 				1EAEF4882BBD7A0C00F06BFB /* WalletDataStruct.swift in Sources */,
 				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
 				1EFFBBF72BB5BD720079B6EE /* myreservationView.swift in Sources */,
+				1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */,
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,

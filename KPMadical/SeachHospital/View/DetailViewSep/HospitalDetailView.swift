@@ -76,7 +76,7 @@ struct HospitalDetailView: View {
                     .navigationDestination(for: HospitalDataHandler.NavigationTarget.self){ value in
                         switch value{
                         case .counsel:
-                            Chat()
+                            ChatList()
                         case .selectDepartment:
                             ChooseDepartment(path: $path, userInfo: userInfo, HospitalInfo: hospitalDataHandler, info: $info)
                         }

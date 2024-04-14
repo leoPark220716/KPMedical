@@ -67,7 +67,7 @@ struct ContentView: View {
             case .myWallet:
                 KNPWalletView(userInfo:authViewModel)
             case .chat:
-                Chat()
+                Chat(userInfo:authViewModel)
             }
             
         }

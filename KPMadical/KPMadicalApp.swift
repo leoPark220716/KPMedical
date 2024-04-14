@@ -17,10 +17,10 @@ struct KPMadicalApp: App {
     var router = GlobalViewRouter()
     var body: some Scene {
         WindowGroup {
-//            SplashView()
-//                .environmentObject(router)
+            SplashView()
+                .environmentObject(router)
 //            Chat()
-            __()
+//            __()
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-class UserObservaleObject: ObservableObject {
+public class UserObservaleObject: ObservableObject {
     @Published var name: String = ""
     @Published var dob: String = ""
     @Published var sex: String = ""
