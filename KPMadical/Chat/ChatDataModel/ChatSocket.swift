@@ -112,14 +112,14 @@ struct OpenChatRoomDataModel{
     }
     
     struct ChatDetail: Codable {
-        var bucket: String?
+        var bucket: KeyType?
         var chat_index: String
         var content_type: String
         var file_cnt: String
         var from: String
         var hospital_id: String
         var index: String
-        var key: String?
+        var key: KeyType?
         var message: String
         var msg_type: String
         var pub_key: String?
@@ -128,9 +128,36 @@ struct OpenChatRoomDataModel{
         var unixtime: String?
         var uuid: String
         var hash: String?
+        
+        enum KeyType: Codable {
+                case string(String)
+                case array([String])
+
+                init(from decoder: Decoder) throws {
+                    let container = try decoder.singleValueContainer()
+                    if let string = try? container.decode(String.self) {
+                        self = .string(string)
+                    } else if let array = try? container.decode([String].self) {
+                        self = .array(array)
+                    } else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Expected String or [String]")
+                    }
+                }
+
+                func encode(to encoder: Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    switch self {
+                    case .string(let string):
+                        try container.encode(string)
+                    case .array(let array):
+                        try container.encode(array)
+                    }
+                }
+            }
     }
 }
 struct ChatMessegeItem: Codable{
+//    type 1  = 텍스트, type =2  사진 , type3 = 파일 type 4 = 날짜
     var type: Int
     var HospitalName: String?
     var messege: String?
@@ -138,5 +165,7 @@ struct ChatMessegeItem: Codable{
     var FileURI: String?
     var time: String
     var amI: Bool
+    var chatDate: String
+    var isPadding: Bool
 }
 

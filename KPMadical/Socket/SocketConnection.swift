@@ -12,6 +12,7 @@ class WebSocket: ObservableObject {
     var webSocketTask: URLSessionWebSocketTask?
     private var timer: Timer?
     @Published var ChatData: [ChatMessegeItem] = []
+    let timeHandler = TimeHandler()
     func SetToken(token: String){
         self.token = token
     }
@@ -74,7 +75,7 @@ class WebSocket: ObservableObject {
             print("decode Error : \(error)")
         }
     }
-//    메시지 전달 받은 데이터 파싱
+    //    메시지 전달 받은 데이터 파싱
     func SetMsg(decodedData: OpenChatRoomDataModel.ChatMessage){
         let amI = decodedData.msg_type == 3
         guard let msg = decodedData.content?.message else{
@@ -82,13 +83,19 @@ class WebSocket: ObservableObject {
             return
         }
         if decodedData.content_type == "text"{
-            DispatchQueue.main.async {
-                self.ChatData.append(ChatMessegeItem(type: 1, messege: msg,  ReadCount: false, time: decodedData.timestamp!, amI: amI))
+            let time = timeHandler.timeChangeToChatTime(time: decodedData.timestamp!)
+            let timeDate = timeHandler.returnyyyy_MM_dd(time: decodedData.timestamp!)
+            if time.success && timeDate.success{
+                DispatchQueue.main.async {
+                    self.ChatData.append(ChatMessegeItem(type: 1, messege: msg,  ReadCount: false, time: time.chatTime, amI: amI,chatDate: timeDate.chatTime,isPadding: false))
+                }
             }
             return
+        }else{
+            
         }
     }
-//    초기 데이터 파싱
+    //    초기 데이터 파싱 (리팩토링 필수)
     func SetFirstData(decodedData: OpenChatRoomDataModel.ChatMessage){
         var ChatPreData: [ChatMessegeItem] = []
         guard let firstDict = decodedData.hospital_data?.all_status else{
@@ -96,13 +103,53 @@ class WebSocket: ObservableObject {
             return
         }
         let sortedDetails = firstDict.values.sorted { $0.chat_index < $1.chat_index }
+        var isFirst = true
+        var isFirst2 = true
         for arr in sortedDetails{
             print(arr.message)
             let type = arr.content_type
             let HospitalName = "진해병원"
             let amI = arr.msg_type == "3"
             if type == "text"{
-                ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: arr.timestamp , amI: amI))
+                let time = timeHandler.timeChangeToChatTime(time: arr.timestamp)
+                let timeDate = timeHandler.returnyyyy_MM_dd(time: arr.timestamp)
+                if isFirst{
+                    ChatPreData.append(ChatMessegeItem(type: 4, messege: timeDate.chatTime, ReadCount: false, time: "" , amI: false ,chatDate: timeDate.chatTime,isPadding: false))
+                 isFirst = false
+                }else{
+                    if ChatPreData.last?.chatDate != timeDate.chatTime{
+                        ChatPreData.append(ChatMessegeItem(type: 4, messege: timeDate.chatTime, ReadCount: false, time: "" , amI: false ,chatDate: timeDate.chatTime,isPadding: false))
+                    }
+                }
+                
+                if !isFirst2 && ChatPreData.last?.type != 4 && ChatPreData.last?.amI == amI{
+                    if ChatPreData.last?.time == time.chatTime {
+                        if var lastItem = ChatPreData.last {
+                                lastItem.isPadding = false
+                                ChatPreData[ChatPreData.count - 1] = lastItem  // 배열의 마지막 위치에 수정된 요소 다시 할당
+                            }
+                        ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
+                    }else{
+                        ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
+                    }
+                    isFirst2 = false
+                }else{
+                    ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
+                    isFirst2 = false
+                }
+                
+            }else{
+                if let keytype = arr.key{
+                    switch keytype {
+                    case .string(let keyString):
+                        print("파일아님\(keyString)")
+                        let imageArr = returnStringToArray(jsonString: keyString)
+                        print(imageArr.arr[0])
+                    case .array(let keyArray):
+                        print("사진 key값사진 key값사진 key값사진 key값사진 key값사진 key값 \(keyArray[0])")
+                    }
+                
+                }
             }
         }
         DispatchQueue.main.async {
@@ -111,6 +158,21 @@ class WebSocket: ObservableObject {
         }
     }
     
+    
+//     초기데이터 스트링 배열로 변환
+    func returnStringToArray(jsonString: String) -> (success: Bool,arr: [String]){
+        guard let jsonData = jsonString.data(using: .utf8) else{
+            return (false,[])
+        }
+        do{
+            let decoder = JSONDecoder()
+            let stringArray = try decoder.decode([String].self, from: jsonData)
+            return (true,stringArray)
+        }catch{
+            print("초기 이미지 스트링 변환 실패 \(error)")
+            return (false,[])
+        }
+    }
     //    유저 ID 추출
     func GetUserAccountString(token: String) -> (status: Bool,account:String){
         let sections = token.components(separatedBy: ".")
@@ -131,7 +193,7 @@ class WebSocket: ObservableObject {
     }
     
     //    메시지 및 파일 메타 데이터 전송
-    func sendMessage(from: String, to: String, content_type: String, message:String? = nil, file_cnt: Int? = nil, file_ext: [String]? = nil) {
+    func sendMessage(from: String, to: String, content_type: String, message:String? = nil, file_cnt: Int? = nil, file_ext: [String]? = nil) async -> Bool{
         let content = SendChatDataModel.MessageContent(
             message: message,
             file_cnt: file_cnt,
@@ -145,22 +207,40 @@ class WebSocket: ObservableObject {
             content: content)
         guard let jsonData = try? JSONEncoder().encode(ChatMessage) else{
             print("JsonData 파싱 실패")
-            return
+            return false
         }
         guard let jsonString = String(data: jsonData, encoding: .utf8) else{
             print("StringErr")
-            return
+            return false
         }
         let message = URLSessionWebSocketTask.Message.string(jsonString)
-        webSocketTask?.send(message, completionHandler: { Error in
-            if let err = Error {
-                print("Message Sending Err \(err.localizedDescription)")
-            }else{
-                print("SendSuccess")
-            }
-        })
+        return await withCheckedContinuation { continuation in
+            webSocketTask?.send(message, completionHandler: { Error in
+                if let err = Error {
+                    print("Message Sending Err \(err.localizedDescription)")
+                    continuation.resume(returning: false)
+                }else{
+                    print("SendSuccess")
+                    continuation.resume(returning: true)
+                }
+            })
+        }
     }
     
+    func SendFileData(data: Data){
+        let message = URLSessionWebSocketTask.Message.data(data)
+            webSocketTask?.send(message, completionHandler: { Error in
+                if let err = Error {
+                    print("Message Sending Err \(err.localizedDescription)")
+        
+                }else{
+                    print("SendSuccess")
+        
+                }
+            })
+        
+        
+    }
     
     //    소켓 연결 끊기
     func disconnect() {
@@ -194,4 +274,10 @@ class WebSocket: ObservableObject {
 //        self?.sendPingMessage()
 //        //            print("SendPing")
 //    }
+//}
+
+
+//function getS3URL(bucket, region, key){
+//    const s3FileURL = `https://${bucket}.s3.${region}.amazonaws.com`+'/'+key;
+//    return s3FileURL; // https://public-kp-medicals.s3.ap-northeast-2.amazonaws.com/hospital_icon/default_hospital.png
 //}

@@ -37,6 +37,7 @@
 		1E5A3C102BCAE19E00DA761F /* photoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */; };
 		1E5A3C122BCAE2C700DA761F /* ㅇㅇ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */; };
 		1E5F6F9C2BCD3A1500787FAC /* ChatViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */; };
+		1E5F6F9F2BCD52D300787FAC /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F9E2BCD52D300787FAC /* extensions.swift */; };
 		1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* WalletPassword.swift */; };
 		1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF32BA051740053A555 /* LoginManager.swift */; };
 		1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E777C222BB322E100B2BC39 /* CustomCalender.swift */; };
@@ -54,6 +55,8 @@
 		1E985FA42BB300BB004B516E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E985FA32BB300BB004B516E /* ToastView.swift */; };
 		1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */; };
 		1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0CA232BA88719009076F1 /* UserDataHandle.swift */; };
+		1EADCF982BCD67B7002F1DBE /* SendImageItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */; };
+		1EADCF9A2BCD88CF002F1DBE /* TimeHandelr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EADCF992BCD88CF002F1DBE /* TimeHandelr.swift */; };
 		1EAEF4852BBD4E1400F06BFB /* KNPWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAEF4842BBD4E1400F06BFB /* KNPWalletView.swift */; };
 		1EAEF4882BBD7A0C00F06BFB /* WalletDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAEF4872BBD7A0C00F06BFB /* WalletDataStruct.swift */; };
 		1EAEF48B2BBD885100F06BFB /* mnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAEF48A2BBD885100F06BFB /* mnemonicView.swift */; };
@@ -148,6 +151,7 @@
 		1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoPicker.swift; sourceTree = "<group>"; };
 		1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ㅇㅇ.swift"; sourceTree = "<group>"; };
 		1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewHandler.swift; sourceTree = "<group>"; };
+		1E5F6F9E2BCD52D300787FAC /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		1E64CBF12BA050B50053A555 /* WalletPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPassword.swift; sourceTree = "<group>"; };
 		1E64CBF32BA051740053A555 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		1E777C222BB322E100B2BC39 /* CustomCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalender.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 		1E985FA32BB300BB004B516E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		1EA0CA232BA88719009076F1 /* UserDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataHandle.swift; sourceTree = "<group>"; };
+		1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendImageItemView.swift; sourceTree = "<group>"; };
+		1EADCF992BCD88CF002F1DBE /* TimeHandelr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHandelr.swift; sourceTree = "<group>"; };
 		1EAEF4842BBD4E1400F06BFB /* KNPWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNPWalletView.swift; sourceTree = "<group>"; };
 		1EAEF4872BBD7A0C00F06BFB /* WalletDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDataStruct.swift; sourceTree = "<group>"; };
 		1EAEF48A2BBD885100F06BFB /* mnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mnemonicView.swift; sourceTree = "<group>"; };
@@ -304,11 +310,8 @@
 		1E2B37472BA039C600B8EFA4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				1EADCF962BCD676D002F1DBE /* View */,
 				1EEFB3662BCBC1D800A0641B /* ChatDataModel */,
-				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
-				1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */,
-				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
-				1E5A3C092BCAADCB00DA761F /* ChatList.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -358,6 +361,14 @@
 				1E5A3C072BCA9E6E00DA761F /* SocketConnection.swift */,
 			);
 			path = Socket;
+			sourceTree = "<group>";
+		};
+		1E5F6F9D2BCD52C000787FAC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F6F9E2BCD52D300787FAC /* extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1E64CBF02BA050A60053A555 /* Acount */ = {
@@ -421,6 +432,18 @@
 				1EA0CA232BA88719009076F1 /* UserDataHandle.swift */,
 			);
 			path = SqLite;
+			sourceTree = "<group>";
+		};
+		1EADCF962BCD676D002F1DBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
+				1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */,
+				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
+				1E5A3C092BCAADCB00DA761F /* ChatList.swift */,
+				1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1EAEF4862BBD79F100F06BFB /* DataModel */ = {
@@ -504,6 +527,7 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1E5F6F9D2BCD52C000787FAC /* Extensions */,
 				1E5A3C062BCA9E5B00DA761F /* Socket */,
 				1E2B37472BA039C600B8EFA4 /* Chat */,
 				1E2E987F2BBEDC0C00986597 /* AppKeyChain */,
@@ -560,6 +584,7 @@
 			children = (
 				1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */,
 				1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */,
+				1EADCF992BCD88CF002F1DBE /* TimeHandelr.swift */,
 			);
 			path = ChatDataModel;
 			sourceTree = "<group>";
@@ -895,6 +920,7 @@
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
 				1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */,
 				1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */,
+				1EADCF982BCD67B7002F1DBE /* SendImageItemView.swift in Sources */,
 				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
 				1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */,
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
@@ -935,8 +961,10 @@
 				1E985FA42BB300BB004B516E /* ToastView.swift in Sources */,
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
+				1E5F6F9F2BCD52D300787FAC /* extensions.swift in Sources */,
 				1EAEF4922BBDAE3100F06BFB /* RSAManager.swift in Sources */,
 				1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */,
+				1EADCF9A2BCD88CF002F1DBE /* TimeHandelr.swift in Sources */,
 				1E7B10542BB2EE9E006C4FCA /* ChooseDoctor.swift in Sources */,
 				1EE9CB642B9F1F9300E923D9 /* KPMadicalApp.swift in Sources */,
 				1E370E9B2BB29460001BA38E /* ChooseDepartment.swift in Sources */,

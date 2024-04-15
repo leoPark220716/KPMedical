@@ -45,6 +45,7 @@ struct OthersChatItem: View {
                 Spacer()
             }
             .padding(.trailing,20)
+            .padding(.bottom,10)
         }
     }
 }
