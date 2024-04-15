@@ -7,89 +7,137 @@
 
 import SwiftUI
 import CoreLocation
+import PhotosUI
 
 struct Chat: View {
     @ObservedObject var userInfo: UserObservaleObject
     @State private var isVisible: Bool = false // 뷰의 표시 여부를 결정하는 상태 변수
     @State private var userLocation: CLLocationCoordinate2D?
     @State private var ChatText = ""
-    @State private var TextArray: [TestChatData] = []
     @ObservedObject var Socket = WebSocket()
     @Environment(\.scenePhase) private var scenePhase
-    
+// 채팅 텍스트 필드 포커스
+    @FocusState private var chatField: Bool
+// 체팅 Plus 버튼 클릭
+    @State private var TabPlus = true
     @EnvironmentObject var router: GlobalViewRouter
+    @State private var selectedItems: [PhotosPickerItem] = []
+    let controler = ChatViewHandler()
     var body: some View {
-        VStack{
-            ScrollView{
-                ForEach(TextArray.indices, id:\.self){ index in
-                    if TextArray[index].My == 0{
-                        OthersChatItem(testArr: $TextArray[index])
-                    }else{
-                        MyChatItem(testArr: $TextArray[index])
-                    }
+        NavigationView(content: {
+            VStack{
+                ScrollView{
+                        ForEach(Socket.ChatData.indices, id: \.self){ index in
+                            ChatItemView(item: $Socket.ChatData[index])
+                        }
+                        .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                        .rotationEffect(Angle(degrees: 180))
+                        .padding(.top)
+
                 }
                 .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                 .rotationEffect(Angle(degrees: 180))
-                .padding(.top)
-            }
-            .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-            .rotationEffect(Angle(degrees: 180))
-            .background(Color.gray.opacity(0.1))
-            HStack{
-                Image(systemName: "plus")
-                    .font(.system(size: 20))
-                    .foregroundColor(.gray)
-                    .padding(.leading)
-                HStack{
-                    TextField("체팅을 입려해주세요.", text: $ChatText)
-                    Image(systemName: "paperplane.circle.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .onTapGesture {
-                            let from = Socket.GetUserAccountString(token: userInfo.token)
-                            if from.status{
-                                Socket.sendMessage(from: from.account, to: "47", content_type: "text", message: ChatText)
+                .background(Color.gray.opacity(0.1))
+                .padding(.bottom,10)
+                .onTapGesture {
+                    chatField = false
+                }
+                VStack{
+                    HStack{
+                        Image(systemName: TabPlus ? "plus" : "xmark")
+                            .font(.system(size: 20))
+                            .foregroundColor(.gray)
+                            .padding(.leading)
+                            .onTapGesture {
+                                let result = ChatViewHandler().ControlBottomView(TabPlus: TabPlus, chatField: chatField, ChatText: ChatText)
+                                TabPlus = result.TabPlus
+                                chatField = result.chatField
+                                ChatText = result.ChatText
                             }
-                            //                            router.currentView = .tab
-                            //                            TextArray.append(TestChatData(text: ChatText, My: 1, id: TextArray.count))
-                            //                            ChatText = ""
+                        HStack{
+                            TextEditor(text: $ChatText)
+                                .focused($chatField)
+                                .onTapGesture {
+                                    TabPlus = true
+                                }
+                            Image(systemName: "paperplane.circle.fill")
+                                .font(.system(size: 30))
+                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                                .onTapGesture {
+                                    let from = Socket.GetUserAccountString(token: userInfo.token)
+                                    if from.status{
+                                        print("Account \(from.account)")
+                                        Socket.sendMessage(from: from.account, to: "47", content_type: "text", message: ChatText)
+                                        ChatText = ""
+                                    }
+                                }
                         }
+                        .padding(.leading)
+                        .frame(height: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                        )
+                        .padding(.trailing, 10)
+                    }
+                    if !TabPlus{
+                        HStack{
+                            
+                            PhotosPicker(
+                                selection: $selectedItems,
+                                maxSelectionCount: 20,
+                                selectionBehavior: .default,
+                                matching: .images,
+                                preferredItemEncoding: .automatic
+                            ) {
+                                SocialLoginButton(systemName: "photo.fill", color: .green.opacity(0.5))
+                                    .padding(.leading)
+                            }
+                            .onChange(of:selectedItems){
+                                
+                            }
+                            
+                            SocialLoginButton(systemName: "camera.fill", color: .blue.opacity(0.5))
+                            Spacer()
+                        }
+                        .cornerRadius(10)
+                        .background(Color.white)
+                        .padding(.top)
+                    }
                 }
-                .padding(.leading)
-                .frame(height: 40)
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(color: .gray.opacity(0.3), radius: 10, x: 0, y: 5)
-                .padding(.trailing, 10)
+                .padding(.bottom,10)
             }
-        }
-        .onAppear{
-            Socket.SetToken(token: userInfo.token)
-            Socket.Connect()
-            Socket.PingBy10Sec()
-            for index in 0...19{
-                TextArray.append(TestChatData(text: "가나다\(index)", My: Int.random(in: 0...1), id: index))
-            }
-            
-        }
-        .onChange(of: scenePhase){
-            switch scenePhase{
-            case .active:
-                if Socket.webSocketTask?.state != .running{
-                    Socket.Connect()
-                    Socket.PingBy10Sec()
-                }
-                print("App is active")
-            case .inactive:
-                print("App is inactive")
-            case .background:
-                Socket.disconnect()
-                print("App is in the background")
-            @unknown default:
-                print("Unknown phase")
+            .onAppear{
+                Socket.SetToken(token: userInfo.token)
+                Socket.Connect()
                 
             }
-        }
+            .onChange(of: scenePhase){
+                switch scenePhase{
+                case .active:
+                    if Socket.webSocketTask?.state != .running{
+                        Socket.Connect()
+                    }
+                    print("App is active")
+                case .inactive:
+                    print("App is inactive")
+                case .background:
+                    Socket.disconnect()
+                    print("App is in the background")
+                @unknown default:
+                    print("Unknown phase")
+                }
+            }
+            .toolbar{
+                ToolbarItem(placement: .navigation){
+                    Button(action:{
+                        router.currentView = .tab
+                    }){
+                        Image(systemName: "chevron.left")
+                    }
+                }
+            }
+        })
     }
 }
 

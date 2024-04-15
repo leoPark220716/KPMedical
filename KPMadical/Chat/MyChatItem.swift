@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+struct ChatItemView: View {
+    @Binding var item: ChatMessegeItem
+    var body: some View {
+        if item.amI{
+            MyChatItem(item: $item)
+        }else{
+            OthersChatItem(item: $item)
+        }
+    }
+}
 struct MyChatItem: View {
-    @Binding var testArr: TestChatData
+    @Binding var item: ChatMessegeItem
     var body: some View {
         HStack(alignment: .bottom,spacing: 3){
             Spacer()
@@ -19,7 +29,7 @@ struct MyChatItem: View {
                 Text("오후 9:25")
                     .font(.system(size: 13))
             }
-            Text(testArr.text)
+            Text(item.messege!)
                 .font(.system(size: 17))
                 .padding(10)
                 .foregroundColor(.black)
@@ -31,8 +41,4 @@ struct MyChatItem: View {
     }
 }
 
-struct MyChatItem_Previews: PreviewProvider {
-    static var previews: some View {
-        MyChatItem(testArr: .constant(TestChatData(text: "asdfklfklma",My: 1,id: 1)))
-    }
-}
+

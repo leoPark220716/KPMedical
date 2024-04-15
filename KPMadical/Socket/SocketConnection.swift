@@ -12,14 +12,10 @@ class WebSocket: ObservableObject {
     var webSocketTask: URLSessionWebSocketTask?
     private var timer: Timer?
     @Published var ChatData: [ChatMessegeItem] = []
-//    init(token: String) {
-//        self.token = token
-//        Connect()
-//        PingBy10Sec()
-//    }
     func SetToken(token: String){
         self.token = token
     }
+    //    소켓 연결 URLSessionWebSocketTask 객체 생성 후 리시브 실행
     func Connect(){
         guard let url = URL(string: "wss://kp-medicals.com/ws?access_token=\(token)&uid=\(getDeviceUUID())&service_id=\(1)&fcm_token=\("fcmToken")&hospital_id=\(47)") else{
             print("소켓 URL 생성 실패")
@@ -31,6 +27,7 @@ class WebSocket: ObservableObject {
         print("연결 \(url)")
         receiveMessage()
     }
+    //    소켓 데이터 Recive
     private func receiveMessage() {
         webSocketTask?.receive { [weak self] result in
             switch result {
@@ -51,7 +48,7 @@ class WebSocket: ObservableObject {
             }
         }
     }
-//    전달 받은 텍스트 제이슨으로 파싱
+    //    전달 받은 텍스트 제이슨으로 파싱
     func UpdateChatList(ReciveText: String){
         guard let jsonData = ReciveText.data(using: .utf8) else{
             print("Error to jsonInvalid")
@@ -59,20 +56,17 @@ class WebSocket: ObservableObject {
         }
         do {
             let decodedData = try JSONDecoder().decode(OpenChatRoomDataModel.ChatMessage.self, from: jsonData)
-            if decodedData.msg_type != 1{
-                guard let FirstArray = decodedData.hospital_data?.all_status else{
-                    print("초기 데이터 없음")
-                    return
-                }
-                for arr in FirstArray{
-                    let type = arr.value.content_type
-                    let HospitalName = "진해병원"
-                    let amI = arr.value.msg_type == "3"
-                    if type == "text"{
-                        ChatData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.value.message, ReadCount: false, time: arr.value.timestamp , amI: amI))
-                    }
-                }
+            switch decodedData.msg_type{
+            case 1:
+                SetFirstData(decodedData: decodedData)
+            case 3:
+                SetMsg(decodedData: decodedData)
+            default:
+                print("msg_type 범위 벗어남 : \(decodedData.msg_type)")
                 return
+            }
+            if decodedData.msg_type == 1{
+                
             }
             print("decode Success \(decodedData.msg_type)")
         }
@@ -80,6 +74,44 @@ class WebSocket: ObservableObject {
             print("decode Error : \(error)")
         }
     }
+//    메시지 전달 받은 데이터 파싱
+    func SetMsg(decodedData: OpenChatRoomDataModel.ChatMessage){
+        let amI = decodedData.msg_type == 3
+        guard let msg = decodedData.content?.message else{
+            print("메시지 없음")
+            return
+        }
+        if decodedData.content_type == "text"{
+            DispatchQueue.main.async {
+                self.ChatData.append(ChatMessegeItem(type: 1, messege: msg,  ReadCount: false, time: decodedData.timestamp!, amI: amI))
+            }
+            return
+        }
+    }
+//    초기 데이터 파싱
+    func SetFirstData(decodedData: OpenChatRoomDataModel.ChatMessage){
+        var ChatPreData: [ChatMessegeItem] = []
+        guard let firstDict = decodedData.hospital_data?.all_status else{
+            print("초기 데이터 파싱 실패")
+            return
+        }
+        let sortedDetails = firstDict.values.sorted { $0.chat_index < $1.chat_index }
+        for arr in sortedDetails{
+            print(arr.message)
+            let type = arr.content_type
+            let HospitalName = "진해병원"
+            let amI = arr.msg_type == "3"
+            if type == "text"{
+                ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: arr.timestamp , amI: amI))
+            }
+        }
+        DispatchQueue.main.async {
+            print("Call")
+            self.ChatData = ChatPreData
+        }
+    }
+    
+    //    유저 ID 추출
     func GetUserAccountString(token: String) -> (status: Bool,account:String){
         let sections = token.components(separatedBy: ".")
         if sections.count > 2 {
@@ -97,6 +129,8 @@ class WebSocket: ObservableObject {
             return (false,"")
         }
     }
+    
+    //    메시지 및 파일 메타 데이터 전송
     func sendMessage(from: String, to: String, content_type: String, message:String? = nil, file_cnt: Int? = nil, file_ext: [String]? = nil) {
         let content = SendChatDataModel.MessageContent(
             message: message,
@@ -126,33 +160,38 @@ class WebSocket: ObservableObject {
             }
         })
     }
-    func sendPingMessage() {
-        if webSocketTask?.state == .running {
-            webSocketTask?.sendPing(pongReceiveHandler: { error in
-                if let error = error {
-//                    print("PingError \(error)")
-                } else {
-//                    print("Ping successfully sent")
-                }
-            })
-        } else {
-//            print("WebSocket is not connected.")
-        }
-    }
-    func PingBy10Sec(){
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
-            self?.sendPingMessage()
-//            print("SendPing")
-        }
-    }
+    
+    
+    //    소켓 연결 끊기
     func disconnect() {
         webSocketTask?.cancel()
         timer?.invalidate()
         print("WebSocket connection closed and timer invalidated.")
     }
+    //    객체 종료
     deinit{
         timer?.invalidate()
         webSocketTask?.cancel()
         print("Ping deinit")
     }
 }
+
+////    핑 전송
+//func sendPingMessage() {
+//    if webSocketTask?.state == .running {
+//        webSocketTask?.sendPing(pongReceiveHandler: { error in
+//            if let error = error {
+//                print("PingError \(error)")
+//            }
+//        })
+//    } else {
+//        print("WebSocket is not connected.")
+//    }
+//}
+////    핑 10초 주기
+//func PingBy10Sec(){
+//    timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+//        self?.sendPingMessage()
+//        //            print("SendPing")
+//    }
+//}

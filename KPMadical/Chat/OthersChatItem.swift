@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OthersChatItem: View {
-    @Binding var testArr: TestChatData
+    @Binding var item: ChatMessegeItem
     @State private var url1 = "https://picsum.photos/200/300"
     var body: some View {
         HStack(alignment: .top){
@@ -27,8 +27,8 @@ struct OthersChatItem: View {
             .padding(.leading)
             HStack(alignment: .bottom,spacing: 3){
                 VStack(alignment: .leading){
-                    Text("진해병원")
-                    Text(testArr.text)
+                    Text(item.HospitalName!)
+                    Text(item.messege!)
                         .font(.system(size: 17))
                         .padding(10)
                         .foregroundColor(.black)

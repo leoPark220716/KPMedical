@@ -47,7 +47,7 @@ struct __: View {
                     matching: .images,
                     preferredItemEncoding: .automatic
                 ) {
-                    Label("Select Image", systemImage: "photo")
+                    Label("", systemImage: "photo")
                 }
                 .onChange(of: selectedItems) {
                     guard let item = selectedItems.first else { 
