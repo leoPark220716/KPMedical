@@ -8,7 +8,7 @@
 import Foundation
 
 class TimeHandler {
-    func timeChangeToChatTime (time: String) -> (success: Bool, chatTime: String){
+    func timeChangeToChatTime (time: String) -> (success: Bool, chatTime: String, chatDate: String){
 
         // ISO 8601 형식을 파싱하기 위한 DateFormatter 설정
         let isoFormatter = DateFormatter()
@@ -22,12 +22,15 @@ class TimeHandler {
             outputFormatter.amSymbol = "오전"
             outputFormatter.pmSymbol = "오후"
             // 최종 결과 문자열 출력
-            let formattedDateStr = outputFormatter.string(from: date)
-            print(formattedDateStr) // 예: "오후 05:31"
-            return (true,formattedDateStr)
+            let timeDateStr = outputFormatter.string(from: date)
+            outputFormatter.dateFormat = "yyyy-MM-dd"
+            let dateStr = outputFormatter.string(from: date)
+            print(timeDateStr) // 예: "오후 05:31"
+            print(dateStr) // 예: "오후 05:31"
+            return (true,timeDateStr,dateStr)
         } else {
             print("날짜 변환 실패")
-            return (false,"")
+            return (false,"","")
         }
     }
     

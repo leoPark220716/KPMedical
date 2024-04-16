@@ -2,7 +2,7 @@
 //  extensions.swift
 //  KPMadical
 //
-//  Created by Junsung Park on 4/15/24.
+//  Created by Junsung Park on 4/15/24. e
 //
 
 import Foundation
@@ -15,3 +15,14 @@ extension Data {
         return header == pngSignatureBytes
     }
 }
+
+private func sortedFristArray(array: [OpenChatRoomDataModel.ChatDetail])->(error:Bool, arr: [OpenChatRoomDataModel.ChatDetail]) {
+    let item = array.sorted {
+        guard let index1 = Int($0.chat_index), let index2 = Int($1.chat_index) else {
+            return true }
+        return index1 < index2
+    }
+    return (false, item)
+}
+
+

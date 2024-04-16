@@ -9,15 +9,16 @@ import SwiftUI
 
 struct ChatItemView: View {
     @Binding var item: ChatMessegeItem
+    @Binding var items: [ChatMessegeItem]
+    var index: Int
     var body: some View {
-        if item.type == 4{
+        switch item.amI{
+        case .user:
+            MyChatItem(item: $item)
+        case .other:
+            OthersChatItem(item: $item,items: $items,index: index)
+        case .sepDate:
             ChatdateView(time: item.chatDate)
-        }else{
-            if item.amI{
-                MyChatItem(item: $item)
-            }else{
-                OthersChatItem(item: $item)
-            }
         }
     }
 }
@@ -30,7 +31,7 @@ struct MyChatItem: View {
                 Text("1")
                     .foregroundStyle(.red)
                     .font(.system(size: 12))
-                if item.isPadding{
+                if item.showETC{
                     Text(item.time)
                         .font(.system(size: 12))
                 }

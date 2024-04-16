@@ -30,7 +30,7 @@ struct Chat: View {
             VStack{
                 ScrollView{
                     ForEach(Socket.ChatData.indices, id: \.self){ index in
-                        ChatItemView(item: $Socket.ChatData[index])
+                        ChatItemView(item: $Socket.ChatData[index],items: $Socket.ChatData,index: index)
                     }
                     .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                     .rotationEffect(Angle(degrees: 180))

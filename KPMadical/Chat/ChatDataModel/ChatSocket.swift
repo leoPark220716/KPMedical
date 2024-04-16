@@ -157,15 +157,19 @@ struct OpenChatRoomDataModel{
     }
 }
 struct ChatMessegeItem: Codable{
-//    type 1  = 텍스트, type =2  사진 , type3 = 파일 type 4 = 날짜
-    var type: Int
+    var type: MessageTypes
     var HospitalName: String?
     var messege: String?
     var ReadCount: Bool
     var FileURI: String?
     var time: String
-    var amI: Bool
+    var amI: AmI
     var chatDate: String
-    var isPadding: Bool
+    var showETC: Bool
+    enum AmI: Codable{
+        case user, other, sepDate
+    }
+    enum MessageTypes: Codable{
+        case text, photo, file
+    }
 }
-

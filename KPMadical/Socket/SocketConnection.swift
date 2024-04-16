@@ -25,6 +25,7 @@ class WebSocket: ObservableObject {
         let request = URLRequest(url: url)
         webSocketTask = URLSession.shared.webSocketTask(with: request)
         webSocketTask?.resume()
+        webSocketTask?.resume()
         print("연결 \(url)")
         receiveMessage()
     }
@@ -87,13 +88,63 @@ class WebSocket: ObservableObject {
             let timeDate = timeHandler.returnyyyy_MM_dd(time: decodedData.timestamp!)
             if time.success && timeDate.success{
                 DispatchQueue.main.async {
-                    self.ChatData.append(ChatMessegeItem(type: 1, messege: msg,  ReadCount: false, time: time.chatTime, amI: amI,chatDate: timeDate.chatTime,isPadding: false))
+                    self.ChatData.append(ChatMessegeItem(type: .text, messege: msg,  ReadCount: false, time: time.chatTime, amI: .user,chatDate: timeDate.chatTime,showETC: false))
                 }
             }
             return
         }else{
             
         }
+    }
+    //    날짜 뷰 추가
+    private func chatDateViewItem(ChatPreData: [ChatMessegeItem],date: String)->(error:Bool, Item: ChatMessegeItem?) {
+        if ChatPreData.isEmpty{
+            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false)
+            return (false, item)
+        }else{
+            if ChatPreData.last?.chatDate != date {
+                let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false)
+                return (false, item)
+            }else{
+                return (true, nil)
+            }
+        }
+    }
+    //    배열 재정렬
+    private func sortedFristArray(array: [OpenChatRoomDataModel.ChatDetail])->(error:Bool, arr: [OpenChatRoomDataModel.ChatDetail]) {
+        let item = array.sorted {
+            guard let index1 = Int($0.chat_index), let index2 = Int($1.chat_index) else {
+                return true }
+            return index1 < index2
+        }
+        return (false, item)
+    }
+//    시간 뷰 세팅
+    private func chatMessegeViewItem(ChatPreData: [ChatMessegeItem], preItem: OpenChatRoomDataModel.ChatDetail, time: String, date: String)->(updateLast:Bool, Item: ChatMessegeItem?) {
+        guard let lastItem = ChatPreData.last else {
+            return (false, nil)
+        }
+        //    마지막 채팅의 발신자가 누구인지
+        let LastUser = lastItem.amI
+        //    시간이 이전 것과 같은 지
+        let isSameTime = lastItem.time == time
+        //  메시지보낸사람이 나인지
+        let isUserMessage = preItem.msg_type == "3"
+        // type 할당
+        let amI: ChatMessegeItem.AmI = isUserMessage ? .user : .other
+        //    이전 체팅과 amI 가 같은지
+        let isSame = isSameTime ? amI == LastUser : false
+        let newItem = ChatMessegeItem(
+            type: .text,
+            HospitalName: "진해병원",
+            messege: preItem.message,
+            ReadCount: false,
+            time: time,
+            amI: amI,
+            chatDate: date,
+            showETC: true)
+        return (isSame, newItem)
+        
     }
     //    초기 데이터 파싱 (리팩토링 필수)
     func SetFirstData(decodedData: OpenChatRoomDataModel.ChatMessage){
@@ -102,43 +153,30 @@ class WebSocket: ObservableObject {
             print("초기 데이터 파싱 실패")
             return
         }
-        let sortedDetails = firstDict.values.sorted { $0.chat_index < $1.chat_index }
-        var isFirst = true
-        var isFirst2 = true
-        for arr in sortedDetails{
+        let sortedDetails = sortedFristArray(array: Array(firstDict.values))
+        if sortedDetails.error{
+            print("초기 데이터 정렬 실패")
+            return
+        }
+        for arr in sortedDetails.arr{
             print(arr.message)
             let type = arr.content_type
-            let HospitalName = "진해병원"
-            let amI = arr.msg_type == "3"
+            let time = timeHandler.timeChangeToChatTime(time: arr.timestamp)
             if type == "text"{
-                let time = timeHandler.timeChangeToChatTime(time: arr.timestamp)
-                let timeDate = timeHandler.returnyyyy_MM_dd(time: arr.timestamp)
-                if isFirst{
-                    ChatPreData.append(ChatMessegeItem(type: 4, messege: timeDate.chatTime, ReadCount: false, time: "" , amI: false ,chatDate: timeDate.chatTime,isPadding: false))
-                 isFirst = false
-                }else{
-                    if ChatPreData.last?.chatDate != timeDate.chatTime{
-                        ChatPreData.append(ChatMessegeItem(type: 4, messege: timeDate.chatTime, ReadCount: false, time: "" , amI: false ,chatDate: timeDate.chatTime,isPadding: false))
-                    }
+                //                날짜 비교 후 날짜 뷰 출력
+                let dateChatSet = chatDateViewItem(ChatPreData: ChatPreData, date: time.chatDate)
+                if !dateChatSet.error{
+                    ChatPreData.append(dateChatSet.Item!)
                 }
-                
-                if !isFirst2 && ChatPreData.last?.type != 4 && ChatPreData.last?.amI == amI{
-                    if ChatPreData.last?.time == time.chatTime {
-                        if var lastItem = ChatPreData.last {
-                                lastItem.isPadding = false
-                                ChatPreData[ChatPreData.count - 1] = lastItem  // 배열의 마지막 위치에 수정된 요소 다시 할당
-                            }
-                        ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
-                    }else{
-                        ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
-                    }
-                    isFirst2 = false
-                }else{
-                    ChatPreData.append(ChatMessegeItem(type: 1, HospitalName: HospitalName, messege: arr.message, ReadCount: false, time: time.chatTime , amI: amI,chatDate: timeDate.chatTime,isPadding: true))
-                    isFirst2 = false
+                //                채팅 시간.
+                let appendDataAndUpdate = chatMessegeViewItem(ChatPreData: ChatPreData, preItem: arr, time: time.chatTime, date: time.chatDate)
+                if appendDataAndUpdate.updateLast, !ChatPreData.isEmpty {
+                    // 배열의 마지막 요소의 인덱스를 찾아 값을 수정합니다.
+                    let lastIndex = ChatPreData.count - 1
+                    ChatPreData[lastIndex].showETC = false
                 }
-                
-            }else{
+                ChatPreData.append(appendDataAndUpdate.Item!)
+            }else if type == "file"{
                 if let keytype = arr.key{
                     switch keytype {
                     case .string(let keyString):
@@ -277,7 +315,7 @@ class WebSocket: ObservableObject {
 //}
 
 
-//function getS3URL(bucket, region, key){
-//    const s3FileURL = `https://${bucket}.s3.${region}.amazonaws.com`+'/'+key;
+//function getS3URL(bucket, key){
+//    const s3FileURL = `https://${bucket}.s3.ap-northeast-2.amazonaws.com`+'/'+key;
 //    return s3FileURL; // https://public-kp-medicals.s3.ap-northeast-2.amazonaws.com/hospital_icon/default_hospital.png
 //}
