@@ -36,7 +36,7 @@ struct __: View {
                 Text("09:00")
                     .font(.system(size: 12))
             }
-            DynamicImageViewManual3(images: imageUrls)
+            DynamicImageViewManual3(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
                 .cornerRadius(20)
         }
         .padding(.trailing)
@@ -188,30 +188,42 @@ struct DynamicImageViewManual2: View {
     }
 }
 import SwiftUI
+//let totalWidth: CGFloat = 270 // 전체 그리드의 너비 설정
+//let imageHeight: CGFloat = 90
 
 struct DynamicImageViewManual3: View {
     var images: [URL]
-    private let totalWidth: CGFloat = 270 // 전체 그리드의 너비 설정
-    private let imageHeight: CGFloat = 90
-
+    let totalWidth: CGFloat // 전체 그리드의 너비 설정
+    let imageHeight: CGFloat
+    let oneItem: CGFloat
     var body: some View {
         VStack(spacing: 3) {
-            ForEach(imageRows(images), id: \.self) { rowImages in
-                HStack(spacing: 3) {
-                    ForEach(rowImages, id: \.self) { url in
-                        AsyncImage(url: url) { image in
-                            image.resizable().aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            ProgressView()
+            if images.count == 1 {
+                // 이미지가 하나인 경우 200x200 크기로 표시
+                AsyncImage(url: images.first!) { image in
+                    image.resizable().aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: oneItem, height: oneItem)
+                .clipped()
+            }else{
+                ForEach(imageRows(images), id: \.self) { rowImages in
+                    HStack(spacing: 3) {
+                        ForEach(rowImages, id: \.self) { url in
+                            AsyncImage(url: url) { image in
+                                image.resizable().aspectRatio(contentMode: .fill)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: totalWidth / CGFloat(rowImages.count), height: imageHeight)
+                            .clipped()
                         }
-                        .frame(width: totalWidth / CGFloat(rowImages.count), height: imageHeight)
-                        .clipped()
                     }
                 }
             }
         }
     }
-    
     // 이미지를 행별로 그룹화
     private func imageRows(_ images: [URL]) -> [[URL]] {
         let rowItemCounts = calculateRowItemCounts(images.count)
@@ -231,7 +243,7 @@ struct DynamicImageViewManual3: View {
     // 각 행에 몇 개의 이미지가 배치될지 계산
     private func calculateRowItemCounts(_ itemCount: Int) -> [Int] {
         switch itemCount {
-        case 1...3:
+        case 2...3:
             return [itemCount]
         case 4:
             return [2, 2]

@@ -72,6 +72,7 @@
 		1ED344C42BB3F6AA0037C9D5 /* ChooseTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */; };
 		1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958A2BACE70900084CAE /* keywordSearch.swift */; };
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
+		1EDB4ECD2BCFE420003C4A35 /* NotiveChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */; };
 		1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */; };
 		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
 		1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */; };
@@ -88,6 +89,9 @@
 		1EFC07EA2BBC39A900ED9F3D /* PersonalRecords.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */; };
 		1EFC07EB2BBC39A900ED9F3D /* PersonalRecords.abi in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */; };
 		1EFC07EC2BBC39A900ED9F3D /* PersonalRecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */; };
+		1EFF61982BCF4A2F000BB898 /* SocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61972BCF4A2F000BB898 /* SocketModel.swift */; };
+		1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */; };
+		1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */; };
 		1EFFBBF22BB599A50079B6EE /* symptomTextFiledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF12BB599A50079B6EE /* symptomTextFiledView.swift */; };
 		1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */; };
 		1EFFBBF72BB5BD720079B6EE /* myreservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFBBF62BB5BD720079B6EE /* myreservationView.swift */; };
@@ -186,6 +190,7 @@
 		1ED344C32BB3F6AA0037C9D5 /* ChooseTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTime.swift; sourceTree = "<group>"; };
 		1ED7958A2BACE70900084CAE /* keywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordSearch.swift; sourceTree = "<group>"; };
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
+		1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiveChatView.swift; sourceTree = "<group>"; };
 		1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailModel.swift; sourceTree = "<group>"; };
 		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1EE63E0A2B9F47CB0026B4DE /* CountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountModel.swift; sourceTree = "<group>"; };
@@ -204,6 +209,9 @@
 		1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = PersonalRecords.bin; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.bin"; sourceTree = "<group>"; };
 		1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PersonalRecords.abi; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.abi"; sourceTree = "<group>"; };
 		1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PersonalRecords.json; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.json"; sourceTree = "<group>"; };
+		1EFF61972BCF4A2F000BB898 /* SocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketModel.swift; sourceTree = "<group>"; };
+		1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketDataHandler.swift; sourceTree = "<group>"; };
+		1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketRequest.swift; sourceTree = "<group>"; };
 		1EFFBBF12BB599A50079B6EE /* symptomTextFiledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = symptomTextFiledView.swift; sourceTree = "<group>"; };
 		1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reservationSuccessView.swift; sourceTree = "<group>"; };
 		1EFFBBF62BB5BD720079B6EE /* myreservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myreservationView.swift; sourceTree = "<group>"; };
@@ -442,6 +450,7 @@
 				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
 				1E5A3C092BCAADCB00DA761F /* ChatList.swift */,
 				1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */,
+				1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -585,6 +594,9 @@
 				1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */,
 				1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */,
 				1EADCF992BCD88CF002F1DBE /* TimeHandelr.swift */,
+				1EFF61972BCF4A2F000BB898 /* SocketModel.swift */,
+				1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */,
+				1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */,
 			);
 			path = ChatDataModel;
 			sourceTree = "<group>";
@@ -901,6 +913,7 @@
 				1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */,
 				1E777C232BB322E100B2BC39 /* CustomCalender.swift in Sources */,
 				1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */,
+				1EFF61982BCF4A2F000BB898 /* SocketModel.swift in Sources */,
 				1E5A3C0A2BCAADCB00DA761F /* ChatList.swift in Sources */,
 				1EE63E0B2B9F47CB0026B4DE /* CountModel.swift in Sources */,
 				1EAEF48E2BBD8F5600F06BFB /* WalletModel.swift in Sources */,
@@ -916,9 +929,11 @@
 				1E5F6F9C2BCD3A1500787FAC /* ChatViewHandler.swift in Sources */,
 				1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */,
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
+				1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
 				1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */,
+				1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */,
 				1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */,
 				1EADCF982BCD67B7002F1DBE /* SendImageItemView.swift in Sources */,
 				1E219B2B2BA08FFD00D79DE3 /* Test.swift in Sources */,
@@ -943,6 +958,7 @@
 				1E7B10572BB2F563006C4FCA /* HospitalDetailTop.swift in Sources */,
 				1ED7958B2BACE70900084CAE /* keywordSearch.swift in Sources */,
 				1E267BE42BA9C07900280170 /* SQlite_UserData.swift in Sources */,
+				1EDB4ECD2BCFE420003C4A35 /* NotiveChatView.swift in Sources */,
 				1EFFBBFF2BB5C6070079B6EE /* requestModel.swift in Sources */,
 				1EAEF4902BBD90FC00F06BFB /* KeyChain.swift in Sources */,
 				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
@@ -1160,7 +1176,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMedical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1198,7 +1214,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMadical;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMedical;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

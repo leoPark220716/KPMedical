@@ -14,7 +14,7 @@ struct Chat: View {
     @State private var isVisible: Bool = false // 뷰의 표시 여부를 결정하는 상태 변수
     @State private var userLocation: CLLocationCoordinate2D?
     @State private var ChatText = ""
-    @ObservedObject var Socket = WebSocket()
+    @ObservedObject var Socket = ChatSocketModel()
     @Environment(\.scenePhase) private var scenePhase
     // 채팅 텍스트 필드 포커스
     @FocusState private var chatField: Bool
@@ -67,43 +67,48 @@ struct Chat: View {
                                 .onTapGesture {
                                     TabPlus = true
                                 }
-                            Image(systemName: "paperplane.circle.fill")
-                                .font(.system(size: 30))
-                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                                .onTapGesture {
-                                    let from = Socket.GetUserAccountString(token: userInfo.token)
-                                    if SendingImages.isEmpty{
-                                        if from.status{
-                                            print("Account \(from.account)")
-                                            Task{
-                                                let success = await Socket.sendMessage(from: from.account, to: "47", content_type: "text", message: ChatText)
-                                                if success{
-                                                    print("메시지 전송 성공")
-                                                }else{
-                                                    print("메시지 전송 실패")
-                                                }
-                                                ChatText = ""
-                                            }
-                                        }
-                                    }else{
-                                        if from.status{
-                                            print("Account \(from.account)")
-                                            let file_ext = Array(repeating: ".png", count: SendingImages.count)
-                                            Task{
-                                               let check = await Socket.sendMessage(from: from.account, to: "47", content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext)
-                                                if check{
-                                                    print("메타데이터 전송 성공")
-                                                    for index in 0..<SendingImagesByte.count{
-                                                        Socket.SendFileData(data: SendingImagesByte[index])
+                            if ChatText != "" || !SendingImages.isEmpty {
+                                Image(systemName: "paperplane.circle.fill")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                                    .onTapGesture {
+                                        let from = Socket.GetUserAccountString(token: userInfo.token)
+                                        if SendingImages.isEmpty{
+                                            if from.status{
+                                                print("Account \(from.account)")
+                                                Task{
+                                                    let success = await Socket.sendMessage(from: from.account, to: "47", content_type: "text", message: ChatText)
+                                                    if success{
+                                                        print("메시지 전송 성공")
+                                                    }else{
+                                                        print("메시지 전송 실패")
                                                     }
-                                                }else{
-                                                    print("메시지 전송 실패")
+                                                    ChatText = ""
                                                 }
                                             }
-                                            ChatText = ""
+                                        }else{
+                                            if from.status{
+                                                print("Account \(from.account)")
+                                                let file_ext = Array(repeating: ".png", count: SendingImages.count)
+                                                Task{
+                                                   let check = await Socket.sendMessage(from: from.account, to: "47", content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext)
+                                                    if check{
+                                                        print("메타데이터 전송 성공")
+                                                        for index in 0..<SendingImagesByte.count{
+                                                            Socket.SendFileData(data: SendingImagesByte[index])
+                                                        }
+                                                    }else{
+                                                        print("메시지 전송 실패")
+                                                    }
+                                                    SendingImages.removeAll()
+                                                    SendingImagesByte.removeAll()
+                                                    selectedItems.removeAll()
+                                                    TabPlus = true
+                                                }
+                                            }
                                         }
                                     }
-                                }
+                            }
                         }
                         .padding(.leading)
                         .frame(height: 40)
@@ -156,7 +161,6 @@ struct Chat: View {
                                     print("finish : \(SendingImagesByte.count)")
                                 }
                             }
-                            
                             SocialLoginButton(systemName: "camera.fill", color: .blue.opacity(0.5))
                             Spacer()
                         }

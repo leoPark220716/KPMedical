@@ -14,9 +14,10 @@ struct ChatItemView: View {
     var body: some View {
         switch item.amI{
         case .user:
-            MyChatItem(item: $item)
+            MyChatItem(item: $item, stringUrls: item.ImageArray ?? [])
         case .other:
-            OthersChatItem(item: $item,items: $items,index: index)
+//            OthersChatItemTest()
+            OthersChatItem(item: $item,items: $items,index: index, stringUrls: item.ImageArray ?? [])
         case .sepDate:
             ChatdateView(time: item.chatDate)
         }
@@ -24,6 +25,8 @@ struct ChatItemView: View {
 }
 struct MyChatItem: View {
     @Binding var item: ChatMessegeItem
+    @State var imageUrls: [URL] = []
+    var stringUrls: [String]
     var body: some View {
         HStack(alignment: .bottom,spacing: 3){
             Spacer()
@@ -36,15 +39,34 @@ struct MyChatItem: View {
                         .font(.system(size: 12))
                 }
             }
-            Text(item.messege!)
-                .font(.system(size: 17))
-                .padding(10)
-                .foregroundColor(.black)
-                .background(Color.blue.opacity(0.5))
-                .cornerRadius(10)
+            switch item.type{
+            case .text:
+                Text(item.messege!)
+                    .font(.system(size: 14))
+                    .padding(10)
+                    .foregroundColor(.black)
+                    .background(Color.blue.opacity(0.5))
+                    .cornerRadius(10)
+            case .photo:
+                DynamicImageViewManual3(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
+                    .cornerRadius(10)
+            case .file:
+                EmptyView()
+            case .notice:
+                EmptyView()
+            case .unowned:
+                EmptyView()
+            }
         }
         .padding(.trailing)
         .padding(.leading,20)
+        .onAppear{
+            if !stringUrls.isEmpty{
+                for _ in 0 ..< stringUrls.count{
+                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+                }
+            }
+        }
     }
 }
 

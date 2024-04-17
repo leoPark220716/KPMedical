@@ -12,6 +12,8 @@ struct OthersChatItem: View {
     @Binding var items: [ChatMessegeItem]
     @State private var url1 = "https://picsum.photos/200/300"
     var index: Int
+    @State var imageUrls: [URL] = []
+    var stringUrls: [String]
     var body: some View {
         HStack(alignment: .top,spacing: 3){
             if items[index-1].amI != .other{
@@ -35,34 +37,49 @@ struct OthersChatItem: View {
                 HStack{
                     if items[index-1].amI != .other{
                         Text(item.HospitalName!)
+                            .font(.system(size: 12))
                     }
                 }
                 HStack(alignment: .bottom,spacing: 3){
-                    Text(item.messege!)
-                        .font(.system(size: 17))
-                        .padding(10)
-                        .foregroundColor(.black)
-                        .background(.white)
-                        .cornerRadius(10)
+                    switch item.type{
+                    case .text:
+                        Text(item.messege!)
+                            .font(.system(size: 14))
+                            .padding(10)
+                            .foregroundColor(.black)
+                            .background(.white)
+                            .cornerRadius(10)
+                    case .photo:
+                        DynamicImageViewManual3(images: imageUrls,totalWidth: 210, imageHeight: 70, oneItem: 210)
+                            .cornerRadius(10)
+                    case .file:
+                        EmptyView()
+                    case .notice:
+                        NotiveChatView(message: item.messege!)
+                            .cornerRadius(10)
+                    case .unowned:
+                        EmptyView()
+                    }
                     VStack(alignment: .leading){
                         if item.showETC{
-                            Text("1")
-                                .foregroundStyle(.red)
-                                .font(.system(size: 12))
                             Text(item.time)
-                                .font(.system(size: 12))
-                        }else{
-                            Text("1")
-                                .foregroundStyle(.red)
                                 .font(.system(size: 12))
                         }
                     }
                 }
             }
+            .padding(.leading,3)
             Spacer()
         }
         .padding(.bottom,5)
         .padding(.leading)
         .padding(.trailing,20)
+        .onAppear{
+            if !stringUrls.isEmpty{
+                for _ in 0 ..< stringUrls.count{
+                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+                }
+            }
+        }
     }
 }
