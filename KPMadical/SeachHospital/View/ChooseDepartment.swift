@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChooseDepartment: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @ObservedObject var HospitalInfo: HospitalDataHandler
     @State private var selectedId: Int? = nil
 //    Toast 메시지

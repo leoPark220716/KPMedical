@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChooseDorcor: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @ObservedObject var HospitalInfo: HospitalDataHandler
     @State var DoctorProfile: [HospitalDataManager.Doctor] = []
     @State var CheckFirst: Bool = false

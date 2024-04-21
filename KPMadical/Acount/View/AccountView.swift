@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
-    @ObservedObject var authViewModel: UserObservaleObject
+    @EnvironmentObject var authViewModel: UserInformation
     let UserDb = LocalDataBase.shared
     @State var path = NavigationPath()
     @EnvironmentObject var router: GlobalViewRouter
@@ -83,9 +83,7 @@ struct AccountView: View {
 //                }
                 Spacer()
             }
-            .onAppear{
-                router.RetrunUserId()
-            }
+            
             .navigationTitle("내 계정")
             .navigationBarTitleDisplayMode(.automatic)
         }

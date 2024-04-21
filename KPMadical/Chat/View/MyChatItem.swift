@@ -31,12 +31,18 @@ struct MyChatItem: View {
         HStack(alignment: .bottom,spacing: 3){
             Spacer()
             VStack(alignment: .trailing){
-                Text("1")
-                    .foregroundStyle(.red)
-                    .font(.system(size: 12))
-                if item.showETC{
-                    Text(item.time)
-                        .font(.system(size: 12))
+                if item.progress && item.type != .photo{
+                    ProgressView()
+                }else{
+                    if !item.progress{
+                        Text("1")
+                            .foregroundStyle(.red)
+                            .font(.system(size: 12))
+                        if item.showETC{
+                            Text(item.time)
+                                .font(.system(size: 12))
+                        }
+                    }
                 }
             }
             switch item.type{
@@ -48,8 +54,12 @@ struct MyChatItem: View {
                     .background(Color.blue.opacity(0.5))
                     .cornerRadius(10)
             case .photo:
-                DynamicImageViewManual3(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
-                    .cornerRadius(10)
+                if item.progress{
+                    ImageProgressView()
+                }else{
+                    DynamicImageViewManual3(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
+                        .cornerRadius(10)
+                }
             case .file:
                 EmptyView()
             case .notice:
@@ -61,6 +71,12 @@ struct MyChatItem: View {
         .padding(.trailing)
         .padding(.leading,20)
         .onAppear{
+            if !stringUrls.isEmpty{
+                for _ in 0 ..< stringUrls.count{
+                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+                }
+            }
+        }.onChange(of:item.progress){
             if !stringUrls.isEmpty{
                 for _ in 0 ..< stringUrls.count{
                     imageUrls = stringUrls.compactMap { URL(string: $0) }

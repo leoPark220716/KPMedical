@@ -12,7 +12,7 @@ struct SplashView: View {
     let UserData = LocalDataBase.shared
     let AoutoLogin = LoginTockenFunc()
     @StateObject private var sign = singupOb()
-    @StateObject private var userInfo = UserObservaleObject()
+    @StateObject private var userInfo = UserInformation()
     var body: some View {
             ZStack {
                 Color("SplashBack").edgesIgnoringSafeArea(.all) // 화면 전체에 색상 적용
@@ -20,7 +20,7 @@ struct SplashView: View {
                     if userInfo.isLoggedIn {
                         ContentView(authViewModel: userInfo, tabState: BottomTab .home)
                     }else{
-                        LoginView(authViewModel: userInfo, sign: sign)
+                        LoginView(sign: sign)
                     }
                 } else {
                     VStack {
@@ -38,7 +38,9 @@ struct SplashView: View {
             }
             .onAppear {
                 UserData.createTable()
-                UserData.readUserDb(userState: userInfo)
+                if UserData.readUserDb(userState: userInfo){
+                    
+                }
                 AoutoLogin.CheckToken(token: userInfo.token, uid: getDeviceUUID()) { check,TokenCheck,token in
                     if check{
                         //  객체에 저장된 정보 그대로 유지
@@ -59,7 +61,6 @@ struct SplashView: View {
                         UserData.removeAllUserDB()
                     }
                 }
-//                스플래시 기능임
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                     withAnimation {
                         print(userInfo.isLoggedIn)

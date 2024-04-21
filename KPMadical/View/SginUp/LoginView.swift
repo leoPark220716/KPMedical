@@ -23,7 +23,7 @@ import SwiftUI
 
 struct LoginView: View {
     let userData = LocalDataBase.shared
-    @ObservedObject var authViewModel: UserObservaleObject
+    @EnvironmentObject var authViewModel: UserInformation
     @ObservedObject var sign: singupOb
     @State private var email: String = ""
     @State private var password: String = ""
@@ -32,6 +32,7 @@ struct LoginView: View {
     @State private var toast: FancyToast? = nil
     @State private var path = NavigationPath()
     @State private var PressLoginButtn = false
+    @EnvironmentObject var router: GlobalViewRouter
     var body: some View {
         NavigationStack(path: $path) {
             if !PressLoginButtn {
@@ -65,8 +66,12 @@ struct LoginView: View {
                         requestLogin(account: email, password: password, uid: getDeviceUUID(),userstate: authViewModel){ isSuccess, token in
                             print("print is Success\(isSuccess)")
                             if isSuccess {
-                                userData.insert(name: authViewModel.name, dob: authViewModel.dob, sex: authViewModel.sex, token: authViewModel.token)
-                                authViewModel.SetLoggedIn(logged: true)
+                                Task{
+                                    await userData.insert(name: authViewModel.name, dob: authViewModel.dob, sex: authViewModel.sex, token: authViewModel.token)
+                                }
+                                DispatchQueue.main.async{
+                                    router.currentView = .tab
+                                }
                             }else{
                                 PressLoginButtn = false
                                 toast = FancyToast(type: .error, title: "아이디 또는 비밀번호가 올바르지 않습니다.", message: "올바른 아이디, 비밀번호를 작성해주세요")

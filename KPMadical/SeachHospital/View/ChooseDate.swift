@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChooseDate: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @ObservedObject var HospitalInfo: HospitalDataHandler
     @State var CheckFirst: Bool = false
     @State private var selectedDate: Date? = nil

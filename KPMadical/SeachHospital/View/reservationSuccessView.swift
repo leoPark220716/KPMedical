@@ -9,7 +9,7 @@ import SwiftUI
 
 struct reservationSuccessView: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @ObservedObject var HospitalInfo: HospitalDataHandler
     @Binding var info: reservationInfo
     @EnvironmentObject var router: GlobalViewRouter

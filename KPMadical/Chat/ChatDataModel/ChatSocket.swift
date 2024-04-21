@@ -125,6 +125,7 @@ struct ChatMessegeItem: Codable{
     var chatDate: String
     var showETC: Bool
     var ImageArray: [String]?
+    var progress: Bool
     enum AmI: Codable{
         case user, other, sepDate
     }

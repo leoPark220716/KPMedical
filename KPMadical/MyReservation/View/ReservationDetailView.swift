@@ -9,7 +9,7 @@ import SwiftUI
 import NMapsMap
 struct ReservationDetailView: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @State var responseOk: Bool = false
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
     let requestData = HospitalHTTPRequest()

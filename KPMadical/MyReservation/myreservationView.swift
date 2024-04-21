@@ -10,7 +10,7 @@ import SwiftUI
 struct myreservationView: View {
     @State var path = NavigationPath()
     let request = ReservationHttpRequest()
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @EnvironmentObject var router: GlobalViewRouter
     @State private var reservationItems: [reservationDataHandler.reservationAr] = []
     var body: some View {

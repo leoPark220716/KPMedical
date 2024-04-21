@@ -37,8 +37,9 @@ class LocalDataBase: ObservableObject {
             }
         
     }
-    func insert(name: String, dob: String, sex: String, token: String){
-            var stmt : OpaquePointer?
+    func insert(name: String, dob: String, sex: String, token: String) async {
+        print("name \(name)")
+        var stmt : OpaquePointer?
             
             let INSERT_QUERY_TEXT : String = "INSERT INTO user (name, dob, sex, Token) VALUES (?, ?, ?, ?)"
 
@@ -77,31 +78,31 @@ class LocalDataBase: ObservableObject {
                 return
             }
         print("Success insert")
-        }
+    }
     
-    func readUserDb(userState: UserObservaleObject) {
+    func readUserDb(userState: UserInformation) ->  Bool {
         print("Call readUserDb")
         let query = "SELECT * FROM user ORDER BY id DESC LIMIT 1;"
         var statement: OpaquePointer? = nil
-        
+        var dataFetched = false
         if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
             while sqlite3_step(statement) == SQLITE_ROW {
+                dataFetched = true
                 let name = String(cString: sqlite3_column_text(statement, 1))
                 let dob = String(cString: sqlite3_column_text(statement, 2))
                 let sex = String(cString: sqlite3_column_text(statement, 3))
                 let token = String(cString: sqlite3_column_text(statement, 4))
                 userState.SetData(name: name, dob: dob, sex: sex, token: token)
-                print("name : \(name)")
-                print("name : \(dob)")
-                print("name : \(sex)")
-                print("name : \(token)")
+                print("Read")
+                print(name)
             }
         } else {
             let errMessage = String(cString: sqlite3_errmsg(db))
             print("Error reading user DB: \(errMessage)")
-            userState.isLoggedIn = false
+            return false
         }
         sqlite3_finalize(statement)
+        return dataFetched
     }
     
     func removeAllUserDB() {

@@ -4,10 +4,51 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>KPMadical.xcscheme_^#shared#^_</key>
+		<key>Copy of Copy of KPMadical 1.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Copy of Copy of KPMadical.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Copy of KPMadical.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>KPMadical.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1EE9CB5F2B9F1F9300E923D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1EE9CB6F2B9F1F9500E923D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1EE9CB792B9F1F9500E923D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

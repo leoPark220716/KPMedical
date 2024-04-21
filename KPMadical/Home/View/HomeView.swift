@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var authViewModel: UserObservaleObject
+    @EnvironmentObject var authViewModel: UserInformation
     var logined: Bool
     let HomeViewHttp = HomviewHttp()
     @Environment(\.dismiss) var dismiss
@@ -30,7 +30,9 @@ struct HomeView: View {
                         departSheetShow.toggle()
                     }
                 //                }
-                //                NavigationLink(destination: FindHospitalView()){
+//                NavigationLink(destination: FindHospitalView( userInfo: authViewModel)){
+//                    SearchHpView()
+//                }
                 SearchHpView()
                     .onTapGesture {
                         router.currentView = .findHospital
@@ -52,9 +54,13 @@ struct HomeView: View {
                     self.url2 = url2
                     self.url3 = url3
                 }
+                
+                    authViewModel.traceTab = "\(authViewModel.name)님 안녕하세요!"
+                
+                print("name Of EnvironmentObject \(authViewModel.name)")
             }
         }.background(Color(.init(white: 0, alpha: 0.05))
-            )
+        )
     }
 }
 // 성훈 코딩 끝나면 상황에 따라 추가할 부분

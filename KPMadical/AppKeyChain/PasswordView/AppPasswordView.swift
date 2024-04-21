@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppPasswordView: View {
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @State private var password: String = ""
     private let passwordLength = 6
     @State private var status = "인증번호를 입력해주세요"
@@ -61,7 +61,7 @@ struct AppPasswordView: View {
     }
 }
 struct NumberPad: View {
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @Binding var TitleString: String
     @Binding var password: String
     @Binding var FirstPassword: String

@@ -11,15 +11,20 @@ class ChatSocketDataHandler: ChatSocketRequest{
     //    날짜 뷰 추가
     func chatDateViewItem(ChatPreData: [ChatMessegeItem],date: String)->(error:Bool, Item: ChatMessegeItem?) {
         if ChatPreData.isEmpty{
-            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false)
+            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
             return (false, item)
         }else{
-            if ChatPreData.last?.chatDate != date {
-                let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false)
-                return (false, item)
-            }else{
-                return (true, nil)
+            for index in ChatPreData.indices.reversed() {
+                if ChatPreData[index].progress == false{
+                    if ChatPreData[index].chatDate != date{
+                        let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
+                        return (false, item)
+                    }else{
+                        return (true, nil)
+                    }
+                }
             }
+            return (true, nil)
         }
     }
     func MethodCall(jsonData: Data){
@@ -45,7 +50,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             print("decode Error : \(error)")
         }
     }
-
+    
     //    소켓 연결 중에 받은 메시지 데이터
     func SetMsg(decodedData: OpenChatRoomDataModel.ChatMessage){
         guard let msg = decodedData.content?.message else{
@@ -57,25 +62,48 @@ class ChatSocketDataHandler: ChatSocketRequest{
             let dateView = chatDateViewItem(ChatPreData: ChatData, date: time.chatDate)
             
             let messages = MessegeTimeControl(ChatPreData: ChatData, msg_type: String(decodedData.msg_type), time: time.chatTime, date: time.chatDate)
-            
-                //                    날짜
-                if !dateView.error{
-                    self.ChatData.append(dateView.Item!)
-                }
-                //                    시간
-                if messages.update,!self.ChatData.isEmpty{
-                    let lastIndex = self.ChatData.count - 1
-                    DispatchQueue.main.async {
-                        self.ChatData[lastIndex].showETC = false
+            //                    날짜
+            if !dateView.error{
+                for index in self.ChatData.indices.reversed() {
+                    if self.ChatData[index].progress == false{
+                        DispatchQueue.main.async {
+                            self.ChatData[index+1] = dateView.Item!
+                        }
+                        break
                     }
                 }
-            switch self.messageType(contentType: decodedData.content_type, fileArray: decodedData.content?.key as? OpenChatRoomDataModel.KeyType, bucket: decodedData.content?.bucket as? OpenChatRoomDataModel.KeyType,msg_type: decodedData.msg_type) {
-                case .text:
-                let textItem = self.textMessageItem(type: .text, messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
-                DispatchQueue.main.async {
-                    self.ChatData.append(textItem)
+            }
+            //                    시간
+            if messages.update,!self.ChatData.isEmpty{
+                for index in ChatData.indices.reversed() {
+                    if ChatData[index].progress == false && ChatData[index].amI == messages.amI{
+                        DispatchQueue.main.async {
+                            self.ChatData[index].showETC = false
+                        }
+                        break
+                    }
                 }
-                case .photo:
+            }
+            switch self.messageType(contentType: decodedData.content_type, fileArray: decodedData.content?.key as? OpenChatRoomDataModel.KeyType, bucket: decodedData.content?.bucket as? OpenChatRoomDataModel.KeyType,msg_type: decodedData.msg_type) {
+            case .text:
+                let textItem = self.textMessageItem(type: .text, messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
+                
+                if messages.amI == .user{
+                    for index in self.ChatData.indices.reversed() {
+                        if self.ChatData[index].progress == true{
+                            DispatchQueue.main.async {
+                                self.ChatData[index] = textItem
+                            }
+                            break
+                        }
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.ChatData.append(textItem)
+                    }
+                }
+                
+            case .photo:
                 guard let key = decodedData.content?.key , let bucket = decodedData.content?.bucket else{
                     print("버킷이 없다.")
                     return
@@ -83,27 +111,44 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 let makeImageArray = determineFileType(from: key, bucket: bucket)
                 let ImageArray = returnURIArray(image: makeImageArray.imageArray)
                 let textItem = self.textMessageItem(type: .photo, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray)
-                DispatchQueue.main.async {
-                    self.ChatData.append(textItem)
+                if messages.amI == .user{
+                    for index in self.ChatData.indices.reversed() {
+                        if self.ChatData[index].progress == true{
+                            DispatchQueue.main.async {
+                                self.ChatData[index] = textItem
+                            }
+                            break
+                        }
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.ChatData.append(textItem)
+                    }
                 }
-                    print("Pohto")
-                case .file:
-                    print("file")
-                case .notice:
+                print("Pohto")
+            case .file:
+                print("file")
+            case .notice:
                 let textItem = self.textMessageItem(type: .notice,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
                 DispatchQueue.main.async {
                     self.ChatData.append(textItem)
                 }
                 print("notice")
-                case .unowned:
-                    print("unowned")
-                }
+            case .unowned:
+                print("unowned")
+            }
         }
     }
     //    시간 뷰 세팅
     func MessegeTimeControl(ChatPreData: [ChatMessegeItem], msg_type: String, time: String, date: String)->(update: Bool,amI: ChatMessegeItem.AmI?) {
-        guard let lastItem = ChatPreData.last else {
+        guard var lastItem = ChatPreData.last else {
             return (false,nil)
+        }
+        for index in ChatPreData.indices.reversed() {
+            if ChatPreData[index].progress == false{
+                lastItem = ChatPreData[index]
+                break
+            }
         }
         //    마지막 채팅의 발신자가 누구인지
         let LastUser = lastItem.amI
@@ -157,7 +202,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
         print("테스트 determineFileType 호출")
         var imageArray: [String] = []
         var bucketArray: [String] = []
-
+        
         // Key 처리
         switch keyType {
         case .string(let fileString):
@@ -167,7 +212,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             print("테스트 Key Array: \(fileArray)")
             imageArray = fileArray
         }
-
+        
         // Bucket 처리
         switch bucket {
         case .string(let bucketString):
@@ -177,15 +222,15 @@ class ChatSocketDataHandler: ChatSocketRequest{
             print("테스트 Bucket Array: \(bucketArrayValues)")
             bucketArray = bucketArrayValues
         }
-
+        
         // 이미지와 버킷 배열의 결합
         if imageArray.isEmpty || bucketArray.isEmpty || imageArray.count != bucketArray.count {
             return (.unowned, [])
         }
-
+        
         let combinedArray = zip(imageArray, bucketArray).map { ($0, $1) }
         let fileType = fileType(for: imageArray.first ?? "") // 첫 번째 파일 경로로 파일 유형 결정
-
+        
         return (fileType, combinedArray)
     }
     
@@ -209,10 +254,26 @@ class ChatSocketDataHandler: ChatSocketRequest{
             amI: amI,
             chatDate: date,
             showETC: true,
-            ImageArray: imgAr)
+            ImageArray: imgAr,
+            progress: false
+        )
         return (newItem)
     }
-    
+    func preMessageItem(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil)->(ChatMessegeItem) {
+        let newItem = ChatMessegeItem(
+            type: type,
+            HospitalName: "진해병원",
+            messege: messege,
+            ReadCount: false,
+            time: time,
+            amI: amI,
+            chatDate: date,
+            showETC: true,
+            ImageArray: imgAr,
+            progress: true
+        )
+        return (newItem)
+    }
     
     //    초기 데이터 파싱 (리팩토링 필수)
     func SetFirstData(decodedData: OpenChatRoomDataModel.ChatMessage){

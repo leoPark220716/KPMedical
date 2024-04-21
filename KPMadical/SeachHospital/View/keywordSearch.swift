@@ -9,7 +9,7 @@ import SwiftUI
 
 struct KeywordSearch: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @State private var searchText = ""
     @ObservedObject private var viewModel = keywordModel()
     // 태그 배열

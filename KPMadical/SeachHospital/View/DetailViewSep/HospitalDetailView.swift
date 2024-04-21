@@ -10,7 +10,7 @@ import NMapsMap
 
 struct HospitalDetailView: View {
     @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @State var StartTime: String
     @State var EndTime: String
     @State var HospitalId: Int
@@ -76,7 +76,8 @@ struct HospitalDetailView: View {
                     .navigationDestination(for: HospitalDataHandler.NavigationTarget.self){ value in
                         switch value{
                         case .counsel:
-                            ChatList()
+                            EmptyView()
+//                            print("asdf")
                         case .selectDepartment:
                             ChooseDepartment(path: $path, userInfo: userInfo, HospitalInfo: hospitalDataHandler, info: $info)
                         }

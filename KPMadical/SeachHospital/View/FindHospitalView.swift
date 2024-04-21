@@ -9,7 +9,7 @@ import CoreLocation
 struct FindHospitalView: View {
     //    유저 관리
     @State var path = NavigationPath()
-    @ObservedObject var userInfo: UserObservaleObject
+    @EnvironmentObject var userInfo: UserInformation
     //    병원 배열
     @State var hospitals: [HospitalDataManager.Hospitals] = []
     @State private var departSheetShow = false

@@ -18,7 +18,7 @@ struct mnemonicView: View {
     @State private var toast: normal_Toast? = nil
     let walletHandler = KNPWallet()
     @State private var showAlert = false
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     let getKeystore = GetKeystore()
     @State var isLoading = false
     var body: some View {

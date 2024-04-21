@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KNPWalletView: View {
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @EnvironmentObject var router: GlobalViewRouter
     @State var path = NavigationPath()
     @State var Items: [WalletDataStruct.AccessItem] = []
@@ -230,7 +230,7 @@ struct WalletAccessItem: View {
 
 struct KNPWalletViewPreviews: PreviewProvider {
     // 프리뷰를 위한 더미 ObservableObject
-    static var dummyUserInfo = UserObservaleObject()
+    static var dummyUserInfo = UserInformation()
 
     // 프리뷰를 위한 더미 바인딩
     @State static var dummyPath = NavigationPath()

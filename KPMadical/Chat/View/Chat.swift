@@ -10,7 +10,7 @@ import CoreLocation
 import PhotosUI
 
 struct Chat: View {
-    @ObservedObject var userInfo: UserObservaleObject
+    @EnvironmentObject var userInfo: UserInformation
     @State private var isVisible: Bool = false // 뷰의 표시 여부를 결정하는 상태 변수
     @State private var userLocation: CLLocationCoordinate2D?
     @State private var ChatText = ""
@@ -25,6 +25,7 @@ struct Chat: View {
     let controler = ChatViewHandler()
     @State var SendingImages: [UIImage] = []
     @State var SendingImagesByte: [Data] = []
+    var data: parseParam
     var body: some View {
         NavigationView(content: {
             VStack{
@@ -72,6 +73,13 @@ struct Chat: View {
                                     .font(.system(size: 30))
                                     .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                                     .onTapGesture {
+                                        if SendingImages.isEmpty{
+                                            let textItem = Socket.preMessageItem(type: .text,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
+                                            Socket.ChatData.append(textItem)
+                                        }else{
+                                            let textItem = Socket.preMessageItem(type: .photo,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
+                                            Socket.ChatData.append(textItem)
+                                        }
                                         let from = Socket.GetUserAccountString(token: userInfo.token)
                                         if SendingImages.isEmpty{
                                             if from.status{
@@ -201,17 +209,12 @@ struct Chat: View {
                     print("Unknown phase")
                 }
             }
-            .toolbar{
-                ToolbarItem(placement: .navigation){
-                    Button(action:{
-                        router.currentView = .tab
-                    }){
-                        Image(systemName: "chevron.left")
-                    }
-                }
-            }
-        })
+        }
+            )
+        .navigationTitle(String(data.des))
+        
     }
+    
 }
 
 

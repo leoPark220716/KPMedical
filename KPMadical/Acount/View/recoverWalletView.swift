@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 struct recoverWalletView: View {
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     @Binding var path: NavigationPath
     @State private var mnimonicText: String = ""
     @State private var isTap: Bool = false

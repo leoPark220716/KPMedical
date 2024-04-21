@@ -13,7 +13,7 @@ struct WalletPassword: View {
     @Binding var Checkpassword:String
     @State private var passCheck = false
     @FocusState private var focus: FocusableField?
-    @ObservedObject var userInfo: UserObservaleObject
+    @ObservedObject var userInfo: UserInformation
     var body: some View {
         VStack{
             PassTextField(title: "비밀번호", placeholder: "비밀번호", text: $password,checktext: $Checkpassword, isNumberInput: false, validator: {$0.count >= 8},limit: 30,FocusEnum: .passwordfiled,focus: _focus, isChecked: $passCheck)

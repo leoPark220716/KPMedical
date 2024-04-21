@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-public class UserObservaleObject: ObservableObject {
+public class UserInformation: ObservableObject {
     @Published var name: String = ""
     @Published var dob: String = ""
     @Published var sex: String = ""
@@ -16,11 +16,14 @@ public class UserObservaleObject: ObservableObject {
     @Published var recommendHospitalUrl1 = ""
     @Published var recommendHospitalUrl2 = ""
     @Published var recommendHospitalUrl3 = ""
+    @Published var traceTab: String = ""
+    @Published var isActivatedByURL = false
+    var hasHandlerURL = false
     func SetData(name: String, dob: String, sex: String, token: String) {
-        self.name = name
-        self.dob = dob
-        self.sex = sex
-        self.token = token
+            self.name = name
+            self.dob = dob
+            self.sex = sex
+            self.token = token
     }
     func SetRecommendHospitalUrl(url1: String, url2: String, url3: String){
         DispatchQueue.main.async{
@@ -45,6 +48,9 @@ class singupOb: ObservableObject {
     @Published var password = ""
     @Published var smsCheck = false
     @Published var Checkpassword = ""
+    deinit{
+        
+    }
 }
 // 디바이스 고유 넘버
 func getDeviceUUID() -> String {

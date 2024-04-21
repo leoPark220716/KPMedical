@@ -265,7 +265,7 @@ func requestSignUp(account: String, password: String, moblie: String, name: Stri
         }.resume()
     }
 }
-func requestLogin(account: String,password: String, uid: String,userstate:UserObservaleObject, completionHandrler: @escaping (Bool, String) -> Void) {
+func requestLogin(account: String,password: String, uid: String,userstate:UserInformation, completionHandrler: @escaping (Bool, String) -> Void) {
     print("request ID Check")
     if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access"){
         let logmodul: LoginModul = .init(account: account, password: password, uid: uid)
@@ -351,32 +351,66 @@ class LoginTockenFunc {
             print("token = null")
         }
     }
+    func checkToken(token: String, uid: String) async -> (success: Bool,tokenUpdate:Bool,newToken:String) {
+        if token != ""{
+            print("Call Cehck Tokens")
+            print(uid)
+            if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access/auto?access_token=\(token)&uid=\(uid)"){
+                print("url:\(url)")
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                do{
+                    let (data,response) = try await URLSession.shared.data(for:request)
+                    guard let httpResponse = response as? HTTPURLResponse,(200 ..< 300) ~= httpResponse.statusCode else{
+                        print("Auto Login False \(String(describing: response))")
+                        return (false,false,"")
+                    }
+                    guard let decoder = try? JSONDecoder().decode(KPApiStructFrom<AutoLoginModel>.self, from: data) else {
+                        print("Json pashing failed")
+                        return (false, false ,"")
+                    }
+                    if token == decoder.data.access_token{
+                        return (true,false,"")
+                    }else{
+                        return (true,true,decoder.data.access_token)
+                    }
+                }catch{
+                    print("token = null")
+                    return (false, false ,"")
+                }
+            }else{
+                return (false, false ,"")
+            }
+        }
+        else{
+            return (false, false ,"")
+        }
+    }
     
-}
-
-func requesxtSmsCheck(mobile: String,Token: String, CheckNum: String, completionHandrler: @escaping (Bool, Int) -> Void) {
-    print("request ID Check")
-    if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/mobile/check?mobile=\(mobile)&mobile_code=\(CheckNum)&verify_token=\(Token)"){
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) {data, res, er in
-            if let er = er {
-                print("err :\(er)")
-                return
-            }
-            guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
-                print("er http request failed")
-                completionHandrler(false,1)
-                return
-            }
-            guard let data = data else{
-                completionHandrler(false,1)
-                return
-            }
-            let decoder = JSONDecoder()
-            if let json = try? decoder.decode( KPApiStructFrom<MobileCheckResponse>.self, from: data) {
-                completionHandrler(true,json.status)
-            }
-        }.resume()
+    func requesxtSmsCheck(mobile: String,Token: String, CheckNum: String, completionHandrler: @escaping (Bool, Int) -> Void) {
+        print("request ID Check")
+        if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/mobile/check?mobile=\(mobile)&mobile_code=\(CheckNum)&verify_token=\(Token)"){
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            URLSession.shared.dataTask(with: request) {data, res, er in
+                if let er = er {
+                    print("err :\(er)")
+                    return
+                }
+                guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
+                    print("er http request failed")
+                    completionHandrler(false,1)
+                    return
+                }
+                guard let data = data else{
+                    completionHandrler(false,1)
+                    return
+                }
+                let decoder = JSONDecoder()
+                if let json = try? decoder.decode( KPApiStructFrom<MobileCheckResponse>.self, from: data) {
+                    completionHandrler(true,json.status)
+                }
+            }.resume()
+        }
     }
 }
