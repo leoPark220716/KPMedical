@@ -17,17 +17,17 @@ struct RouteFinder {
             print("DeepLInkURLS Chat")
             let queryParameters = url.queryParameters
             guard let descQueryVal = queryParameters?["desc"] as? String,
-                  let chatIdVal = queryParameters?["id"] as? String else{
+                  let chatIdVal = queryParameters?["id"] as? String,
+                  let hospitalIdVal = queryParameters?["hos_id"] as? String
+            else{
                 print("false")
                 return (nil,"")
             }
-                    
-            let URLData = parseParam(id: chatIdVal, des: descQueryVal)
+            let URLData = parseParam(id: Int(chatIdVal)!, name: descQueryVal, hospital_id: Int(hospitalIdVal)!)
             return (Route.chat(data:URLData),"chat")
         default:
             return (nil,"")
         }
-        
     }
 }
 extension URL{

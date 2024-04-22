@@ -11,21 +11,89 @@ import FirebaseMessaging
 import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
+    var app: KPMadicalApp?
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOption,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        application.registerForRemoteNotifications()
         UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
         return true
     }
+    
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        // Print full message.
+//        print("call in didReceiveRemoteNotification : \(userInfo)")
+//        // Handle the data message
+//        if let nick = userInfo["test_title"] as? String,
+//           let body = userInfo["test_content"] as? String{
+//            displayCustomNotification(title: nick, body: body)
+//            print("nick \(nick)")
+//        }
+//
+//        completionHandler(UIBackgroundFetchResult.newData)
+//    }
 }
 extension AppDelegate: UNUserNotificationCenterDelegate{
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         //        노티피케이션이 탭됐을 때 오는 댈리게이트
-        if let deepLink = response.notification.request.content.userInfo["link"] as? String{
+        let userInfo = response.notification.request.content.userInfo
+        print("Tab userInfo \(userInfo)")
+        if let deepLink = userInfo["test_titile"] as? String{
+            print("✅ recive  userInfo \(userInfo)")
             print("✅ recive deep link\(deepLink)")
+            let stringURL = "KpMedicalApp://chat?id=12&desc=\(deepLink)&hos_id=47"
+            let url = URL(string: stringURL)
+            app?.handleDeeplink(from: url!)
         }
     }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, 
+                                willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        let userInfo = notification.request.content.userInfo
+        print("call in UNUserNotificationCenter : \(userInfo)")
+        return [.sound,.badge,.banner,.list]
+    }
+    func displayCustomNotification(title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content,trigger: nil)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error)")
+            }
+        }
+    }
+    
+
 }
+extension AppDelegate: MessagingDelegate{
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("토큰을 받았다")
+        // Store this token to firebase and retrieve when to send message to someone...
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        // Store token in Firestore For Sending Notifications From Server in Future...
+        print(dataDict)
+    }
+}
+
 @main
 struct KPMadicalApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
@@ -48,6 +116,7 @@ struct KPMadicalApp: App {
                     }
                 })
                 .onAppear{
+                    appDelegate.app = self
                     print("onAppear")
                     if !authViewModel.isActivatedByURL{
                         Task {

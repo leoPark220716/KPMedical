@@ -10,14 +10,13 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var authViewModel: UserInformation
     let UserDb = LocalDataBase.shared
-    @State var path = NavigationPath()
     @EnvironmentObject var router: GlobalViewRouter
     let CheckPassword = AppPasswordKeyChain()
     @State var isOPT = false
     @State var create = true
     let appKeyChain = AppPasswordKeyChain()
     var body: some View {
-        NavigationStack(path: $path){
+        
             VStack(alignment: .leading){
                 HStack{
                     Image(systemName: "person.crop.circle.fill")
@@ -76,17 +75,12 @@ struct AccountView: View {
                 .onTapGesture {
                     print("진료기록")
                 }
-//                Text("임시 로그아웃").onTapGesture {
-                    
-//                    authViewModel.SetLoggedIn(logged: false)
-//                    UserDb.removeAllUserDB()
-//                }
                 Spacer()
             }
             
             .navigationTitle("내 계정")
             .navigationBarTitleDisplayMode(.automatic)
-        }
+        
     }
 }
 

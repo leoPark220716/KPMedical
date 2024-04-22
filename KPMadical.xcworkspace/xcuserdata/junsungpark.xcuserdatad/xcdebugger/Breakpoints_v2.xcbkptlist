@@ -49,6 +49,38 @@
             endingLineNumber = "86"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "93FDE4B3-290F-4782-8C35-955A4909A771 - 3e768f1552e73ad8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (KPMadical.HospitalDataHandler.ChooseTimeOrDoctor) -&gt; SwiftUI._ConditionalContent&lt;KPMadical.ChooseDorcor, KPMadical.ChooseTime&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;KPMadical.CustomCalendarView&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: Swift.Hashable, &#x3c4;_1_1: SwiftUI.View&gt;(for: &#x3c4;_1_0.Type, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0)&gt; in KPMadical.ChooseDate.body.getter : some"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/SeachHospital/View/ChooseDate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "1556">
+               </Location>
+               <Location
+                  uuid = "93FDE4B3-290F-4782-8C35-955A4909A771 - 3e768f1552e73ad8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (KPMadical.HospitalDataHandler.ChooseTimeOrDoctor) -&gt; SwiftUI._ConditionalContent&lt;KPMadical.ChooseDorcor, KPMadical.ChooseTime&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;KPMadical.CustomCalendarView&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: Swift.Hashable, &#x3c4;_1_1: SwiftUI.View&gt;(for: &#x3c4;_1_0.Type, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0)&gt; in KPMadical.ChooseDate.body.getter : some"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/SeachHospital/View/ChooseDate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "1816">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

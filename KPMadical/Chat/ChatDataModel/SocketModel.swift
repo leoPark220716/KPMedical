@@ -20,7 +20,6 @@ class ChatSocketModel: ChatSocketDataHandler{
         let request = URLRequest(url: url)
         webSocketTask = URLSession.shared.webSocketTask(with: request)
         webSocketTask?.resume()
-        webSocketTask?.resume()
         print("연결 \(url)")
         receiveMessage()
     }

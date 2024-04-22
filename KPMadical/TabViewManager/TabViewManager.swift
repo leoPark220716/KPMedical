@@ -23,17 +23,17 @@ class GlobalViewRouter: ObservableObject {
         print("Call push")
         if screen != nil{
             guard !routes.contains(screen!) else {
-                currentView = .tab
+                currentView = baseView
             return
             }
             print("screen nil")
             print(screen!)
-            currentView = .tab
+            currentView = baseView
             routes.append(screen!)
             print(currentView)
         }else{
             print("screen !nil")
-            currentView = .tab
+            currentView = baseView
         }
         print("pushFinish")
     }
@@ -48,7 +48,7 @@ class GlobalViewRouter: ObservableObject {
         case .home:
             return "안녕하세요 \(name)님!"
         case .chat:
-            return "상담"
+            return "상담내역"
         case .hospital:
             return "내 병원"
         case .account:

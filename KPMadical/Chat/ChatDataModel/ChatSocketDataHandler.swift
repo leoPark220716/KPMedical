@@ -31,11 +31,15 @@ class ChatSocketDataHandler: ChatSocketRequest{
         do {
             let decodedData = try JSONDecoder().decode(OpenChatRoomDataModel.ChatMessage.self, from: jsonData)
             switch decodedData.msg_type{
+                
             case 1:
+                print("decode Success \(decodedData.msg_type)")
                 SetFirstData(decodedData: decodedData)
             case 3:
+                print("decode Success \(decodedData.msg_type)")
                 SetMsg(decodedData: decodedData)
             case 5:
+                print("decode Success \(decodedData.msg_type)")
                 SetMsg(decodedData: decodedData)
             default:
                 print("msg_type 범위 벗어남 : \(decodedData.msg_type)")
@@ -44,7 +48,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             if decodedData.msg_type == 1{
                 
             }
-            print("decode Success \(decodedData.msg_type)")
+            
         }
         catch{
             print("decode Error : \(error)")
@@ -330,19 +334,6 @@ class ChatSocketDataHandler: ChatSocketRequest{
             case .unowned:
                 print("unowned")
             }
-            //                ChatPreData.append(appendDataAndUpdate.Item!)
-            //            }else if type == "file"{
-            //                if let keytype = arr.key{
-            //                    switch keytype {
-            //                    case .string(let keyString):
-            //                        print("파일아님\(keyString)")
-            //                        let imageArr = returnStringToArray(jsonString: keyString)
-            //                        print("사진 key값사진 key값사진 key값사진 key값사진 key값사진 key값 \(imageArr.arr[0])")
-            //                    case .array(let keyArray):
-            //                        print("사진 key값사진 key값사진 key값사진 key값사진 key값사진 key값 \(keyArray[0])")
-            //                    }
-            //                }
-            //            }
         }
         DispatchQueue.main.async {
             print("Call")
@@ -351,14 +342,125 @@ class ChatSocketDataHandler: ChatSocketRequest{
     }
     func returnURIArray(image: [(String,String)]) -> (success: Bool, imgArray: [String]){
         var Array: [String] = []
+        print("이미지 배열 출력한다.")
         for index in 0 ..< image.count{
             print("이미지 이름 : \(image[index].0)")
             print("이미지 버켓 : \(image[index].1)")
             Array.append("https://\(image[index].1).s3.ap-northeast-2.amazonaws.com/\(image[index].0)")
+            print("https://\(image[index].1).s3.ap-northeast-2.amazonaws.com/\(image[index].0)")
         }
+        print("여기까지")
+        if !Array.isEmpty{
+            return (false, Array)
+        }
+        return (true, Array)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func HttpMessageType(contentType: String, fileArray:[String], bucket:[String],msg_type: Any? = nil) -> ChatMessegeItem.MessageTypes {
+        print("messageType \(contentType)")
+        print("messageType\(String(describing: msg_type))")
+        switch contentType {
+        case "text":
+            print(msg_type as Any)
+            if msg_type == nil{
+                return .text
+            }
+            return testMessgaeType(msg_type:msg_type).msg_type
+        default:
+            // fileType 함수 호출 전에 두 매개변수 모두 nil이 아닌지 확인
+            if fileArray[0] != "N/A" {
+//                return .photo
+                return HttpDetermineFileType(from: fileArray, bucket: bucket).fileType
+            } else {
+                return .unowned  // 파일 유형 정보가 없는 경우 적절하게 처리
+            }
+        }
+    }
+    func HttpDetermineFileType(from keyType: [String], bucket: [String]) -> (fileType: ChatMessegeItem.MessageTypes, imageArray: [(String, String)]) {
+        print("테스트 determineFileType 호출")
+        let imageArray: [String] = keyType
+        let bucketArray: [String] = bucket
+        // 이미지와 버킷 배열의 결합
+        if imageArray.isEmpty || bucketArray.isEmpty || imageArray.count != bucketArray.count {
+            return (.unowned, [])
+        }
+
+        let combinedArray = zip(imageArray, bucketArray).map { ($0, $1) }
+        let fileType = fileType(for: imageArray.first ?? "") // 첫 번째 파일 경로로 파일 유형 결정
+        return (fileType, combinedArray)
+    }
+    
+//    HTTp 로 받은 데이터 파싱
+    func SetFirstData(decodedData: [ChatHTTPresponseStruct.Chat_Message]){
+        //
+        print("초기데이터 함수 호출")
+        var ChatPreData: [ChatMessegeItem] = []
+        for arr in decodedData.reversed(){
+            print("arr ContentType 출력\(arr.content_type)")
+            let time = timeHandler.timeChangeToChatTime(time: arr.timestamp)
+            
+            //                날짜 비교 후 날짜 뷰 출력
+            let dateChatSet = chatDateViewItem(ChatPreData: ChatPreData, date: time.chatDate)
+            if !dateChatSet.error{
+                ChatPreData.append(dateChatSet.Item!)
+            }
+            //                채팅 시간.
+            let appendDataAndUpdate = MessegeTimeControl(ChatPreData: ChatPreData,msg_type: String(arr.msg_type),time: time.chatTime, date: time.chatDate)
+            if appendDataAndUpdate.update, !ChatPreData.isEmpty {
+                // 배열의 마지막 요소의 인덱스를 찾아 값을 수정합니다.
+                let lastIndex = ChatPreData.count - 1
+                ChatPreData[lastIndex].showETC = false
+            }
+            switch self.HttpMessageType(contentType: arr.content_type,fileArray: arr.key,bucket: arr.bucket,msg_type: arr.msg_type){
+            case .text:
+                let textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!)
+                ChatPreData.append(textItem)
+                print("text")
+            case .photo:
+                print("Photo")
+                let makeImageArray = HttpDetermineFileType(from: arr.bucket, bucket: arr.key)
+                let ImageArray = HttPreturnURIArray(image: makeImageArray.imageArray)
+                let textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!,imgAr: ImageArray.imgArray)
+                ChatPreData.append(textItem)
+            case .file:
+                print("file")
+            case .notice:
+                let textItem = self.textMessageItem(type: .notice,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!)
+                print("notice amI Data \(appendDataAndUpdate.amI!)")
+                ChatPreData.append(textItem)
+                print("notice")
+            case .unowned:
+                print("unowned")
+            }
+        }
+        DispatchQueue.main.async {
+            print("Call")
+            self.ChatData = ChatPreData
+        }
+    }
+    func HttPreturnURIArray(image: [(String,String)]) -> (success: Bool, imgArray: [String]){
+        var Array: [String] = []
+        print("이미지 배열 출력한다.")
+        for index in 0 ..< image.count{
+            print("이미지 이름 : \(image[index].0)")
+            print("이미지 버켓 : \(image[index].1)")
+            Array.append("https://\(image[index].0).s3.ap-northeast-2.amazonaws.com/\(image[index].1)")
+            print("https://\(image[index].0).s3.ap-northeast-2.amazonaws.com/\(image[index].1)")
+        }
+        print("여기까지")
         if !Array.isEmpty{
             return (false, Array)
         }
         return (true, Array)
     }
 }
+

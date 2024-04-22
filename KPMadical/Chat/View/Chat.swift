@@ -27,7 +27,6 @@ struct Chat: View {
     @State var SendingImagesByte: [Data] = []
     var data: parseParam
     var body: some View {
-        NavigationView(content: {
             VStack{
                 ScrollView{
                     ForEach(Socket.ChatData.indices, id: \.self){ index in
@@ -192,6 +191,21 @@ struct Chat: View {
             .onAppear{
                 Socket.SetToken(token: userInfo.token)
                 Socket.Connect()
+                let chatHttpRequest = ChatHttpRequest()
+                let httpStruct = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.MessageData>>.init(method:"GET", urlParse: "v2/chat/\(data.id)/messages?limit=200&service_id=1", token: userInfo.token, UUID: getDeviceUUID())
+                Task{
+                    let result = await chatHttpRequest.HttpRequest(HttpStructs: httpStruct)
+                    if result.success{
+                        var chatItem: [ChatHTTPresponseStruct.Chat_Message] = []
+                        chatItem = result.data?.data.messages ?? []
+                        print("??????????????????????????")
+                        print(chatItem.first?.message ?? "?????")
+                        Socket.SetFirstData(decodedData: chatItem)
+                    }
+                    
+                    Socket.SetToken(token: userInfo.token)
+                    Socket.Connect()
+                }
             }
             .onChange(of: scenePhase){
                 switch scenePhase{
@@ -209,9 +223,8 @@ struct Chat: View {
                     print("Unknown phase")
                 }
             }
-        }
-            )
-        .navigationTitle(String(data.des))
+        .navigationTitle(String(data.name))
+        .toolbarTitleDisplayMode(.inline)
         
     }
     

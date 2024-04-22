@@ -56,3 +56,40 @@ class ChatSocketRequest: WebSocket{
             })
     }
 }
+struct ChatHttpRequest{
+    func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType>) async -> (success: Bool, data: ReturnType?){
+        let StringURL = "https://kp-medicals.com/api/common/\(HttpStructs.urlParse)"
+        print(StringURL)
+        if let url = URL(string: StringURL){
+            do{
+                var request = URLRequest(url: url)
+                request.httpMethod = HttpStructs.method
+                request.setValue("Bearer \(HttpStructs.token)", forHTTPHeaderField: "Authorization")
+                request.setValue(HttpStructs.UUID, forHTTPHeaderField: "X-Device-UUID")
+                if HttpStructs.method == "POST"{
+                    let postData = try JSONEncoder().encode(HttpStructs.requestVal)
+                    request.httpBody = postData
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                }
+                let (data,response) = try await URLSession.shared.data(for: request)
+                guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else{
+                    print("Request HTTP response Error \(String(describing: response))")
+                    return (false,nil)
+                }
+                do {
+                    let jsonData = try JSONDecoder().decode(ReturnType.self, from: data)
+                    return (true, jsonData)
+                } catch let decodeError {
+                    print("JSON Decoding Error: \(decodeError)")
+                    return (false, nil)
+                }
+            }catch{
+                print("Request Error \(error)")
+                return (false,nil)
+            }
+        }
+        else{
+            return (false,nil)
+        }
+    }
+}

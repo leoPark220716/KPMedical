@@ -32,7 +32,6 @@ struct OpenChatRoomDataModel{
         var content: MessageContent?
         var block_data: BlockData?
         var hospital_data: HospitalData?
-        var on: Bool
         var err_msg: String?
         var timestamp: String?
     }
@@ -49,8 +48,8 @@ struct OpenChatRoomDataModel{
     
     struct BlockData: Codable {
         var hospital_id: Int
-        var unixtime: String?
-        var index: Int
+        var unixtime: Int?
+        var index: Int?
         var pub_key: String?
         var hash: String?
     }
@@ -84,7 +83,7 @@ struct OpenChatRoomDataModel{
         var pub_key: String?
         var timestamp: String
         var to: String
-        var unixtime: String?
+        var unixtime: Int?
         var uuid: String
         var hash: String?
     }
@@ -133,3 +132,63 @@ struct ChatMessegeItem: Codable{
         case text, photo, file, notice,unowned
     }
 }
+struct http<RequestType: Codable, ReturnType: Codable> : Codable{
+    var method: String
+    var urlParse: String
+    var token: String
+    var UUID: String
+    var requestVal: RequestType?
+}
+struct ChatHTTPresponseStruct{
+    
+    struct ChatList: Codable{
+        var chats: [ChatListArray]
+        var error_code: Int
+        var error_stack: String
+    }
+    struct ChatListArray: Codable {
+        var chat_id: Int
+        var hospital_id:Int
+        var hospital_name: String
+        var icon: String
+        var patient_id:String
+        var patient_name:String
+        var room_key: String
+        var last_connected_time: String
+        var unread_cnt: Int
+        var last_message: LastMessage
+    }
+    struct LastMessage: Codable{
+        var timestamp: String
+        var message: String
+    }
+    
+    
+    // 메시지와 관련된 데이터를 포함하는 구조체
+    struct MessageData: Codable {
+        var messages: [Chat_Message]
+        var error_code: Int
+        var error_stack: String
+    }
+
+    // 개별 메시지 구조체
+    struct Chat_Message: Codable {
+        var room_key: String
+        var timestamp_uuid: String
+        var msg_type: Int
+        var from: String
+        var to: String
+        var content_type: String
+        var message: String
+        var file_cnt: Int
+        var bucket: [String]
+        var key: [String]
+        var hospital_id: Int
+        var unixtime: Int
+        var index: Int
+        var pub_key: String
+        var hash: String
+        var timestamp: String
+    }
+}
+struct Empty: Codable {}

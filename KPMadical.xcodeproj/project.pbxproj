@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E130CA72BB5CE5A004F7C36 /* ReservationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */; };
+		1E1636C52BD68E0B00A0A38B /* ChatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */; };
 		1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */; };
 		1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E82BAAF44800466221 /* FindHospitalView.swift */; };
 		1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */; };
@@ -136,6 +137,7 @@
 		15D55CA9484DF1CF529D9C2A /* Pods-KPMadicalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadicalTests.debug.xcconfig"; path = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailView.swift; sourceTree = "<group>"; };
 		1E14AEB62BB028F7009A0325 /* Scadul.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scadul.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListItem.swift; sourceTree = "<group>"; };
 		1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNVSTack.swift; sourceTree = "<group>"; };
 		1E18A2E82BAAF44800466221 /* FindHospitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHospitalView.swift; sourceTree = "<group>"; };
 		1E18A2EA2BAAF76100466221 /* DepartmentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsManager.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				1E5A3C092BCAADCB00DA761F /* ChatList.swift */,
 				1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */,
 				1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */,
+				1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				1E7B10592BB2F5A8006C4FCA /* PikerViewSelection.swift in Sources */,
 				1E2E987E2BBE949F00986597 /* recoverWalletView.swift in Sources */,
 				1E2E98852BBEE01200986597 /* AppPasswordView.swift in Sources */,
+				1E1636C52BD68E0B00A0A38B /* ChatListItem.swift in Sources */,
 				1E517A792BD1347E00820F35 /* ChatTEst.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */,

@@ -8,8 +8,9 @@
 import Foundation
 
 struct parseParam{
-    let id: String
-    let des: String
+    let id: Int
+    let name: String
+    let hospital_id: Int
 }
 
 protocol PathAddress: Hashable {
@@ -22,21 +23,29 @@ enum Route{
     case chat(data: parseParam)
 }
 extension Route: Hashable {
-    
     static func == (lhs: Route, rhs: Route) -> Bool {
         switch (lhs, rhs) {
         case (.item(let lhsItem), .item(let rhsItem)):
             return lhsItem.name == rhsItem.name && lhsItem.page == rhsItem.page && lhsItem.id == rhsItem.id
         case (.chat(let lhsData), .chat(let rhsData)):
-            return lhsData.id == rhsData.id && lhsData.des == rhsData.des
+            return lhsData.id == rhsData.id && lhsData.name == rhsData.name && lhsData.hospital_id == rhsData.hospital_id
         default:
             return false
         }
     }
-
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.hashValue)
+        switch self {
+        case .item(let item):
+            hasher.combine(item.id)  // 예시로 id 사용
+            hasher.combine(item.name)
+            hasher.combine(item.page)
+        case .chat(let data):
+            hasher.combine(data.id)
+            hasher.combine(data.name)
+            hasher.combine(data.hospital_id)
+        }
     }
+
 }
 
 struct ViewPathAddress: PathAddress {

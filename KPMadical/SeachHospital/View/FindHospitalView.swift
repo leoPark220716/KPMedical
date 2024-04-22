@@ -115,7 +115,6 @@ struct FindHospitalView: View {
                             print("isBottom")
                         }
                     }
-                    
                 }
                 .navigationDestination(for: Int.self){index in
                     HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)

@@ -61,9 +61,8 @@ struct tabView: View {
                     .tag(BottomTab .chat)
                 
                 //                    Hospital(Count: countModel)
-                NavigationStack{
-                    FindHospitalView()
-                }
+                
+                AccountView()
                 .tabItem {
                     Label("내병원", systemImage: "stethoscope")
                 }
@@ -76,10 +75,10 @@ struct tabView: View {
                 
             }
             .navigationTitle(router.TitleString(Tabs: router.exportTapView, name: authViewModel.name))
-            .navigationBarTitleDisplayMode(router.exportTapView == .home ? .inline : .automatic)
+            .navigationBarTitleDisplayMode(router.exportTapView == .home ? .inline : .large)
             .navigationDestination(for: Route.self){ route in
                 switch route {
-                case .item(let item):
+                case .item(_):
                     EmptyView()
                 case .chat(data: let data):
                     Chat(data: data)
