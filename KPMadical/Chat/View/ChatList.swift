@@ -11,28 +11,29 @@ struct ChatList: View {
     @EnvironmentObject var router: GlobalViewRouter
     @EnvironmentObject var authViewModel: UserInformation
     @State var ChatViewGo = false
-    @State var chatItem: [ChatHTTPresponseStruct.ChatListArray] = []
-    var body: some View {
     
+    var body: some View {
         VStack{
-            List(chatItem.indices, id: \.self){ index in
-                ChatListItem(item: chatItem[index])
+            List(authViewModel.chatItem.indices, id: \.self){ index in
+                ChatListItem(item: authViewModel.chatItem[index])
                     .onTapGesture {
-                        router.routes.append(Route.chat(data: parseParam(id: chatItem[index].chat_id, name: chatItem[index].hospital_name,hospital_id: chatItem[index].hospital_id)))
+                        router.routes.append(Route.chat(data: parseParam(id: authViewModel.chatItem[index].chat_id, name: authViewModel.chatItem[index].hospital_name,hospital_id: authViewModel.chatItem[index].hospital_id)))
                     }
             }
         }
         .onAppear{
-            let chatHttpRequest = ChatHttpRequest()
             let httpStruct = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.ChatList>>.init(method:"GET", urlParse: "v2/chat?service_id=1", token: authViewModel.token, UUID: getDeviceUUID())
             Task{
-                let result = await chatHttpRequest.HttpRequest(HttpStructs: httpStruct)
+                let result = await HttpRequest(HttpStructs: httpStruct)
                 if !result.success{
                     return
                 }
-                chatItem = result.data?.data.chats ?? []
-                print(result.data?.data.chats.first?.last_message ?? "????")
+                authViewModel.chatItem = result.data?.data.chats ?? []
+                print("👀  Caht List Open \(String(describing: result.data?.data.chats.first?.last_message))")
             }
+        }
+        .onDisappear{
+            authViewModel.RemoveChatItems()
         }
     }
 }

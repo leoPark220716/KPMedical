@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatListItem: View {
     let item: ChatHTTPresponseStruct.ChatListArray
-    @State var times = ""
+    
     let time = TimeHandler()
     var body: some View {
         HStack{
@@ -42,13 +42,9 @@ struct ChatListItem: View {
             }
             .padding(.leading,3)
             Spacer()
-            Text(times)
+            Text(time.returnyyyy_MM_dd(time: item.last_message.timestamp).chatTime)
                 .font(.system(size: 13))
                 .foregroundStyle(.gray)
-        }
-        .onAppear{
-            let t = time.returnyyyy_MM_dd(time: item.last_message.timestamp)
-            times = t.chatTime
         }
     }
 }

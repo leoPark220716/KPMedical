@@ -10,14 +10,15 @@ import SwiftUI
 struct ChatItemView: View {
     @Binding var item: ChatMessegeItem
     @Binding var items: [ChatMessegeItem]
+    @Binding var img: String
+    let HospitalName: String
     var index: Int
     var body: some View {
         switch item.amI{
         case .user:
             MyChatItem(item: $item, stringUrls: item.ImageArray ?? [])
         case .other:
-//            OthersChatItemTest()
-            OthersChatItem(item: $item,items: $items,index: index, stringUrls: item.ImageArray ?? [])
+            OthersChatItem(item: $item,items: $items, image: $img,index: index, stringUrls: item.ImageArray ?? [],HospitalName: HospitalName)
         case .sepDate:
             ChatdateView(time: item.chatDate)
         }
@@ -34,12 +35,21 @@ struct MyChatItem: View {
                 if item.progress && item.type != .photo{
                     ProgressView()
                 }else{
-                    if !item.progress{
-                        Text("1")
-                            .foregroundStyle(.red)
-                            .font(.system(size: 12))
+                    if !item.progress {
+                        if !item.ReadCount{
+                            Text("1")
+                                .foregroundStyle(.red)
+                                .font(.system(size: 12))
+                        }else{
+                            Text("")
+                                .foregroundStyle(.red)
+                                .font(.system(size: 12))
+                        }
                         if item.showETC{
                             Text(item.time)
+                                .font(.system(size: 12))
+                        }else{
+                            Text("")
                                 .font(.system(size: 12))
                         }
                     }
@@ -51,7 +61,7 @@ struct MyChatItem: View {
                     .font(.system(size: 14))
                     .padding(10)
                     .foregroundColor(.black)
-                    .background(Color.blue.opacity(0.5))
+                    .background(Color.blue.opacity(0.3))
                     .cornerRadius(10)
             case .photo:
                 if item.progress{
@@ -70,6 +80,7 @@ struct MyChatItem: View {
         }
         .padding(.trailing)
         .padding(.leading,20)
+        .padding(.bottom,3)
         .onAppear{
             if !stringUrls.isEmpty{
                 for _ in 0 ..< stringUrls.count{

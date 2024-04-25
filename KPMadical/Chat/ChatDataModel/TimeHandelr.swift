@@ -65,6 +65,19 @@ class TimeHandler {
             }
         }
     }
+    func returnReadCheck(hospitalTime: String? = "1000-01-01T01:01:01.000", patientTime: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        guard let Hdate = dateFormatter.date(from: hospitalTime!) else {
+            print("??")
+            return false
+        }
+        guard let Pdate = dateFormatter.date(from: patientTime) else {
+            print("??")
+            return false
+        }
+        return Hdate >= Pdate
+    }
     private func isToday(dateString: String) -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"

@@ -13,11 +13,10 @@ public class UserInformation: ObservableObject {
     @Published var sex: String = ""
     @Published var token: String = ""
     @Published var isLoggedIn = false
-    @Published var recommendHospitalUrl1 = ""
-    @Published var recommendHospitalUrl2 = ""
-    @Published var recommendHospitalUrl3 = ""
     @Published var traceTab: String = ""
     @Published var isActivatedByURL = false
+    @Published var FCMToken = ""
+    @Published var chatItem: [ChatHTTPresponseStruct.ChatListArray] = []
     var hasHandlerURL = false
     func SetData(name: String, dob: String, sex: String, token: String) {
             self.name = name
@@ -25,16 +24,67 @@ public class UserInformation: ObservableObject {
             self.sex = sex
             self.token = token
     }
-    func SetRecommendHospitalUrl(url1: String, url2: String, url3: String){
-        DispatchQueue.main.async{
-            self.recommendHospitalUrl1 = url1
-            self.recommendHospitalUrl2 = url2
-            self.recommendHospitalUrl3 = url3
-        }
-    }
     func SetLoggedIn(logged: Bool) {
         DispatchQueue.main.async {
             self.isLoggedIn = logged
+        }
+    }
+    func ReturnLogin() -> Bool{
+        if token == ""{
+            return false
+        }else{
+            return true
+        }
+    }
+    func SetFCMToken(fcmToken: String){
+//        if FCMToken != "" && token != "" {
+//            TokenToServer(httpMethod: "PATCH")
+//        }
+        print("fcmToken \(fcmToken)")
+        self.FCMToken = fcmToken
+    }
+    func SetChatItem(chatItems: [ChatHTTPresponseStruct.ChatListArray]){
+        DispatchQueue.main.async {
+            self.chatItem = chatItems
+        }
+    }
+    func UpdateChatItem(hospitalId: String, msg: String,timestemp: String){
+        for index in chatItem.indices{
+            if chatItem[index].hospital_id == Int(hospitalId){
+                var updatedItem = chatItem[index]
+                
+                // 요소의 필드를 업데이트
+                updatedItem.unread_cnt += 1
+                updatedItem.last_message.message = msg
+                updatedItem.last_message.timestamp = timestemp
+                // 배열에 업데이트된 요소를 다시 할당
+                DispatchQueue.main.async {
+                    self.chatItem[index] = updatedItem
+                }
+                break
+            }
+        }
+    }
+    func RemoveChatItems(){
+        self.chatItem = []
+    }
+    func TokenToServer(httpMethod: String){
+        print("👀 FCMToken server Call \(httpMethod)")
+        let BodyData = FcmToken.FcmTokenSend.init(fcm_token: FCMToken)
+        let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
+            method: httpMethod,
+            urlParse: "v2/fcm",
+            token: token ,
+            UUID: getDeviceUUID(),
+            requestVal: BodyData
+        )
+        Task{
+         let result = await KPWalletApi(HttpStructs: httpStruct)
+            if result.success{
+                print(result.data?.message ?? "Option Null")
+            }else{
+                print(result.data?.message ?? "Option Null")
+            }
         }
     }
 }

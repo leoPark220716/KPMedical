@@ -34,8 +34,6 @@ struct MainView: View {
     }
     
 }
-
-
 struct tabView: View {
     @EnvironmentObject var authViewModel: UserInformation
     @EnvironmentObject var router: GlobalViewRouter
@@ -45,9 +43,6 @@ struct tabView: View {
         NavigationStack(path: $router.routes){
             TabView (selection: $router.exportTapView){
                 HomeView(logined: loginManager.LoginStatus)
-                    .onAppear{
-                        print(router.routes.count)
-                    }
                 // 이 부분을 ScrollView 밖으로 이동
                 // 필요한 경우 타이틀 표시 모드를 조정
                     .tabItem {
@@ -84,6 +79,9 @@ struct tabView: View {
                     Chat(data: data)
                 }
             }
+        }
+        .onAppear{
+            print("📟 OnAppearTabView")
         }
     }
 }

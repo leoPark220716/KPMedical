@@ -13,8 +13,8 @@ struct SendChatDataModel{
         var msg_type: Int
         var from: String
         var to: String
-        var content_type: String
-        var content: MessageContent
+        var content_type: String?
+        var content: MessageContent?
     }
     struct MessageContent: Codable{
         var message: String?
@@ -32,6 +32,7 @@ struct OpenChatRoomDataModel{
         var content: MessageContent?
         var block_data: BlockData?
         var hospital_data: HospitalData?
+        var on: Bool
         var err_msg: String?
         var timestamp: String?
     }
@@ -115,7 +116,6 @@ struct OpenChatRoomDataModel{
 }
 struct ChatMessegeItem: Codable{
     var type: MessageTypes
-    var HospitalName: String?
     var messege: String?
     var ReadCount: Bool
     var FileURI: String?
@@ -167,14 +167,33 @@ struct ChatHTTPresponseStruct{
     // 메시지와 관련된 데이터를 포함하는 구조체
     struct MessageData: Codable {
         var messages: [Chat_Message]
+        var chat_info: chatInfo?
         var error_code: Int
         var error_stack: String
     }
-
+    struct CreateResponse: Codable{
+        var chat_id: Int
+        var error_code: Int
+        var error_stack: String
+    }
+    struct PatchTimeResponse: Codable{
+        var affectedRows: Int
+        var error_code: Int
+        var error_stack: String
+    }
+    struct chatInfo: Codable{
+        var chat_id: Int
+        var hospital_id: Int
+        var patient_id: String
+        var h_connected_time:String
+        var p_connected_time:String
+        var icon: String
+    }
     // 개별 메시지 구조체
     struct Chat_Message: Codable {
-        var room_key: String
-        var timestamp_uuid: String
+        var room_key: String?
+        var timestamp_uuid: String?
+        var uuid: String?
         var msg_type: Int
         var from: String
         var to: String
@@ -184,11 +203,19 @@ struct ChatHTTPresponseStruct{
         var bucket: [String]
         var key: [String]
         var hospital_id: Int
-        var unixtime: Int
+        var unixtime: Int?
         var index: Int
         var pub_key: String
         var hash: String
         var timestamp: String
+    }
+    struct JoinRoom: Codable{
+        var service_id: Int
+        var hospital_id: Int
+    }
+    struct PatchChatTime: Codable{
+        var service_id: Int
+        var room_key: String
     }
 }
 struct Empty: Codable {}

@@ -8,12 +8,16 @@
 import Foundation
 
 class ChatSocketModel: ChatSocketDataHandler{
-    private var token:String = ""
+    public var token:String = ""
+    private var hospitalId:Int = 0
+    var ConnectFirst = true
     func SetToken(token: String){
         self.token = token
     }
-    func Connect(){
-        guard let url = URL(string: "wss://kp-medicals.com/ws?access_token=\(token)&uid=\(getDeviceUUID())&service_id=\(1)&fcm_token=\("fcmToken")&hospital_id=\(47)") else{
+    func Connect(hospitalId: Int,fcmToken:String){
+        print("✅FcmToken : \(fcmToken)")
+        self.hospitalId = hospitalId
+        guard let url = URL(string: "wss://kp-medicals.com/ws?access_token=\(token)&uid=\(getDeviceUUID())&service_id=\(1)&fcm_token=\(fcmToken)&hospital_id=\(hospitalId)") else{
             print("소켓 URL 생성 실패")
             return
         }
@@ -22,6 +26,15 @@ class ChatSocketModel: ChatSocketDataHandler{
         webSocketTask?.resume()
         print("연결 \(url)")
         receiveMessage()
+        let from = GetUserAccountString(token: token)
+        Task{
+            let success = await sendMessage(msg_type: 2 ,from: from.account, to: hospitalId, content_type: "text", message: "")
+            if success{
+                print("메시지 전송 성공")
+            }else{
+                print("메시지 전송 실패")
+            }
+        }
     }
     //    소켓 데이터 Recive
     private func receiveMessage() {
@@ -41,6 +54,7 @@ class ChatSocketModel: ChatSocketDataHandler{
                         self?.MethodCall(jsonData: json.jsonData!)
                     }
                     print("Received string: \(text)")
+                    
                 case .data(let data):
                     print("Received data: \(data)")
                 @unknown default:

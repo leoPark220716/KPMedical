@@ -15,89 +15,143 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        
         if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
             
             let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOption,
                 completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().delegate = self
         } else {
             let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         application.registerForRemoteNotifications()
-        UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
         return true
     }
-    
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
-//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        // Print full message.
-//        print("call in didReceiveRemoteNotification : \(userInfo)")
-//        // Handle the data message
-//        if let nick = userInfo["test_title"] as? String,
-//           let body = userInfo["test_content"] as? String{
-//            displayCustomNotification(title: nick, body: body)
-//            print("nick \(nick)")
-//        }
-//
-//        completionHandler(UIBackgroundFetchResult.newData)
-//    }
 }
 extension AppDelegate: UNUserNotificationCenterDelegate{
+    private func extractName(from userInfo: [AnyHashable: Any]) -> String {
+        if let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any],
+           let title = alert["title"] as? String {
+            return title
+        } else {
+            return "Failed to extract title."
+        }
+    }
+    private func extractMessage(from userInfo: [AnyHashable: Any]) -> String {
+        if let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any],
+           let body = alert["body"] as? String {
+            return body
+        } else {
+            return "Failed to extract title."
+        }
+    }
+    private func extractId(from userInfo: [AnyHashable: Any]) -> String {
+        if let chat = userInfo["chat"] as? [String: Any] {
+            return extractFromField(from: chat)
+        } else if let chatString = userInfo["chat"] as? String,
+                  let chatData = chatString.data(using: .utf8) {
+            return decodeChatData(chatData)
+        } else {
+            print("Chat data is not in the expected format or missing.")
+            return ""
+        }
+    }
+    private func extractFromField(from chat: [String: Any]) -> String {
+        if let from = chat["from"] as? String {
+            return from
+        } else {
+            return ""
+        }
+    }
+    
+    private func decodeChatData(_ data: Data) -> String {
+        do {
+            if let chatDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                return extractFromField(from: chatDict)
+            } else {
+                print("Failed to decode chat JSON.")
+                return ""
+            }
+        } catch {
+            print("Error decoding chat JSON: \(error)")
+            return ""
+        }
+    }
+    private func extractTimestamp(from userInfo: [AnyHashable: Any]) -> String {
+        if let chat = userInfo["chat"] as? [String: Any],
+           let timestamp = chat["timestamp"] as? String {
+            return timestamp
+        } else if let chatString = userInfo["chat"] as? String,
+                  let chatData = chatString.data(using: .utf8) {
+            return decodeTimestamp(chatData)
+        } else {
+            return "Timestamp not available."
+        }
+    }
+
+    private func decodeTimestamp(_ data: Data) -> String {
+        do {
+            if let chatDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let timestamp = chatDict["timestamp"] as? String {
+                return timestamp
+            } else {
+                return "Failed to decode timestamp."
+            }
+        } catch {
+            return "Error decoding chat JSON for timestamp: \(error)"
+        }
+    }
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         //        노티피케이션이 탭됐을 때 오는 댈리게이트
         let userInfo = response.notification.request.content.userInfo
-        print("Tab userInfo \(userInfo)")
-        if let deepLink = userInfo["test_titile"] as? String{
-            print("✅ recive  userInfo \(userInfo)")
-            print("✅ recive deep link\(deepLink)")
-            let stringURL = "KpMedicalApp://chat?id=12&desc=\(deepLink)&hos_id=47"
-            let url = URL(string: stringURL)
-            app?.handleDeeplink(from: url!)
-        }
+        let name = extractName(from: userInfo)
+        let id = extractId(from: userInfo)
+        
+        // Handle or display the results as needed
+        print(name)
+        print(id)
+        let stringURL = "KpMedicalApp://chat?id=0&name=\(name)&hos_id=\(id)"
+        let url = URL(string: stringURL)
+        app?.handleDeeplink(from: url!)
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, 
                                 willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         let userInfo = notification.request.content.userInfo
         print("call in UNUserNotificationCenter : \(userInfo)")
+        let id = extractId(from: userInfo)
+        let msg = extractMessage(from: userInfo)
+        let timeStemp = extractTimestamp(from: userInfo)
+        print("👀 TimeStemp \(timeStemp)")
+        app?.authViewModel.UpdateChatItem(hospitalId: id, msg: msg,timestemp: timeStemp)
         return [.sound,.badge,.banner,.list]
     }
-    func displayCustomNotification(title: String, body: String) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = .default
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content,trigger: nil)
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error)")
-            }
-        }
-    }
-    
-
 }
 extension AppDelegate: MessagingDelegate{
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("토큰을 받았다")
         // Store this token to firebase and retrieve when to send message to someone...
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
-        // Store token in Firestore For Sending Notifications From Server in Future...
-        print(dataDict)
+        if let token = dataDict["token"] {
+            print("토큰 :  \(token)")
+            app?.SetFCMToken(from: token)
+        } else {
+            print("Token not found")
+        }
+        print("토근값 : \(dataDict)")
     }
 }
 
 @main
 struct KPMadicalApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    
     @StateObject var authViewModel = UserInformation()
     @StateObject var router = GlobalViewRouter()
     let UserData = LocalDataBase.shared
@@ -159,13 +213,14 @@ struct KPMadicalApp: App {
         }
         if tokenResult.tokenUpdate{
             authViewModel.token = tokenResult.newToken
+            print(tokenResult.newToken)
             print("Call tokenUpdate")
             router.push(baseView: .tab)
             return
         }else{
             router.push(baseView: .tab)
         }
-        
+        print("👀 App 초기화 과정 끝남")
     }
 }
 extension KPMadicalApp{
@@ -180,24 +235,45 @@ extension KPMadicalApp{
         }
         router.push(baseView: .tab,to:route.route)
     }
+    func SetFCMToken(from token: String){
+        authViewModel.FCMToken = token
+        authViewModel.SetFCMToken(fcmToken: token)
+    }
+    func TokenToServer(fcmToken: String,httpMethod: String){
+        let BodyData = FcmToken.FcmTokenSend.init(fcm_token: fcmToken)
+        let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
+            method: httpMethod,
+            urlParse: "v2/fcm",
+            token: authViewModel.token,
+            UUID: getDeviceUUID(),
+            requestVal: BodyData
+        )
+        Task{
+         let result = await KPWalletApi(HttpStructs: httpStruct)
+            if result.success{
+                print(result.data?.message ?? "Option Null")
+            }else{
+                print(result.data?.message ?? "Option Null")
+            }
+        }
+    }
 }
 //class AppDelegate: NSObject, UIApplicationDelegate{
-//    var window: UIWindow?
-//    var notificationData = NotificationData()
+//    
 //    let gcmMessageIDKey = "gcm.message_id"
-//
+//    
 //    // 앱이 켜졌을 때
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//
+//        
 //        // 파이어베이스 설정
 //        FirebaseApp.configure()
-//
+//        
 //        // Setting Up Notifications...
 //        // 원격 알림 등록
 //        if #available(iOS 10.0, *) {
 //            // For iOS 10 display notification (sent via APNS)
 //            UNUserNotificationCenter.current().delegate = self
-//
+//            
 //            let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
 //            UNUserNotificationCenter.current().requestAuthorization(
 //                options: authOption,
@@ -207,124 +283,80 @@ extension KPMadicalApp{
 //            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
 //            application.registerUserNotificationSettings(settings)
 //        }
-//
+//        
 //        application.registerForRemoteNotifications()
-//
-//
+//        
+//        
 //        // Setting Up Cloud Messaging...
 //        // 메세징 델리겟
 //        Messaging.messaging().delegate = self
-//
+//        
 //        UNUserNotificationCenter.current().delegate = self
 //        return true
 //    }
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//            if let windowScene = scene as? UIWindowScene {
-//                let window = UIWindow(windowScene: windowScene)
-//                let contentView = ChatTEst().environmentObject(notificationData)
-//                window.rootViewController = UIHostingController(rootView: contentView)
-//                self.window = window
-//                window.makeKeyAndVisible()
-//            }
-//
-//            // Handle notification tap
-//            if let response = connectionOptions.notificationResponse {
-//                handleNotification(response: response)
-//            }
-//        }
-//    func handleNotification(response: UNNotificationResponse) {
-//            let userInfo = response.notification.request.content.userInfo
-//            if let message = userInfo["test_content"] as? String {
-//                DispatchQueue.main.async {
-//                    self.notificationData.message = message
-//                }
-//            }
-//        }
-//
+//    
 //    // fcm 토큰이 등록 되었을 때
 //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 //        Messaging.messaging().apnsToken = deviceToken
 //    }
-//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-//        print("Failed to register for remote notifications: \(error)")
-//    }
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-//        print("userInfo : String : \(userInfo)")
-//    }
-//
+//    
 //}
 //
 //// Cloud Messaging...
 //extension AppDelegate: MessagingDelegate{
-//
+//    
 //    // fcm 등록 토큰을 받았을 때
 //    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+//
 //        print("토큰을 받았다")
 //        // Store this token to firebase and retrieve when to send message to someone...
 //        let dataDict: [String: String] = ["token": fcmToken ?? ""]
-//
+//        
 //        // Store token in Firestore For Sending Notifications From Server in Future...
-//
+//        
 //        print(dataDict)
+//     
 //    }
 //}
 //
+//// User Notifications...[AKA InApp Notification...]
+//
+//@available(iOS 10, *)
 //extension AppDelegate: UNUserNotificationCenterDelegate {
+//  
+//    // 푸시 메세지가 앱이 켜져있을 때 나올떄
+//  func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                              willPresent notification: UNNotification,
+//                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+//                                -> Void) {
+//      
+//    let userInfo = notification.request.content.userInfo
 //
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                willPresent notification: UNNotification,
-//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        let userInfo = notification.request.content.userInfo
-//        print("@escapinguserNotificationCenter :  \(userInfo)")
-//        // Firebase 메시징 애널리틱스에 메시지 수신 정보 전달
-//        Messaging.messaging().appDidReceiveMessage(userInfo)
-//            // 기본 알림을 표시할 옵션 지정
-////        if let title = userInfo["test_titile"] as? String, let body = userInfo["test_content"] as? String {
-////               print("title \(title)")
-////               print("test_content \(body)")
-////               displayCustomNotification(title: title, body: body)
-////               // 커스텀 알림을 처리하므로 기본 알림 표시하지 않음
-////               completionHandler([])
-////           } else {
-//               // 기본 알림을 표시할 옵션 지정
-//               completionHandler([.banner, .sound])
-////           }
-//
-//        // 표시할 알림 유형 선택
+//    
+//    // Do Something With MSG Data...
+//    if let messageID = userInfo[gcmMessageIDKey] {
+//        print("Message ID: \(messageID)")
 //    }
-//    func displayCustomNotification(title: String, body: String) {
-//        let content = UNMutableNotificationContent()
-//        content.title = title
-//        content.body = body
-//        content.sound = .default
+//    
+//    
+//    print(userInfo)
 //
-//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content,trigger: nil)
+//    completionHandler([[.banner, .badge, .sound]])
+//  }
 //
-//        UNUserNotificationCenter.current().add(request) { error in
-//            if let error = error {
-//                print("Error scheduling notification: \(error)")
-//            }
-//        }
+//    // 푸시메세지를 받았을 떄
+//  func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                              didReceive response: UNNotificationResponse,
+//                              withCompletionHandler completionHandler: @escaping () -> Void) {
+//    let userInfo = response.notification.request.content.userInfo
+//
+//    // Do Something With MSG Data...
+//    if let messageID = userInfo[gcmMessageIDKey] {
+//        print("Message ID: \(messageID)")
 //    }
+//      
+//    print(userInfo)
 //
-////    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-////        let userInfo = response.notification.request.content.userInfo
-////        if let message = userInfo["test_content"] as? String {
-////
-////        }
-////        NotificationCenter.default.post(name: Notification.Name("TestContentReceived"), object: nil, userInfo: userInfo)
-////        completionHandler()
-////    }
-//
-//
-//    //    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//    //                                didReceive response: UNNotificationResponse,
-//    //                                withCompletionHandler completionHandler: @escaping () -> Void) {
-//    //      let userInfo = response.notification.request.content.userInfo
-//    //        let title = userInfo["test_titile"] as! String
-//    //        let body = userInfo["test_content"] as! String
-//    //    }
-//}
-//class NotificationData: ObservableObject {
-//    @Published var message: String = "Default Message"
+//    completionHandler()
+//  }
 //}

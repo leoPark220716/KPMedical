@@ -25,6 +25,7 @@ struct HospitalDetailView: View {
     @State var DoctorProfile: [HospitalDataManager.Doctor] = []
     //    최종 저장할 때 사용할 구조체
     @State var info = reservationInfo()
+    @EnvironmentObject var router: GlobalViewRouter
     var body: some View {
         ZStack{
             VStack{
@@ -58,6 +59,13 @@ struct HospitalDetailView: View {
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.blue.opacity(0.5), lineWidth: 1)
                             )
+                            .onTapGesture {
+                                print("병원 아이디")
+                                print( info.hospital_id)
+                                router.push(baseView: .tab, to:Route.chat(data: parseParam(id: 0, name: hospitalDataHandler.HospitalDetailData.hospital.hospital_name,hospital_id: info.hospital_id)))
+                                
+                            
+                            }
                     }
                     NavigationLink(value: HospitalDataHandler.NavigationTarget.selectDepartment){
                         Text("예약하기")

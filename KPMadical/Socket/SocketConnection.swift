@@ -62,7 +62,6 @@ class WebSocket: ObservableObject {
         return (false,jsonData)
     }
 }
-
 ////    핑 전송
 //func sendPingMessage() {
 //    if webSocketTask?.state == .running {

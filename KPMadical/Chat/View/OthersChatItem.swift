@@ -10,14 +10,16 @@ import SwiftUI
 struct OthersChatItem: View {
     @Binding var item: ChatMessegeItem
     @Binding var items: [ChatMessegeItem]
-    @State private var url1 = "https://picsum.photos/200/300"
+    @Binding var image: String
     var index: Int
     @State var imageUrls: [URL] = []
     var stringUrls: [String]
+    @EnvironmentObject var router: GlobalViewRouter
+    let HospitalName: String
     var body: some View {
         HStack(alignment: .top,spacing: 3){
-            if items[index-1].amI != .other{
-                AsyncImage(url: URL(string: url1)){ image in
+            if index < items.count - 1 && items[index+1].amI != .other{
+                AsyncImage(url: URL(string: image)){ image in
                     image.resizable() // 이미지를 resizable로 만듭니다.
                         .aspectRatio(contentMode: .fill) // 이미지의 종횡비를 유지하면서 프레임에 맞게 조정합니다.
                 } placeholder: {
@@ -35,8 +37,8 @@ struct OthersChatItem: View {
             }
             VStack(alignment: .leading,spacing: 3){
                 HStack{
-                    if items[index-1].amI != .other{
-                        Text(item.HospitalName!)
+                    if index < items.count - 1 && items[index+1].amI != .other{
+                        Text(HospitalName)
                             .font(.system(size: 12))
                     }
                 }
@@ -67,11 +69,14 @@ struct OthersChatItem: View {
                         }
                     }
                 }
+                .padding(.top,3)
             }
             .padding(.leading,3)
             Spacer()
         }
-        .padding(.bottom,5)
+        .padding(.top, index < items.count - 1 && items[index + 1].amI == .other ? 0 : 10)
+        .padding(.bottom, index > 0 && items[index - 1].amI == .user ? 20 : 0)
+
         .padding(.leading)
         .padding(.trailing,20)
         .onAppear{

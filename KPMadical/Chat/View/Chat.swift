@@ -26,24 +26,39 @@ struct Chat: View {
     @State var SendingImages: [UIImage] = []
     @State var SendingImagesByte: [Data] = []
     var data: parseParam
+    @State var HospitalImage = ""
+    @State var ChatId: Int = 0
     var body: some View {
             VStack{
                 ScrollView{
-                    ForEach(Socket.ChatData.indices, id: \.self){ index in
-                        ChatItemView(item: $Socket.ChatData[index],items: $Socket.ChatData,index: index)
+                    LazyVStack{
+                        if !Socket.ChatData.isEmpty{
+                            ForEach(Socket.ChatData.indices, id: \.self){ index in
+                                ChatItemView(item: $Socket.ChatData[index], items:$Socket.ChatData , img: $HospitalImage, HospitalName: data.name, index: Int(index))
+                                    .onAppear {
+                                        if ChatId != 0{
+                                            if index == Socket.ChatData.count - 3 {
+                                                Socket.loadMoreData(token: userInfo.token, chatId: ChatId)
+                                            }
+                                        }
+                                    }
+                                    .onTapGesture {
+                                        print("✅ Date Time \(Socket.ChatData[index])")
+                                    }
+                            }
+                            .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                            .rotationEffect(Angle(degrees: 180))
+                        }
                     }
-                    .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                    .rotationEffect(Angle(degrees: 180))
-                    .padding(.top)
-                    
                 }
                 .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                 .rotationEffect(Angle(degrees: 180))
-                .background(Color.gray.opacity(0.1))
-                .padding(.bottom,10)
+                .padding(.bottom,4)
                 .onTapGesture {
                     chatField = false
                 }
+                .padding(.bottom, 12)
+                .background(Color.gray.opacity(0.1))
                 VStack{
                     HStack{
                         Image(systemName: TabPlus ? "plus" : "xmark")
@@ -74,17 +89,17 @@ struct Chat: View {
                                     .onTapGesture {
                                         if SendingImages.isEmpty{
                                             let textItem = Socket.preMessageItem(type: .text,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
-                                            Socket.ChatData.append(textItem)
+                                            Socket.ChatData.insert(textItem, at: 0)
                                         }else{
                                             let textItem = Socket.preMessageItem(type: .photo,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
-                                            Socket.ChatData.append(textItem)
+                                            Socket.ChatData.insert(textItem, at: 0)
                                         }
                                         let from = Socket.GetUserAccountString(token: userInfo.token)
                                         if SendingImages.isEmpty{
                                             if from.status{
                                                 print("Account \(from.account)")
                                                 Task{
-                                                    let success = await Socket.sendMessage(from: from.account, to: "47", content_type: "text", message: ChatText)
+                                                    let success = await Socket.sendMessage(msg_type: 3 ,from: from.account, to: data.hospital_id, content_type: "text", message: ChatText)
                                                     if success{
                                                         print("메시지 전송 성공")
                                                     }else{
@@ -98,7 +113,7 @@ struct Chat: View {
                                                 print("Account \(from.account)")
                                                 let file_ext = Array(repeating: ".png", count: SendingImages.count)
                                                 Task{
-                                                   let check = await Socket.sendMessage(from: from.account, to: "47", content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext)
+                                                   let check = await Socket.sendMessage(msg_type: 3,from: from.account, to: data.hospital_id, content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext)
                                                     if check{
                                                         print("메타데이터 전송 성공")
                                                         for index in 0..<SendingImagesByte.count{
@@ -125,6 +140,7 @@ struct Chat: View {
                         )
                         .padding(.trailing, 10)
                     }
+                    .padding(.top,4)
                     if !TabPlus && SendingImages.isEmpty{
                         HStack{
                             PhotosPicker(
@@ -189,29 +205,65 @@ struct Chat: View {
                 .padding(.bottom,10)
             }
             .onAppear{
-                Socket.SetToken(token: userInfo.token)
-                Socket.Connect()
-                let chatHttpRequest = ChatHttpRequest()
-                let httpStruct = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.MessageData>>.init(method:"GET", urlParse: "v2/chat/\(data.id)/messages?limit=200&service_id=1", token: userInfo.token, UUID: getDeviceUUID())
+                let from = Socket.GetUserAccountString(token: userInfo.token)
+                let RoomKey = "\(data.hospital_id):\(from.account)"
+                let httpStructCheck = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.CreateResponse>>.init(method:"GET", urlParse:"v2/chat/room?service_id=1&hospital_id=\(data.hospital_id)", token: userInfo.token, UUID: getDeviceUUID())
                 Task{
-                    let result = await chatHttpRequest.HttpRequest(HttpStructs: httpStruct)
+                    let result = await HttpRequest(HttpStructs: httpStructCheck)
                     if result.success{
-                        var chatItem: [ChatHTTPresponseStruct.Chat_Message] = []
-                        chatItem = result.data?.data.messages ?? []
-                        print("??????????????????????????")
-                        print(chatItem.first?.message ?? "?????")
-                        Socket.SetFirstData(decodedData: chatItem)
+                        print("🫡 \(result.data!.message)")
+                        if result.data!.data.chat_id != -1{
+                            ChatId = result.data!.data.chat_id
+                            print("🫡 \(ChatId)")
+                            let httpStruct = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.MessageData>>.init(method:"GET", urlParse:"v2/chat/\(result.data!.data.chat_id)?service_id=1", token: userInfo.token, UUID: getDeviceUUID())
+                            let result = await HttpRequest(HttpStructs: httpStruct)
+                            if result.success{
+                                var chatItem: [ChatHTTPresponseStruct.Chat_Message] = []
+                                chatItem = result.data?.data.messages ?? []
+                                print(chatItem.first?.message ?? "?????")
+                                Socket.SetFirstData(decodedData: chatItem, hospitalTime: result.data?.data.chat_info?.h_connected_time)
+                                HospitalImage = result.data?.data.chat_info?.icon ?? ""
+                            }
+                        }else{
+                            let joinRoomData = ChatHTTPresponseStruct.JoinRoom.init(service_id: 1, hospital_id: data.hospital_id)
+                            let httpStruct = http<ChatHTTPresponseStruct.JoinRoom?, KPApiStructFrom<ChatHTTPresponseStruct.CreateResponse>>(
+                                method: "POST",
+                                urlParse: "v2/chat",
+                                token: userInfo.token,
+                                UUID: getDeviceUUID(),
+                                requestVal: joinRoomData // POST 데이터 제공
+                            )
+                            let result = await HttpRequest(HttpStructs: httpStruct)
+                            if result.success{
+                                print("채팅방 생성")
+                                print(result.data!.data.chat_id)
+                            }
+                        }
                     }
                     
-                    Socket.SetToken(token: userInfo.token)
-                    Socket.Connect()
                 }
+                let patchData = ChatHTTPresponseStruct.PatchChatTime.init(service_id: 1, room_key: RoomKey)
+                let patchRequest = http<ChatHTTPresponseStruct.PatchChatTime?, KPApiStructFrom<ChatHTTPresponseStruct.PatchTimeResponse>>(
+                    method: "PATCH",
+                    urlParse: "v2/chat",
+                    token: userInfo.token,
+                    UUID: getDeviceUUID(),
+                    requestVal: patchData // POST 데이터 제공
+                )
+                Task{
+                    let result = await HttpRequest(HttpStructs: patchRequest)
+                    if result.success{
+                        print(result.data?.message ?? "Null")
+                    }
+                }
+                Socket.SetToken(token: userInfo.token)
+                Socket.Connect(hospitalId: data.hospital_id,fcmToken: userInfo.FCMToken)
             }
             .onChange(of: scenePhase){
                 switch scenePhase{
                 case .active:
                     if Socket.webSocketTask?.state != .running{
-                        Socket.Connect()
+                        Socket.Connect(hospitalId: data.hospital_id,fcmToken: userInfo.FCMToken)
                     }
                     print("App is active")
                 case .inactive:
@@ -225,18 +277,37 @@ struct Chat: View {
             }
         .navigationTitle(String(data.name))
         .toolbarTitleDisplayMode(.inline)
-        
+        .navigationBarBackButtonHidden(true)
+        .toolbar{
+            ToolbarItem(placement: .navigation){
+                Button(action:{
+                    let from = Socket.GetUserAccountString(token: userInfo.token)
+                    let RoomKey = "\(data.hospital_id):\(from.account)"
+                    print("👮🏼‍♂️ onDisappear Call")
+                    let patchData = ChatHTTPresponseStruct.PatchChatTime.init(service_id: 1, room_key: RoomKey)
+                    let patchRequest = http<ChatHTTPresponseStruct.PatchChatTime?, KPApiStructFrom<ChatHTTPresponseStruct.PatchTimeResponse>>(
+                        method: "PATCH",
+                        urlParse: "v2/chat",
+                        token: userInfo.token,
+                        UUID: getDeviceUUID(),
+                        requestVal: patchData // POST 데이터 제공
+                    )
+                    Task{
+                        let result = await HttpRequest(HttpStructs: patchRequest)
+                        if result.success{
+                            print("👮🏼‍♂️ onDisappear Call \(result.data?.message ?? "Null")")
+                            router.goBack()
+                        }
+                    }
+                }){
+                    Image(systemName: "chevron.left")
+                }
+            }
+        }
     }
-    
 }
 
-
-
-
-
-
-struct TestChatData : Codable{
-    var text: String
-    var My: Int
-    var id: Int
-}
+//class ChatViewModel: ObservableObject{
+//    @Published var hospitalImage: String ""
+//    @Published var
+//}

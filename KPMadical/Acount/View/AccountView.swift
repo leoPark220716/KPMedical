@@ -73,7 +73,22 @@ struct AccountView: View {
                 .padding(.top)
                 .background(Color.white)
                 .onTapGesture {
-                    print("진료기록")
+                    let BodyData = FcmToken.FcmTokenSend.init(fcm_token: authViewModel.FCMToken)
+                    let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
+                        method: "POST",
+                        urlParse: "v2/fcm",
+                        token: authViewModel.token,
+                        UUID: getDeviceUUID(),
+                        requestVal: BodyData
+                    )
+                    Task{
+                     let result = await KPWalletApi(HttpStructs: httpStruct)
+                        if result.success{
+                            print(result.data?.message ?? "Option Null")
+                        }else{
+                            print(result.data?.message ?? "Option Null")
+                        }
+                    }
                 }
                 Spacer()
             }

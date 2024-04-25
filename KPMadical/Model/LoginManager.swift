@@ -16,6 +16,18 @@ class LoginManager: ObservableObject{
     }
     
 }
+struct FcmToken:Codable{
+    struct FcmTokenSend: Codable{
+        var fcm_token:String
+    }
+    struct FcmTokenResponse: Codable{
+        var affectedRows: Int
+        var error_code: Int
+        var error_stack: String
+    }
+    
+}
+
 //회원가입 테스트 구조체
 struct SingupRequestModul: Codable {
     let account: String
@@ -265,91 +277,89 @@ func requestSignUp(account: String, password: String, moblie: String, name: Stri
         }.resume()
     }
 }
-func requestLogin(account: String,password: String, uid: String,userstate:UserInformation, completionHandrler: @escaping (Bool, String) -> Void) {
-    print("request ID Check")
-    if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access"){
+func requestLogin(account: String,password: String, uid: String,userstate:UserInformation, completionHandrler: @escaping (Bool, String) -> Void){
         let logmodul: LoginModul = .init(account: account, password: password, uid: uid)
-        var request = URLRequest.init(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let requestData = try? JSONEncoder().encode(logmodul){
-            request.httpBody = requestData
-            if let JsonString = String(data: requestData, encoding: .utf8){
-                print(JsonString)
-            }
-        }
-        URLSession.shared.dataTask(with: request) {data, res, er in
-            if let er = er {
-                print("err :\(er)")
-                return
-            }
-            guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else {
-                print("er http request failed\(String(describing: res))")
-                completionHandrler(false,"1")
-                return
-            }
-            guard let data = data else{
-                completionHandrler(false,"1")
-                return
-            }
-            guard let decoder = try? JSONDecoder().decode(KPApiStructFrom<loginResponse>.self, from: data) else {
-                completionHandrler(false,"false")
-                return
-            }
-            if decoder.status != 201 {
-                completionHandrler(false,"false")
-            }else{
-                userstate.SetData(name: decoder.data.name, dob: decoder.data.dob, sex: decoder.data.sex_code, token: decoder.data.access_token)
+        let request = http<LoginModul?, KPApiStructFrom<loginResponse>>.init(
+            method: "POST",
+            urlParse: "users/access",
+            token: "",
+            UUID: getDeviceUUID(),
+            requestVal: logmodul
+        )
+        KPWalletApiCloser(HttpStructs: request){ success, data in
+            if success{
+                userstate.SetData(name: data?.data.name ?? "", dob: data?.data.dob ?? "", sex: data?.data.sex_code ?? "", token: data?.data.access_token ?? "")
                 print(userstate.name)
-                completionHandrler(true,decoder.data.access_token)
+                completionHandrler(true,data?.data.access_token ?? "")
+            }else{
+                completionHandrler(false,"false")
             }
-        }.resume()
-    }
-}
-class LoginTockenFunc {
-    
-    func CheckToken(token: String, uid: String, completionHandrler: @escaping (Bool,Bool,String) -> Void) {
-        if token != ""{
-            print("Call Cehck Tokens")
-            print(uid)
-            if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access/auto?access_token=\(token)&uid=\(uid)"){
-                print("url:\(url)")
-                var request = URLRequest(url: url)
-                request.httpMethod = "GET"
-                URLSession.shared.dataTask(with: request){data,res,er in
-                    if let er = er {
-                        print("err : \(er)")
-                        completionHandrler(false, false ,"")
-                        return
-                    }
-                    guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else{
-                        print("er http request failed \(String(describing: res))")
-                        completionHandrler(false, false ,"")
-                        return
-                    }
-                    guard let data = data else{
-                        completionHandrler(false, false ,"")
-                        return
-                    }
-                    guard let decoder = try? JSONDecoder().decode(KPApiStructFrom<AutoLoginModel>.self, from: data) else {
-                        print("Json pashing failed")
-                        completionHandrler(false, false ,"")
-                        return
-                    }
-                    if decoder.status == 200 {
-                        if token == decoder.data.access_token{
-                            completionHandrler(true, true, "")
-                        }else{
-                            completionHandrler(true, false, decoder.data.access_token)
-                        }
-                    }else{
-                        completionHandrler(false, false ,"")
-                    }
-                }.resume()
-            }
-        }else{
-            print("token = null")
         }
+}
+
+class LoginTockenFunc {
+    func CheckToken(token: String, uid: String, completionHandrler: @escaping (Bool,Bool,String) -> Void) {
+        let request = http<Empty?, KPApiStructFrom<AutoLoginModel>>.init(
+            method: "GET",
+            urlParse: "users/access/auto?access_token=\(token)&uid=\(uid)",
+            token: "",
+            UUID: getDeviceUUID()
+        )
+        KPWalletApiCloser(HttpStructs: request){ success, data in
+            if success{
+                print(data?.data.access_token ?? "")
+                if token == data?.data.access_token{
+                    completionHandrler(true, true, "")
+                }else{
+                    completionHandrler(true, false, data?.data.access_token ?? "")
+                }
+            }else{
+                completionHandrler(false, false ,"")
+            }
+        }
+        
+        
+//        if token != ""{
+//            print("Call Cehck Tokens")
+//            print(uid)
+//            if let url = URL (string: "https://kp-medicals.com/api/medical-wallet/users/access/auto?access_token=\(token)&uid=\(uid)"){
+//                print("url:\(url)")
+//                var request = URLRequest(url: url)
+//                request.httpMethod = "GET"
+//                URLSession.shared.dataTask(with: request){data,res,er in
+//                    if let er = er {
+//                        print("err : \(er)")
+//                        completionHandrler(false, false ,"")
+//                        return
+//                    }
+//                    guard let res = res as? HTTPURLResponse, (200 ..< 300) ~= res.statusCode else{
+//                        print("er http request failed \(String(describing: res))")
+//                        completionHandrler(false, false ,"")
+//                        return
+//                    }
+//                    guard let data = data else{
+//                        completionHandrler(false, false ,"")
+//                        return
+//                    }
+//                    guard let decoder = try? JSONDecoder().decode(KPApiStructFrom<AutoLoginModel>.self, from: data) else {
+//                        print("Json pashing failed")
+//                        completionHandrler(false, false ,"")
+//                        return
+//                    }
+//                    if decoder.status == 200 {
+//                        if token == decoder.data.access_token{
+//                            completionHandrler(true, true, "")
+//                        }else{
+//                            completionHandrler(true, false, decoder.data.access_token)
+//                        }
+//                    }else{
+//                        completionHandrler(false, false ,"")
+//                    }
+//                }.resume()
+//            }
+//        }else{
+//            print("token = null")
+//        }
     }
     func checkToken(token: String, uid: String) async -> (success: Bool,tokenUpdate:Bool,newToken:String) {
         if token != ""{

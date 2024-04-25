@@ -16,7 +16,7 @@ struct RouteFinder {
         case .chat:
             print("DeepLInkURLS Chat")
             let queryParameters = url.queryParameters
-            guard let descQueryVal = queryParameters?["desc"] as? String,
+            guard let descQueryVal = queryParameters?["name"] as? String,
                   let chatIdVal = queryParameters?["id"] as? String,
                   let hospitalIdVal = queryParameters?["hos_id"] as? String
             else{

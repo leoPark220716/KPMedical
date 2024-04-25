@@ -51,7 +51,6 @@ struct LoginView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(checkBool ? Color.gray : Color.red, lineWidth: 2)
                         )
-                    
                     SecureField("비밀번호", text: $password)
                         .padding()
                         .background(Color.white)
@@ -68,6 +67,7 @@ struct LoginView: View {
                             if isSuccess {
                                 Task{
                                     await userData.insert(name: authViewModel.name, dob: authViewModel.dob, sex: authViewModel.sex, token: authViewModel.token)
+                                    authViewModel.TokenToServer(httpMethod: "POST")
                                 }
                                 DispatchQueue.main.async{
                                     router.currentView = .tab
@@ -79,7 +79,6 @@ struct LoginView: View {
                                 password = ""
                             }
                         }
-                                            
                     }) {
                         Text("로그인")
                             .foregroundColor(.white)
@@ -88,10 +87,8 @@ struct LoginView: View {
                             .background(Color("ConceptColor"))
                             .cornerRadius(25)
                     }
-                    
                     Text("비밀번호를 잊으셨나요?")
                         .foregroundColor(.blue)
-                    
                     Divider()
                     
                     Text("간편 로그인")
