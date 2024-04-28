@@ -12,24 +12,38 @@ import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
     var app: KPMadicalApp?
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    let gcmMessageIDKey = "gcm.message_id"
+    
+    // 앱이 켜졌을 때
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        // 파이어베이스 설정
         FirebaseApp.configure()
+        
+        // Setting Up Notifications...
+        // 원격 알림 등록
         if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
             
             let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOption,
                 completionHandler: {_, _ in })
-            UNUserNotificationCenter.current().delegate = self
         } else {
             let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
+        
         application.registerForRemoteNotifications()
+        
+        
+        // Setting Up Cloud Messaging...
+        // 메세징 델리겟
         Messaging.messaging().delegate = self
+        
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 }
@@ -114,7 +128,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         let userInfo = response.notification.request.content.userInfo
         let name = extractName(from: userInfo)
         let id = extractId(from: userInfo)
-        
         // Handle or display the results as needed
         print(name)
         print(id)
@@ -141,7 +154,7 @@ extension AppDelegate: MessagingDelegate{
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         if let token = dataDict["token"] {
             print("토큰 :  \(token)")
-            app?.SetFCMToken(from: token)
+            app?.SetFCMToken(fcmtoken: token)
         } else {
             print("Token not found")
         }
@@ -166,7 +179,11 @@ struct KPMadicalApp: App {
                     print(url)
                     authViewModel.isActivatedByURL = true
                     Task {
-                        await  CheckLogin(url: url,call: "onOpenURL")
+                        let autoLoginCheck = await CheckLogin(url: url,call: "onOpenURL")
+                         print(autoLoginCheck)
+                        if autoLoginCheck {
+                            authViewModel.TokenToServer(httpMethod: "PATCH")
+                        }
                     }
                 })
                 .onAppear{
@@ -174,13 +191,17 @@ struct KPMadicalApp: App {
                     print("onAppear")
                     if !authViewModel.isActivatedByURL{
                         Task {
-                            await CheckLogin(call: "onAppear")
+                            let autoLoginCheck = await CheckLogin(call: "onAppear")
+                            print(autoLoginCheck)
+                            if autoLoginCheck {
+                                authViewModel.TokenToServer(httpMethod: "PATCH")
+                            }
                         }
                     }
                 }
         }
     }
-    private func CheckLogin(url: URL? = nil,call: String) async {
+    private func CheckLogin(url: URL? = nil,call: String) async -> Bool {
         print(call)
         UserData.createTable()
         let checkNilUserDb = UserData.readUserDb(userState: authViewModel)
@@ -191,7 +212,7 @@ struct KPMadicalApp: App {
             UserData.removeAllUserDB()
             print("SetData LoginView")
             router.push(baseView: .Login)
-            return
+            return false
         }
         let tokenResult = await AutoLogin.checkToken(token: authViewModel.token, uid: getDeviceUUID())
         print(tokenResult.success)
@@ -202,25 +223,24 @@ struct KPMadicalApp: App {
             UserData.removeAllUserDB()
             print("checkToken LoginView")
             router.push(baseView: .Login)
-            return
-        }
-        if url != nil{
-            print("URL is not nil")
-            handleDeeplink(from: url!)
-            return
-        }else{
-            router.currentView = .Splash
+            return false
         }
         if tokenResult.tokenUpdate{
             authViewModel.token = tokenResult.newToken
             print(tokenResult.newToken)
             print("Call tokenUpdate")
-            router.push(baseView: .tab)
-            return
-        }else{
-            router.push(baseView: .tab)
+            
+        }
+        if url != nil{
+            print("URL is not nil")
+            handleDeeplink(from: url!)
+            return true
         }
         print("👀 App 초기화 과정 끝남")
+        router.push(baseView: .tab)
+        return true
+//        이부분에서 패치 시도
+        
     }
 }
 extension KPMadicalApp{
@@ -235,9 +255,9 @@ extension KPMadicalApp{
         }
         router.push(baseView: .tab,to:route.route)
     }
-    func SetFCMToken(from token: String){
-        authViewModel.FCMToken = token
-        authViewModel.SetFCMToken(fcmToken: token)
+    func SetFCMToken(fcmtoken : String){
+//        authViewModel.FCMToken = fcmtoken
+        authViewModel.SetFCMToken(fcmToken: fcmtoken)
     }
     func TokenToServer(fcmToken: String,httpMethod: String){
         let BodyData = FcmToken.FcmTokenSend.init(fcm_token: fcmToken)
@@ -261,19 +281,19 @@ extension KPMadicalApp{
 //class AppDelegate: NSObject, UIApplicationDelegate{
 //    
 //    let gcmMessageIDKey = "gcm.message_id"
-//    
+//
 //    // 앱이 켜졌을 때
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        
+//
 //        // 파이어베이스 설정
 //        FirebaseApp.configure()
-//        
+//
 //        // Setting Up Notifications...
 //        // 원격 알림 등록
 //        if #available(iOS 10.0, *) {
 //            // For iOS 10 display notification (sent via APNS)
 //            UNUserNotificationCenter.current().delegate = self
-//            
+//
 //            let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
 //            UNUserNotificationCenter.current().requestAuthorization(
 //                options: authOption,
@@ -283,18 +303,18 @@ extension KPMadicalApp{
 //            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
 //            application.registerUserNotificationSettings(settings)
 //        }
-//        
+//
 //        application.registerForRemoteNotifications()
-//        
-//        
+//
+//
 //        // Setting Up Cloud Messaging...
 //        // 메세징 델리겟
 //        Messaging.messaging().delegate = self
-//        
+//
 //        UNUserNotificationCenter.current().delegate = self
 //        return true
 //    }
-//    
+//
 //    // fcm 토큰이 등록 되었을 때
 //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 //        Messaging.messaging().apnsToken = deviceToken

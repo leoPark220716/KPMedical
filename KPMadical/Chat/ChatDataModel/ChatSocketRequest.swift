@@ -128,7 +128,7 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                 request.httpMethod = HttpStructs.method
                 request.setValue("Bearer \(HttpStructs.token)", forHTTPHeaderField: "Authorization")
                 request.setValue(HttpStructs.UUID, forHTTPHeaderField: "X-Device-UUID")
-                if HttpStructs.method == "POST"{
+                if HttpStructs.method != "GET"{
                     let postData = try JSONEncoder().encode(HttpStructs.requestVal)
                     request.httpBody = postData
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -142,7 +142,7 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                     return (false,nil)
                 }
                 let bodyString = String(data: data, encoding: .utf8)
-                print("👀 Response body: \(bodyString ?? "Null")")
+                print("👀 Response body (\(HttpStructs.method)): \(bodyString ?? "Null")")
                 do {
                     let jsonData = try JSONDecoder().decode(ReturnType.self, from: data)
                     return (true, jsonData)

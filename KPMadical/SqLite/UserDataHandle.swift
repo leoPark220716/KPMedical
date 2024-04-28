@@ -37,11 +37,9 @@ public class UserInformation: ObservableObject {
         }
     }
     func SetFCMToken(fcmToken: String){
-//        if FCMToken != "" && token != "" {
-//            TokenToServer(httpMethod: "PATCH")
-//        }
-        print("fcmToken \(fcmToken)")
         self.FCMToken = fcmToken
+        print("✅ fcmToken \(FCMToken)")
+        print("✅ token \(token)")
     }
     func SetChatItem(chatItems: [ChatHTTPresponseStruct.ChatListArray]){
         DispatchQueue.main.async {
@@ -52,7 +50,6 @@ public class UserInformation: ObservableObject {
         for index in chatItem.indices{
             if chatItem[index].hospital_id == Int(hospitalId){
                 var updatedItem = chatItem[index]
-                
                 // 요소의 필드를 업데이트
                 updatedItem.unread_cnt += 1
                 updatedItem.last_message.message = msg
@@ -69,7 +66,9 @@ public class UserInformation: ObservableObject {
         self.chatItem = []
     }
     func TokenToServer(httpMethod: String){
-        print("👀 FCMToken server Call \(httpMethod)")
+        print("👀 FCMToken server Call : \(httpMethod)")
+        print("👀 FCMToken server token : \(token)")
+        print("👀 FCMToken server FCMToken : \(FCMToken)")
         let BodyData = FcmToken.FcmTokenSend.init(fcm_token: FCMToken)
         let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
             method: httpMethod,

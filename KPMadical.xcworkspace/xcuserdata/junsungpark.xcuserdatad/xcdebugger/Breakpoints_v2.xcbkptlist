@@ -507,24 +507,8 @@
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "CheckLogin(url:call:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A56A6FF9-B759-4F9A-A013-DE66431D25A2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/KPMadicalApp.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -539,8 +523,8 @@
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -555,8 +539,8 @@
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -571,8 +555,8 @@
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -587,24 +571,8 @@
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "CheckLogin(url:call:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4C6FE88A-2819-49AA-BBC5-DCA4DA6EDC58"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KPMadical/KPMadicalApp.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
