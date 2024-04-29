@@ -39,7 +39,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "93FDE4B3-290F-4782-8C35-955A4909A771"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KPMadical/SeachHospital/View/ChooseDate.swift"
@@ -52,7 +52,7 @@
             <Locations>
                <Location
                   uuid = "93FDE4B3-290F-4782-8C35-955A4909A771 - 3e768f1552e73ad8"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 (KPMadical.HospitalDataHandler.ChooseTimeOrDoctor) -&gt; SwiftUI._ConditionalContent&lt;KPMadical.ChooseDorcor, KPMadical.ChooseTime&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;KPMadical.CustomCalendarView&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: Swift.Hashable, &#x3c4;_1_1: SwiftUI.View&gt;(for: &#x3c4;_1_0.Type, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0)&gt; in KPMadical.ChooseDate.body.getter : some"
@@ -67,7 +67,7 @@
                </Location>
                <Location
                   uuid = "93FDE4B3-290F-4782-8C35-955A4909A771 - 3e768f1552e73ad8"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 (KPMadical.HospitalDataHandler.ChooseTimeOrDoctor) -&gt; SwiftUI._ConditionalContent&lt;KPMadical.ChooseDorcor, KPMadical.ChooseTime&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, Swift.Optional&lt;KPMadical.CustomCalendarView&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: Swift.Hashable, &#x3c4;_1_1: SwiftUI.View&gt;(for: &#x3c4;_1_0.Type, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0)&gt; in KPMadical.ChooseDate.body.getter : some"
@@ -141,14 +141,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "562DB310-EBEA-46BE-9E04-FFC292DD8116 - 24a8689edb9d4d27"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -163,7 +163,7 @@
                </Location>
                <Location
                   uuid = "562DB310-EBEA-46BE-9E04-FFC292DD8116 - 24a8689edb9d4d27"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -189,14 +189,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "9D07B143-DDC8-4443-A5D0-AD21E3E79D96 - 24a8689edb9d4ae5"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -211,7 +211,7 @@
                </Location>
                <Location
                   uuid = "9D07B143-DDC8-4443-A5D0-AD21E3E79D96 - 24a8689edb9d4ae5"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -237,14 +237,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "355A6ABF-AB2B-4F49-A8B6-241359BD6025 - 24a8689edb9d4aca"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -259,7 +259,7 @@
                </Location>
                <Location
                   uuid = "355A6ABF-AB2B-4F49-A8B6-241359BD6025 - 24a8689edb9d4aca"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -285,14 +285,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "B473D2BA-5DD0-4291-838E-9B4B64765AED - 24a8689edb9d4a2f"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -307,7 +307,7 @@
                </Location>
                <Location
                   uuid = "B473D2BA-5DD0-4291-838E-9B4B64765AED - 24a8689edb9d4a2f"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -322,7 +322,7 @@
                </Location>
                <Location
                   uuid = "B473D2BA-5DD0-4291-838E-9B4B64765AED - 24a8689edb9d4aab"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -348,14 +348,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "56E0BE35-6742-4973-95B7-54D3B30CC5DD - 24a8689edb9d4a0c"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -370,7 +370,7 @@
                </Location>
                <Location
                   uuid = "56E0BE35-6742-4973-95B7-54D3B30CC5DD - 24a8689edb9d4a0c"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -385,7 +385,7 @@
                </Location>
                <Location
                   uuid = "56E0BE35-6742-4973-95B7-54D3B30CC5DD - 24a8689edb9d4a69"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -411,14 +411,14 @@
             filePath = "KPMadical/TabViewManager/TabViewManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "push(baseView:to:)"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "7D7F2A81-DD3D-4133-98CF-C1CC7353088B - 24a8689edb9d4bb2"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -433,7 +433,7 @@
                </Location>
                <Location
                   uuid = "7D7F2A81-DD3D-4133-98CF-C1CC7353088B - 24a8689edb9d4bb2"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -448,7 +448,7 @@
                </Location>
                <Location
                   uuid = "7D7F2A81-DD3D-4133-98CF-C1CC7353088B - 24a8689edb9d4a4e"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KPMadical.GlobalViewRouter.push(baseView: KPMadical.ViewTypes, to: Swift.Optional&lt;KPMadical.Route&gt;) -&gt; ()"
@@ -475,8 +475,8 @@
             filePath = "KPMadical/Chat/ChatDataModel/ChatSocketDataHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "HttPreturnURIArray(image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -501,7 +501,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B51C0CD0-48A2-4E18-B966-C02A76A71E1A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KPMadical/KPMadicalApp.swift"
@@ -517,7 +517,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CE7C3A2C-4598-45C3-AE69-C2FB5E353BCF"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KPMadical/KPMadicalApp.swift"
@@ -549,14 +549,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4ED829B4-5E3D-4595-B58E-BCCEA359BDA6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KPMadical/KPMadicalApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "CheckLogin(url:call:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -565,7 +565,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2E3E13A1-F5B9-48EC-A326-614739E67381"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KPMadical/KPMadicalApp.swift"
@@ -574,6 +574,133 @@
             startingLineNumber = "231"
             endingLineNumber = "231"
             landmarkName = "CheckLogin(url:call:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8B10DE2-6028-4E3B-9DA3-5A7E5C1F768B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/Chat/ChatDataModel/FileManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "DownloadManager"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "B8B10DE2-6028-4E3B-9DA3-5A7E5C1F768B - 95dfde1b69658585"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.DownloadManager.__allocating_init() -&gt; KPMadical.DownloadManager"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Chat/ChatDataModel/FileManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "B8B10DE2-6028-4E3B-9DA3-5A7E5C1F768B - 5495aabac6e2ee66"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.DownloadManager.init() -&gt; KPMadical.DownloadManager"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "B8B10DE2-6028-4E3B-9DA3-5A7E5C1F768B - cda1d38000ba96f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KPMadical.DownloadManager.__deallocating_deinit"
+                  moduleName = "KPMadical"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/junsungpark/Desktop/KPMadical/KPMadical/Chat/ChatDataModel/FileManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6632AA65-7A49-45E2-BC88-C79A100C32D9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/Chat/ChatDataModel/FileManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "startDownload(urlString:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "24C7ECAD-FBF4-40C5-9C8C-E9E366FBEB4B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/Chat/ChatDataModel/FileManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "urlSession(_:downloadTask:didFinishDownloadingTo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7FD0600A-BFD5-4505-8B69-003FA6502CD2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/Chat/ChatDataModel/FileManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "64D87D17-9DAE-4D7C-BA88-E000925908E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KPMadical/Chat/ChatDataModel/FileManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "urlSession(_:task:didCompleteWithError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

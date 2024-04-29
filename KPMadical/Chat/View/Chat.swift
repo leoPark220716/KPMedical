@@ -28,6 +28,8 @@ struct Chat: View {
     var data: parseParam
     @State var HospitalImage = ""
     @State var ChatId: Int = 0
+    @State private var importing = false
+    @State private var toast: normal_Toast? = nil
     var body: some View {
             VStack{
                 ScrollView{
@@ -99,7 +101,7 @@ struct Chat: View {
                                             if from.status{
                                                 print("Account \(from.account)")
                                                 Task{
-                                                    let success = await Socket.sendMessage(msg_type: 3 ,from: from.account, to: data.hospital_id, content_type: "text", message: ChatText)
+                                                    let success = await Socket.sendMessage(msg_type: 3 ,from: from.account, to: String(data.hospital_id), content_type: "text", message: ChatText)
                                                     if success{
                                                         print("메시지 전송 성공")
                                                     }else{
@@ -112,8 +114,9 @@ struct Chat: View {
                                             if from.status{
                                                 print("Account \(from.account)")
                                                 let file_ext = Array(repeating: ".png", count: SendingImages.count)
+                                                let file_name = Array(repeating: "1", count: SendingImages.count)
                                                 Task{
-                                                   let check = await Socket.sendMessage(msg_type: 3,from: from.account, to: data.hospital_id, content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext)
+                                                    let check = await Socket.sendMessage(msg_type: 3,from: from.account, to: String(data.hospital_id), content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext,file_name:file_name)
                                                     if check{
                                                         print("메타데이터 전송 성공")
                                                         for index in 0..<SendingImagesByte.count{
@@ -181,10 +184,52 @@ struct Chat: View {
                                 taskGroup.notify(queue: .main){
                                     self.SendingImages = sendingImages
                                     self.SendingImagesByte = sendingImagesByte
+                                    sendingImagesByte = []
+                                    sendingImages = []
                                     print("finish : \(SendingImagesByte.count)")
                                 }
                             }
                             SocialLoginButton(systemName: "camera.fill", color: .blue.opacity(0.5))
+                            Button{
+                                importing = true
+                            } label: {
+                                SocialLoginButton(systemName: "folder.fill", color: .yellow.opacity(0.5))
+                            }
+                            .fileImporter(
+                                isPresented: $importing,
+                                allowedContentTypes: [.item]
+                            ){ result in
+                                switch result {
+                                case .success(let file):
+                                    if file.startAccessingSecurityScopedResource() {  // 권한 요청 시작
+                                        defer { file.stopAccessingSecurityScopedResource() }  // 작업 완료 후 권한 해제
+                                        do {
+                                            let from = Socket.GetUserAccountString(token: userInfo.token)
+                                            let fileData = try Data(contentsOf: file)
+                                            let fileExtension = file.pathExtension
+                                            let fileNameBase = file.deletingPathExtension().lastPathComponent
+                                            let isSpecialFile = fileNameBase == "1" || fileNameBase == "2"
+                                            let fileName = isSpecialFile ? "\(fileNameBase)\(fileExtension)" : fileNameBase
+                                            let extensions = [".\(fileExtension)"]
+                                            let fileNames = [fileName]
+                                            print("🫡 File Get Success FileName \(fileNames[0])")
+                                            print("🫡 File Get Success Extensions \(extensions[0])")
+                                            Task{
+                                                let check = await Socket.sendMessage(msg_type: 3,from: from.account, to: String(data.hospital_id), content_type: "file",file_cnt: 1 ,file_ext: extensions, file_name: fileNames)
+                                                if check{
+                                                    Socket.SendFileData(data: fileData)
+                                                }
+                                            }
+                                        } catch {
+                                            print("❌ File 데이터 변환 실패: \(error)")
+                                        }
+                                    } else {
+                                        print("❌ 파일 접근 권한을 얻지 못했습니다.")
+                                    }
+                                case .failure(let error):
+                                    print("❌ File Get error \(error.localizedDescription)")
+                                }
+                            }
                             Spacer()
                         }
                         .cornerRadius(10)
@@ -204,9 +249,14 @@ struct Chat: View {
                 }
                 .padding(.bottom,10)
             }
+            .onChange(of: router.toast){
+                if router.toast == true{
+                    print("show Toast")
+                    toast = normal_Toast(message: "다운로드가 완료되었습니다.")
+                }
+            }
+            .normalToastView(toast: $toast)
             .onAppear{
-                let from = Socket.GetUserAccountString(token: userInfo.token)
-                let RoomKey = "\(data.hospital_id):\(from.account)"
                 let httpStructCheck = http<Empty?, KPApiStructFrom<ChatHTTPresponseStruct.CreateResponse>>.init(method:"GET", urlParse:"v2/chat/room?service_id=1&hospital_id=\(data.hospital_id)", token: userInfo.token, UUID: getDeviceUUID())
                 Task{
                     let result = await HttpRequest(HttpStructs: httpStructCheck)
@@ -240,21 +290,6 @@ struct Chat: View {
                             }
                         }
                     }
-                    
-                }
-                let patchData = ChatHTTPresponseStruct.PatchChatTime.init(service_id: 1, room_key: RoomKey)
-                let patchRequest = http<ChatHTTPresponseStruct.PatchChatTime?, KPApiStructFrom<ChatHTTPresponseStruct.PatchTimeResponse>>(
-                    method: "PATCH",
-                    urlParse: "v2/chat",
-                    token: userInfo.token,
-                    UUID: getDeviceUUID(),
-                    requestVal: patchData // POST 데이터 제공
-                )
-                Task{
-                    let result = await HttpRequest(HttpStructs: patchRequest)
-                    if result.success{
-                        print(result.data?.message ?? "Null")
-                    }
                 }
                 Socket.SetToken(token: userInfo.token)
                 Socket.Connect(hospitalId: data.hospital_id,fcmToken: userInfo.FCMToken)
@@ -269,6 +304,17 @@ struct Chat: View {
                 case .inactive:
                     print("App is inactive")
                 case .background:
+                    Task{
+                        let from = Socket.GetUserAccountString(token: userInfo.token)
+                        let success = await Socket.sendMessage(msg_type: 2 ,from: from.account, to: "", content_type: "", message: "")
+                        if success{
+                            print("메시지 전송 성공")
+                            Socket.disconnect()
+                        }else{
+                            print("메시지 전송 실패")
+                            Socket.disconnect()
+                        }
+                    }
                     Socket.disconnect()
                     print("App is in the background")
                 @unknown default:
@@ -281,21 +327,16 @@ struct Chat: View {
         .toolbar{
             ToolbarItem(placement: .navigation){
                 Button(action:{
-                    let from = Socket.GetUserAccountString(token: userInfo.token)
-                    let RoomKey = "\(data.hospital_id):\(from.account)"
-                    print("👮🏼‍♂️ onDisappear Call")
-                    let patchData = ChatHTTPresponseStruct.PatchChatTime.init(service_id: 1, room_key: RoomKey)
-                    let patchRequest = http<ChatHTTPresponseStruct.PatchChatTime?, KPApiStructFrom<ChatHTTPresponseStruct.PatchTimeResponse>>(
-                        method: "PATCH",
-                        urlParse: "v2/chat",
-                        token: userInfo.token,
-                        UUID: getDeviceUUID(),
-                        requestVal: patchData // POST 데이터 제공
-                    )
                     Task{
-                        let result = await HttpRequest(HttpStructs: patchRequest)
-                        if result.success{
-                            print("👮🏼‍♂️ onDisappear Call \(result.data?.message ?? "Null")")
+                        let from = Socket.GetUserAccountString(token: userInfo.token)
+                        let success = await Socket.sendMessage(msg_type: 2 ,from: from.account, to: "", content_type: "", message: "")
+                        if success{
+                            print("메시지 전송 성공")
+                            Socket.disconnect()
+                            router.goBack()
+                        }else{
+                            print("메시지 전송 실패")
+                            Socket.disconnect()
                             router.goBack()
                         }
                     }

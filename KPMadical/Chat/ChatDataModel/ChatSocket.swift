@@ -12,7 +12,7 @@ struct SendChatDataModel{
     struct ChatMessageContent: Codable {
         var msg_type: Int
         var from: String
-        var to: String
+        var to: String?
         var content_type: String?
         var content: MessageContent?
     }
@@ -20,6 +20,7 @@ struct SendChatDataModel{
         var message: String?
         var file_cnt: Int?
         var file_ext: [String]?
+        var file_name: [String]?
     }
 }
 // 소켓 처음 연결 됐을 때 받는 데이터 타입.

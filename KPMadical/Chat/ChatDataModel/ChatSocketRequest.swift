@@ -9,23 +9,25 @@ import Foundation
 
 class ChatSocketRequest: WebSocket{
     //    메시지 및 파일 메타 데이터 전송
-    func sendMessage(msg_type : Int, from: String, to: Int, content_type: String, message:String? = nil, file_cnt: Int? = nil, file_ext: [String]? = nil) async -> Bool{
+    func sendMessage(msg_type : Int, from: String, to: String, content_type: String, message:String? = nil, file_cnt: Int? = nil, file_ext: [String]? = nil, file_name:[String]? = nil) async -> Bool{
         let content = SendChatDataModel.MessageContent(
             message: message,
             file_cnt: file_cnt,
-            file_ext: file_ext
+            file_ext: file_ext,
+            file_name: file_name
         )
         var ChatMessage: SendChatDataModel.ChatMessageContent
         if msg_type == 2{
             ChatMessage = SendChatDataModel.ChatMessageContent(
                 msg_type: 2,
                 from: from,
-                to: String(to))
+                to: to
+                )
         }else{
             ChatMessage = SendChatDataModel.ChatMessageContent(
                 msg_type: 3,
                 from: from,
-                to: String(to),
+                to: to,
                 content_type: content_type,
                 content: content)
 
@@ -51,7 +53,6 @@ class ChatSocketRequest: WebSocket{
             })
         }
     }
-    
     func SendFileData(data: Data){
         let message = URLSessionWebSocketTask.Message.data(data)
             webSocketTask?.send(message, completionHandler: { Error in
@@ -83,7 +84,7 @@ func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 }
                 let (data,response) = try await URLSession.shared.data(for: request)
-                
+
                 guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else{
                     let bodyString = String(data: data, encoding: .utf8)
                     print("Response body: \(bodyString ?? "Null")")

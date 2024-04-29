@@ -19,6 +19,13 @@ struct ChatTEst: View {
                 await manager.request()
             }
         }
+        AsyncImage(url: URL(string:"https://public-kp-medicals.s3.ap-northeast-2.amazonaws.com/chat_files/1%231714336746440246849.png")){
+            image in
+            image.resizable()
+        }placeholder: {
+            ProgressView()
+        }
+    
         .buttonStyle(.bordered)
         .disabled(manager.hasPermission)
         .task {

@@ -52,10 +52,12 @@ struct OthersChatItem: View {
                             .background(.white)
                             .cornerRadius(10)
                     case .photo:
-                        DynamicImageViewManual3(images: imageUrls,totalWidth: 210, imageHeight: 70, oneItem: 210)
+                        DynamicImageView(images: imageUrls,totalWidth: 210, imageHeight: 70, oneItem: 210)
                             .cornerRadius(10)
                     case .file:
-                        EmptyView()
+                        if !stringUrls.isEmpty{
+                            FileChatView(urlString: stringUrls[0])
+                        }
                     case .notice:
                         NotiveChatView(message: item.messege!)
                             .cornerRadius(10)
@@ -80,10 +82,15 @@ struct OthersChatItem: View {
         .padding(.leading)
         .padding(.trailing,20)
         .onAppear{
-            if !stringUrls.isEmpty{
-                for _ in 0 ..< stringUrls.count{
-                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+            if !stringUrls.isEmpty {
+                imageUrls = stringUrls.compactMap { urlString in
+                    urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed).flatMap { URL(string: $0) }
                 }
+            }
+        }
+        .onTapGesture {
+            if !stringUrls.isEmpty{
+                print("URL 값 확인 : \(stringUrls[0])")
             }
         }
     }

@@ -42,7 +42,7 @@
 		1E5A3C0C2BCAD53200DA761F /* GallerriTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */; };
 		1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */; };
 		1E5A3C102BCAE19E00DA761F /* photoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */; };
-		1E5A3C122BCAE2C700DA761F /* ㅇㅇ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */; };
+		1E5A3C122BCAE2C700DA761F /* ChatImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3C112BCAE2C700DA761F /* ChatImageViews.swift */; };
 		1E5F6F9C2BCD3A1500787FAC /* ChatViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */; };
 		1E5F6F9F2BCD52D300787FAC /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F9E2BCD52D300787FAC /* extensions.swift */; };
 		1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64CBF12BA050B50053A555 /* WalletPassword.swift */; };
@@ -75,6 +75,7 @@
 		1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */; };
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
 		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
+		1EBACA992BDF9302003EF784 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBACA982BDF9302003EF784 /* FileManager.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
 		1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */; };
 		1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */; };
@@ -83,6 +84,7 @@
 		1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7958C2BACE71C00084CAE /* keywordModel.swift */; };
 		1EDB4ECD2BCFE420003C4A35 /* NotiveChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */; };
 		1EDCAD6B2BB19D4B00FC0C9B /* HospitalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */; };
+		1EE007BC2BDE3DF30033D2AE /* FileChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE007BB2BDE3DF30033D2AE /* FileChatView.swift */; };
 		1EE2FE102BD01B3B0073CA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2FE0F2BD01B3B0073CA7B /* AppDelegate.swift */; };
 		1EE2FE122BD026DC0073CA7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EE2FE112BD026DC0073CA7B /* GoogleService-Info.plist */; };
 		1EE63E082B9F46510026B4DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE63E072B9F46510026B4DE /* HomeView.swift */; };
@@ -172,7 +174,7 @@
 		1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerriTest.swift; sourceTree = "<group>"; };
 		1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imagePick.swift; sourceTree = "<group>"; };
 		1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoPicker.swift; sourceTree = "<group>"; };
-		1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ㅇㅇ.swift"; sourceTree = "<group>"; };
+		1E5A3C112BCAE2C700DA761F /* ChatImageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViews.swift; sourceTree = "<group>"; };
 		1E5F6F9B2BCD3A1500787FAC /* ChatViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewHandler.swift; sourceTree = "<group>"; };
 		1E5F6F9E2BCD52D300787FAC /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		1E64CBF12BA050B50053A555 /* WalletPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPassword.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
 		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorItemView.swift; path = ../DoctorItemView.swift; sourceTree = "<group>"; };
 		1EB7BA2E2BD0322000744717 /* KPMadical.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KPMadical.entitlements; sourceTree = "<group>"; };
+		1EBACA982BDF9302003EF784 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		1ECDEB752BD02B8E00E45E56 /* KPMadicalRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KPMadicalRelease.entitlements; sourceTree = "<group>"; };
 		1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatItem.swift; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 		1ED7958C2BACE71C00084CAE /* keywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keywordModel.swift; sourceTree = "<group>"; };
 		1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiveChatView.swift; sourceTree = "<group>"; };
 		1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailModel.swift; sourceTree = "<group>"; };
+		1EE007BB2BDE3DF30033D2AE /* FileChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileChatView.swift; sourceTree = "<group>"; };
 		1EE2FE0F2BD01B3B0073CA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EE2FE112BD026DC0073CA7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1EE63E072B9F46510026B4DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -396,7 +400,6 @@
 				1E5A3C0B2BCAD53200DA761F /* GallerriTest.swift */,
 				1E5A3C0D2BCAD55A00DA761F /* imagePick.swift */,
 				1E5A3C0F2BCAE19E00DA761F /* photoPicker.swift */,
-				1E5A3C112BCAE2C700DA761F /* ㅇㅇ.swift */,
 				1E517A782BD1347E00820F35 /* ChatTEst.swift */,
 			);
 			path = TestFile;
@@ -492,6 +495,7 @@
 		1EADCF962BCD676D002F1DBE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E5A3C112BCAE2C700DA761F /* ChatImageViews.swift */,
 				1E2B37482BA039DA00B8EFA4 /* Chat.swift */,
 				1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */,
 				1ED17A5E2BC296F50028AE83 /* OthersChatItem.swift */,
@@ -499,6 +503,7 @@
 				1EADCF972BCD67B7002F1DBE /* SendImageItemView.swift */,
 				1EDB4ECC2BCFE420003C4A35 /* NotiveChatView.swift */,
 				1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */,
+				1EE007BB2BDE3DF30033D2AE /* FileChatView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				1EFF61972BCF4A2F000BB898 /* SocketModel.swift */,
 				1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */,
 				1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */,
+				1EBACA982BDF9302003EF784 /* FileManager.swift */,
 			);
 			path = ChatDataModel;
 			sourceTree = "<group>";
@@ -1011,6 +1017,7 @@
 				1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
 				1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */,
+				1EE007BC2BDE3DF30033D2AE /* FileChatView.swift in Sources */,
 				1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */,
 				1EAEF48B2BBD885100F06BFB /* mnemonicView.swift in Sources */,
 				1E5A3C102BCAE19E00DA761F /* photoPicker.swift in Sources */,
@@ -1042,6 +1049,7 @@
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
 				1E3BA5122BD3F990008AF9DD /* Splash.swift in Sources */,
+				1EBACA992BDF9302003EF784 /* FileManager.swift in Sources */,
 				1E5F6F9F2BCD52D300787FAC /* extensions.swift in Sources */,
 				1EAEF4922BBDAE3100F06BFB /* RSAManager.swift in Sources */,
 				1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */,
@@ -1057,7 +1065,7 @@
 				1E5A3C0C2BCAD53200DA761F /* GallerriTest.swift in Sources */,
 				1E4FA0E72BAC7D1A000D3A27 /* TabViewManager.swift in Sources */,
 				1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */,
-				1E5A3C122BCAE2C700DA761F /* ㅇㅇ.swift in Sources */,
+				1E5A3C122BCAE2C700DA761F /* ChatImageViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

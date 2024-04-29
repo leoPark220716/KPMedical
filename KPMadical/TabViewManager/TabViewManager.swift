@@ -19,6 +19,7 @@ class GlobalViewRouter: ObservableObject {
     @Published var exportTapView: BottomTab = .home
     @Published var userId: String = ""
     @Published var routes = [Route]()
+    @Published var toast = false
     func push(baseView:ViewTypes ,to screen: Route? = nil){
         print("Call push")
         if screen != nil{

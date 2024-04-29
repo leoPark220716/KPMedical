@@ -67,11 +67,13 @@ struct MyChatItem: View {
                 if item.progress{
                     ImageProgressView()
                 }else{
-                    DynamicImageViewManual3(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
+                    DynamicImageView(images: imageUrls,totalWidth: 270, imageHeight: 90, oneItem: 270)
                         .cornerRadius(10)
                 }
             case .file:
-                EmptyView()
+                if !stringUrls.isEmpty{
+                    FileChatView(urlString: stringUrls[0])
+                }
             case .notice:
                 EmptyView()
             case .unowned:
@@ -82,23 +84,26 @@ struct MyChatItem: View {
         .padding(.leading,20)
         .padding(.bottom,3)
         .onAppear{
-            if !stringUrls.isEmpty{
-                for _ in 0 ..< stringUrls.count{
-                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+            if !stringUrls.isEmpty {
+                imageUrls = stringUrls.compactMap { urlString in
+                    urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed).flatMap { URL(string: $0) }
                 }
             }
-        }.onChange(of:item.progress){
-            if !stringUrls.isEmpty{
-                for _ in 0 ..< stringUrls.count{
-                    imageUrls = stringUrls.compactMap { URL(string: $0) }
+        }
+        .onChange(of:item.progress){
+            if !stringUrls.isEmpty {
+                imageUrls = stringUrls.compactMap { urlString in
+                    urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed).flatMap { URL(string: $0) }
                 }
+            }
+        }
+        .onTapGesture {
+            if !stringUrls.isEmpty{
+                print("URL 값 확인 : \(stringUrls[0])")
             }
         }
     }
 }
-
-
-
 struct ChatdateView: View {
     var time: String
     var body: some View {

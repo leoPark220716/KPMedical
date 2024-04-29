@@ -79,6 +79,7 @@ struct tabView: View {
                     Chat(data: data)
                 }
             }
+            
         }
         .onAppear{
             print("📟 OnAppearTabView")

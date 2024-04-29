@@ -22,54 +22,10 @@ struct ImageProgressView: View {
         .padding(.leading,20)
     }
 }
-
-struct DynamicImageView8: View {
-    var images: [URL]
-    
-    private let totalWidth: CGFloat = 270 // 전체 그리드의 너비 설정
-    private let numberOfColumns = 3 // 열의 최대 개수
-    
-    var body: some View {
-        VStack {
-            if images.count == 1 {
-                AsyncImage(url: images.first) { image in
-                    image.resizable().scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: totalWidth, height: 90)
-            } else {
-                let numberOfRows = (images.count + numberOfColumns - 1) / numberOfColumns
-                let remainingItems = images.count % numberOfColumns
-                let columnWidth = totalWidth / CGFloat(numberOfColumns)
-                let isLastRowPartial = remainingItems != 0 && numberOfRows > 1
-                
-                LazyVGrid(columns: Array(repeating: GridItem(.fixed(columnWidth), spacing: 5), count: numberOfColumns)) {
-                    ForEach(images.indices, id: \.self) { index in
-                        AsyncImage(url: images[index]) { image in
-                            image.resizable().aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(
-                            width: isLastRowPartial && index >= images.count - remainingItems ?
-                            (remainingItems == 1 ? totalWidth : // 1개 일 경우 전체 너비
-                             remainingItems == 2 ? totalWidth / 2 : // 2개 일 경우 반으로 나눔
-                             columnWidth) : // 3개 있는 경우 각각 원래 열 너비
-                            columnWidth,
-                            height: 90
-                        )
-                        .clipped()
-                    }
-                }
-            }
-        }
-    }
-}
 //let totalWidth: CGFloat = 270 // 전체 그리드의 너비 설정
 //let imageHeight: CGFloat = 90
 
-struct DynamicImageViewManual3: View {
+struct DynamicImageView: View {
     var images: [URL]
     let totalWidth: CGFloat // 전체 그리드의 너비 설정
     let imageHeight: CGFloat

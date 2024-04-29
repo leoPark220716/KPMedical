@@ -28,7 +28,7 @@ class ChatSocketModel: ChatSocketDataHandler{
         receiveMessage()
         let from = GetUserAccountString(token: token)
         Task{
-            let success = await sendMessage(msg_type: 2 ,from: from.account, to: hospitalId, content_type: "text", message: "")
+            let success = await sendMessage(msg_type: 2 ,from: from.account, to: String(hospitalId), content_type: "text", message: "")
             if success{
                 print("메시지 전송 성공")
             }else{
