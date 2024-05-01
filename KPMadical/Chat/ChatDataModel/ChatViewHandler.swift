@@ -7,9 +7,15 @@
 
 import Foundation
 import UIKit
+import _PhotosUI_SwiftUI
+import PhotosUI
 //    Chat 뷰의 상태 변환
 class ChatViewHandler {
 
+    @Published var selectedItems: [PhotosPickerItem] = []
+    @Published var SendingImages: [UIImage] = []
+    @Published var SendingImagesByte: [Data] = []
+    
     func ControlBottomView(TabPlus: Bool, chatField: Bool,ChatText: String)-> (TabPlus: Bool, chatField: Bool,ChatText: String){
         var tab = TabPlus
         var editor = chatField

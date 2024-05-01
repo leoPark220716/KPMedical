@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import PhotosUI
+import _PhotosUI_SwiftUI
 
 class ChatSocketModel: ChatSocketDataHandler{
     public var token:String = ""

@@ -22,9 +22,9 @@ struct Chat: View {
     @State private var TabPlus = true
     @EnvironmentObject var router: GlobalViewRouter
     @State var selectedItems: [PhotosPickerItem] = []
-    let controler = ChatViewHandler()
     @State var SendingImages: [UIImage] = []
     @State var SendingImagesByte: [Data] = []
+    let controler = ChatViewHandler()
     var data: parseParam
     @State var HospitalImage = ""
     @State var ChatId: Int = 0
@@ -82,12 +82,12 @@ struct Chat: View {
                                 .onTapGesture {
                                     TabPlus = true
                                 }
-                            if ChatText != "" || !SendingImages.isEmpty {
+                            if ChatText != "" || !controler.SendingImages.isEmpty {
                                 Image(systemName: "paperplane.circle.fill")
                                     .font(.system(size: 30))
                                     .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                                     .onTapGesture {
-                                        if SendingImages.isEmpty{
+                                        if controler.SendingImages.isEmpty{
                                             let textItem = Socket.preMessageItem(type: .text,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
                                             Socket.ChatData.insert(textItem, at: 0)
                                         }else{
@@ -95,7 +95,7 @@ struct Chat: View {
                                             Socket.ChatData.insert(textItem, at: 0)
                                         }
                                         let from = Socket.GetUserAccountString(token: userInfo.token)
-                                        if SendingImages.isEmpty{
+                                        if controler.SendingImages.isEmpty{
                                             if from.status{
                                                 print("Account \(from.account)")
                                                 Task{
@@ -111,8 +111,8 @@ struct Chat: View {
                                         }else{
                                             if from.status{
                                                 print("Account \(from.account)")
-                                                let file_ext = Array(repeating: ".png", count: SendingImages.count)
-                                                let file_name = Array(repeating: "1", count: SendingImages.count)
+                                                let file_ext = Array(repeating: ".png", count: controler.SendingImages.count)
+                                                let file_name = Array(repeating: "1", count: controler.SendingImages.count)
                                                 Task{
                                                     let check = await Socket.sendMessage(msg_type: 3,from: from.account, to: String(data.hospital_id), content_type: "file",file_cnt: SendingImages.count,file_ext:file_ext,file_name:file_name)
                                                     if check{
