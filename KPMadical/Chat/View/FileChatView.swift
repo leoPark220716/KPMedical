@@ -56,7 +56,10 @@ struct FileChatView: View {
         }
         .onChange(of: downloadManager.doen){
             print("Call ToastView")
-            router.toast = true
+            if downloadManager.doen == true{
+                router.toast = true
+                downloadManager.doen = false
+            }
         }
     }
 }

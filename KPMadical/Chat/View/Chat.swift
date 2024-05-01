@@ -69,9 +69,7 @@ struct Chat: View {
                             .padding(.leading)
                             .onTapGesture {
                                 if !TabPlus{
-                                    SendingImages.removeAll()
-                                    SendingImagesByte.removeAll()
-                                    selectedItems.removeAll()
+                                    cleanDataArray()
                                 }
                                 let result = ChatViewHandler().ControlBottomView(TabPlus: TabPlus, chatField: chatField, ChatText: ChatText)
                                 TabPlus = result.TabPlus
@@ -253,6 +251,7 @@ struct Chat: View {
                 if router.toast == true{
                     print("show Toast")
                     toast = normal_Toast(message: "다운로드가 완료되었습니다.")
+                    router.toast = false
                 }
             }
             .normalToastView(toast: $toast)
@@ -345,6 +344,11 @@ struct Chat: View {
                 }
             }
         }
+    }
+    private func cleanDataArray(){
+        SendingImages.removeAll()
+        SendingImagesByte.removeAll()
+        selectedItems.removeAll()
     }
 }
 

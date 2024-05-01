@@ -161,7 +161,6 @@ extension AppDelegate: MessagingDelegate{
         print("토근값 : \(dataDict)")
     }
 }
-
 @main
 struct KPMadicalApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate

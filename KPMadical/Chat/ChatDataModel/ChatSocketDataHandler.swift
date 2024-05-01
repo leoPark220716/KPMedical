@@ -562,12 +562,30 @@ class ChatSocketDataHandler: ChatSocketRequest{
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.ChatData.append(textItem)
+                        self.ChatData.insert(textItem, at: 0)
                     }
                 }
                 print("Pohto")
             case .file:
+                print("?????????????????????????????????????")
                 print("file")
+                guard let key = decodedData.content?.key , let bucket = decodedData.content?.bucket else{
+                    print("버킷이 없다.")
+                    return
+                }
+                let makeImageArray = determineFileType(from: key, bucket: bucket)
+                let ImageArray = returnURIArray(image: makeImageArray.imageArray)
+                var textItem = self.textMessageItem(type: .file, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray)
+                textItem.ReadCount = decodedData.on
+                if messages.amI == .user{
+                    DispatchQueue.main.async {
+                        self.ChatData.insert(textItem, at: 0)
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.ChatData.insert(textItem, at: 0)
+                    }
+                }
             case .notice:
                 let textItem = self.textMessageItem(type: .notice,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
                 DispatchQueue.main.async {
