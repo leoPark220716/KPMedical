@@ -24,6 +24,17 @@ public class UserInformation: ObservableObject {
             self.sex = sex
             self.token = token
     }
+    func initData(){
+        name = ""
+        dob = ""
+        sex = ""
+        token = ""
+        isLoggedIn = false
+        traceTab = ""
+        isActivatedByURL = false
+        FCMToken = ""
+        chatItem = []
+    }
     func SetLoggedIn(logged: Bool) {
         DispatchQueue.main.async {
             self.isLoggedIn = logged

@@ -288,7 +288,8 @@ struct Chat: View {
                     }
                 }
                 Socket.SetToken(token: userInfo.token)
-                Socket.Connect(hospitalId: data.hospital_id,fcmToken: userInfo.FCMToken)
+                print("🫡 FCM TOKEN \(userInfo.FCMToken)")
+                Socket.Connect(hospitalId: data.hospital_id, fcmToken: userInfo.FCMToken)
             }
             .onChange(of: scenePhase){
                 switch scenePhase{

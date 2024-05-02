@@ -244,6 +244,7 @@ struct IdTextField: View{
     let limit: Int
     let FocusEnum: FocusableField
     @FocusState var focus: FocusableField?
+    var check: Bool? = true
     @State var inVisible: Bool = true
     @StateObject private var idFieldModel = IDFieldModel()
     @Binding var isChecked: Bool
@@ -256,16 +257,15 @@ struct IdTextField: View{
                     .focused($focus, equals: FocusEnum)
                     .onReceive(Just(text)) {
                         text = String($0.prefix(limit))
-//                        test = idFieldModel.isTextValid
+                        text = idFieldModel.text
                     }
                     .autocapitalization(.none)
                     .padding(12)
                     .cornerRadius(10)
-                
                     .onTapGesture {
                         isChecked = false
                     }
-                if idFieldModel.isTextValid {
+                if idFieldModel.isTextValid && check! {
                     if !isChecked{
                         Text("중복확인")
                             .font(.system(size: 15))
@@ -291,7 +291,8 @@ struct IdTextField: View{
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(idFieldModel.isTextValid && isChecked ? Color("ConceptColor") : Color.red, lineWidth: 2)
+                    .stroke(idFieldModel.isTextValid && (check! ? isChecked : true) ? Color("ConceptColor") : Color.red, lineWidth: 2)
+
             )
             if !idFieldModel.isTextValid{
                 Text("6자 이상 30자리 이하의 숫자, 영문자 조합으로 가능합니다.")
@@ -307,7 +308,11 @@ struct IdTextField: View{
     private var statusText: String {
             switch idCheckState {
             case .notChecked:
-                return "중복확인을 완료해주세요"
+                if !check!{
+                    return ""
+                }else{
+                    return "중복확인을 완료해주세요"
+                }
             case .valid:
                 return "사용가능한 아이디 입니다."
             case .duplicated:

@@ -8,7 +8,7 @@
 import Foundation
 
 enum ViewTypes{
-    case findHospital, tab, MyReservation, myWallet, chat, Login, Splash
+    case  tab,  myWallet, Login, Splash, findPassword
 }
 enum BottomTab{
     case home,chat,hospital, account
@@ -19,6 +19,7 @@ class GlobalViewRouter: ObservableObject {
     @Published var exportTapView: BottomTab = .home
     @Published var userId: String = ""
     @Published var routes = [Route]()
+    @Published var passRoutes = [PassRoute]()
     @Published var toast = false
     @Published var hospital_data: HospitalDataHandler?
     @Published var HospitalReservationData: reservationInfo?

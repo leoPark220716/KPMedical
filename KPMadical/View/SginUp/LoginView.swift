@@ -89,6 +89,9 @@ struct LoginView: View {
                     }
                     Text("비밀번호를 잊으셨나요?")
                         .foregroundColor(.blue)
+                        .onTapGesture {
+                            router.currentView = .findPassword
+                        }
                     Divider()
                     
                     Text("간편 로그인")
@@ -99,9 +102,7 @@ struct LoginView: View {
                         SocialLoginButton(systemName: "f.circle.fill", color: .blue)
                         SocialLoginButton(systemName: "g.circle.fill", color: .red)
                     }
-                    
                     Spacer()
-                    
                     Text("아직 회원이 아니신가요? 가입하기")
                         .foregroundColor(.blue)
                         .onTapGesture {

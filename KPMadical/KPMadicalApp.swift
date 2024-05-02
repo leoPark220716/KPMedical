@@ -46,6 +46,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
         UNUserNotificationCenter.current().delegate = self
         return true
     }
+    // fcm 토큰이 등록 되었을 때
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
 }
 extension AppDelegate: UNUserNotificationCenterDelegate{
     private func extractName(from userInfo: [AnyHashable: Any]) -> String {
@@ -148,17 +152,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     }
 }
 extension AppDelegate: MessagingDelegate{
+    
+    // fcm 등록 토큰을 받았을 때
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+
         print("토큰을 받았다")
         // Store this token to firebase and retrieve when to send message to someone...
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
-        if let token = dataDict["token"] {
-            print("토큰 :  \(token)")
-            app?.SetFCMToken(fcmtoken: token)
-        } else {
-            print("Token not found")
+        if fcmToken != ""{
+            let token = fcmToken
+            app?.SetFCMToken(fcmtoken: token!)
         }
-        print("토근값 : \(dataDict)")
+        // Store token in Firestore For Sending Notifications From Server in Future...
+        
+        print(dataDict)
+     
     }
 }
 @main
@@ -256,23 +264,5 @@ extension KPMadicalApp{
     func SetFCMToken(fcmtoken : String){
 //        authViewModel.FCMToken = fcmtoken
         authViewModel.SetFCMToken(fcmToken: fcmtoken)
-    }
-    func TokenToServer(fcmToken: String,httpMethod: String){
-        let BodyData = FcmToken.FcmTokenSend.init(fcm_token: fcmToken)
-        let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
-            method: httpMethod,
-            urlParse: "v2/fcm",
-            token: authViewModel.token,
-            UUID: getDeviceUUID(),
-            requestVal: BodyData
-        )
-        Task{
-         let result = await KPWalletApi(HttpStructs: httpStruct)
-            if result.success{
-                print(result.data?.message ?? "Option Null")
-            }else{
-                print(result.data?.message ?? "Option Null")
-            }
-        }
     }
 }

@@ -14,22 +14,18 @@ struct MainView: View {
     @State private var path = NavigationPath()
     var body: some View {
         switch router.currentView {
-        case .MyReservation:
-            EmptyView()
+        
 //            myreservationView(userInfo: authViewModel)
         case .tab:
             tabView()
-        case .findHospital:
-            EmptyView()
         case .myWallet:
             KNPWalletView(userInfo:authViewModel)
-        case .chat:
-            EmptyView()
-            //            Chat(chatId:14)
         case .Login:
             LoginView(sign: sign)
         case .Splash:
             Splash()
+        case .findPassword:
+            PasswordFind()
         }
     }
 }

@@ -82,6 +82,7 @@ func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                     let postData = try JSONEncoder().encode(HttpStructs.requestVal)
                     request.httpBody = postData
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    print("✅ \(String(describing: HttpStructs.requestVal))")
                 }
                 let (data,response) = try await URLSession.shared.data(for: request)
 
@@ -115,10 +116,11 @@ func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
         return (false,nil)
     }
 }
+
+
 func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType>) async -> (success: Bool, data: ReturnType?){
     let query = HttpStructs.urlParse
     if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
-//    https://kp-medicals.com/api/medical-wallet/
         let StringURL = "https://kp-medicals.com/api/medical-wallet/\(encodedQuery)"
         print(StringURL)
         if let url = URL(string: StringURL){
@@ -133,6 +135,7 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                     let postData = try JSONEncoder().encode(HttpStructs.requestVal)
                     request.httpBody = postData
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    print("✅ \(String(describing: HttpStructs.requestVal))")
                 }
                 let (data,response) = try await URLSession.shared.data(for: request)
                 
@@ -164,6 +167,9 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
         return (false,nil)
     }
 }
+
+
+
 func KPWalletApiCloser<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType> ,completionHandrler: @escaping (Bool, ReturnType?) -> Void){
     let query = HttpStructs.urlParse
     if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){

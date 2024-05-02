@@ -169,7 +169,8 @@ struct ReservationDetailView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-                            ).onTapGesture {
+                            )
+                            .onTapGesture {
                                 responseOk = false
                                 request.cancelReservationById(token: userInfo.token, id: data.reservation_id) { Bool in
                                     if Bool{
@@ -179,7 +180,6 @@ struct ReservationDetailView: View {
                                     }
                                 }
                             }
-                        
                         Text("확인")
                             .padding()
                             .font(.system(size: 14))
@@ -193,9 +193,7 @@ struct ReservationDetailView: View {
                                     .stroke(Color.blue.opacity(0.5), lineWidth: 1)
                             )
                             .onTapGesture {
-                                DispatchQueue.main.async{
-                                    router.goBack()
-                                }
+                                router.goBack()
                             }
                         Spacer()
                     }

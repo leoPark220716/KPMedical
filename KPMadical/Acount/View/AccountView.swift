@@ -15,8 +15,8 @@ struct AccountView: View {
     @State var isOPT = false
     @State var create = true
     let appKeyChain = AppPasswordKeyChain()
+    let Account_handler = AccountViewHandler()
     var body: some View {
-        
             VStack(alignment: .leading){
                 HStack{
                     Image(systemName: "person.crop.circle.fill")
@@ -90,9 +90,30 @@ struct AccountView: View {
                         }
                     }
                 }
+                HStack{
+                    Text("로그아웃")
+                        .foregroundStyle(Color.red)
+                        .padding(.leading)
+                    Spacer()
+                }
+                .onTapGesture {
+                    Task{
+                     let success = await Account_handler.TokenToServer(httpMethod: "DELETE", token: authViewModel.token, FCMToken: authViewModel.FCMToken)
+                        if success {
+                            UserDb.removeAllUserDB()
+                            router.ReservationDeInit()
+                            appKeyChain.deleteAllKeyChainItems()
+                            DispatchQueue.main.async{
+                                authViewModel.initData()
+                                router.currentView = .Login
+                            }
+                        }else{
+                            print("삭제 요청 실패")
+                        }
+                    }
+                }
                 Spacer()
             }
-            
             .navigationTitle("내 계정")
             .navigationBarTitleDisplayMode(.automatic)
         

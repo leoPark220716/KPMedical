@@ -77,26 +77,34 @@ extension Route: Hashable {
     }
 
 }
-
+enum PassRoute{
+    case item(item: PassViewPathAddress)
+}
+extension PassRoute: Hashable{
+    static func == (lhs: PassRoute, rhs: PassRoute) -> Bool {
+        switch (lhs, rhs) {
+        case (.item(let lhsItem), .item(let rhsItem)):
+            return lhsItem.token == rhsItem.token && lhsItem.page == rhsItem.page && lhsItem.id == rhsItem.id
+        }
+    }
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .item(let item):
+            hasher.combine(item.id)  // 예시로 id 사용
+            hasher.combine(item.token)
+            hasher.combine(item.page)
+        }
+    }
+}
 struct ViewPathAddress: PathAddress {
     var name: String
     var page: Int
     var id: Int
 }
+struct PassViewPathAddress {
+    var token: String
+    var id: String
+    var page: Int
+}
 
 
-//NavigationLink(value: Route.item(item: ViewPathAddress.init(name: "findHospitalView", page: 1, id: 0))){
-//    HStack {
-//        Image(systemName: "magnifyingglass")
-//            .foregroundColor(.gray)
-//        Text("찾고있는 병원을 검색하세요.")
-//            .font(.subheadline)
-//            .foregroundColor(.gray)
-//            .padding(.trailing,120)
-//    }
-//    .padding(.horizontal, 10)
-//    .frame(height: 40)
-//    .background(Color.white)
-//    .cornerRadius(20)
-//    .shadow(color: .gray.opacity(0.3), radius: 10, x: 0, y: 5)
-//}

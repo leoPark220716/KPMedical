@@ -79,7 +79,6 @@ struct reservationItemView: View {
                         }
                     }
                 }
-                
             }
         }
         .background(Color.white)
@@ -94,13 +93,11 @@ struct reservationItemView: View {
             dateFormatter.timeZone = timezone
 
             // 주어진 날짜와 시간으로 Date 객체 생성
-            if let visitDate = dateFormatter.date(from: "\(item.date) \(item.time)") {
+            if let visitDate = dateFormatter.date(from: "\(item.date) \(item.time)"){
                 // 현재 날짜와 시간
                 let currentDate = Date()
-                
                 // 방문 시간까지 남은 시간 (초 단위)
                 let timeInterval = visitDate.timeIntervalSince(currentDate)
-                
                 if timeInterval < 0 {
                     // 이미 지난 시간
                     TimeCarculate = "종료"
@@ -108,7 +105,6 @@ struct reservationItemView: View {
                     // 남은 시간을 시간과 일로 변환
                     let hours = timeInterval / 3600
                     let days = hours / 24
-                    
                     if hours < 24 {
                         TimeCarculate = "\(Int(hours)) 시간 후 방문"
                     } else {
