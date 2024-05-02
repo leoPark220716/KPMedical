@@ -14,7 +14,7 @@ class reservationDataHandler {
         var error_code: Int
         var error_stack: String
     }
-    struct reservationAr : Codable{
+    struct reservationAr : Codable,Equatable,Hashable{
         var reservation_id: Int
         var hospital_id: Int
         var hospital_name: String

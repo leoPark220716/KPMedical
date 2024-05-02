@@ -8,15 +8,16 @@
 import SwiftUI
 import NMapsMap
 struct ReservationDetailView: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
+    @EnvironmentObject var userInfo: UserInformation
+    @EnvironmentObject var router: GlobalViewRouter
     @State var responseOk: Bool = false
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
     let requestData = HospitalHTTPRequest()
     @ObservedObject var hospitalDataHandler = HospitalDataHandler() // 변경됨
-    @Binding var item: reservationDataHandler.reservationAr
-    @State var HospitalId: Int
-    @State var reservation_id: Int
+//    @Binding var item: reservationDataHandler.reservationAr
+//    @State var HospitalId: Int
+//    @State var reservation_id: Int
+    let data: ReservationParseParam
     let request = ReservationHttpRequest()
     var body: some View {
         ZStack{
@@ -55,7 +56,7 @@ struct ReservationDetailView: View {
                                     .bold()
                                     .padding(.leading,23)
                                 Spacer()
-                                Text(item.hospital_name)
+                                Text(data.item.hospital_name)
                                     .font(.system(size: 15))
                                     .bold()
                                     .padding(.trailing,23)
@@ -69,7 +70,7 @@ struct ReservationDetailView: View {
                                     .bold()
                                     .padding(.leading,23)
                                 Spacer()
-                                Text("\(item.date) \(item.time)")
+                                Text("\(data.item.date) \(data.item.time)")
                                     .font(.system(size: 15))
                                     .bold()
                                     .padding(.trailing,23)
@@ -82,7 +83,7 @@ struct ReservationDetailView: View {
                                     .bold()
                                     .padding(.leading,23)
                                 Spacer()
-                                Text(item.staff_name)
+                                Text(data.item.staff_name)
                                     .font(.system(size: 15))
                                     .bold()
                                     .padding(.trailing,23)
@@ -95,7 +96,7 @@ struct ReservationDetailView: View {
                                     .bold()
                                     .padding(.leading,23)
                                 Spacer()
-                                Text(item.patient_name)
+                                Text(data.item.patient_name)
                                     .font(.system(size: 15))
                                     .bold()
                                     .padding(.trailing,23)
@@ -170,9 +171,11 @@ struct ReservationDetailView: View {
                                     .stroke(Color.gray.opacity(0.5), lineWidth: 1)
                             ).onTapGesture {
                                 responseOk = false
-                                request.cancelReservationById(token: userInfo.token, id: reservation_id) { Bool in
+                                request.cancelReservationById(token: userInfo.token, id: data.reservation_id) { Bool in
                                     if Bool{
-                                        path = .init()
+                                        DispatchQueue.main.async{
+                                            router.goBack()
+                                        }
                                     }
                                 }
                             }
@@ -190,7 +193,9 @@ struct ReservationDetailView: View {
                                     .stroke(Color.blue.opacity(0.5), lineWidth: 1)
                             )
                             .onTapGesture {
-                                path = .init()
+                                DispatchQueue.main.async{
+                                    router.goBack()
+                                }
                             }
                         Spacer()
                     }
@@ -206,7 +211,7 @@ struct ReservationDetailView: View {
             }
         }
         .onAppear{
-            requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
+            requestData.HospitalDetailHTTPRequest(hospitalId: data.HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
                 self.hospitalDataHandler.HospitalDetailData = data
                 responseOk = true
             }

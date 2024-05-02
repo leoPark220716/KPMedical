@@ -9,13 +9,12 @@ import SwiftUI
 
 
 struct ChooseDate: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @ObservedObject var HospitalInfo: HospitalDataHandler
+    
+    @EnvironmentObject var userInfo: UserInformation
+    @EnvironmentObject var router: GlobalViewRouter
     @State var CheckFirst: Bool = false
     @State private var selectedDate: Date? = nil
     @State private var SelectDateString: String = ""
-    @Binding var info: reservationInfo
     @State var disalbeWeek: Set<Int> = []
     @State var HospitalSchedules: [HospitalDataManager.Schedule] = []
     @State var HospitalSubSchedules: [HospitalDataManager.Schedule] = []
@@ -62,35 +61,38 @@ struct ChooseDate: View {
                         .padding(.trailing)
                         .onTapGesture {
                             if isTap {
-                                info.setDate(date:formatDate(selectedDate!))
-                                if CheckFirst{
-                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Doctor)
+                                router.HospitalReservationData!.setDate(date:formatDate(selectedDate!))
+                                if router.HospitalReservationData!.staff_id != 0{
+                                    router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooseTime", page: 6, id: 6)))
+//                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Doctor)
                                 }else{
-                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Time)
+                                    router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooesDocor", page: 4, id: 4)))
+                                    
+//                                    path.append(HospitalDataHandler.ChooseTimeOrDoctor.Time)
                                 }
                             }
-                            print("info.date : \(info.date)")
-                            print("info.hospital_id :\(info.hospital_id)")
-                            print("info.staff_id : \(info.staff_id)")
-                            print("info.department_id \(info.department_id)")
+//                            print("info.date : \(info.date)")
+//                            print("info.hospital_id :\(info.hospital_id)")
+//                            print("info.staff_id : \(info.staff_id)")
+//                            print("info.department_id \(info.department_id)")
                         }
                 }
             }
-            .navigationDestination(for: HospitalDataHandler.ChooseTimeOrDoctor.self){ value in
-                switch value{
-                case .Doctor:
-                    ChooseDorcor(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
-                case .Time:
-                    ChooseTime(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
-                }
-            }
+//            .navigationDestination(for: HospitalDataHandler.ChooseTimeOrDoctor.self){ value in
+//                switch value{
+//                case .Doctor:
+//                    ChooseDorcor(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
+//                case .Time:
+//                    ChooseTime(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
+//                }
+//            }
         }
         .onAppear{
-            info.date = ""
-            if CheckFirst{
-                HospitalSchedules = HospitalInfo.GetMainSchdules(departId: info.department_id)
-                HospitalSubSchedules = HospitalInfo.GetSubSchedules(departId: info.department_id)
-                doctors = HospitalInfo.GetDoctors()
+            router.HospitalReservationData?.date = ""
+            if router.HospitalReservationData!.staff_id == 0{
+                HospitalSchedules = router.hospital_data!.GetMainSchdules(departId: router.HospitalReservationData!.department_id)
+                HospitalSubSchedules = router.hospital_data!.GetSubSchedules(departId: router.HospitalReservationData!.department_id)
+                doctors = router.hospital_data!.GetDoctors()
                 // 메인 스케줄 기반 휴일
                 for index in 0..<7 {
                     let isDayOffForAll = HospitalSchedules.allSatisfy { schedule in
@@ -139,8 +141,8 @@ struct ChooseDate: View {
                 }
             }
             else{
-                HospitalSchedules = HospitalInfo.GetDoctorMainSchedules(staff_id: info.staff_id)
-                HospitalSubSchedules = HospitalInfo.GetDoctorSubSchedules(staff_id: info.staff_id)
+                HospitalSchedules = router.hospital_data!.GetDoctorMainSchedules(staff_id: router.HospitalReservationData!.staff_id)
+                HospitalSubSchedules = router.hospital_data!.GetDoctorSubSchedules(staff_id: router.HospitalReservationData!.staff_id)
                 for index in 0..<7 {
                     let isDayOffForAll = HospitalSchedules.allSatisfy { schedule in
                         let dayOffIndex = schedule.dayoff.index(schedule.dayoff.startIndex, offsetBy: index)

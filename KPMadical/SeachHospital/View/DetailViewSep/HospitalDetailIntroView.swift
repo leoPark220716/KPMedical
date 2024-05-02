@@ -9,9 +9,11 @@ import SwiftUI
 import NMapsMap
 
 struct HospitalDetailIntroView: View{
-    @Binding var HospitalDetailData: HospitalDataManager.HospitalDataClass
+    
     @Binding var coord: NMGLatLng
     @Binding var HospitalSchedules: [HospitalDataManager.Schedule]
+    @EnvironmentObject var router: GlobalViewRouter
+//    router.hospital_data.
     var body: some View{
         Text("진료시간")
             .bold()
@@ -28,7 +30,7 @@ struct HospitalDetailIntroView: View{
             .padding(.leading,30)
             .padding(.top,8)
         HStack{
-            let numerString = formatKoreanPhoneNumber(HospitalDetailData.hospital.phone)
+            let numerString = formatKoreanPhoneNumber(router.hospital_data!.HospitalDetailData.hospital.phone)
             Text(numerString)
                 .padding(.leading,30)
             Spacer()
@@ -57,7 +59,7 @@ struct HospitalDetailIntroView: View{
             .bold()
             .padding(.leading,30)
             .padding(.top,8)
-        Text(HospitalDetailData.hospital.location)
+        Text(router.hospital_data!.HospitalDetailData.hospital.location)
             .font(.system(size: 13))
             .padding(.leading,30)
             .padding(.top,8)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct reservationItemView: View {
-    @Binding var item: reservationDataHandler.reservationAr
+    var item: reservationDataHandler.reservationAr
     let dateString = "2024-03-12"
     let timeString = "15:30"
     @State var TimeCarculate: String = ""

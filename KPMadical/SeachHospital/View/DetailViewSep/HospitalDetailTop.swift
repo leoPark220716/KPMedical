@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct HospitalDetailTop: View{
-    @Binding var HospitalDetailData: HospitalDataManager.HospitalDataClass
-    @Binding var StartTime: String
-    @Binding var EndTime: String
-    @Binding var MainImage: String
+    
+    var StartTime: String
+    var EndTime: String
+    var MainImage: String
     @State var WorkingState: Bool?
     let timeManager = TimeManager()
+    @EnvironmentObject var router: GlobalViewRouter
     var body: some View{
         VStack(alignment: .leading){
             ZStack {
@@ -27,7 +28,7 @@ struct HospitalDetailTop: View{
                 }
             }
             .frame(maxWidth: .infinity, alignment: .center)
-            Text(HospitalDetailData.hospital.hospital_name)
+            Text(router.hospital_data!.HospitalDetailData.hospital.hospital_name)
                 .font(.system(size: 20))
                 .padding([.top,.leading])
                 .bold()
@@ -46,7 +47,7 @@ struct HospitalDetailTop: View{
             .padding(.leading)
             .padding(.vertical,4)
             HStack{
-                ForEach(HospitalDetailData.hospital.department_id.prefix(4), id: \.self) { id in
+                ForEach(router.hospital_data!.HospitalDetailData.hospital.department_id.prefix(4), id: \.self) { id in
                     let intid = Int(id)
                     if let department = Department(rawValue: intid ?? 0) {
                         Text(department.name)
@@ -59,7 +60,7 @@ struct HospitalDetailTop: View{
                             .foregroundColor(.white)
                     }
                 }
-                if HospitalDetailData.hospital.department_id.count > 4 {
+                if router.hospital_data!.HospitalDetailData.hospital.department_id.count > 4 {
                     Text("전체보기")
                         .font(.system(size: 13))
                         .padding(.trailing, 10)

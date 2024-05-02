@@ -17,7 +17,7 @@ struct ChatList: View {
             List(authViewModel.chatItem.indices, id: \.self){ index in
                 ChatListItem(item: authViewModel.chatItem[index])
                     .onTapGesture {
-                        router.routes.append(Route.chat(data: parseParam(id: authViewModel.chatItem[index].chat_id, name: authViewModel.chatItem[index].hospital_name,hospital_id: authViewModel.chatItem[index].hospital_id)))
+                        router.routes.append(Route.chat(data: chatParseParam(id: authViewModel.chatItem[index].chat_id, name: authViewModel.chatItem[index].hospital_name,hospital_id: authViewModel.chatItem[index].hospital_id)))
                     }
             }
         }

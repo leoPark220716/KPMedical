@@ -35,7 +35,7 @@ struct HomeView: View {
 //                }
                 SearchHpView()
                     .onTapGesture {
-                        router.currentView = .findHospital
+                        router.tabPush(to: Route.item(item: ViewPathAddress.init(name: "findHospitalView", page: 1, id: 0)))
                     }
                 //                }
                 Spacer()
@@ -43,20 +43,18 @@ struct HomeView: View {
                     calendarView()
                     PillView()
                         .onTapGesture {
-                            router.currentView = .MyReservation
+                            router.tabPush(to: Route.item(item: ViewPathAddress(name: "MyreservationView", page: 9, id: 9)))
                         }
                 }
                 .padding(.top)
             }
             .onAppear{
-                HomeViewHttp.requestHomViewItems(token: authViewModel.token) { url1, url2, url3 in
+                HomeViewHttp.requestHomViewItems(token: authViewModel.token){ url1, url2, url3 in
                     self.url1 = url1
                     self.url2 = url2
                     self.url3 = url3
                 }
-                
-                    authViewModel.traceTab = "\(authViewModel.name)님 안녕하세요!"
-                
+                authViewModel.traceTab = "\(authViewModel.name)님 안녕하세요!"
                 print("name Of EnvironmentObject \(authViewModel.name)")
             }
         }.background(Color(.init(white: 0, alpha: 0.05))

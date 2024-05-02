@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DoctorItemView: View {
-    @Binding var DoctorProfile: HospitalDataManager.Doctor
+    var DoctorProfile: HospitalDataManager.Doctor
     var TimeHelper = TimeManager()
     @State var WorkingState: Bool?
     @State var CheckIsEmpty = true

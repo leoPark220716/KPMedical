@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct KeywordSearch: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
+    @Environment var userInfo: UserInformation
     @State private var searchText = ""
     @ObservedObject private var viewModel = keywordModel()
     // 태그 배열
@@ -76,8 +75,8 @@ struct KeywordSearch: View {
                     List(viewModel.hospitals.indices, id: \.self) {index in
                         FindHosptialItem(hospital: $viewModel.hospitals[index])
                             .background(
-                                NavigationLink("",destination : HospitalDetailView(path: $path, userInfo:userInfo,StartTime: viewModel.hospitals[index].start_time,EndTime: viewModel.hospitals[index].end_time,HospitalId: viewModel.hospitals[index].hospital_id, MainImage: viewModel.hospitals[index].icon))
-                                    .opacity(0)
+//                                NavigationLink("",destination : HospitalDetailView(path: $path, userInfo:userInfo,StartTime: viewModel.hospitals[index].start_time,EndTime: viewModel.hospitals[index].end_time,HospitalId: viewModel.hospitals[index].hospital_id, MainImage: viewModel.hospitals[index].icon))
+//                                    .opacity(0)
                             )
                     }
                     .listStyle(InsetListStyle())

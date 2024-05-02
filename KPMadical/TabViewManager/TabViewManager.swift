@@ -20,6 +20,8 @@ class GlobalViewRouter: ObservableObject {
     @Published var userId: String = ""
     @Published var routes = [Route]()
     @Published var toast = false
+    @Published var hospital_data: HospitalDataHandler?
+    @Published var HospitalReservationData: reservationInfo?
     func push(baseView:ViewTypes ,to screen: Route? = nil){
         print("Call push")
         if screen != nil{
@@ -27,8 +29,6 @@ class GlobalViewRouter: ObservableObject {
                 currentView = baseView
             return
             }
-            print("screen nil")
-            print(screen!)
             currentView = baseView
             routes.append(screen!)
             print(currentView)
@@ -38,6 +38,11 @@ class GlobalViewRouter: ObservableObject {
         }
         print("pushFinish")
     }
+    
+    func tabPush(to screen: Route){
+        routes.append(screen)
+    }
+    
     func goBack(){
         _ = routes.popLast()
     }
@@ -55,5 +60,13 @@ class GlobalViewRouter: ObservableObject {
         case .account:
             return "내 계정"
         }
+    }
+    func ReservationDeInit(){
+        hospital_data = nil
+        HospitalReservationData = nil
+    }
+    func ReservationInit(){
+        hospital_data = HospitalDataHandler()
+        HospitalReservationData = reservationInfo()
     }
 }

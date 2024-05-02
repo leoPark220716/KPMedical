@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct reservationSuccessView: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @ObservedObject var HospitalInfo: HospitalDataHandler
-    @Binding var info: reservationInfo
+    @EnvironmentObject var userInfo: UserInformation
     @EnvironmentObject var router: GlobalViewRouter
     let pading = 23
     var body: some View {
@@ -57,7 +54,7 @@ struct reservationSuccessView: View {
                     .bold()
                     .padding(.leading,23)
                 Spacer()
-                Text(info.hospital_name)
+                Text(router.HospitalReservationData!.hospital_name)
                     .font(.system(size: 15))
                     .bold()
                     .padding(.trailing,23)
@@ -70,7 +67,7 @@ struct reservationSuccessView: View {
                     .bold()
                     .padding(.leading,23)
                 Spacer()
-                Text("\(info.date)-\(info.time)")
+                Text("\(router.HospitalReservationData!.date)-\(router.HospitalReservationData!.time)")
                     .font(.system(size: 15))
                     .bold()
                     .padding(.trailing,23)
@@ -83,7 +80,7 @@ struct reservationSuccessView: View {
                     .bold()
                     .padding(.leading,23)
                 Spacer()
-                Text(info.doc_name)
+                Text(router.HospitalReservationData!.doc_name)
                     .font(.system(size: 15))
                     .bold()
                     .padding(.trailing,23)
@@ -109,7 +106,7 @@ struct reservationSuccessView: View {
                     .bold()
                     .padding(.leading,23)
                 Spacer()
-                Text(info.purpose)
+                Text(router.HospitalReservationData!.purpose)
                     .font(.system(size: 15))
                     .bold()
                     .padding(.trailing,23)
@@ -129,8 +126,9 @@ struct reservationSuccessView: View {
         }
     }
     func buttonAction(){
-        path.removeLast(path.count)
+        router.reset()
         router.currentView = .tab
+        router.tabPush(to: Route.item(item: ViewPathAddress(name: "MyreservationView", page: 9, id: 9)))
     }
 }
 

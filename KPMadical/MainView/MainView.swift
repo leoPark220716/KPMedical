@@ -15,24 +15,23 @@ struct MainView: View {
     var body: some View {
         switch router.currentView {
         case .MyReservation:
-            myreservationView(userInfo: authViewModel)
+            EmptyView()
+//            myreservationView(userInfo: authViewModel)
         case .tab:
             tabView()
         case .findHospital:
-            FindHospitalView()
+            EmptyView()
         case .myWallet:
             KNPWalletView(userInfo:authViewModel)
         case .chat:
             EmptyView()
-//            Chat(chatId:14)
+            //            Chat(chatId:14)
         case .Login:
             LoginView(sign: sign)
         case .Splash:
             Splash()
         }
-        
     }
-    
 }
 struct tabView: View {
     @EnvironmentObject var authViewModel: UserInformation
@@ -67,16 +66,43 @@ struct tabView: View {
                         Label("내정보", systemImage: "person.crop.circle")
                     }
                     .tag(BottomTab .account)
-                
             }
             .navigationTitle(router.TitleString(Tabs: router.exportTapView, name: authViewModel.name))
             .navigationBarTitleDisplayMode(router.exportTapView == .home ? .inline : .large)
             .navigationDestination(for: Route.self){ route in
                 switch route {
-                case .item(_):
-                    EmptyView()
+                case .item(item: let item):
+                    switch item.page{
+                    case 1:
+                        FindHospitalView()
+                    case 3:
+                        ChooseDepartment()
+                    case 4:
+                        ChooseDorcor()
+                    case 5:
+                        ChooseDate()
+                    case 6:
+                        ChooseTime()
+                    case 7:
+                        symptomTextFiledView()
+                    case 8:
+                        reservationSuccessView()
+                    case 9:
+                        myreservationView()
+                    default:
+                        EmptyView()
+                    }
                 case .chat(data: let data):
                     Chat(data: data)
+                case .hospital(item: let item):
+                    switch item.name{
+                    case "hospitalDitailView":
+                        HospitalDetailView(data: item)
+                    default:
+                        EmptyView()
+                    }
+                case .reservation(item: let item):
+                    ReservationDetailView(data: item)
                 }
             }
             

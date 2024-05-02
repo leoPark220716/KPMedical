@@ -8,7 +8,6 @@
 import SwiftUI
 import NMapsMap
 struct PikerViewSelection: View{
-    @Binding var HospitalDetailData: HospitalDataManager.HospitalDataClass
     @State private var selection = Selection.Intro
     @Binding var coord: NMGLatLng
     @Binding var HospitalSchedules: [HospitalDataManager.Schedule]
@@ -51,7 +50,7 @@ struct PikerViewSelection: View{
             }
             switch selection {
             case .Intro:
-                HospitalDetailIntroView(HospitalDetailData: $HospitalDetailData,coord: $coord, HospitalSchedules: $HospitalSchedules)
+                HospitalDetailIntroView(coord: $coord, HospitalSchedules: $HospitalSchedules)
             case .doc:
                 DoctorListView(DoctorProfile: $DoctorProfile)
             }

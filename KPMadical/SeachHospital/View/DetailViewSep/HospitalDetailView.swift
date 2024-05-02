@@ -9,44 +9,44 @@ import SwiftUI
 import NMapsMap
 
 struct HospitalDetailView: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @State var StartTime: String
-    @State var EndTime: String
-    @State var HospitalId: Int
-    @State var MainImage: String
+    @EnvironmentObject var userInfo: UserInformation
+    let data: hospitalParseParam
     let requestData = HospitalHTTPRequest()
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
     //    데이터 헨들러 디텔뷰에서 들어갈 때 해당 객체로 데이터 다 다룰듯
-    @ObservedObject var hospitalDataHandler = HospitalDataHandler() // 변경됨
+    
     //    의사 스케줄 반영에 따른 시간표 출력 배열
     @State var HospitalSchedules: [HospitalDataManager.Schedule] = []
     //    의사 프로필 데이터
     @State var DoctorProfile: [HospitalDataManager.Doctor] = []
     //    최종 저장할 때 사용할 구조체
-    @State var info = reservationInfo()
     @EnvironmentObject var router: GlobalViewRouter
     var body: some View {
         ZStack{
             VStack{
                 ScrollView{
                     VStack{
-                        if hospitalDataHandler.CheckLoadingState{
-                            HospitalDetailTop(HospitalDetailData: $hospitalDataHandler.HospitalDetailData,StartTime: $StartTime,EndTime: $EndTime,MainImage: $MainImage)
+                        if router.hospital_data!.CheckLoadingState {
+                            HospitalDetailTop(
+                                              StartTime: data.startTiome,
+                                              EndTime: data.EndTime,
+                                              MainImage: data.MainImage)
                             Rectangle()
                                 .frame(height: 1)
                                 .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
                                 .cornerRadius(10)
                                 .padding(.horizontal)
                             
-                            PikerViewSelection(HospitalDetailData: $hospitalDataHandler.HospitalDetailData, coord: $mapCoord, HospitalSchedules: $HospitalSchedules,DoctorProfile: $DoctorProfile)
+                            PikerViewSelection(coord: $mapCoord,
+                                               HospitalSchedules: $HospitalSchedules,
+                                               DoctorProfile: $DoctorProfile)
                         }
                     }
-                }.navigationTitle(hospitalDataHandler.CheckLoadingState ? hospitalDataHandler.HospitalDetailData.hospital.hospital_name : "")
+                }.navigationTitle(router.hospital_data!.CheckLoadingState ? router.hospital_data!.HospitalDetailData.hospital.hospital_name : "")
                 HStack{
                     Spacer()
                     //            NavigationLink(destination: Chat()) {
-                    NavigationLink(value: HospitalDataHandler.NavigationTarget.counsel){
+//                    NavigationLink(value: HospitalDataHandler.NavigationTarget.counsel){
                         Text("상담하기")
                             .padding()
                             .font(.system(size: 14))
@@ -61,13 +61,10 @@ struct HospitalDetailView: View {
                             )
                             .onTapGesture {
                                 print("병원 아이디")
-                                print( info.hospital_id)
-                                router.push(baseView: .tab, to:Route.chat(data: parseParam(id: 0, name: hospitalDataHandler.HospitalDetailData.hospital.hospital_name,hospital_id: info.hospital_id)))
-                                
-                            
+                                router.push(baseView: .tab, to:Route.chat(data: chatParseParam(id: 0, name: router.hospital_data!.HospitalDetailData.hospital.hospital_name,hospital_id: data.hospital_id)))
                             }
-                    }
-                    NavigationLink(value: HospitalDataHandler.NavigationTarget.selectDepartment){
+//                    }
+//                    NavigationLink(value: HospitalDataHandler.NavigationTarget.selectDepartment){
                         Text("예약하기")
                             .padding()
                             .font(.system(size: 14))
@@ -80,20 +77,23 @@ struct HospitalDetailView: View {
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.blue.opacity(0.5), lineWidth: 1)
                             )
-                    }
-                    .navigationDestination(for: HospitalDataHandler.NavigationTarget.self){ value in
-                        switch value{
-                        case .counsel:
-                            EmptyView()
-//                            print("asdf")
-                        case .selectDepartment:
-                            ChooseDepartment(path: $path, userInfo: userInfo, HospitalInfo: hospitalDataHandler, info: $info)
-                        }
-                    }
+                            .onTapGesture {
+                                router.tabPush(to: Route.item(item: ViewPathAddress(name: "chooseDepartMent", page: 3, id: 3)))
+//                                ChooseDepartment()
+                            }
+//                    }
+//                    .navigationDestination(for: HospitalDataHandler.NavigationTarget.self){ value in
+//                        switch value{
+//                        case .counsel:
+//                            EmptyView()
+//                        case .selectDepartment:
+//                            ChooseDepartment(userInfo: userInfo, HospitalInfo: router.hospitalDataHandler, info: router.HospitalReservationData)
+//                        }
+//                    }
                     Spacer()
                 }
             }
-            if !hospitalDataHandler.CheckLoadingState {
+            if !router.hospital_data!.CheckLoadingState {
                 ProgressView("Loading...")
                     .scaleEffect(2) // 크기를 조정하려면 scaleEffect 사용
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -102,14 +102,16 @@ struct HospitalDetailView: View {
             }
         }
         .onAppear{
-            requestData.HospitalDetailHTTPRequest(hospitalId: HospitalId, token: userInfo.token, uuid: getDeviceUUID()){ data in
-                self.hospitalDataHandler.HospitalDetailData = data
-                mapCoord = NMGLatLng(lat: hospitalDataHandler.HospitalDetailData.hospital.y, lng: hospitalDataHandler.HospitalDetailData.hospital.x)
-                self.HospitalSchedules = hospitalDataHandler.HospitalDetailData.doctors.flatMap { $0.main_schedules }
-                self.DoctorProfile = hospitalDataHandler.HospitalDetailData.doctors
-                hospitalDataHandler.LoadingCheck()
-                info.hospital_id = HospitalId
-                info.hospital_name = data.hospital.hospital_name
+            requestData.HospitalDetailHTTPRequest(hospitalId: data.hospital_id, token: userInfo.token, uuid: getDeviceUUID()){ data in
+                router.hospital_data!.HospitalDetailData = data
+                mapCoord = NMGLatLng(lat: router.hospital_data!.HospitalDetailData.hospital.y, lng: router.hospital_data!.HospitalDetailData.hospital.x)
+                self.HospitalSchedules = router.hospital_data!.HospitalDetailData.doctors.flatMap { $0.main_schedules }
+                self.DoctorProfile = router.hospital_data!.HospitalDetailData.doctors
+                router.hospital_data!.LoadingCheck()
+                DispatchQueue.main.async {
+                    router.HospitalReservationData!.hospital_id = data.hospital.hospital_id
+                    router.HospitalReservationData!.hospital_name = data.hospital.hospital_name
+                }
             }
         }
     }

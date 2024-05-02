@@ -8,36 +8,37 @@
 import SwiftUI
 
 struct ChooseDorcor: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @ObservedObject var HospitalInfo: HospitalDataHandler
-    @State var DoctorProfile: [HospitalDataManager.Doctor] = []
-    @State var CheckFirst: Bool = false
-    @Binding var info: reservationInfo
+    @EnvironmentObject var userInfo: UserInformation
+    @EnvironmentObject var router: GlobalViewRouter
     var body: some View {
         ZStack{
             VStack{
                 ScrollView{
                     VStack{
-                        if !DoctorProfile.isEmpty{
-                            ForEach(DoctorProfile.indices, id: \.self) { index in
-                                DoctorItemView(DoctorProfile: $DoctorProfile[index])
+                        if !router.hospital_data!.DoctorProfile.isEmpty{
+                            ForEach(router.hospital_data!.DoctorProfile.indices, id: \.self) { index in
+                                DoctorItemView(DoctorProfile: router.hospital_data!.DoctorProfile[index])
                                     .onTapGesture {
-                                        info.staff_id = DoctorProfile[index].staff_id
-                                        info.time_slot = DoctorProfile[index].main_schedules[0].timeSlot
-                                        info.doc_name = DoctorProfile[index].name
-                                        if CheckFirst{
-                                            print("info.date : \(info.date)")
-                                            print("info.hospital_id :\(info.hospital_id)")
-                                            print("info.staff_id : \(info.staff_id)")
-                                            print("info.department_id \(info.department_id)")
-                                            path.append(HospitalDataHandler.ChooseTimeOrDate.Date)
+                                        router.HospitalReservationData!.staff_id = router.hospital_data!.DoctorProfile[index].staff_id
+                                        
+                                        router.HospitalReservationData!.time_slot = router.hospital_data!.DoctorProfile[index].main_schedules[0].timeSlot
+                                        
+                                        router.HospitalReservationData!.doc_name = router.hospital_data!.DoctorProfile[index].name
+            
+                                        if  router.HospitalReservationData!.date != ""{
+                                            router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooseTime", page: 6, id: 6)))
+//                                            print("info.date : \(info.date)")
+//                                            print("info.hospital_id :\(info.hospital_id)")
+//                                            print("info.staff_id : \(info.staff_id)")
+//                                            print("info.department_id \(info.department_id)")
+//                                            path.append(HospitalDataHandler.ChooseTimeOrDate.Date)
                                         }else{
-                                            print("info.date : \(info.date)")
-                                            print("info.hospital_id :\(info.hospital_id)")
-                                            print("info.staff_id : \(info.staff_id)")
-                                            print("info.department_id \(info.department_id)")
-                                            path.append(HospitalDataHandler.ChooseTimeOrDate.Time)
+                                            router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooseDate", page: 5, id: 5)))
+//                                            print("info.date : \(info.date)")
+//                                            print("info.hospital_id :\(info.hospital_id)")
+//                                            print("info.staff_id : \(info.staff_id)")
+//                                            print("info.department_id \(info.department_id)")
+//                                            path.append(HospitalDataHandler.ChooseTimeOrDate.Time)
                                         }
                                     }
                                 
@@ -47,17 +48,17 @@ struct ChooseDorcor: View {
                         }
                     }
                     .padding(.top)
-                    .navigationDestination(for: HospitalDataHandler.ChooseTimeOrDate.self){ value in
-                        switch value{
-                        case .Date:
-                            ChooseDate(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo,CheckFirst: false,info: $info)
-                        case .Time:
-                            ChooseTime(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
-                        }
-                    }
+//                    .navigationDestination(for: HospitalDataHandler.ChooseTimeOrDate.self){ value in
+//                        switch value{
+//                        case .Date:
+//                            ChooseDate(HospitalInfo: HospitalInfo,CheckFirst: false,info: $info)
+//                        case .Time:
+//                            ChooseTime(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
+//                        }
+//                    }
                 }
             }
-            if DoctorProfile.isEmpty {
+            if router.hospital_data!.DoctorProfile.isEmpty {
                 ProgressView("의료진 정보를 불러오고 있습니다...")
                     .font(.system(size: 10))
                     .scaleEffect(2) // 크기를 조정하려면 scaleEffect 사용
@@ -67,14 +68,14 @@ struct ChooseDorcor: View {
             }
         }
         .onAppear{
-            info.staff_id = 0
-            if CheckFirst{
-                DoctorProfile = HospitalInfo.GetDepartHaveDoctor(id: info.department_id)
+            router.HospitalReservationData!.staff_id = 0
+            if router.HospitalReservationData!.date == ""{
+                router.hospital_data!.DoctorProfile = router.hospital_data!.GetDepartHaveDoctor(id: router.HospitalReservationData!.department_id)
             }else{
                 var workingStaffIds: [Int] = []
-                let docarr = HospitalInfo.GetDepartHaveDoctor(id: info.department_id)
-                workingStaffIds = HospitalInfo.findWorkingStaffIds(on: info.date, from: docarr)
-                DoctorProfile = HospitalInfo.GetDoctorGetIDArry(staff_id: workingStaffIds)
+                let docarr = router.hospital_data!.GetDepartHaveDoctor(id: router.HospitalReservationData!.department_id)
+                workingStaffIds = router.hospital_data!.findWorkingStaffIds(on: router.HospitalReservationData!.date, from: docarr)
+                router.hospital_data!.DoctorProfile = router.hospital_data!.GetDoctorGetIDArry(staff_id: workingStaffIds)
             }
         }
         .navigationTitle("예약할 의사 선생님을 선택해주세요")

@@ -28,103 +28,128 @@ struct FindHospitalView: View {
     @State private var userLocation: CLLocationCoordinate2D?
     @State private var selectedHospital: Int? = nil
     var body: some View {
-        NavigationStack(path: $path) {
-            VStack(spacing: 0){
-                NavigationLink(destination: KeywordSearch(path: $path, userInfo: userInfo)){
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                        Text("찾고있는 병원을 검색하세요.")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.trailing,120)
-                    }
-                    .padding(.horizontal, 10)
-                    .frame(height: 40)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 0, y: 5)
+        VStack(spacing: 0){
+            NavigationLink(value: Route.item(item: ViewPathAddress.init(name: "keywordHospitalView", page: 2, id: 0))){
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    Text("찾고있는 병원을 검색하세요.")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.trailing,120)
                 }
-                VStack{
+                .padding(.horizontal, 10)
+                .frame(height: 40)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: .gray.opacity(0.3), radius: 10, x: 0, y: 5)
+            }
+            VStack{
+                HStack{
                     HStack{
-                        HStack{
-                            Image(systemName: "mappin.and.ellipse")
-                                .padding(.leading,20)
-                                .foregroundColor(.pink)
-                            if let addres = locationService.address_Naver{
-                                Text("\(addres)")
-                                    .font(.system(size: 14))
-                            }else{
-                                Text("주소를 찾을수 없습니다.")
-                                    .font(.system(size: 14))
-                            }
-                            //                            Text("수정")
-                            //                                .font(.system(size: 12))
-                            //                                .foregroundColor(.blue)
+                        Image(systemName: "mappin.and.ellipse")
+                            .padding(.leading,20)
+                            .foregroundColor(.pink)
+                        if let addres = locationService.address_Naver{
+                            Text("\(addres)")
+                                .font(.system(size: 14))
+                        }else{
+                            Text("주소를 찾을수 없습니다.")
+                                .font(.system(size: 14))
                         }
-                        .padding(.top,10)
-                        Spacer()
                     }
+                    .padding(.top,10)
+                    Spacer()
+                }
+                HStack{
+                    Picker("Tabs",selection: $viewModel.selectedTab){
+                        Text("전체").tag(0)
+                        Text("거리순").tag(1)
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.leading)
+                    .frame(width: 150)
+                    Spacer()
                     HStack{
-                        Picker("Tabs",selection: $viewModel.selectedTab){
-                            Text("전체").tag(0)
-                            Text("거리순").tag(1)
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.leading)
-                        .frame(width: 150)
-                        Spacer()
-                        HStack{
-                            Text(selectedDepartment?.name ?? "진료과")
-                                .font(.system(size: 13))
-                                .padding(.leading,10)
-                                .padding(.vertical, 4)
-                                .foregroundColor(.blue)
-                            Image(systemName: "control")
-                                .rotationEffect(.degrees(180))
-                                .font(.system(size: 10))
-                                .padding(.trailing,7)
-                        }
-                        .background(Color.blue.opacity(0.1))
-                        .cornerRadius(10)
-                        .padding(.trailing)
-                        .shadow(color: .gray.opacity(0.3), radius: 10, x: 10, y: 10)
-                        .onTapGesture {
-                            departSheetShow.toggle()
-                        }
-                        .sheet(isPresented: $departSheetShow){
-                            departmentsChooseSheetView(selectedDepartment: $selectedDepartment, onDepartmentSelect: { department in
-                                self.selectedDepartment = department
-                                viewModel.selectedTab = viewModel.selectedTab
-                                department_id = String(selectedDepartment!.rawValue)
-                                print("id = \(selectedDepartment?.rawValue ?? -1)")
-                            })
-                            .presentationDetents([.height(400),.medium,.large])
-                            .presentationDragIndicator(.automatic)
-                        }
+                        Text(selectedDepartment?.name ?? "진료과")
+                            .font(.system(size: 13))
+                            .padding(.leading,10)
+                            .padding(.vertical, 4)
+                            .foregroundColor(.blue)
+                        Image(systemName: "control")
+                            .rotationEffect(.degrees(180))
+                            .font(.system(size: 10))
+                            .padding(.trailing,7)
+                    }
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(10)
+                    .padding(.trailing)
+                    .shadow(color: .gray.opacity(0.3), radius: 10, x: 10, y: 10)
+                    .onTapGesture {
+                        departSheetShow.toggle()
+                    }
+                    .sheet(isPresented: $departSheetShow){
+                        departmentsChooseSheetView(selectedDepartment: $selectedDepartment, onDepartmentSelect: { department in
+                            self.selectedDepartment = department
+                            viewModel.selectedTab = viewModel.selectedTab
+                            department_id = String(selectedDepartment!.rawValue)
+                            print("id = \(selectedDepartment?.rawValue ?? -1)")
+                        })
+                        .presentationDetents([.height(400),.medium,.large])
+                        .presentationDragIndicator(.automatic)
                     }
                 }
-                List(hospitals.indices, id: \.self) {index in
-                    FindHosptialItem(hospital: $hospitals[index])
-                        .onTapGesture {
-                            path.append(index)
-                        }
+            }
+            List(hospitals.indices, id: \.self) {index in
+                FindHosptialItem(hospital: $hospitals[index])
+                    .onTapGesture {
+                        router.ReservationInit()
+                        router.tabPush(to: Route.hospital(item: hospitalParseParam(id: hospitals[index].hospital_id, name: "hospitalDitailView", hospital_id:hospitals[index].hospital_id , startTiome: hospitals[index].start_time, EndTime: hospitals[index].end_time, MainImage: hospitals[index].icon)))
+                    }
                     .onAppear {
                         if hospitals[index] == hospitals.last {
                             print(hospitals.last ?? "default value")
                             print("isBottom")
                         }
                     }
-                }
-                .navigationDestination(for: Int.self){index in
-                    HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
-                }
-                .listStyle(InsetListStyle())
-                .padding(.top, 10)
             }
-            .onAppear{
-                locationService.requestLocation()
-                requestList.CallHospitalList(orderBy: "name", x: "", y: "", keyword: keyword, department_id: department_id){ result in
+//            .navigationDestination(for: Int.self){index in
+//                HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
+//            }
+            .listStyle(InsetListStyle())
+            .padding(.top, 10)
+        }
+        .onAppear{
+            locationService.requestLocation()
+            requestList.CallHospitalList(orderBy: "name", x: "", y: "", keyword: keyword, department_id: department_id){ result in
+                print("isChange?")
+                switch result {
+                case .success(let hospitals):
+                    self.hospitals = hospitals
+                case .failure(let error):
+                    print("Failed Recevied Hospital: \(error)")
+                }
+            }
+        }
+        .onReceive(viewModel.$selectedTab){ newSelectedTab in
+            self.hospitals = []
+            if newSelectedTab == 0{
+                order = "name"
+            }else if newSelectedTab == 1{
+                order = "distance"
+            }
+            if order == "name"{
+                requestList.CallHospitalList(orderBy: order, x: "", y: "", keyword: keyword, department_id: department_id){ result in
+                    print("isChange?")
+                    switch result {
+                    case .success(let hospitals):
+                        self.hospitals = hospitals
+                    case .failure(let error):
+                        print("Failed Recevied Hospital: \(error)")
+                    }
+                }
+            }else{
+                requestList.CallHospitalList(orderBy: order, x: locationService.longitude ?? "123.123", y: locationService.latitude ?? "123.123", keyword: keyword, department_id: department_id){ result in
                     print("isChange?")
                     switch result {
                     case .success(let hospitals):
@@ -134,51 +159,22 @@ struct FindHospitalView: View {
                     }
                 }
             }
-            .onReceive(viewModel.$selectedTab){ newSelectedTab in
-                print("selctedTeb Check : \(newSelectedTab)")
-                self.hospitals = []
-                if newSelectedTab == 0{
-                    order = "name"
-                }else if newSelectedTab == 1{
-                    order = "distance"
-                }
-                if order == "name"{
-                    requestList.CallHospitalList(orderBy: order, x: "", y: "", keyword: keyword, department_id: department_id){ result in
-                        print("isChange?")
-                        switch result {
-                        case .success(let hospitals):
-                            self.hospitals = hospitals
-                        case .failure(let error):
-                            print("Failed Recevied Hospital: \(error)")
-                        }
-                    }
-                }else{
-                    requestList.CallHospitalList(orderBy: order, x: locationService.longitude ?? "123.123", y: locationService.latitude ?? "123.123", keyword: keyword, department_id: department_id){ result in
-                        print("isChange?")
-                        switch result {
-                        case .success(let hospitals):
-                            self.hospitals = hospitals
-                        case .failure(let error):
-                            print("Failed Recevied Hospital: \(error)")
-                        }
-                    }
-                }
-            }
-            .background(Color("backColor"))
-            .navigationTitle("어떤 병원을 찾고 있으세요?")
-            .navigationBarTitleDisplayMode(.inline)
-            //            뒤로가기
-            .toolbar{
-                ToolbarItem(placement: .navigation){
-                    Button(action:{
-                        router.currentView = .tab
-                    }){
-                        Image(systemName: "chevron.left")
-                    }
-                }
-            }
-            //            여기까지
         }
+        .background(Color("backColor"))
+        .navigationTitle("어떤 병원을 찾고 있으세요?")
+        .navigationBarTitleDisplayMode(.inline)
+        //            뒤로가기
+        .toolbar{
+            ToolbarItem(placement: .navigation){
+                Button(action:{
+                    router.currentView = .tab
+                }){
+                    Image(systemName: "chevron.left")
+                }
+            }
+        }
+        //            여기까지
+        
     }
     
 }

@@ -23,7 +23,7 @@ struct RouteFinder {
                 print("false")
                 return (nil,"")
             }
-            let URLData = parseParam(id: Int(chatIdVal)!, name: descQueryVal, hospital_id: Int(hospitalIdVal)!)
+            let URLData = chatParseParam(id: Int(chatIdVal)!, name: descQueryVal, hospital_id: Int(hospitalIdVal)!)
             return (Route.chat(data:URLData),"chat")
         default:
             return (nil,"")

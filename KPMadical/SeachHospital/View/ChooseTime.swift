@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ChooseTime: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @ObservedObject var HospitalInfo: HospitalDataHandler
-    @Binding var info: reservationInfo
+    @EnvironmentObject var userInfo: UserInformation
+    @EnvironmentObject var router: GlobalViewRouter
     @State var reservation: [HospitalDataManager.Reservation] = []
     let requestData = HospitalHTTPRequest()
     @State var timeSlot: Int = 0
@@ -44,7 +42,7 @@ struct ChooseTime: View {
                 .padding(.bottom,10)
             HStack{
                 VStack{
-                    Text(info.date)
+                    Text(router.HospitalReservationData!.date)
                         .font(.system(size: 14))
                         .padding(.leading)
                     Text("\(selectedTime)")
@@ -67,32 +65,33 @@ struct ChooseTime: View {
                     )
                     .padding(.trailing,40)
                     .onTapGesture {
-                        info.time = selectedTime
+                        router.HospitalReservationData!.time = selectedTime
                         if selectedTime != ""{
-                            path.append(HospitalDataHandler.GotoLast.textfiledView)
+                            router.tabPush(to: Route.item(item: ViewPathAddress(name: "symptomEditor", page: 7, id: 7)))
+//                            path.append(HospitalDataHandler.GotoLast.textfiledView)
                         }
                     }
             }
             .navigationTitle("예약 시간을 선택해주세요")
         }
-        .navigationDestination(for: HospitalDataHandler.GotoLast.self){ value in
-            switch value{
-            case .textfiledView:
-                symptomTextFiledView(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo, info: $info)
-            }
-        }
+//        .navigationDestination(for: HospitalDataHandler.GotoLast.self){ value in
+//            switch value{
+//            case .textfiledView:
+//                symptomTextFiledView()
+//            }
+//        }
         .background(Color.gray.opacity(0.09))
         .onAppear{
-            requestData.GetReservations(token: userInfo.token, uid: getDeviceUUID(), date: info.date, staff_id: String(info.staff_id)){
+            requestData.GetReservations(token: userInfo.token, uid: getDeviceUUID(), date: router.HospitalReservationData!.date, staff_id: String(router.HospitalReservationData!.staff_id)){
                 value in
                 DispatchQueue.main.async{
                     reservation = value
                     self.reservedTimes = value.map { $0.time }
-                    self.timeSlot = Int(info.time_slot) ?? 10
-                    self.startTime1 = HospitalInfo.GetStartTime1(staff_id: info.staff_id , date: info.date)
-                    self.endTime1 = HospitalInfo.GetEndTime1(staff_id: info.staff_id , date: info.date)
-                    self.startTime2 = HospitalInfo.GetStartTime2(staff_id: info.staff_id , date: info.date)
-                    self.endTime2 = HospitalInfo.GetEndTime2(staff_id: info.staff_id , date: info.date)
+                    self.timeSlot = Int(router.HospitalReservationData!.time_slot) ?? 10
+                    self.startTime1 = router.hospital_data!.GetStartTime1(staff_id: router.HospitalReservationData!.staff_id , date: router.HospitalReservationData!.date)
+                    self.endTime1 = router.hospital_data!.GetEndTime1(staff_id: router.HospitalReservationData!.staff_id , date:  router.HospitalReservationData!.date)
+                    self.startTime2 = router.hospital_data!.GetStartTime2(staff_id: router.HospitalReservationData!.staff_id , date: router.HospitalReservationData!.date)
+                    self.endTime2 = router.hospital_data!.GetEndTime2(staff_id: router.HospitalReservationData!.staff_id , date: router.HospitalReservationData!.date)
                     isApper = true
                 }
             }

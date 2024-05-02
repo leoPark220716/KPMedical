@@ -9,6 +9,9 @@ import Foundation
 
 class HospitalDataHandler: ObservableObject {
     @Published var CheckLoadingState = false
+    @Published var DoctorProfile: [HospitalDataManager.Doctor] = []
+    @Published var CheckFirst: Bool = false
+    
     var HospitalDetailData = HospitalDataManager.HospitalDataClass()
     
     func GetDoctorArray() -> [HospitalDataManager.Doctor] {

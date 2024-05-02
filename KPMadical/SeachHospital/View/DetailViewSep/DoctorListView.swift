@@ -12,7 +12,7 @@ struct DoctorListView: View{
     var body: some View{
         if !DoctorProfile.isEmpty{
             ForEach(DoctorProfile.indices, id: \.self) { item in
-                DoctorItemView(DoctorProfile: $DoctorProfile[item])
+                DoctorItemView(DoctorProfile: DoctorProfile[item])
             }
         }else{
             Spacer()

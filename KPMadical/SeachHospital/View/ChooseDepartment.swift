@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct ChooseDepartment: View {
-    @Binding var path: NavigationPath
-    @ObservedObject var userInfo: UserInformation
-    @ObservedObject var HospitalInfo: HospitalDataHandler
+    @EnvironmentObject var userInfo: UserInformation
+    @EnvironmentObject var router: GlobalViewRouter
     @State private var selectedId: Int? = nil
 //    Toast 메시지
     @State private var toast: FancyToast? = nil
-    @Binding var info: reservationInfo
+    
     var body: some View {
         ScrollView{
             VStack(alignment:.center){
-                ForEach(HospitalInfo.HospitalDetailData.hospital.department_id, id: \.self){ id in
+                ForEach(router.hospital_data!.HospitalDetailData.hospital.department_id, id: \.self){ id in
                     let intid = Int(id)
                     if let department = Department(rawValue: intid ?? 0){
                         DepartmentView(name: department.name, isSelected: selectedId == Int(id))
                             .onTapGesture {
                                 self.selectedId = Int(id)
-                                info.department_id = id
+                                router.HospitalReservationData!.department_id = id
                             }
                     }
                 }
@@ -36,14 +35,16 @@ struct ChooseDepartment: View {
         HStack{
             Spacer()
             if selectedId != nil{
-                NavigationLink(value: HospitalDataHandler.ChooseDateOrDoctor.doctor){
-                    Text("의료진")
-                        .modifier(ButtonStyleModifier(isEnabled: true))
-                }
-                NavigationLink(value: HospitalDataHandler.ChooseDateOrDoctor.date_day){
-                    Text("진료일")
-                        .modifier(ButtonStyleModifier(isEnabled: true))
-                }
+                Text("의료진")
+                    .modifier(ButtonStyleModifier(isEnabled: true))
+                    .onTapGesture{
+                        router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooesDocor", page: 4, id: 4)))
+                    }
+                Text("진료일")
+                    .modifier(ButtonStyleModifier(isEnabled: true))
+                    .onTapGesture{
+                        router.tabPush(to: Route.item(item: ViewPathAddress(name: "ChooseDate", page: 5, id: 5)))
+                    }
             }else{
                 Text("의료진")
                     .modifier(ButtonStyleModifier(isEnabled: true))
@@ -58,14 +59,14 @@ struct ChooseDepartment: View {
             }
             Spacer()
         }
-        .navigationDestination(for:HospitalDataHandler.ChooseDateOrDoctor.self){ value in
-            switch value{
-            case .date_day:
-                ChooseDate(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo,CheckFirst: true,info: $info)
-            case .doctor:
-                ChooseDorcor(path: $path, userInfo: userInfo, HospitalInfo: HospitalInfo,CheckFirst: true,info: $info)
-            }
-        }
+//        .navigationDestination(for:HospitalDataHandler.ChooseDateOrDoctor.self){ value in
+//            switch value{
+//            case .date_day:
+//                ChooseDate()
+//            case .doctor:
+//                ChooseDorcor()
+//            }
+//        }
     }
 }
 struct ButtonStyleModifier: ViewModifier {
