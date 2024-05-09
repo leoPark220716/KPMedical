@@ -51,6 +51,9 @@ public class UserInformation: ObservableObject {
         self.FCMToken = fcmToken
         print("✅ fcmToken \(FCMToken)")
         print("✅ token \(token)")
+        if token != "" {
+            TokenToServer(httpMethod: "PATCH")
+        }
     }
     func SetChatItem(chatItems: [ChatHTTPresponseStruct.ChatListArray]){
         DispatchQueue.main.async {
@@ -80,20 +83,23 @@ public class UserInformation: ObservableObject {
         print("👀 FCMToken server Call : \(httpMethod)")
         print("👀 FCMToken server token : \(token)")
         print("👀 FCMToken server FCMToken : \(FCMToken)")
-        let BodyData = FcmToken.FcmTokenSend.init(fcm_token: FCMToken)
-        let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
-            method: httpMethod,
-            urlParse: "v2/fcm",
-            token: token ,
-            UUID: getDeviceUUID(),
-            requestVal: BodyData
-        )
-        Task{
-         let result = await KPWalletApi(HttpStructs: httpStruct)
-            if result.success{
-                print(result.data?.message ?? "Option Null")
-            }else{
-                print(result.data?.message ?? "Option Null")
+        print("👀 FCMToken server UUID : \(getDeviceUUID())")
+        if FCMToken != ""{
+            let BodyData = FcmToken.FcmTokenSend.init(fcm_token: FCMToken)
+            let httpStruct = http<FcmToken.FcmTokenSend?, KPApiStructFrom<FcmToken.FcmTokenResponse>>.init(
+                method: httpMethod,
+                urlParse: "v2/fcm",
+                token: token ,
+                UUID: getDeviceUUID(),
+                requestVal: BodyData
+            )
+            Task{
+             let result = await KPWalletApi(HttpStructs: httpStruct)
+                if result.success{
+                    print(result.data?.message ?? "Option Null")
+                }else{
+                    print(result.data?.message ?? "Option Null")
+                }
             }
         }
     }

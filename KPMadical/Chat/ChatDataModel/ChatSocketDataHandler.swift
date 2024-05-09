@@ -385,7 +385,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                     textItem.ReadCount = true
                     ChatPreData.append(textItem)
                 }else{
-                    var textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray)
+                    let textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray)
                     
                     ChatPreData.append(textItem)
                 }
@@ -414,6 +414,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             print("이미지 버켓 : \(image[index].1)")
             Array.append("https://\(image[index].0).s3.ap-northeast-2.amazonaws.com/\(image[index].1)")
             print("https://\(image[index].0).s3.ap-northeast-2.amazonaws.com/\(image[index].1)")
+        
         }
         print("여기까지")
         if !Array.isEmpty{

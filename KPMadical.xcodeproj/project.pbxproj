@@ -80,6 +80,8 @@
 		1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A0F2BAC4AC400E7BC6A /* NaverGeocoder.swift */; };
 		1EB02A142BAC5BCA00E7BC6A /* HomViewHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */; };
 		1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */; };
+		1EB969D92BED17110045A994 /* myHospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB969D82BED17110045A994 /* myHospital.swift */; };
+		1EB969DB2BED180F0045A994 /* MyHospitalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB969DA2BED180F0045A994 /* MyHospitalRequest.swift */; };
 		1EBACA992BDF9302003EF784 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBACA982BDF9302003EF784 /* FileManager.swift */; };
 		1ECC00932BAC0809009B2006 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC00922BAC0809009B2006 /* NaverMap.swift */; };
 		1ED17A5D2BC296E00028AE83 /* MyChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED17A5C2BC296E00028AE83 /* MyChatItem.swift */; };
@@ -216,6 +218,8 @@
 		1EB02A132BAC5BCA00E7BC6A /* HomViewHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomViewHttp.swift; sourceTree = "<group>"; };
 		1EB532A32BB1CA4600E1958C /* DoctorItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorItemView.swift; path = ../DoctorItemView.swift; sourceTree = "<group>"; };
 		1EB7BA2E2BD0322000744717 /* KPMadical.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KPMadical.entitlements; sourceTree = "<group>"; };
+		1EB969D82BED17110045A994 /* myHospital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myHospital.swift; sourceTree = "<group>"; };
+		1EB969DA2BED180F0045A994 /* MyHospitalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHospitalRequest.swift; sourceTree = "<group>"; };
 		1EBACA982BDF9302003EF784 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1ECC00922BAC0809009B2006 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		1ECDEB752BD02B8E00E45E56 /* KPMadicalRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KPMadicalRelease.entitlements; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				1EFFBBF32BB5B0C90079B6EE /* reservationSuccessView.swift */,
 				1E8760982BB7D8BF0021F70A /* TimeItemsView.swift */,
 				1E777C222BB322E100B2BC39 /* CustomCalender.swift */,
+				1EB969D82BED17110045A994 /* myHospital.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				1ED7958C2BACE71C00084CAE /* keywordModel.swift */,
 				1EDCAD6A2BB19D4B00FC0C9B /* HospitalDetailModel.swift */,
 				1E370E9E2BB2A148001BA38E /* HospitalDataHandler.swift */,
+				1EB969DA2BED180F0045A994 /* MyHospitalRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1057,6 +1063,7 @@
 				1EAEF4902BBD90FC00F06BFB /* KeyChain.swift in Sources */,
 				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
 				1EAEF4852BBD4E1400F06BFB /* KNPWalletView.swift in Sources */,
+				1EB969DB2BED180F0045A994 /* MyHospitalRequest.swift in Sources */,
 				1E7C6FF82BE3FCAC00D0CB12 /* newPassword.swift in Sources */,
 				1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E5A3C082BCA9E6E00DA761F /* SocketConnection.swift in Sources */,
+				1EB969D92BED17110045A994 /* myHospital.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */,
 				1E8760992BB7D8BF0021F70A /* TimeItemsView.swift in Sources */,
 				1ED7958D2BACE71C00084CAE /* keywordModel.swift in Sources */,

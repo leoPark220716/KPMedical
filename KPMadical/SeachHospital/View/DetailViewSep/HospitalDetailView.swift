@@ -14,13 +14,13 @@ struct HospitalDetailView: View {
     let requestData = HospitalHTTPRequest()
     @State private var mapCoord = NMGLatLng(lat: 0.0, lng: 0.0)
     //    데이터 헨들러 디텔뷰에서 들어갈 때 해당 객체로 데이터 다 다룰듯
-    
     //    의사 스케줄 반영에 따른 시간표 출력 배열
     @State var HospitalSchedules: [HospitalDataManager.Schedule] = []
     //    의사 프로필 데이터
     @State var DoctorProfile: [HospitalDataManager.Doctor] = []
     //    최종 저장할 때 사용할 구조체
     @EnvironmentObject var router: GlobalViewRouter
+    @State var marked = false
     var body: some View {
         ZStack{
             VStack{
@@ -28,9 +28,9 @@ struct HospitalDetailView: View {
                     VStack{
                         if router.hospital_data!.CheckLoadingState {
                             HospitalDetailTop(
-                                              StartTime: data.startTiome,
-                                              EndTime: data.EndTime,
-                                              MainImage: data.MainImage)
+                                StartTime: data.startTiome,
+                                EndTime: data.EndTime,
+                                MainImage: data.MainImage)
                             Rectangle()
                                 .frame(height: 1)
                                 .foregroundColor(Color(.init(white: 0, alpha: 0.2)))
@@ -45,51 +45,37 @@ struct HospitalDetailView: View {
                 }.navigationTitle(router.hospital_data!.CheckLoadingState ? router.hospital_data!.HospitalDetailData.hospital.hospital_name : "")
                 HStack{
                     Spacer()
-                    //            NavigationLink(destination: Chat()) {
-//                    NavigationLink(value: HospitalDataHandler.NavigationTarget.counsel){
-                        Text("상담하기")
-                            .padding()
-                            .font(.system(size: 14))
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(Color.blue.opacity(0.5))
-                            .background(Color.white)
-                            .cornerRadius(5)
-                            .bold()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.blue.opacity(0.5), lineWidth: 1)
-                            )
-                            .onTapGesture {
-                                print("병원 아이디")
-                                router.push(baseView: .tab, to:Route.chat(data: chatParseParam(id: 0, name: router.hospital_data!.HospitalDetailData.hospital.hospital_name,hospital_id: data.hospital_id)))
-                            }
-//                    }
-//                    NavigationLink(value: HospitalDataHandler.NavigationTarget.selectDepartment){
-                        Text("예약하기")
-                            .padding()
-                            .font(.system(size: 14))
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(Color.white)
-                            .background(Color.blue.opacity(0.5))
-                            .cornerRadius(5)
-                            .bold()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.blue.opacity(0.5), lineWidth: 1)
-                            )
-                            .onTapGesture {
-                                router.tabPush(to: Route.item(item: ViewPathAddress(name: "chooseDepartMent", page: 3, id: 3)))
-//                                ChooseDepartment()
-                            }
-//                    }
-//                    .navigationDestination(for: HospitalDataHandler.NavigationTarget.self){ value in
-//                        switch value{
-//                        case .counsel:
-//                            EmptyView()
-//                        case .selectDepartment:
-//                            ChooseDepartment(userInfo: userInfo, HospitalInfo: router.hospitalDataHandler, info: router.HospitalReservationData)
-//                        }
-//                    }
+                    Text("상담하기")
+                        .padding()
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(Color.blue.opacity(0.5))
+                        .background(Color.white)
+                        .cornerRadius(5)
+                        .bold()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.blue.opacity(0.5), lineWidth: 1)
+                        )
+                        .onTapGesture {
+                            print("병원 아이디")
+                            router.push(baseView: .tab, to:Route.chat(data: chatParseParam(id: 0, name: router.hospital_data!.HospitalDetailData.hospital.hospital_name,hospital_id: data.hospital_id)))
+                        }
+                    Text("예약하기")
+                        .padding()
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue.opacity(0.5))
+                        .cornerRadius(5)
+                        .bold()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.blue.opacity(0.5), lineWidth: 1)
+                        )
+                        .onTapGesture {
+                            router.tabPush(to: Route.item(item: ViewPathAddress(name: "chooseDepartMent", page: 3, id: 3)))
+                        }
                     Spacer()
                 }
             }
@@ -99,6 +85,18 @@ struct HospitalDetailView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.black.opacity(0.5)) // 반투명 배경
                     .foregroundColor(.white)
+            }
+        }
+        .toolbar{
+            ToolbarItem(placement: .navigation){
+                Button(action:{
+                    Task{
+                        marked = await requestData.LikeHospital(token: userInfo.token, hospital_id: data.hospital_id)
+                    }
+                }){
+                    Image(systemName: marked ? "heart.fill" : "heart")
+                        .foregroundStyle(marked ? Color.red : Color.gray)
+                }
             }
         }
         .onAppear{
@@ -111,6 +109,7 @@ struct HospitalDetailView: View {
                 DispatchQueue.main.async {
                     router.HospitalReservationData!.hospital_id = data.hospital.hospital_id
                     router.HospitalReservationData!.hospital_name = data.hospital.hospital_name
+                    marked = data.hospital.marked == 1
                 }
             }
         }

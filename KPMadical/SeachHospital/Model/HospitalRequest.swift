@@ -21,7 +21,7 @@ struct HospitalDataManager{
         var department_id: [String]
         var start_time: String  // "start_time"으로 수정
         var end_time: String  // "end_time"으로 수정
-
+        
         // JSON의 키와 Swift 프로퍼티 이름 매핑
         enum CodingKeys: String, CodingKey {
             case hospital_id, hospital_name, icon, location, department_id, start_time, end_time
@@ -37,7 +37,6 @@ struct HospitalDataManager{
         let doctors: [Doctor]
         let error_code :Int
         let error_stack :String
-        
         init() {
             self.hospital = Hospital_Detail() // 여기서 '...'은 Hospital_Detail의 기본값을 나타냄
             self.doctors = [] // 빈 배열 또는 기본 의사 목록
@@ -55,21 +54,21 @@ struct HospitalDataManager{
         var department_id: [String]
         var marked: Int
         init(hospital_id: Int = 0,
-                hospital_name: String = "",
-                location: String = "",
-                x: Double = 0.0,
-                y: Double = 0.0,
-                department_id: [String] = [],
-                marked: Int = 0) {
-               self.hospital_id = hospital_id
-               self.hospital_name = hospital_name
-               self.location = location
-               self.x = x
-               self.y = y
-               self.phone = ""
-               self.department_id = department_id
-               self.marked = marked
-           }
+             hospital_name: String = "",
+             location: String = "",
+             x: Double = 0.0,
+             y: Double = 0.0,
+             department_id: [String] = [],
+             marked: Int = 0) {
+            self.hospital_id = hospital_id
+            self.hospital_name = hospital_name
+            self.location = location
+            self.x = x
+            self.y = y
+            self.phone = ""
+            self.department_id = department_id
+            self.marked = marked
+        }
     }
     struct Doctor: Codable{
         var staff_id: Int
@@ -94,7 +93,7 @@ struct HospitalDataManager{
         let maxReservation: Int
         let dayoff: String
         let name: String
-
+        
         enum CodingKeys: String, CodingKey {
             case scheduleId = "schedule_id"
             case hospitalId = "hospital_id"
@@ -119,10 +118,10 @@ struct HospitalDataManager{
     }
     struct Reservation: Codable {
         var reservation_id: Int
-            var hospital_id: Int
-            var staff_id: Int
-            var date: String
-            var time: String
+        var hospital_id: Int
+        var staff_id: Int
+        var date: String
+        var time: String
     }
     struct reservationResponse: Codable{
         var access_token: String
@@ -142,20 +141,19 @@ struct HospitalDataManager{
     }
 }
 class HospitalDataManagerClass {
-//    var hospitalData: HospitalDataManager.HospitalData?
-//
-//    func updateHospitalData(with data: HospitalDataManager.HospitalData) {
-//        self.hospitalData = data
-//    }
-//
-//    func clearHospitalData() {
-//        self.hospitalData = nil
-//    }
+    //    var hospitalData: HospitalDataManager.HospitalData?
+    //
+    //    func updateHospitalData(with data: HospitalDataManager.HospitalData) {
+    //        self.hospitalData = data
+    //    }
+    //
+    //    func clearHospitalData() {
+    //        self.hospitalData = nil
+    //    }
 }
 
 class HospitalHTTPRequest {
     typealias HospitalListCompletion = (Result<[HospitalDataManager.Hospitals], Error>) -> Void
-    
     func CallHospitalList(orderBy: String, x: String, y:String, keyword:String,department_id:String,completion: @escaping HospitalListCompletion) {
         var urlString = "https://kp-medicals.com/api/medical-wallet/hospitals"
         func appendParameter(key: String, value: String) {
@@ -277,7 +275,7 @@ class HospitalHTTPRequest {
         return url
     }
     func GetReservations(token: String, uid:String, date:String, staff_id: String, httpHandler: @escaping ([HospitalDataManager.Reservation]) -> Void){
-     let urlString = "https://kp-medicals.com/api/medical-wallet/hospitals/reservations/list/doctor?access_token=\(token)&uid=\(uid)&date=\(date)&staff_id=\(staff_id)"
+        let urlString = "https://kp-medicals.com/api/medical-wallet/hospitals/reservations/list/doctor?access_token=\(token)&uid=\(uid)&date=\(date)&staff_id=\(staff_id)"
         print(urlString)
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
@@ -348,6 +346,38 @@ class HospitalHTTPRequest {
                     }
                 }
             }.resume()
+        }
+    }
+    func LikeHospital(token : String,hospital_id: Int) async -> Bool{
+        let BodyData = PostBody.init(access_token: token, uid: getDeviceUUID(), hospital_id: hospital_id)
+        let httpStruct = http<PostBody?, KPApiStructFrom<ResponseBody>>.init(
+            method: "POST",
+            urlParse: "users/marks",
+            token: token ,
+            UUID: getDeviceUUID(),
+            requestVal: BodyData
+        )
+        
+        let result = await KPWalletApi(HttpStructs: httpStruct)
+        if result.success{
+            print(result.data?.message ?? "Option Null")
+            let marked = (result.data?.data.mark_id ?? -1) != -1 ? true : false
+            return marked
+        }else{
+            print(result.data?.message ?? "Option Null")
+            return false
+        }
+        
+        struct PostBody: Codable{
+            var access_token: String
+            var uid: String
+            var hospital_id: Int
+        }
+        struct ResponseBody: Codable{
+            var access_token: String
+            var mark_id: Int
+            var error_code: Int
+            var error_stack: String
         }
     }
 }

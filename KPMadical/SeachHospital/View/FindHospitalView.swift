@@ -22,6 +22,7 @@ struct FindHospitalView: View {
     @State var department_id = ""
     @State var keyword = ""
     @State var order = "name"
+    @State var marked = false
     //    좌표 찾기 객체, 해당 객체 안에서 Naver API 사용하여 좌표를 주소로 반환
     @StateObject private var locationService = LocationService()
     @State private var selectedNumber = 0
@@ -113,9 +114,6 @@ struct FindHospitalView: View {
                         }
                     }
             }
-//            .navigationDestination(for: Int.self){index in
-//                HospitalDetailView(path: $path,userInfo:userInfo,StartTime:hospitals[index].start_time,EndTime:hospitals[index].end_time, HospitalId: hospitals[index].hospital_id, MainImage: hospitals[index].icon)
-//            }
             .listStyle(InsetListStyle())
             .padding(.top, 10)
         }
@@ -163,16 +161,7 @@ struct FindHospitalView: View {
         .background(Color("backColor"))
         .navigationTitle("어떤 병원을 찾고 있으세요?")
         .navigationBarTitleDisplayMode(.inline)
-        //            뒤로가기
-        .toolbar{
-            ToolbarItem(placement: .navigation){
-                Button(action:{
-                    router.currentView = .tab
-                }){
-                    Image(systemName: "chevron.left")
-                }
-            }
-        }
+        
         //            여기까지
         
     }

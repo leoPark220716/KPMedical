@@ -11,7 +11,6 @@ struct ChatList: View {
     @EnvironmentObject var router: GlobalViewRouter
     @EnvironmentObject var authViewModel: UserInformation
     @State var ChatViewGo = false
-    
     var body: some View {
         VStack{
             List(authViewModel.chatItem.indices, id: \.self){ index in
@@ -33,7 +32,7 @@ struct ChatList: View {
             }
         }
         .onDisappear{
-            authViewModel.RemoveChatItems()
+//            authViewModel.RemoveChatItems()
         }
     }
 }

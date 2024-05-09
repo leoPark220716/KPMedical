@@ -34,12 +34,13 @@ struct tabView: View {
     @EnvironmentObject var router: GlobalViewRouter
     @StateObject private var loginManager = LoginManager(LoginStatus: false)
     @State private var title: String = ""
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
     var body: some View {
         NavigationStack(path: $router.routes){
             TabView (selection: $router.exportTapView){
                 HomeView(logined: loginManager.LoginStatus)
-                // 이 부분을 ScrollView 밖으로 이동
-                // 필요한 경우 타이틀 표시 모드를 조정
                     .tabItem {
                         Label("홈", systemImage: "house")
                     }
@@ -49,10 +50,7 @@ struct tabView: View {
                         Label("상담", systemImage: "message")
                     }
                     .tag(BottomTab .chat)
-                
-                //                    Hospital(Count: countModel)
-                
-                AccountView()
+                myHospital()
                 .tabItem {
                     Label("내병원", systemImage: "stethoscope")
                 }

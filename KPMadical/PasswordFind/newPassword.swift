@@ -43,7 +43,7 @@ struct newPassword: View {
                     }
                 }
         }
-        .navigationTitle("지갑 비밀번호 등록")
+        .navigationTitle("새비밀번호 등록")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
