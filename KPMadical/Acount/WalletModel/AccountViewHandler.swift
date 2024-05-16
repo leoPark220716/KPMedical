@@ -8,9 +8,6 @@
 import Foundation
 
 class AccountViewHandler{
-    
-    
-    
     func TokenToServer(httpMethod: String, token: String,FCMToken: String) async -> Bool{
         print("👀 FCMToken server Call : \(httpMethod)")
         print("👀 FCMToken server token : \(token)")

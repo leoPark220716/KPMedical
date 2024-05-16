@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E09364A2BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0936482BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.json */; };
+		1E09364B2BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1E0936492BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin */; };
+		1E09364E2BF62FF3008BEA3D /* userInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09364D2BF62FF3008BEA3D /* userInfoRequest.swift */; };
+		1E0936502BF63BDB008BEA3D /* accountDeep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09364F2BF63BDB008BEA3D /* accountDeep.swift */; };
+		1E0936522BF643FC008BEA3D /* currentPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0936512BF643FC008BEA3D /* currentPass.swift */; };
+		1E0936542BF64890008BEA3D /* findPassModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0936532BF64890008BEA3D /* findPassModal.swift */; };
+		1E0936562BF64F1B008BEA3D /* NewPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0936552BF64F1B008BEA3D /* NewPhoneNumberView.swift */; };
+		1E0D0D652BF3C91600363FC1 /* newAccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0D0D642BF3C91600363FC1 /* newAccountTest.swift */; };
+		1E0D0D672BF3D55B00363FC1 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0D0D662BF3D55B00363FC1 /* UserInfoView.swift */; };
 		1E130CA72BB5CE5A004F7C36 /* ReservationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */; };
 		1E1636C52BD68E0B00A0A38B /* ChatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */; };
 		1E18A2E52BAAAFFE00466221 /* TestNVSTack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E18A2E42BAAAFFE00466221 /* TestNVSTack.swift */; };
@@ -107,9 +116,6 @@
 		1EED4F1D2BD550DB0005F267 /* RouteFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED4F1C2BD550DB0005F267 /* RouteFinder.swift */; };
 		1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */; };
 		1EF3ABEC2BB8551600B6DE56 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF3ABEB2BB8551600B6DE56 /* web3swift */; };
-		1EFC07EA2BBC39A900ED9F3D /* PersonalRecords.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */; };
-		1EFC07EB2BBC39A900ED9F3D /* PersonalRecords.abi in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */; };
-		1EFC07EC2BBC39A900ED9F3D /* PersonalRecords.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */; };
 		1EFF61982BCF4A2F000BB898 /* SocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61972BCF4A2F000BB898 /* SocketModel.swift */; };
 		1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */; };
 		1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */; };
@@ -144,6 +150,15 @@
 /* Begin PBXFileReference section */
 		0885E87C3F41109616F52EE9 /* Pods_KPMadicalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadicalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15D55CA9484DF1CF529D9C2A /* Pods-KPMadicalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KPMadicalTests.debug.xcconfig"; path = "Target Support Files/Pods-KPMadicalTests/Pods-KPMadicalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E0936482BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PersonalRecords_sol_PersonalRecords.json; sourceTree = "<group>"; };
+		1E0936492BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = PersonalRecords_sol_PersonalRecords.bin; sourceTree = "<group>"; };
+		1E09364D2BF62FF3008BEA3D /* userInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfoRequest.swift; sourceTree = "<group>"; };
+		1E09364F2BF63BDB008BEA3D /* accountDeep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountDeep.swift; sourceTree = "<group>"; };
+		1E0936512BF643FC008BEA3D /* currentPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentPass.swift; sourceTree = "<group>"; };
+		1E0936532BF64890008BEA3D /* findPassModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = findPassModal.swift; sourceTree = "<group>"; };
+		1E0936552BF64F1B008BEA3D /* NewPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhoneNumberView.swift; sourceTree = "<group>"; };
+		1E0D0D642BF3C91600363FC1 /* newAccountTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAccountTest.swift; sourceTree = "<group>"; };
+		1E0D0D662BF3D55B00363FC1 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		1E130CA62BB5CE5A004F7C36 /* ReservationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailView.swift; sourceTree = "<group>"; };
 		1E14AEB62BB028F7009A0325 /* Scadul.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scadul.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1E1636C42BD68E0B00A0A38B /* ChatListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListItem.swift; sourceTree = "<group>"; };
@@ -248,9 +263,6 @@
 		1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1EED4F1C2BD550DB0005F267 /* RouteFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinder.swift; sourceTree = "<group>"; };
 		1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocket.swift; sourceTree = "<group>"; };
-		1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = PersonalRecords.bin; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.bin"; sourceTree = "<group>"; };
-		1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PersonalRecords.abi; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.abi"; sourceTree = "<group>"; };
-		1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PersonalRecords.json; path = "../../../../Downloads/환자 진료기록 저장 컨트랙트 참고 파일/PersonalRecords.json"; sourceTree = "<group>"; };
 		1EFF61972BCF4A2F000BB898 /* SocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketModel.swift; sourceTree = "<group>"; };
 		1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketDataHandler.swift; sourceTree = "<group>"; };
 		1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketRequest.swift; sourceTree = "<group>"; };
@@ -300,6 +312,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E09364C2BF62FDE008BEA3D /* AccountModel */ = {
+			isa = PBXGroup;
+			children = (
+				1E09364D2BF62FF3008BEA3D /* userInfoRequest.swift */,
+			);
+			path = AccountModel;
+			sourceTree = "<group>";
+		};
 		1E18A2E62BAAF41700466221 /* SeachHospital */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +468,7 @@
 		1E64CBF02BA050A60053A555 /* Acount */ = {
 			isa = PBXGroup;
 			children = (
+				1E09364C2BF62FDE008BEA3D /* AccountModel */,
 				1EAEF48C2BBD8F2E00F06BFB /* WalletModel */,
 				1EAEF4892BBD83B100F06BFB /* View */,
 				1EAEF4862BBD79F100F06BFB /* DataModel */,
@@ -476,6 +497,8 @@
 				1E7C6FF32BE3E7A500D0CB12 /* DataRequest.swift */,
 				1E7C6FF52BE3F47D00D0CB12 /* MobileOPT.swift */,
 				1E7C6FF72BE3FCAC00D0CB12 /* newPassword.swift */,
+				1E0936512BF643FC008BEA3D /* currentPass.swift */,
+				1E0936532BF64890008BEA3D /* findPassModal.swift */,
 			);
 			path = PasswordFind;
 			sourceTree = "<group>";
@@ -551,6 +574,9 @@
 				1E9681EE2BA19400003F8E4B /* AccountView.swift */,
 				1EAEF4842BBD4E1400F06BFB /* KNPWalletView.swift */,
 				1E2E987D2BBE949F00986597 /* recoverWalletView.swift */,
+				1E0D0D642BF3C91600363FC1 /* newAccountTest.swift */,
+				1E0D0D662BF3D55B00363FC1 /* UserInfoView.swift */,
+				1E09364F2BF63BDB008BEA3D /* accountDeep.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -647,6 +673,7 @@
 				1EE9CB692B9F1F9400E923D9 /* Preview Content */,
 				1E985FA32BB300BB004B516E /* ToastView.swift */,
 				1EE2FE0F2BD01B3B0073CA7B /* AppDelegate.swift */,
+				1E0936552BF64F1B008BEA3D /* NewPhoneNumberView.swift */,
 			);
 			path = KPMadical;
 			sourceTree = "<group>";
@@ -693,9 +720,8 @@
 		1EFC07E02BBC38CE00ED9F3D /* SmartContract */ = {
 			isa = PBXGroup;
 			children = (
-				1EFC07E82BBC39A900ED9F3D /* PersonalRecords.abi */,
-				1EFC07E72BBC39A900ED9F3D /* PersonalRecords.bin */,
-				1EFC07E92BBC39A900ED9F3D /* PersonalRecords.json */,
+				1E0936482BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.json */,
+				1E0936492BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin */,
 			);
 			path = SmartContract;
 			sourceTree = "<group>";
@@ -869,12 +895,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EFC07EC2BBC39A900ED9F3D /* PersonalRecords.json in Resources */,
 				1EE9CB6B2B9F1F9400E923D9 /* Preview Assets.xcassets in Resources */,
-				1EFC07EA2BBC39A900ED9F3D /* PersonalRecords.bin in Resources */,
+				1E09364A2BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.json in Resources */,
 				1EE9CB682B9F1F9400E923D9 /* Assets.xcassets in Resources */,
-				1EFC07EB2BBC39A900ED9F3D /* PersonalRecords.abi in Resources */,
 				1EE2FE122BD026DC0073CA7B /* GoogleService-Info.plist in Resources */,
+				1E09364B2BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,8 +1042,11 @@
 				1E2E987C2BBE581D00986597 /* HTTPRequest.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
+				1E0936502BF63BDB008BEA3D /* accountDeep.swift in Sources */,
+				1E0D0D672BF3D55B00363FC1 /* UserInfoView.swift in Sources */,
 				1E7C6FF42BE3E7A500D0CB12 /* DataRequest.swift in Sources */,
 				1EAEF4882BBD7A0C00F06BFB /* WalletDataStruct.swift in Sources */,
+				1E0936522BF643FC008BEA3D /* currentPass.swift in Sources */,
 				1EA0CA242BA88719009076F1 /* UserDataHandle.swift in Sources */,
 				1EFFBBF72BB5BD720079B6EE /* myreservationView.swift in Sources */,
 				1E5F6F9C2BCD3A1500787FAC /* ChatViewHandler.swift in Sources */,
@@ -1026,6 +1054,7 @@
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
 				1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
+				1E09364E2BF62FF3008BEA3D /* userInfoRequest.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
 				1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */,
 				1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */,
@@ -1040,12 +1069,14 @@
 				1EFFBBF22BB599A50079B6EE /* symptomTextFiledView.swift in Sources */,
 				1E7B10592BB2F5A8006C4FCA /* PikerViewSelection.swift in Sources */,
 				1E2E987E2BBE949F00986597 /* recoverWalletView.swift in Sources */,
+				1E0936562BF64F1B008BEA3D /* NewPhoneNumberView.swift in Sources */,
 				1E2E98852BBEE01200986597 /* AppPasswordView.swift in Sources */,
 				1E1636C52BD68E0B00A0A38B /* ChatListItem.swift in Sources */,
 				1E517A792BD1347E00820F35 /* ChatTEst.swift in Sources */,
 				1E18A2EB2BAAF76100466221 /* DepartmentsManager.swift in Sources */,
 				1E5A3C0E2BCAD55A00DA761F /* imagePick.swift in Sources */,
 				1E64CBF42BA051740053A555 /* LoginManager.swift in Sources */,
+				1E0D0D652BF3C91600363FC1 /* newAccountTest.swift in Sources */,
 				1ED17A5F2BC296F50028AE83 /* OthersChatItem.swift in Sources */,
 				1EE007BC2BDE3DF30033D2AE /* FileChatView.swift in Sources */,
 				1E7B105B2BB2F5F9006C4FCA /* HospitalDetailIntroView.swift in Sources */,
@@ -1072,6 +1103,7 @@
 				1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */,
 				1EB02A102BAC4AC400E7BC6A /* NaverGeocoder.swift in Sources */,
 				1E5A3C082BCA9E6E00DA761F /* SocketConnection.swift in Sources */,
+				1E0936542BF64890008BEA3D /* findPassModal.swift in Sources */,
 				1EB969D92BED17110045A994 /* myHospital.swift in Sources */,
 				1E64CBF22BA050B50053A555 /* WalletPassword.swift in Sources */,
 				1E8760992BB7D8BF0021F70A /* TimeItemsView.swift in Sources */,

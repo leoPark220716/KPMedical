@@ -36,6 +36,7 @@ enum Route{
     case chat(data: chatParseParam)
     case hospital(item: hospitalParseParam)
     case reservation(item: ReservationParseParam)
+    case pass(item: PassViewPathAddress)
 }
 extension Route: Hashable {
     static func == (lhs: Route, rhs: Route) -> Bool {
@@ -48,6 +49,8 @@ extension Route: Hashable {
             return lhsData.id == rhsData.id && lhsData.name == rhsData.name && lhsData.hospital_id == rhsData.hospital_id && lhsData.startTiome == rhsData.startTiome && lhsData.EndTime == rhsData.EndTime && lhsData.MainImage == rhsData.MainImage
         case (.reservation(let lhsData), .reservation(let rhsData)):
             return lhsData.item == rhsData.item && lhsData.HospitalId == rhsData.HospitalId && lhsData.reservation_id == rhsData.reservation_id
+        case (.pass(let lhsItem), .pass(let rhsItem)):
+            return lhsItem.token == rhsItem.token && lhsItem.page == rhsItem.page && lhsItem.id == rhsItem.id
         default:
             return false
         }
@@ -73,6 +76,11 @@ extension Route: Hashable {
             hasher.combine(data.item)
             hasher.combine(data.HospitalId)
             hasher.combine(data.reservation_id)
+        case .pass(let item):
+            hasher.combine(item.id)  // 예시로 id 사용
+            hasher.combine(item.token)
+            hasher.combine(item.page)
+        
         }
     }
 
@@ -105,6 +113,7 @@ struct PassViewPathAddress {
     var token: String
     var id: String
     var page: Int
+    var type: Int
 }
 
 

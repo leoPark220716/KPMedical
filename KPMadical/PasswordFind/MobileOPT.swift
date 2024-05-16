@@ -19,6 +19,8 @@ struct MobileOPT: View {
     @FocusState private var otpFocused: Bool
     @EnvironmentObject var router: GlobalViewRouter
     let passApi = passwordDataRequest()
+    private let infomation = UserInfoRequest()
+    @EnvironmentObject var authViewModel: UserInformation
     var body: some View {
         VStack {
             Text("휴대전화 인증")
@@ -63,17 +65,29 @@ struct MobileOPT: View {
                 print("👀 \(data.id)")
                 print("👀 \(data.token)")
                 print("👀 \(otp)")
-                Task{
-                    let status = await passApi.checkPasswordChange(otp: otp, account: data.id, token: data.token)
-                    if status.0{
-                        if status.1{
-                            DispatchQueue.main.async{
-                                router.passRoutes.append(PassRoute.item(item: PassViewPathAddress(token: status.2, id: data.id, page: 2)))
+                if data.type == 2 {
+                    Task{
+                        let changes = await infomation.patchMoblie(mobile: data.id, code: otp, verifiy_token: data.token, token: authViewModel.token)
+                        if changes{
+                            DispatchQueue.main.async {
+                                router.routes.removeLast(2)
                             }
                         }
-                    }else{
-                        DispatchQueue.main.async{
-                            router.passRoutes.removeLast()
+                    }
+                } else{
+                    Task{
+                        let status = await passApi.checkPasswordChange(otp: otp, account: data.id, token: data.token)
+                        if status.0{
+                            if status.1{
+                                DispatchQueue.main.async{
+                                    CheckBool = true
+                                    router.passRoutes.append(PassRoute.item(item: PassViewPathAddress(token: status.2, id: data.id, page: 2,type: 1)))
+                                }
+                            }
+                        }else{
+                            DispatchQueue.main.async{
+                                router.passRoutes.removeLast()
+                            }
                         }
                     }
                 }
@@ -85,10 +99,18 @@ struct MobileOPT: View {
             .background(Color("ConceptColor"))
             .cornerRadius(20)
             .onReceive(timer) { _ in
-                if timeRemaining > 0 {
-                    timeRemaining -= 1
+                if data.type == 2{
+                    if timeRemaining > 0 {
+                        timeRemaining -= 1
+                    }else{
+                        router.goBack()
+                    }
                 }else{
-                    router.passRoutes.removeLast()
+                    if timeRemaining > 0 {
+                        timeRemaining -= 1
+                    }else{
+                        router.passRoutes.removeLast()
+                    }
                 }
             }
         }

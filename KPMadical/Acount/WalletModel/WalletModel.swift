@@ -129,12 +129,12 @@ class KNPWallet: RSAKeyManager{
                 return (false, "")
             }
             //        abi 값 추출
-            guard let abiUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "json"), let abiString = try? String(contentsOf: abiUrl) else{
+            guard let abiUrl = Bundle.main.url(forResource: "PersonalRecords_sol_PersonalRecords", withExtension: "json"), let abiString = try? String(contentsOf: abiUrl) else{
                 print("ABI 파일 실패")
                 return (false, "")
             }
             //            solidityCode 추출
-            guard let bytecodeUrl = Bundle.main.url(forResource: "PersonalRecords", withExtension: "bin"),
+            guard let bytecodeUrl = Bundle.main.url(forResource: "PersonalRecords_sol_PersonalRecords", withExtension: "bin"),
                   let bytecodeString = try? "0x"+String(contentsOf: bytecodeUrl) else {
                 print("Bytecode 파일을 로드할 수 없습니다.")
                 return (false, "")

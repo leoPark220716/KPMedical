@@ -22,7 +22,7 @@ class ChatSocketRequest: WebSocket{
                 msg_type: 2,
                 from: from,
                 to: to
-                )
+            )
         }else{
             ChatMessage = SendChatDataModel.ChatMessageContent(
                 msg_type: 3,
@@ -30,7 +30,7 @@ class ChatSocketRequest: WebSocket{
                 to: to,
                 content_type: content_type,
                 content: content)
-
+            
         }
         guard let jsonData = try? JSONEncoder().encode(ChatMessage) else{
             print("JsonData 파싱 실패")
@@ -55,14 +55,14 @@ class ChatSocketRequest: WebSocket{
     }
     func SendFileData(data: Data){
         let message = URLSessionWebSocketTask.Message.data(data)
-            webSocketTask?.send(message, completionHandler: { Error in
-                if let err = Error {
-                    print("Message Sending Err \(err.localizedDescription)")
-        
-                }else{
-                    print("SendSuccess")
-                }
-            })
+        webSocketTask?.send(message, completionHandler: { Error in
+            if let err = Error {
+                print("Message Sending Err \(err.localizedDescription)")
+                
+            }else{
+                print("SendSuccess")
+            }
+        })
     }
 }
 func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType>) async -> (success: Bool, data: ReturnType?){
@@ -85,7 +85,7 @@ func HttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                     print("✅ \(String(describing: HttpStructs.requestVal))")
                 }
                 let (data,response) = try await URLSession.shared.data(for: request)
-
+                
                 guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else{
                     let bodyString = String(data: data, encoding: .utf8)
                     print("Response body: \(bodyString ?? "Null")")
@@ -131,6 +131,9 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
                 request.httpMethod = HttpStructs.method
                 request.setValue("Bearer \(HttpStructs.token)", forHTTPHeaderField: "Authorization")
                 request.setValue(HttpStructs.UUID, forHTTPHeaderField: "X-Device-UUID")
+                print("✅ HeaderValues")
+                print("✅ \(String(describing: HttpStructs.token))")
+                print("✅ \(String(describing: HttpStructs.UUID))")
                 if HttpStructs.method != "GET"{
                     let postData = try JSONEncoder().encode(HttpStructs.requestVal)
                     request.httpBody = postData
@@ -167,7 +170,59 @@ func KPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<Re
         return (false,nil)
     }
 }
-
+func StoneKPWalletApi<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType>,param: [String:String]) async -> (success: Bool, data: ReturnType?){
+    let query = HttpStructs.urlParse
+    if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+        let StringURL = "https://kp-medicals.com/api/medical-wallet/\(encodedQuery)"
+        print(StringURL)
+        guard let Url = makeURLWithQueryParameters(baseURL: StringURL, parameters: param) else{
+            print("URL 생성실패")
+            return (false,nil)
+        }
+        print("SendURL \(Url)")
+        do{
+            var request = URLRequest(url: Url)
+            print("request URL  \(String(describing: request.url))")
+            request.httpMethod = HttpStructs.method
+            if HttpStructs.method != "GET"{
+                let postData = try JSONEncoder().encode(HttpStructs.requestVal)
+                request.httpBody = postData
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                print("✅ \(String(describing: HttpStructs.requestVal))")
+            }
+            let (data,response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else{
+                let bodyString = String(data: data, encoding: .utf8)
+                print("Response body: \(bodyString ?? "Null")")
+                print("Request HTTP response Error \(String(describing: response))")
+                return (false,nil)
+            }
+            let bodyString = String(data: data, encoding: .utf8)
+            print("👀 Response body (\(HttpStructs.method)): \(bodyString ?? "Null")")
+            do {
+                let jsonData = try JSONDecoder().decode(ReturnType.self, from: data)
+                return (true, jsonData)
+            } catch let decodeError {
+                print("JSON Decoding Error: \(decodeError)")
+                return (false, nil)
+            }
+        }catch{
+            print("Request Error \(error)")
+            return (false,nil)
+        }
+        
+        
+    }
+    else{
+        return (false,nil)
+    }
+    func makeURLWithQueryParameters(baseURL: String, parameters: [String: String]) -> URL? {
+        var components = URLComponents(string: baseURL)
+        components?.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        return components?.url
+    }
+}
 
 
 func KPWalletApiCloser<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType> ,completionHandrler: @escaping (Bool, ReturnType?) -> Void){

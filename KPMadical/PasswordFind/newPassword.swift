@@ -31,12 +31,24 @@ struct newPassword: View {
                 .bold()
                 .onTapGesture {
                     if passCheck{
-                        Task{
-                            let success = await passApi.patchPassword(type: 1, new_pass: Checkpassword, pass: "", token:  data.token)
-                            if success{
-                                DispatchQueue.main.async {
-                                    router.currentView = .Login
-                                    router.passRoutes.removeAll()
+                        if data.type == 2{
+                            Task{
+                                let success = await passApi.patchPassword(type: 2, new_pass: Checkpassword, pass: data.id, token:  data.token)
+                                if success{
+                                    router.routes.removeLast(2)
+                                }else{
+                                    router.toast = true
+                                    router.goBack()
+                                }
+                            }
+                        }else{
+                            Task{
+                                let success = await passApi.patchPassword(type: 1, new_pass: Checkpassword, pass: "", token:  data.token)
+                                if success{
+                                    DispatchQueue.main.async {
+                                        router.currentView = .Login
+                                        router.passRoutes.removeAll()
+                                    }
                                 }
                             }
                         }

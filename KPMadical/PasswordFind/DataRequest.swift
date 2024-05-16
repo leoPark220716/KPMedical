@@ -39,6 +39,7 @@ class passwordDataRequest{
     }
     
     func checkPasswordChange(otp: String, account: String, token: String) async -> (Bool,Bool,String) {
+        print("👀 Call checkPasswordChange")
         let httpStruct = http<Empty?, KPApiStructFrom<getBody>>.init(
             method: "GET",
             urlParse: "v2/users/mobile/check?account=\(account)&verify_token=\(token)&code=\(otp)&service_id=1",
@@ -51,12 +52,16 @@ class passwordDataRequest{
             if result.data?.status == 200{
                 return (true,true,result.data!.data.temp_token)
             }else if result.data?.status == 202{
+                print("👀 End checkPasswordChange")
                 return (true,false,"")
             }else{
+                print("👀 End checkPasswordChange")
                 return (true,false,"")
+                
             }
         }else{
             print(result.data?.message ?? "Option Null")
+            print("👀 End checkPasswordChange")
             return (true,false,"")
         }
         struct getBody: Codable{

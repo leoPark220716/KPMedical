@@ -1,7 +1,7 @@
 //
-//  ChatList.swift
+//  ChatList.swiftw
 //  KPMadical
-//
+//w
 //  Created by Junsung Park on 4/13/24.
 //
 
@@ -30,9 +30,6 @@ struct ChatList: View {
                 authViewModel.chatItem = result.data?.data.chats ?? []
                 print("👀  Caht List Open \(String(describing: result.data?.data.chats.first?.last_message))")
             }
-        }
-        .onDisappear{
-//            authViewModel.RemoveChatItems()
         }
     }
 }

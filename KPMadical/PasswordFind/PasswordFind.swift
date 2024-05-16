@@ -26,7 +26,7 @@ struct PasswordFind: View {
                         let success = await passApi.getPasswordOpt(account: account)
                         if success.0{
                             if success.1{
-                                router.passRoutes.append(PassRoute.item(item: PassViewPathAddress(token: success.2, id: account, page: 1)))
+                                router.passRoutes.append(PassRoute.item(item: PassViewPathAddress(token: success.2, id: account, page: 1,type: 1)))
                             }else{
                                 print("Toast 뷰 띄워야함")
                             }

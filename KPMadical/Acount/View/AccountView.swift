@@ -61,7 +61,6 @@ struct AccountView: View {
                         AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 입력해주세요.",isCreate: $create)
                     }
                 }
-                
                 HStack{
                     Image(systemName: "doc.text")
                         .foregroundStyle(Color("ConceptColor"))

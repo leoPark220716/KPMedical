@@ -55,7 +55,7 @@ struct tabView: View {
                     Label("내병원", systemImage: "stethoscope")
                 }
                 .tag(BottomTab .hospital)
-                AccountView()
+                newAccountView()
                     .tabItem {
                         Label("내정보", systemImage: "person.crop.circle")
                     }
@@ -83,6 +83,10 @@ struct tabView: View {
                         reservationSuccessView()
                     case 9:
                         myreservationView()
+                    case 10:
+                        UserInfoView()
+                    case 11:
+                        accountDeep(data: item)
                     default:
                         EmptyView()
                     }
@@ -97,6 +101,19 @@ struct tabView: View {
                     }
                 case .reservation(item: let item):
                     ReservationDetailView(data: item)
+                case .pass(item: let item):
+                    switch item.page{
+                    case 1:
+                        currentPass()
+                    case 2:
+                        newPassword(data: item)
+                    case 3:
+                        NewPhoneNumberView()
+                    case 4:
+                        MobileOPT(data: item)
+                    default:
+                        EmptyView()
+                    }
                 }
             }
             
