@@ -23,6 +23,8 @@ class GlobalViewRouter: ObservableObject {
     @Published var toast = false
     @Published var hospital_data: HospitalDataHandler?
     @Published var HospitalReservationData: reservationInfo?
+    @Published var transactionManager: TransactionManager?
+    @Published var OptSeet = false
     func push(baseView:ViewTypes ,to screen: Route? = nil){
         print("Call push")
         if screen != nil{
@@ -69,5 +71,11 @@ class GlobalViewRouter: ObservableObject {
     func ReservationInit(){
         hospital_data = HospitalDataHandler()
         HospitalReservationData = reservationInfo()
+    }
+    func TransactionManagerInit(unixTime: Int,type: ChatMessegeItem.MessageTypes){
+        transactionManager = TransactionManager(UnixTime: unixTime,type: type)
+    }
+    func TransactionManagerDeInit(){
+        transactionManager = nil
     }
 }

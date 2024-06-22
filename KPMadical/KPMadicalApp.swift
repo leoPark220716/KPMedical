@@ -10,15 +10,19 @@ import Firebase
 import FirebaseMessaging
 import UserNotifications
 
-class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
+class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject{
     var app: KPMadicalApp?
     let gcmMessageIDKey = "gcm.message_id"
+    
+    
     
     // 앱이 켜졌을 때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+
         // 파이어베이스 설정
         FirebaseApp.configure()
+        
         
         // Setting Up Notifications...
         // 원격 알림 등록
@@ -40,12 +44,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject{
         
         
         // Setting Up Cloud Messaging...
-        // 메세징 델리겟
+        // 메세징 델리겟f
         Messaging.messaging().delegate = self
         
         UNUserNotificationCenter.current().delegate = self
         return true
     }
+//    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+//            // 백그라운드 세션 이벤트를 처리합니다.
+//            // (이 코드는 URLSession을 사용할 경우 필요합니다)
+//            BackgroundTaskManager.shared.completionHandler = completionHandler
+//        }
+
     // fcm 토큰이 등록 되었을 때
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
@@ -126,6 +136,40 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
             return "Error decoding chat JSON for timestamp: \(error)"
         }
     }
+
+
+    private func extractMsgTypeField(from chat: [String: Any]) -> String {
+        if let msg_type = chat["msg_type"] as? Int {
+            return String(msg_type)
+        } else {
+            return ""
+        }
+    }
+    // 새로운 함수 추가
+    private func extractMsgType(from userInfo: [AnyHashable: Any]) -> String {
+        if let chat = userInfo["chat"] as? [String: Any] {
+            return extractMsgTypeField(from: chat)
+        } else if let chatString = userInfo["chat"] as? String,
+                  let chatData = chatString.data(using: .utf8) {
+            return decodeMsgType(chatData)
+        } else {
+            print("Chat data is not in the expected format or missing.")
+            return ""
+        }
+    }
+
+    private func decodeMsgType(_ data: Data) -> String {
+        do {
+            if let chatDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let msg_type = chatDict["msg_type"] as? Int {
+                return String(msg_type)
+            } else {
+                return "Failed to decode msg_type."
+            }
+        } catch {
+            return "Error decoding chat JSON for msg_type: \(error)"
+        }
+    }
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         //        노티피케이션이 탭됐을 때 오는 댈리게이트
@@ -148,14 +192,40 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         let timeStemp = extractTimestamp(from: userInfo)
         print("👀 TimeStemp \(timeStemp)")
         app?.authViewModel.UpdateChatItem(hospitalId: id, msg: msg,timestemp: timeStemp)
-        return [.sound,.badge,.banner,.list]
+        
+        let isCounselingNotificationEnabled = UserDefaults.standard.bool(forKey: "counselingNotification")
+        let infoRequestNotification = UserDefaults.standard.bool(forKey: "infoRequestNotification")
+        let movementNotification = UserDefaults.standard.bool(forKey: "movementNotification")
+        print("👀👀👀👀👀👀👀👀👀👀👀👀")
+        let msgType = extractMsgType(from: userInfo) // msg_type 값을 추출
+        print(msgType)
+        print("👀👀👀👀👀👀👀👀👀👀👀👀")
+        switch msgType{
+        case "4":
+            if isCounselingNotificationEnabled {
+                return [.sound, .badge, .banner, .list]
+            } else {
+                return []
+            }
+        case "6":
+            if infoRequestNotification {
+                return [.sound, .badge, .banner, .list]
+            } else {
+                return []
+            }
+        default:
+            if movementNotification {
+                return [.sound, .badge, .banner, .list]
+            } else {
+                return []
+            }
+        }
     }
 }
 extension AppDelegate: MessagingDelegate{
     
     // fcm 등록 토큰을 받았을 때
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-
         print("토큰을 받았다")
         // Store this token to firebase and retrieve when to send message to someone...
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
@@ -169,6 +239,7 @@ extension AppDelegate: MessagingDelegate{
      
     }
 }
+
 @main
 struct KPMadicalApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
@@ -225,7 +296,9 @@ struct KPMadicalApp: App {
         print(tokenResult.success)
         if !tokenResult.success{
             //   초기화
-            authViewModel.SetData(name: "", dob: "", sex: "", token: "")
+            DispatchQueue.main.async {
+                authViewModel.SetData(name: "", dob: "", sex: "", token: "")
+            }
             //  DB 에 저장된 정보 정보 전부 삭제
             UserData.removeAllUserDB()
             print("checkToken LoginView")
@@ -233,7 +306,9 @@ struct KPMadicalApp: App {
             return false
         }
         if tokenResult.tokenUpdate{
-            authViewModel.token = tokenResult.newToken
+            DispatchQueue.main.async {
+                authViewModel.token = tokenResult.newToken
+            }
             print(tokenResult.newToken)
             print("Call tokenUpdate")
         }

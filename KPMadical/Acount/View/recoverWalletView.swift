@@ -23,7 +23,6 @@ struct recoverWalletView: View {
             VStack{
                 ScrollView{
                     VStack(alignment: .leading){
-                        
                         Text("니모닉 문구 작성란")
                             .bold()
                             .font(.title3)
@@ -173,12 +172,7 @@ struct SpinnerView: View {
     ProgressView()
       .progressViewStyle(CircularProgressViewStyle(tint: .blue))
       .scaleEffect(2.0, anchor: .center) // Makes the spinner larger
-      .onAppear {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-          // Simulates a delay in content loading
-          // Perform transition to the next view here
-        }
-      }
+      .padding(.top, 150)
       Text(Title)
           .padding(.top)
   }

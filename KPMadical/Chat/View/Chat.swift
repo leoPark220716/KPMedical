@@ -30,37 +30,10 @@ struct Chat: View {
     @State var ChatId: Int = 0
     @State private var importing = false
     @State private var toast: normal_Toast? = nil
+    @State var isOPT = false
     var body: some View {
             VStack{
-                ScrollView{
-                    LazyVStack{
-                        if !Socket.ChatData.isEmpty{
-                            ForEach(Socket.ChatData.indices, id: \.self){ index in
-                                ChatItemView(item: $Socket.ChatData[index], items:$Socket.ChatData , img: $HospitalImage, HospitalName: data.name, index: Int(index))
-                                    .onAppear {
-                                        if ChatId != 0{
-                                            if index == Socket.ChatData.count - 3 {
-                                                Socket.loadMoreData(token: userInfo.token, chatId: ChatId)
-                                            }
-                                        }
-                                    }
-                                    .onTapGesture {
-                                        print("✅ Date Time \(Socket.ChatData[index])")
-                                    }
-                            }
-                            .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                            .rotationEffect(Angle(degrees: 180))
-                        }
-                    }
-                }
-                .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                .rotationEffect(Angle(degrees: 180))
-                .padding(.bottom,4)
-                .onTapGesture {
-                    chatField = false
-                }
-                .padding(.bottom, 12)
-                .background(Color.gray.opacity(0.1))
+                ChatScrollView
                 VStack{
                     HStack{
                         Image(systemName: TabPlus ? "plus" : "xmark")
@@ -88,9 +61,8 @@ struct Chat: View {
                                     .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                                     .onTapGesture {
                                         let itemType = SendingImages.isEmpty ? ChatMessegeItem.MessageTypes.text : ChatMessegeItem.MessageTypes.photo
-                                        let textItem = Socket.preMessageItem(type: itemType,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user)
+                                        let textItem = Socket.preMessageItem(type: itemType,messege: ChatText ,time: "", date: "", amI:ChatMessegeItem.AmI.user,unix: 0)
                                         Socket.ChatData.insert(textItem, at: 0)
-                    
                                         let from = Socket.GetUserAccountString(token: userInfo.token)
                                         if SendingImages.isEmpty{
                                             if from.status{
@@ -342,15 +314,51 @@ struct Chat: View {
                 }
             }
         }
+        .sheet(isPresented: $isOPT) {
+            presentAppPasswordView()
+        }
+
+    }
+    private var ChatScrollView: some View{
+        ScrollView{
+            LazyVStack{
+                if !Socket.ChatData.isEmpty{
+                    ForEach(Socket.ChatData.indices, id: \.self){ index in
+                        ChatItemView(item: $Socket.ChatData[index], items:$Socket.ChatData , img: $HospitalImage, isOPT: $isOPT, HospitalName: data.name, index: Int(index))
+                            .onAppear {
+                                if ChatId != 0{
+                                    if index == Socket.ChatData.count - 3 {
+                                        Socket.loadMoreData(token: userInfo.token, chatId: ChatId)
+                                    }
+                                }
+                            }
+                            .onTapGesture {
+                                print("✅ Date Time \(Socket.ChatData[index])")
+                            }
+                    }
+                    .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                    .rotationEffect(Angle(degrees: 180))
+                }
+            }
+        }
+        .scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+        .rotationEffect(Angle(degrees: 180))
+        .padding(.bottom,4)
+        .onTapGesture {
+            chatField = false
+        }
+        .padding(.bottom, 12)
+        .background(Color.gray.opacity(0.1))
     }
     private func cleanDataArray(){
         SendingImages.removeAll()
         SendingImagesByte.removeAll()
         selectedItems.removeAll()
     }
+    func presentAppPasswordView() -> some View {
+        DispatchQueue.main.async{
+            router.transactionManager?.SetSocketAndHosId(socket: Socket, hospitalId: data.hospital_id, hospitalName: data.name)
+        }
+        return AppPasswordView(TitleString: "인증번호를 생성해주세요.", isRequest: true)
+    }
 }
-
-//class ChatViewModel: ObservableObject{
-//    @Published var hospitalImage: String ""
-//    @Published var
-//}

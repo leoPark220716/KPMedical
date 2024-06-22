@@ -13,13 +13,13 @@ class ChatSocketDataHandler: ChatSocketRequest{
     //    날짜 뷰 추가
     func chatDateViewItem(ChatPreData: [ChatMessegeItem],date: String)->(error:Bool, Item: ChatMessegeItem?) {
         if ChatPreData.isEmpty{
-            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
+            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false,unixTime: 0)
             return (false, item)
         }else{
             for index in ChatPreData.indices.reversed() {
                 if ChatPreData[index].progress == false{
                     if ChatPreData[index].chatDate != date{
-                        let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
+                        let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false,unixTime: 0)
                         return (false, item)
                     }else{
                         return (true, nil)
@@ -46,6 +46,18 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 print("decode Success \(decodedData.msg_type)")
                 MyMsg(decodedData: decodedData)
             case 5:
+                print("decode Success \(decodedData.msg_type)")
+                MyMsg(decodedData: decodedData)
+            case 6:
+                print("decode Success \(decodedData.msg_type)")
+                MyMsg(decodedData: decodedData)
+            case 7:
+                print("decode Success \(decodedData.msg_type)")
+                MyMsg(decodedData: decodedData)
+            case 8:
+                print("decode Success \(decodedData.msg_type)")
+                MyMsg(decodedData: decodedData)
+            case 9:
                 print("decode Success \(decodedData.msg_type)")
                 MyMsg(decodedData: decodedData)
             default:
@@ -117,19 +129,24 @@ class ChatSocketDataHandler: ChatSocketRequest{
     }
     func testMessgaeType(msg_type: Any?) -> (success: Bool, msg_type: ChatMessegeItem.MessageTypes){
         if let stringType = msg_type as? String{
-            if stringType == "5"{
+            if stringType == "5" || stringType == "6" || stringType == "9"{
                 return (true, .notice)
+            }else if stringType == "7"{
+                return (true, .edit)
+            }else if stringType == "8"{
+                return (true, .share)
             }
         }else if let intType = msg_type as? Int{
-            if intType == 5{
+            if intType == 5 || intType == 6 || intType == 9 {
                 return (true, .notice)
+            }else if intType == 7{
+                return (true, .edit)
+            }else if intType == 8{
+                return (true, .share)
             }
         }
         return (false, .text)
     }
-    
-    
-    
     func determineFileType(from keyType: OpenChatRoomDataModel.KeyType, bucket: OpenChatRoomDataModel.KeyType) -> (fileType: ChatMessegeItem.MessageTypes, imageArray: [(String, String)]) {
         print("테스트 determineFileType 호출")
         var imageArray: [String] = []
@@ -176,7 +193,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
     
     
     //    텍스트 메시지 삽입
-    func textMessageItem(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil)->(ChatMessegeItem) {
+    func textMessageItem(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil,unix: Int)->(ChatMessegeItem) {
         let newItem = ChatMessegeItem(
             type: type,
             messege: messege,
@@ -186,11 +203,13 @@ class ChatSocketDataHandler: ChatSocketRequest{
             chatDate: date,
             showETC: true,
             ImageArray: imgAr,
-            progress: false
+            progress: false,
+            unixTime: unix
         )
         return (newItem)
     }
-    func preMessageItem(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil)->(ChatMessegeItem) {
+    //    9번 msg type 전송
+    func nineMSG(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil,unix: Int,hash:String)->(ChatMessegeItem) {
         let newItem = ChatMessegeItem(
             type: type,
             messege: messege,
@@ -200,74 +219,30 @@ class ChatSocketDataHandler: ChatSocketRequest{
             chatDate: date,
             showETC: true,
             ImageArray: imgAr,
-            progress: true
+            progress: false,
+            unixTime: unix,
+            noticeMsgNine: true,
+            hash: hash
+        )
+        return (newItem)
+    }
+    func preMessageItem(type: ChatMessegeItem.MessageTypes,messege: String? = nil, time: String, date: String,amI: ChatMessegeItem.AmI,imgAr: [String]? = nil,unix: Int)->(ChatMessegeItem) {
+        let newItem = ChatMessegeItem(
+            type: type,
+            messege: messege,
+            ReadCount: false,
+            time: time,
+            amI: amI,
+            chatDate: date,
+            showETC: true,
+            ImageArray: imgAr,
+            progress: true,
+            unixTime: unix
         )
         return (newItem)
     }
     
-    //    초기 데이터 파싱 (리팩토링 필수)
-    func SSSetFirstData(decodedData: OpenChatRoomDataModel.ChatMessage){
-        //
-        print("초기데이터 함수 호출")
-        var ChatPreData: [ChatMessegeItem] = []
-        guard let firstDict = decodedData.hospital_data?.all_status else{
-            print("초기 데이터 파싱 실패")
-            return
-        }
-        let sortedDetails = sortedFristArray(array: Array(firstDict.values))
-        if sortedDetails.error{
-            print("초기 데이터 정렬 실패")
-            return
-        }
-        for arr in sortedDetails.arr{
-            print("arr ContentType 출력\(arr.content_type)")
-            let time = timeHandler.timeChangeToChatTime(time: arr.timestamp)
-            
-            //                날짜 비교 후 날짜 뷰 출력
-            let dateChatSet = chatDateViewItem(ChatPreData: ChatPreData, date: time.chatDate)
-            if !dateChatSet.error{
-                ChatPreData.append(dateChatSet.Item!)
-            }
-            //                채팅 시간.
-            let appendDataAndUpdate = MessegeTimeControl(ChatPreData: ChatPreData,msg_type: arr.msg_type,time: time.chatTime, date: time.chatDate)
-            if appendDataAndUpdate.update, !ChatPreData.isEmpty {
-                // 배열의 마지막 요소의 인덱스를 찾아 값을 수정합니다.
-                let lastIndex = ChatPreData.count - 1
-                ChatPreData[lastIndex].showETC = false
-            }
-            switch self.messageType(contentType: arr.content_type,fileArray: arr.key,bucket: arr.bucket,msg_type: arr.msg_type){
-            case .text:
-                let textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!)
-                ChatPreData.append(textItem)
-                print("text")
-            case .photo:
-                print("Photo")
-                guard let key = arr.key , let bucket = arr.bucket else{
-                    print("버킷이 없다.")
-                    return
-                }
-                let makeImageArray = determineFileType(from: key, bucket: bucket)
-                let ImageArray = returnURIArray(image: makeImageArray.imageArray)
-                let textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!,imgAr: ImageArray.imgArray)
-                ChatPreData.append(textItem)
-            case .file:
-                let textItem = self.textMessageItem(type: .file,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!)
-                ChatPreData.append(textItem)
-                print("file")
-            case .notice:
-                let textItem = self.textMessageItem(type: .notice,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: appendDataAndUpdate.amI!)
-                print("notice amI Data \(appendDataAndUpdate.amI!)")
-                ChatPreData.append(textItem)
-                print("notice")
-            case .unowned:
-                print("unowned")
-            }
-        }
-        DispatchQueue.main.async {
-            print("Call")
-            self.ChatData = ChatPreData
-        }
-    }
+    
     func returnURIArray(image: [(String,String)]) -> (success: Bool, imgArray: [String]){
         var Array: [String] = []
         print("이미지 배열 출력한다.")
@@ -341,7 +316,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             switch self.HttpMessageType(contentType: arr.content_type,fileArray: arr.key,bucket: arr.bucket,msg_type: arr.msg_type){
             case .text:
                 if arr.msg_type  == 3 {
-                    var textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user)
+                    var textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user, unix: 0)
                     if timeHandler.returnReadCheck(hospitalTime: HTime, patientTime: arr.timestamp){
                         textItem.ReadCount = true
                         print("👀 병원 타임 체크 \(String(describing: hospitalTime))")
@@ -352,7 +327,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                         ChatPreData.append(textItem)
                     }
                 }else{
-                    let textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other)
+                    let textItem = self.textMessageItem(type: .text, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other, unix: 0)
                     ChatPreData.append(textItem)
                 }
                 print("text")
@@ -361,7 +336,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 let makeImageArray = HttpDetermineFileType(from: arr.bucket, bucket: arr.key)
                 let ImageArray = HttPreturnURIArray(image: makeImageArray.imageArray)
                 if arr.msg_type  == 3 {
-                    var textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user,imgAr: ImageArray.imgArray)
+                    var textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user,imgAr: ImageArray.imgArray,unix: 0)
                     if timeHandler.returnReadCheck(hospitalTime: HTime, patientTime: arr.timestamp){
                         textItem.ReadCount = true
                         print("👀 병원 타임 체크 \(String(describing: hospitalTime))")
@@ -373,7 +348,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                     }
                 }
                 else{
-                    let textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray)
+                    let textItem = self.textMessageItem(type: .photo, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray, unix: 0)
                     ChatPreData.append(textItem)
                 }
             case .file:
@@ -381,20 +356,36 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 let makeImageArray = HttpDetermineFileType(from: arr.bucket, bucket: arr.key)
                 let ImageArray = HttPreturnURIArray(image: makeImageArray.imageArray)
                 if arr.msg_type  == 3 {
-                    var textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user,imgAr: ImageArray.imgArray)
+                    var textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user,imgAr: ImageArray.imgArray, unix: 0)
                     textItem.ReadCount = true
                     ChatPreData.append(textItem)
                 }else{
-                    let textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray)
+                    let textItem = self.textMessageItem(type: .file, messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,imgAr: ImageArray.imgArray, unix: 0)
                     
                     ChatPreData.append(textItem)
                 }
             case .notice:
-                let textItem = self.textMessageItem(type: .notice,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other)
-                ChatPreData.append(textItem)
+                if arr.msg_type == 9{
+                    let item = nineMSG(type: .notice,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .user,unix: arr.unixtime!,hash: arr.hash)
+                    ChatPreData.append(item)
+                }else{
+                    let textItem = self.textMessageItem(type: .notice,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,unix: arr.unixtime!)
+                    ChatPreData.append(textItem)
+                }
+                
                 print("notice")
             case .unowned:
                 print("unowned")
+            case .share:
+                var textItem = self.textMessageItem(type: .share,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,unix: arr.unixtime!)
+                textItem.departmentCode = arr.department_code
+                textItem.pubKey = arr.pub_key
+                ChatPreData.append(textItem)
+            case .edit:
+                var textItem = self.textMessageItem(type: .edit,messege: arr.message, time: time.chatTime, date: time.chatDate, amI: .other,unix: arr.unixtime!)
+                textItem.hash = arr.hash
+                textItem.index = arr.index
+                ChatPreData.append(textItem)
             }
         }
         let reversedArray = Array(ChatPreData.reversed())
@@ -447,13 +438,13 @@ class ChatSocketDataHandler: ChatSocketRequest{
     //    날짜 뷰 추가
     func dateViewAdd(ChatPreData: [ChatMessegeItem],date: String)->(error:Bool, Item: ChatMessegeItem?) {
         if ChatPreData.isEmpty{
-            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
+            let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false,unixTime: 0)
             return (false, item)
         }else{
             for index in ChatPreData.indices {
                 if ChatPreData[index].progress == false{
                     if ChatPreData[index].chatDate != date{
-                        let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false)
+                        let item = ChatMessegeItem(type: .text, ReadCount: false, time: "", amI: .sepDate, chatDate: date, showETC: false, progress: false, unixTime:  0)
                         return (false, item)
                     }else{
                         return (true, nil)
@@ -524,7 +515,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
             }
             switch self.messageType(contentType: decodedData.content_type, fileArray: decodedData.content?.key as? OpenChatRoomDataModel.KeyType, bucket: decodedData.content?.bucket as? OpenChatRoomDataModel.KeyType,msg_type: decodedData.msg_type) {
             case .text:
-                var textItem = self.textMessageItem(type: .text, messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
+                var textItem = self.textMessageItem(type: .text, messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!, unix: decodedData.block_data?.unixtime ?? 0)
                 print("👀 Watch Chat Item State amI : \(textItem.amI)")
                 print("👀 Watch Chat Item State message : \(textItem.messege!)")
                 textItem.ReadCount = decodedData.on
@@ -550,7 +541,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 }
                 let makeImageArray = determineFileType(from: key, bucket: bucket)
                 let ImageArray = returnURIArray(image: makeImageArray.imageArray)
-                var textItem = self.textMessageItem(type: .photo, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray)
+                var textItem = self.textMessageItem(type: .photo, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray,unix: decodedData.block_data?.unixtime ?? 0)
                 textItem.ReadCount = decodedData.on
                 if messages.amI == .user{
                     for index in self.ChatData.indices {
@@ -576,7 +567,7 @@ class ChatSocketDataHandler: ChatSocketRequest{
                 }
                 let makeImageArray = determineFileType(from: key, bucket: bucket)
                 let ImageArray = returnURIArray(image: makeImageArray.imageArray)
-                var textItem = self.textMessageItem(type: .file, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray)
+                var textItem = self.textMessageItem(type: .file, time: time.chatTime, date: time.chatDate, amI: messages.amI!,imgAr: ImageArray.imgArray,unix: decodedData.block_data?.unixtime ?? 0)
                 textItem.ReadCount = decodedData.on
                 if messages.amI == .user{
                     DispatchQueue.main.async {
@@ -588,13 +579,35 @@ class ChatSocketDataHandler: ChatSocketRequest{
                     }
                 }
             case .notice:
-                let textItem = self.textMessageItem(type: .notice,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!)
-                DispatchQueue.main.async {
-                    self.ChatData.append(textItem)
+                if decodedData.msg_type == 9{
+                    let item = nineMSG(type: .notice,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!,unix: decodedData.block_data?.unixtime ?? 0,hash: decodedData.block_data?.hash ?? "0xaaaa")
+                    DispatchQueue.main.async {
+                        self.ChatData.insert(item, at: 0)
+                    }
+                }else{
+                    let textItem = self.textMessageItem(type: .notice,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!,unix: decodedData.block_data?.unixtime ?? 0)
+                    DispatchQueue.main.async {
+                        self.ChatData.insert(textItem, at: 0)
+                    }
                 }
+                
                 print("notice")
             case .unowned:
                 print("unowned")
+            case .share:
+                var textItem = self.textMessageItem(type: .share,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!,unix: decodedData.block_data?.unixtime ?? 0)
+                textItem.departmentCode = decodedData.block_data?.department_code
+                textItem.pubKey = decodedData.block_data?.pub_key
+                DispatchQueue.main.async {
+                    self.ChatData.insert(textItem, at: 0)
+                }
+            case .edit:
+                var textItem = self.textMessageItem(type: .edit,messege: msg, time: time.chatTime, date: time.chatDate, amI: messages.amI!,unix: decodedData.block_data?.unixtime ?? 0)
+                textItem.hash = decodedData.block_data?.hash
+                textItem.index = decodedData.block_data?.index
+                DispatchQueue.main.async {
+                    self.ChatData.insert(textItem, at: 0)
+                }
             }
         }
     }

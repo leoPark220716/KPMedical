@@ -17,6 +17,7 @@ public class UserInformation: ObservableObject {
     @Published var isActivatedByURL = false
     @Published var FCMToken = ""
     @Published var chatItem: [ChatHTTPresponseStruct.ChatListArray] = []
+    var getRecode: ReacoderModel?
     var hasHandlerURL = false
     func SetData(name: String, dob: String, sex: String, token: String) {
             self.name = name
@@ -48,11 +49,15 @@ public class UserInformation: ObservableObject {
         }
     }
     func SetFCMToken(fcmToken: String){
-        self.FCMToken = fcmToken
-        print("✅ fcmToken \(FCMToken)")
-        print("✅ token \(token)")
-        if token != "" {
-            TokenToServer(httpMethod: "PATCH")
+        DispatchQueue.main.async{
+            self.FCMToken = fcmToken
+            print("✅ fcmToken \(self.FCMToken)")
+            print("✅ token \(self.token)")
+            
+            if self.token != "" {
+                self.TokenToServer(httpMethod: "POST")
+                self.TokenToServer(httpMethod: "PATCH")
+            }
         }
     }
     func SetChatItem(chatItems: [ChatHTTPresponseStruct.ChatListArray]){
@@ -102,6 +107,14 @@ public class UserInformation: ObservableObject {
                 }
             }
         }
+    }
+    
+    func CheckRecodeDatas() async -> (success: Bool, item: ReacoderModel.DoctorRecord?){
+        getRecode = ReacoderModel()
+        let item = await getRecode!.LastRecodeData(token: token)
+        getRecode = nil
+        return item
+//        return (false,nil)
     }
 }
 class singupOb: ObservableObject {

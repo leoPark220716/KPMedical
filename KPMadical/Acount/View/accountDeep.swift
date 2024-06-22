@@ -60,10 +60,10 @@ struct accountDeep: View {
                 Spacer()
                     
             }
-            .onAppear{
-                infomation.getMoblie(token: authViewModel.token)
-            }
             .padding()
+        }
+        .onAppear{
+            infomation.getMoblie(token: authViewModel.token)
         }
     }
 }

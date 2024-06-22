@@ -54,7 +54,6 @@ class RSATest{
         }
         
         let algo: SecKeyAlgorithm = .rsaEncryptionPKCS1
-        //            .rsaEncryptionOAEPSHA1
         guard SecKeyIsAlgorithmSupported(privateKey, .decrypt, algo) else {
             print("알고리즘 지원 안됨")
             return
@@ -74,7 +73,7 @@ class RSATest{
     
     //    상대 공개키로 암호화
     func createRSA(){
-        let der = Data(base64Encoded: htpubkey, options: .ignoreUnknownCharacters)!
+        let der = Data(base64Encoded: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjz+79EQRDyZXdMhGCtXxn43AsXulZtLAz5Nl84brUD42Da3nPm5STyij8E5JEXa5RU/M13zguZhIN2kwXs7afeEx2+8MXEDkAZIMTOk2ATA2Z6JpKWiqNRMvj1DLrq2TPkDXrCW37UIul6AfXarRB+GwqDOSZxK2JXHtaHGQVNrkO/7yK9mfTPlZt3m8qc0igGrhyoXnWc09eZxyxpqzOudoOo6c2hmuMwRQaU0xTGZhPEItzyMH7gvmwKc5jOokRObjWSM86qCkU1gsGtTkHg8SIse1TrgS2Jf1JgQ+gaIUP+NvA99sj81RHNMguJHfOjjM/uR5w9lG3prm5DFePQIDAQAB", options: .ignoreUnknownCharacters)!
         let attributes: [String: Any] = [
             String(kSecAttrKeyType): kSecAttrKeyTypeRSA,
             String(kSecAttrKeyClass): kSecAttrKeyClassPublic,
@@ -88,36 +87,6 @@ class RSATest{
         let PK = SecKeyCreateEncryptedData(key, .rsaEncryptionPKCS1, plainText as CFData, nil)! as Data
         let asdfg = PK.base64EncodedString()
         print("PK : \(asdfg)")
-        
-        
-        
-        //
-        //
-        //        print("PK : \(asdfg)")
-        
-        //        print(privateKeyBase64)
-        
-        //        내 개인키로 복호화
-        //        if let privateKeyData = Data(base64Encoded: baseKey){
-        //            do{
-        //                let rsaPrivateKey = try RSA(rawRepresentation: privateKeyData)
-        //                print("RSA 키 생성 성공 : \(rsaPrivateKey)")
-        //                if let encryptedMessage = Data(base64Encoded: message){
-        //                    let encryptedMessage = Array(encryptedMessage)
-        //                    do {
-        //                        let decryptedBytes = try rsaPrivateKey.decrypt(encryptedMessage)
-        //                        if let msg = String(data: Data(decryptedBytes),encoding: .utf8){
-        //                            print(msg)
-        //                        }
-        //                    }
-        //                }
-        //            }catch{
-        //                print("RSA 키 생성 실패: \(error)")
-        //            }
-        //        }else{
-        //            print("Base64 디코딩 실패")
-        //        }
-        
     }
     //     키 생성
     func generateRSAKeyPair(keySize: Int = 1024) -> (publicKey: SecKey?, privateKey: SecKey?) {
@@ -224,39 +193,44 @@ class RSAManager: ObservableObject {
         }
         return privateKeyData.base64EncodedString()
     }
-    
-    
 }
 
 
 
 func decryptAES256() -> String? {
-    let symatickey = "cd7e3533f4dd9af3e2d6e60f4f10b42cffeae4fa4d66274d02f7a92c2e3ef4f9"
-    let data = "n05I/Ub/GC/mzQRmlNTl7w=="
-    let iv = "4963b7334a46352623252955df21d7f3"
+//        let symatickey = "cd7e3533f4dd9af3e2d6e60f4f10b42cffeae4fa4d66274d02f7a92c2e3ef4f9"
+//        let data = "n05I/Ub/GC/mzQRmlNTl7w=="
+//        let ivString = "4963b7334a46352623252955df21d7f3"
+    let symatickey = "knzSMj6gRpwfLtyCTQ/qbQ4MVrqII/6S+O03H6oRn7U="
+    let data = "K15KmRQKA/7GzInV4cWpA9M4uY31zOqZl4eDzsTl+BEE/hcxBruMDiYcR5J43w1TNMsESJxU4gcouwvZ1DsCtqxWjbQbyal+cfROIVG7Rj+5ee7dLdnpWVcUZqFvklZmQmXQl+PvoES+isXAd8nQXRJrxrF0hBwQjkvAEcqLH+tENrjLK4HJ8o5Le3Wa+EjNMg6Tb0QAel9WvI+UGiJ1lY/dPtaAoZQHF/4lqarQTVl4FY59K65TRyHp/4gcMEZi7RaA58kuVCqDIO9ctnh18QBvnDYe1OxczOGqxbICnTXwNGZTeVO1AD9PlZzLz/2B7N3Qz7Kxx02eCJ+A9kC5Eld78Vvjktq7Z8g+mfOYXYorH9xe0O/WLq2Yn89hC4BOB2uKdfsh8X0MjOdlJ3lSRRkY3bJRqL8Sd00d2R6KlKTXt35XrLzfzhidIj89dmKlUBkUWq6hRMkBEr7T3ccCmpLed4e7fdSSzEsR6PZKNo2abEpwIY8XtzD5qzZ909Toh2T99y1T0glrOwmbwoOZiyk9sm8Uz4fLvpRAPYMvtteUCzBK6mnJGOzZHJYZ4ANs"
+//    let data = "6N9fJStPQe4+kTkfBn5GkA=="
+    let ivString = "8890a77a0d69739305599bbb8f8773d0"
     // Base64 인코딩된 데이터를 디코딩
     guard let encryptedData = Data(base64Encoded: data) else {
         print("Invalid data")
         return nil
     }
-    
-    // 16진수 키를 바이트 배열로 변환
-    guard let key = symatickey.hexaBytes else {
-        print("Invalid key")
-        return nil
-    }
+    // Base64 인코딩된 키를 디코딩
+        guard let keyData = Data(base64Encoded: symatickey) else {
+            print("Invalid key")
+            return nil
+        }
+    // Base64 인코딩된 키를 디코딩
+//    guard let key = symatickey.hexaBytes else {
+//          print("Invalid key")
+//          return nil
+//      }
     
     // Base64 인코딩된 IV를 디코딩
-    guard let iv = iv.hexaBytes else {
-        print("Invalid IV")
-        return nil
-    }
-    
+    let iv = ivString.hexaBytes!
+        if iv.count != 16 {
+            print("Invalid IV")
+            return nil
+        }
     do {
         // AES 객체 생성
-        let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+        let aes = try AES(key: keyData.bytes, blockMode: CBC(iv: iv), padding: .pkcs7)
         // 데이터 복호화
-        //        let decryptedBytes = try aes.decrypt(encryptedData.bytes)
         let decryptedBytes = try aes.decrypt(encryptedData.bytes)
         
         // 복호화된 데이터를 문자열로 변환
@@ -269,31 +243,13 @@ func decryptAES256() -> String? {
             print("Decryption failed. Data sample (first 20 bytes): \(sampleData.map { String(format: "%02x", $0) }.joined())")
             return nil
         }
-        
     } catch {
         print("Error in decryption: \(error)")
         return nil
     }
 }
 
-extension String {
-    var hexaBytes: [UInt8]? {
-        var bytes = [UInt8]()
-        var startIndex = index(startIndex, offsetBy: 0)
-        
-        while startIndex < endIndex {
-            let endIndex = index(startIndex, offsetBy: 2, limitedBy: endIndex) ?? endIndex
-            let hexStr = String(self[startIndex..<endIndex])
-            if let byte = UInt8(hexStr, radix: 16) {
-                bytes.append(byte)
-            } else {
-                return nil
-            }
-            startIndex = endIndex
-        }
-        return bytes
-    }
-}
+
 func decryptAES256(data base64EncodedData: String, key hexKey: String, iv base64IV: String) -> String? {
     // Base64 인코딩된 데이터를 디코딩
     guard let encryptedData = Data(base64Encoded: base64EncodedData) else {
@@ -672,4 +628,51 @@ class GetKeystore: KeystoreKeyChain{
         }
     }
 
+}
+extension String {
+    var hexaBytess: [UInt8] {
+        var bytes = [UInt8]()
+        var startIndex = self.startIndex
+        
+        while startIndex < self.endIndex {
+            let endIndex = self.index(startIndex, offsetBy: 2, limitedBy: self.endIndex) ?? self.endIndex
+            let hexStr = String(self[startIndex..<endIndex])
+            if let byte = UInt8(hexStr, radix: 16) {
+                bytes.append(byte)
+            } else {
+                return []
+            }
+            startIndex = endIndex
+        }
+        return bytes
+    }
+}
+
+func decryptRecord(Symmetric_key: String, encryptedStr: String, ivString: String) -> String? {
+    guard let encryptedData = Data(base64Encoded: encryptedStr),
+          let keyData = Data(base64Encoded: Symmetric_key),
+          keyData.count == 32 else {
+        print("Invalid data or key")
+        return nil
+    }
+
+    let iv = ivString.hexaBytess
+    if iv.count != 16 {
+        print("Invalid IV")
+        return nil
+    }
+
+    do {
+        let aes = try AES(key: keyData.bytes, blockMode: CBC(iv: iv), padding: .pkcs7)
+        let decryptedBytes = try aes.decrypt(encryptedData.bytes)
+        if let decryptedString = String(data: Data(decryptedBytes), encoding: .utf8) {
+            return decryptedString
+        } else {
+            print("Decryption failed. Cannot convert to String.")
+            return nil
+        }
+    } catch {
+        print("Error in decryption: \(error)")
+        return nil
+    }
 }

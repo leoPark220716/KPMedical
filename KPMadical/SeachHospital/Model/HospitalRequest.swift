@@ -155,7 +155,7 @@ class HospitalDataManagerClass {
 class HospitalHTTPRequest {
     typealias HospitalListCompletion = (Result<[HospitalDataManager.Hospitals], Error>) -> Void
     func CallHospitalList(orderBy: String, x: String, y:String, keyword:String,department_id:String,completion: @escaping HospitalListCompletion) {
-        var urlString = "https://kp-medicals.com/api/medical-wallet/hospitals"
+        var urlString = "https://kp-medicals.com/api/medical-wallet/hospitals?start=0&limit=100"
         func appendParameter(key: String, value: String) {
             // URL에 '?'가 없으면 추가하고, 이미 있으면 '&'를 추가
             if !urlString.contains("?") {

@@ -22,6 +22,20 @@ struct SendChatDataModel{
         var file_ext: [String]?
         var file_name: [String]?
     }
+    struct Confirmed: Codable {
+        let msg_type: Int
+        let from: String
+        let to: String
+        let content_type: String
+        let content: content
+        let block_data: blockData
+    }
+    struct content: Codable{
+        let message: String
+    }
+    struct blockData: Codable{
+        let hash: String
+    }
 }
 // 소켓 처음 연결 됐을 때 받는 데이터 타입.
 struct OpenChatRoomDataModel{
@@ -54,6 +68,7 @@ struct OpenChatRoomDataModel{
         var index: Int?
         var pub_key: String?
         var hash: String?
+        var department_code: Int?
     }
     
     struct HospitalData: Codable {
@@ -126,11 +141,17 @@ struct ChatMessegeItem: Codable{
     var showETC: Bool
     var ImageArray: [String]?
     var progress: Bool
+    var unixTime: Int
+    var noticeMsgNine = false
+    var hash: String?
+    var departmentCode: Int?
+    var pubKey: String?
+    var index: Int?
     enum AmI: Codable{
         case user, other, sepDate
     }
     enum MessageTypes: Codable{
-        case text, photo, file, notice,unowned
+        case text, photo, file, notice, share,edit,unowned
     }
 }
 struct http<RequestType: Codable, ReturnType: Codable> : Codable{
@@ -209,6 +230,8 @@ struct ChatHTTPresponseStruct{
         var pub_key: String
         var hash: String
         var timestamp: String
+        var department_code: Int
+        
     }
     struct JoinRoom: Codable{
         var service_id: Int

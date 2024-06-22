@@ -11,14 +11,15 @@ struct ChatItemView: View {
     @Binding var item: ChatMessegeItem
     @Binding var items: [ChatMessegeItem]
     @Binding var img: String
+    @Binding var isOPT: Bool
     let HospitalName: String
     var index: Int
     var body: some View {
         switch item.amI{
         case .user:
-            MyChatItem(item: $item, stringUrls: item.ImageArray ?? [])
+            MyChatItem(item: $item, stringUrls: item.ImageArray ?? [],HospitalName: HospitalName)
         case .other:
-            OthersChatItem(item: $item,items: $items, image: $img,index: index, stringUrls: item.ImageArray ?? [],HospitalName: HospitalName)
+            OthersChatItem(item: $item,items: $items, image: $img,index: index, stringUrls: item.ImageArray ?? [],HospitalName: HospitalName,isOPT: $isOPT)
         case .sepDate:
             ChatdateView(time: item.chatDate)
         }
@@ -28,6 +29,7 @@ struct MyChatItem: View {
     @Binding var item: ChatMessegeItem
     @State var imageUrls: [URL] = []
     var stringUrls: [String]
+    let HospitalName: String
     var body: some View {
         HStack(alignment: .bottom,spacing: 3){
             Spacer()
@@ -75,8 +77,13 @@ struct MyChatItem: View {
                     FileChatView(urlString: stringUrls[0])
                 }
             case .notice:
-                EmptyView()
+                ConfirmChatView(message: item.messege!, hospitalName: HospitalName, hash: item.hash!)
+                    .cornerRadius(10)
             case .unowned:
+                EmptyView()
+            case .share:
+                EmptyView()
+            case .edit:
                 EmptyView()
             }
         }

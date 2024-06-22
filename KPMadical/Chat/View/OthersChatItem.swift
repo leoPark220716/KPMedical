@@ -16,6 +16,7 @@ struct OthersChatItem: View {
     var stringUrls: [String]
     @EnvironmentObject var router: GlobalViewRouter
     let HospitalName: String
+    @Binding var isOPT: Bool
     var body: some View {
         HStack(alignment: .top,spacing: 3){
             if index < items.count - 1 && items[index+1].amI != .other{
@@ -59,10 +60,27 @@ struct OthersChatItem: View {
                             FileChatView(urlString: stringUrls[0])
                         }
                     case .notice:
-                        NotiveChatView(message: item.messege!)
-                            .cornerRadius(10)
+                        if item.noticeMsgNine{
+                            ConfirmChatView(message: item.messege!, hospitalName: HospitalName, hash: item.hash!)
+                                .cornerRadius(10)
+                        }else{
+                            if item.unixTime != 0 {
+                                RequestConfirmChatView(message: item.messege!, hospitalName: HospitalName)
+                                    .cornerRadius(10)
+                            }else{
+                                NotiveChatView(message: item.messege!)
+                                    .cornerRadius(10)
+                            }
+                        }
+                            
                     case .unowned:
                         EmptyView()
+                    case .share:
+                        RequestConfirmChatView(message: item.messege!, hospitalName: HospitalName)
+                            .cornerRadius(10)
+                    case .edit:
+                        RequestConfirmChatView(message: item.messege!, hospitalName: HospitalName)
+                            .cornerRadius(10)
                     }
                     VStack(alignment: .leading){
                         if item.showETC{
@@ -89,9 +107,20 @@ struct OthersChatItem: View {
             }
         }
         .onTapGesture {
-            if !stringUrls.isEmpty{
-                print("URL 값 확인 : \(stringUrls[0])")
+            if item.type == .notice && item.unixTime != 0 {
+                router.TransactionManagerInit(unixTime: item.unixTime,type: item.type)
+                isOPT.toggle()
+            }else if item.type == .share{
+                router.TransactionManagerInit(unixTime: item.unixTime,type: item.type)
+                router.transactionManager?.shareSetting(departCode: item.departmentCode!, pubkey: item.pubKey!)
+                isOPT.toggle()
+                
+            }else if item.type == .edit {
+                router.TransactionManagerInit(unixTime: item.unixTime,type: item.type)
+                router.transactionManager?.EditSetting(index: item.index!, hash: item.hash!)
+                isOPT.toggle()
             }
+            
         }
     }
 }

@@ -38,21 +38,6 @@ struct newAccountView: View {
             .padding([.leading, .trailing])
             .onTapGesture {
                 router.tabPush(to: Route.item(item: ViewPathAddress(name: "myProfile", page: 10, id: 1)))
-//                로그아웃
-//                Task{
-//                 let success = await Account_handler.TokenToServer(httpMethod: "DELETE", token: authViewModel.token, FCMToken: authViewModel.FCMToken)
-//                    if success {
-//                        UserDb.removeAllUserDB()
-//                        router.ReservationDeInit()
-//                        appKeyChain.deleteAllKeyChainItems()
-//                        DispatchQueue.main.async{
-//                            authViewModel.initData()
-//                            router.currentView = .Login
-//                        }
-//                    }else{
-//                        print("삭제 요청 실패")
-//                    }
-//                }
             }
             // 나의 프로젝트
             VStack(alignment: .leading) {
@@ -101,23 +86,13 @@ struct newAccountView: View {
                         .stroke(Color("ConceptColor"), lineWidth: 1) // 테두리 설정
                 )
                 .onTapGesture {
-                    let account = CheckPassword.GetUserAccountString(token: authViewModel.token)
-                    if !account.status{
-                        return
-                    }
-                    if CheckPassword.checkPasswordExists(account: account.account){
-                        print("있음")
-                        create = false
-                        isOPT.toggle()
-                    }else{
-                        isOPT.toggle()
-                    }
+                    isOPT.toggle()
                 }
                 .sheet(isPresented: $isOPT){
                     if create{
-                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 생성해주세요.",isCreate: $create)
+                        AppPasswordView( TitleString: "인증번호를 생성해주세요.")
                     }else{
-                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 입력해주세요.",isCreate: $create)
+                        AppPasswordView( TitleString: "인증번호를 입력해주세요.")
                     }
                 }
                 .padding(.top)

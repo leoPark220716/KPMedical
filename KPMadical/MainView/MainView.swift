@@ -69,6 +69,8 @@ struct tabView: View {
                     switch item.page{
                     case 1:
                         FindHospitalView()
+                    case 2:
+                        KeywordSearch()
                     case 3:
                         ChooseDepartment()
                     case 4:
@@ -87,6 +89,8 @@ struct tabView: View {
                         UserInfoView()
                     case 11:
                         accountDeep(data: item)
+                    case 12:
+                        ListRecodeView()
                     default:
                         EmptyView()
                     }
@@ -114,7 +118,10 @@ struct tabView: View {
                     default:
                         EmptyView()
                     }
+                case .detail_medical(item: let item):
+                    TestView(data: item)
                 }
+                
             }
             
         }

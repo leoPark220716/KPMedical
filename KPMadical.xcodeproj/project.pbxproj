@@ -72,6 +72,7 @@
 		1E89D12A2BA31B0300C78CEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D1292BA31B0300C78CEC /* LoginView.swift */; };
 		1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */; };
 		1E8F79182B9F322000F4C230 /* Hospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8F79172B9F322000F4C230 /* Hospital.swift */; };
+		1E902E252C05CA8400E78E4E /* TransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E902E242C05CA8400E78E4E /* TransactionManager.swift */; };
 		1E9681EF2BA19400003F8E4B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9681EE2BA19400003F8E4B /* AccountView.swift */; };
 		1E985FA42BB300BB004B516E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E985FA32BB300BB004B516E /* ToastView.swift */; };
 		1E9F0A592BD0135400BEA19D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E9F0A582BD0135400BEA19D /* FirebaseAnalytics */; };
@@ -116,6 +117,13 @@
 		1EED4F1D2BD550DB0005F267 /* RouteFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EED4F1C2BD550DB0005F267 /* RouteFinder.swift */; };
 		1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */; };
 		1EF3ABEC2BB8551600B6DE56 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF3ABEB2BB8551600B6DE56 /* web3swift */; };
+		1EF3AD312C073FBC00F62CE9 /* ListRecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF3AD302C073FBC00F62CE9 /* ListRecode.swift */; };
+		1EF3AD342C07402700F62CE9 /* TreatmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF3AD332C07402700F62CE9 /* TreatmentCard.swift */; };
+		1EF3AD372C0740D400F62CE9 /* RecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF3AD362C0740D400F62CE9 /* RecoderModel.swift */; };
+		1EF847742C086A8F00AE4453 /* testsFilesViw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF847732C086A8F00AE4453 /* testsFilesViw.swift */; };
+		1EF847762C08739B00AE4453 /* MedicalsHttpRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF847752C08739B00AE4453 /* MedicalsHttpRequestModel.swift */; };
+		1EFEE2C42BFFF11D002E7989 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFEE2C32BFFF11D002E7989 /* NotificationService.swift */; };
+		1EFEE2C82BFFF11D002E7989 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1EFEE2C12BFFF11C002E7989 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1EFF61982BCF4A2F000BB898 /* SocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61972BCF4A2F000BB898 /* SocketModel.swift */; };
 		1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */; };
 		1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */; };
@@ -145,7 +153,28 @@
 			remoteGlobalIDString = 1EE9CB5F2B9F1F9300E923D9;
 			remoteInfo = KPMadical;
 		};
+		1EFEE2C62BFFF11D002E7989 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EE9CB582B9F1F9300E923D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EFEE2C02BFFF11C002E7989;
+			remoteInfo = NotificationService;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EFEE2C92BFFF11D002E7989 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1EFEE2C82BFFF11D002E7989 /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0885E87C3F41109616F52EE9 /* Pods_KPMadicalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KPMadicalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +246,7 @@
 		1E89D1292BA31B0300C78CEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1E89D12B2BA3434300C78CEC /* SingleOPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOPTView.swift; sourceTree = "<group>"; };
 		1E8F79172B9F322000F4C230 /* Hospital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hospital.swift; sourceTree = "<group>"; };
+		1E902E242C05CA8400E78E4E /* TransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionManager.swift; sourceTree = "<group>"; };
 		1E9681EE2BA19400003F8E4B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		1E985FA32BB300BB004B516E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		1EA0CA212BA8343E009076F1 /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
@@ -263,6 +293,14 @@
 		1EE9CB802B9F1F9500E923D9 /* KPMadicalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPMadicalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1EED4F1C2BD550DB0005F267 /* RouteFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinder.swift; sourceTree = "<group>"; };
 		1EEFB3672BCBC1ED00A0641B /* ChatSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocket.swift; sourceTree = "<group>"; };
+		1EF3AD302C073FBC00F62CE9 /* ListRecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecode.swift; sourceTree = "<group>"; };
+		1EF3AD332C07402700F62CE9 /* TreatmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentCard.swift; sourceTree = "<group>"; };
+		1EF3AD362C0740D400F62CE9 /* RecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoderModel.swift; sourceTree = "<group>"; };
+		1EF847732C086A8F00AE4453 /* testsFilesViw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testsFilesViw.swift; sourceTree = "<group>"; };
+		1EF847752C08739B00AE4453 /* MedicalsHttpRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalsHttpRequestModel.swift; sourceTree = "<group>"; };
+		1EFEE2C12BFFF11C002E7989 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EFEE2C32BFFF11D002E7989 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		1EFEE2C52BFFF11D002E7989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EFF61972BCF4A2F000BB898 /* SocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketModel.swift; sourceTree = "<group>"; };
 		1EFF61992BCF4C6B000BB898 /* ChatSocketDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketDataHandler.swift; sourceTree = "<group>"; };
 		1EFF619B2BCF4E21000BB898 /* ChatSocketRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketRequest.swift; sourceTree = "<group>"; };
@@ -306,6 +344,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4230BE916FCB078A069C557 /* Pods_KPMadical_KPMadicalUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EFEE2BE2BFFF11C002E7989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +429,7 @@
 		1E2B37472BA039C600B8EFA4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				1E902E232C05CA7000E78E4E /* TransactionModel */,
 				1EADCF962BCD676D002F1DBE /* View */,
 				1EEFB3662BCBC1D800A0641B /* ChatDataModel */,
 			);
@@ -532,6 +578,14 @@
 			path = SginUp;
 			sourceTree = "<group>";
 		};
+		1E902E232C05CA7000E78E4E /* TransactionModel */ = {
+			isa = PBXGroup;
+			children = (
+				1E902E242C05CA8400E78E4E /* TransactionManager.swift */,
+			);
+			path = TransactionModel;
+			sourceTree = "<group>";
+		};
 		1EA0CA202BA8341C009076F1 /* SqLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +678,7 @@
 				1EE9CB622B9F1F9300E923D9 /* KPMadical */,
 				1EE9CB732B9F1F9500E923D9 /* KPMadicalTests */,
 				1EE9CB7D2B9F1F9500E923D9 /* KPMadicalUITests */,
+				1EFEE2C22BFFF11D002E7989 /* NotificationService */,
 				1EE9CB612B9F1F9300E923D9 /* Products */,
 				C20FF78453C69FD9FDF4D006 /* Pods */,
 				98E1C7DF6EB99CA8CB97C4FA /* Frameworks */,
@@ -636,6 +691,7 @@
 				1EE9CB602B9F1F9300E923D9 /* KPMadical.app */,
 				1EE9CB702B9F1F9500E923D9 /* KPMadicalTests.xctest */,
 				1EE9CB7A2B9F1F9500E923D9 /* KPMadicalUITests.xctest */,
+				1EFEE2C12BFFF11C002E7989 /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -643,6 +699,7 @@
 		1EE9CB622B9F1F9300E923D9 /* KPMadical */ = {
 			isa = PBXGroup;
 			children = (
+				1EF3AD2F2C073FA000F62CE9 /* reacods */,
 				1E7C6FF02BE3DB1400D0CB12 /* PasswordFind */,
 				1EB7BA2E2BD0322000744717 /* KPMadical.entitlements */,
 				1ECDEB752BD02B8E00E45E56 /* KPMadicalRelease.entitlements */,
@@ -717,6 +774,34 @@
 			path = ChatDataModel;
 			sourceTree = "<group>";
 		};
+		1EF3AD2F2C073FA000F62CE9 /* reacods */ = {
+			isa = PBXGroup;
+			children = (
+				1EF3AD352C0740C500F62CE9 /* Model */,
+				1EF3AD322C07401400F62CE9 /* View */,
+			);
+			path = reacods;
+			sourceTree = "<group>";
+		};
+		1EF3AD322C07401400F62CE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EF3AD302C073FBC00F62CE9 /* ListRecode.swift */,
+				1EF3AD332C07402700F62CE9 /* TreatmentCard.swift */,
+				1EF847732C086A8F00AE4453 /* testsFilesViw.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1EF3AD352C0740C500F62CE9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EF3AD362C0740D400F62CE9 /* RecoderModel.swift */,
+				1EF847752C08739B00AE4453 /* MedicalsHttpRequestModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1EFC07E02BBC38CE00ED9F3D /* SmartContract */ = {
 			isa = PBXGroup;
 			children = (
@@ -724,6 +809,15 @@
 				1E0936492BF60557008BEA3D /* PersonalRecords_sol_PersonalRecords.bin */,
 			);
 			path = SmartContract;
+			sourceTree = "<group>";
+		};
+		1EFEE2C22BFFF11D002E7989 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				1EFEE2C32BFFF11D002E7989 /* NotificationService.swift */,
+				1EFEE2C52BFFF11D002E7989 /* Info.plist */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 		1EFFBBF52BB5BD1A0079B6EE /* MyReservation */ = {
@@ -789,10 +883,12 @@
 				1EE9CB5D2B9F1F9300E923D9 /* Frameworks */,
 				1EE9CB5E2B9F1F9300E923D9 /* Resources */,
 				BEF048D52EB9AA9870BD16C8 /* [CP] Embed Pods Frameworks */,
+				1EFEE2C92BFFF11D002E7989 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1EFEE2C72BFFF11D002E7989 /* PBXTargetDependency */,
 			);
 			name = KPMadical;
 			packageProductDependencies = (
@@ -843,6 +939,23 @@
 			productReference = 1EE9CB7A2B9F1F9500E923D9 /* KPMadicalUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1EFEE2C02BFFF11C002E7989 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EFEE2CC2BFFF11D002E7989 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				1EFEE2BD2BFFF11C002E7989 /* Sources */,
+				1EFEE2BE2BFFF11C002E7989 /* Frameworks */,
+				1EFEE2BF2BFFF11C002E7989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 1EFEE2C12BFFF11C002E7989 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -850,7 +963,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					1EE9CB5F2B9F1F9300E923D9 = {
@@ -863,6 +976,9 @@
 					1EE9CB792B9F1F9500E923D9 = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 1EE9CB5F2B9F1F9300E923D9;
+					};
+					1EFEE2C02BFFF11C002E7989 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -886,6 +1002,7 @@
 				1EE9CB5F2B9F1F9300E923D9 /* KPMadical */,
 				1EE9CB6F2B9F1F9500E923D9 /* KPMadicalTests */,
 				1EE9CB792B9F1F9500E923D9 /* KPMadicalUITests */,
+				1EFEE2C02BFFF11C002E7989 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -911,6 +1028,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1EE9CB782B9F1F9500E923D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EFEE2BF2BFFF11C002E7989 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1042,6 +1166,7 @@
 				1E2E987C2BBE581D00986597 /* HTTPRequest.swift in Sources */,
 				1E2B374B2BA0403500B8EFA4 /* SplashView.swift in Sources */,
 				1EE9CB662B9F1F9300E923D9 /* ContentView.swift in Sources */,
+				1EF3AD312C073FBC00F62CE9 /* ListRecode.swift in Sources */,
 				1E0936502BF63BDB008BEA3D /* accountDeep.swift in Sources */,
 				1E0D0D672BF3D55B00363FC1 /* UserInfoView.swift in Sources */,
 				1E7C6FF42BE3E7A500D0CB12 /* DataRequest.swift in Sources */,
@@ -1052,11 +1177,13 @@
 				1E5F6F9C2BCD3A1500787FAC /* ChatViewHandler.swift in Sources */,
 				1EEFB3682BCBC1ED00A0641B /* ChatSocket.swift in Sources */,
 				1E2B37492BA039DA00B8EFA4 /* Chat.swift in Sources */,
+				1EF847742C086A8F00AE4453 /* testsFilesViw.swift in Sources */,
 				1EFF619C2BCF4E21000BB898 /* ChatSocketRequest.swift in Sources */,
 				1EE63E0D2B9F4E460026B4DE /* SignUpView.swift in Sources */,
 				1E09364E2BF62FF3008BEA3D /* userInfoRequest.swift in Sources */,
 				1E89D12C2BA3434300C78CEC /* SingleOPTView.swift in Sources */,
 				1EFFBBFA2BB5BFA30079B6EE /* reservationItemView.swift in Sources */,
+				1EF3AD372C0740D400F62CE9 /* RecoderModel.swift in Sources */,
 				1EFF619A2BCF4C6B000BB898 /* ChatSocketDataHandler.swift in Sources */,
 				1EFFBBF42BB5B0C90079B6EE /* reservationSuccessView.swift in Sources */,
 				1EADCF982BCD67B7002F1DBE /* SendImageItemView.swift in Sources */,
@@ -1064,6 +1191,7 @@
 				1E18A2E92BAAF44800466221 /* FindHospitalView.swift in Sources */,
 				1E4C28192BA9F413005461D1 /* TestFunc.swift in Sources */,
 				1EFFBBFD2BB5C5280079B6EE /* reservationModel.swift in Sources */,
+				1EF3AD342C07402700F62CE9 /* TreatmentCard.swift in Sources */,
 				1E370E9F2BB2A148001BA38E /* HospitalDataHandler.swift in Sources */,
 				1E3BA50E2BD3EADF008AF9DD /* Route.swift in Sources */,
 				1EFFBBF22BB599A50079B6EE /* symptomTextFiledView.swift in Sources */,
@@ -1095,6 +1223,7 @@
 				1E370E9D2BB2946C001BA38E /* ChooseDate.swift in Sources */,
 				1EAEF4852BBD4E1400F06BFB /* KNPWalletView.swift in Sources */,
 				1EB969DB2BED180F0045A994 /* MyHospitalRequest.swift in Sources */,
+				1E902E252C05CA8400E78E4E /* TransactionManager.swift in Sources */,
 				1E7C6FF82BE3FCAC00D0CB12 /* newPassword.swift in Sources */,
 				1E4FA0E92BACA198000D3A27 /* HospitalDetailView.swift in Sources */,
 				1EA0CA222BA8343E009076F1 /* LocalDataBase.swift in Sources */,
@@ -1111,6 +1240,7 @@
 				1E130CA72BB5CE5A004F7C36 /* ReservationDetailView.swift in Sources */,
 				1EED4F1D2BD550DB0005F267 /* RouteFinder.swift in Sources */,
 				1E985FA42BB300BB004B516E /* ToastView.swift in Sources */,
+				1EF847762C08739B00AE4453 /* MedicalsHttpRequestModel.swift in Sources */,
 				1EB532A42BB1CA4600E1958C /* DoctorItemView.swift in Sources */,
 				1E7B105D2BB2F659006C4FCA /* HospitalScheduleView.swift in Sources */,
 				1E7C6FEF2BE3D7DB00D0CB12 /* AccountViewHandler.swift in Sources */,
@@ -1154,6 +1284,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1EFEE2BD2BFFF11C002E7989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EFEE2C42BFFF11D002E7989 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1166,6 +1304,11 @@
 			isa = PBXTargetDependency;
 			target = 1EE9CB5F2B9F1F9300E923D9 /* KPMadical */;
 			targetProxy = 1EE9CB7B2B9F1F9500E923D9 /* PBXContainerItemProxy */;
+		};
+		1EFEE2C72BFFF11D002E7989 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EFEE2C02BFFF11C002E7989 /* NotificationService */;
+			targetProxy = 1EFEE2C62BFFF11D002E7989 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1293,6 +1436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3AD48946A0D93AA67F35AC2B /* Pods-KPMadical.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1305,9 +1449,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KPMadical/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1332,6 +1476,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 412CDC71591AD17A701230ED /* Pods-KPMadical.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1345,9 +1490,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KPMadical/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1449,6 +1594,61 @@
 			};
 			name = Release;
 		};
+		1EFEE2CA2BFFF11D002E7989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N762C9YWP9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMedical.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1EFEE2CB2BFFF11D002E7989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N762C9YWP9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knp.KpMedical.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1484,6 +1684,15 @@
 			buildConfigurations = (
 				1EE9CB8B2B9F1F9500E923D9 /* Debug */,
 				1EE9CB8C2B9F1F9500E923D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EFEE2CC2BFFF11D002E7989 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EFEE2CA2BFFF11D002E7989 /* Debug */,
+				1EFEE2CB2BFFF11D002E7989 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

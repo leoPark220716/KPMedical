@@ -144,6 +144,58 @@ class WalletAPIRequest{
             return (false,"","")
         }
     }
+    func getTransactionList(Limit: String, token: String,account: String) async -> (success: Bool, array: [WalletDataStruct.AccessItem]){
+        let httpStruct = http<Empty?,KPApiStructFrom<getListData>>.init(
+            method: "GET",
+            urlParse: "v2/chat/transactions?limit=\(Limit)",
+            token: token,
+            UUID: getDeviceUUID())
+        struct getListData: Codable{
+            var transactions: [TransactionItems]
+        }
+        let result = await KPWalletApi(HttpStructs: httpStruct)
+        if result.success{
+            var tempItems: [WalletDataStruct.AccessItem] = []
+            for item in result.data!.data.transactions{
+                tempItems.append(WalletDataStruct.AccessItem(HospitalName: item.hospital_name, Purpose: item.message, State: item.from == account, Date: datePase(dateString: item.timestamp),blockHash: item.hash,unixTime: item.unixtime))
+            }
+            return (true,tempItems)
+        }else{
+            return (false,[])
+        }
+        struct TransactionItems: Codable{
+            let room_key: String
+            let timestamp_uuid: String
+            let msg_type: Int
+            let from: String
+            let to: String
+            let message: String
+            let hospital_id: Int
+            let unixtime: Int
+            let hash: String
+            let timestamp: String
+            let hospital_name: String
+        }
+    }
+    private func datePase(dateString: String) -> String{
+
+        // DateFormatter 인스턴스 생성 및 설정
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "M.dd"
+
+        // 문자열을 Date 객체로 변환
+        if let date = inputFormatter.date(from: dateString) {
+            // Date 객체를 원하는 형식의 문자열로 변환
+            let formattedDateString = outputFormatter.string(from: date)
+            print(formattedDateString) // "5.25"
+            return formattedDateString
+        } else {
+            return "1"
+        }
+    }
 
     struct SaveWalletData: Codable{
         var access_token: String

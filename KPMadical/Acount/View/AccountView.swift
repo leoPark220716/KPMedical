@@ -55,11 +55,7 @@ struct AccountView: View {
                     }
                 }
                 .sheet(isPresented: $isOPT){
-                    if create{
-                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 생성해주세요.",isCreate: $create)
-                    }else{
-                        AppPasswordView(userInfo: authViewModel, TitleString: "인증번호를 입력해주세요.",isCreate: $create)
-                    }
+
                 }
                 HStack{
                     Image(systemName: "doc.text")

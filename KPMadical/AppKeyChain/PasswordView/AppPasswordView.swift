@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import BigInt
 
 struct AppPasswordView: View {
-    @ObservedObject var userInfo: UserInformation
+    @EnvironmentObject var userInfo: UserInformation
     @State private var password: String = ""
     private let passwordLength = 6
     @State private var status = "인증번호를 입력해주세요"
@@ -16,9 +17,12 @@ struct AppPasswordView: View {
     @State var FirstPassword: String = ""
     @State private var statusBool = false
     @State private var tabBool = false
-    @Binding var isCreate: Bool
+    @State var isCreate = false
+    @State var isRequest = false
+    @State var unixTime = 0
+    @State var hospitalId = 0
+    let CheckPassword = AppPasswordKeyChain()
     var body: some View {
-        
         GeometryReader { geometry in
             VStack {
                 if isCreate{
@@ -52,16 +56,28 @@ struct AppPasswordView: View {
                 Text(status)
                     .foregroundStyle(status == "인증번호가 일치하지 않습니다." ? Color.red : Color.black)
                 Spacer()
-                NumberPad(userInfo: userInfo,TitleString:$TitleString,password: $password,FirstPassword: $FirstPassword ,maxLength: passwordLength,status: $status, statusBool: $statusBool, tabBool: $tabBool,isCreate: $isCreate)
+                NumberPad(TitleString:$TitleString,password: $password,FirstPassword: $FirstPassword ,maxLength: passwordLength,status: $status, statusBool: $statusBool, tabBool: $tabBool,isCreate: $isCreate,isRequest: $isRequest,unixTime: $unixTime, hospitalId: $hospitalId)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .edgesIgnoringSafeArea(.all)
-        
+        .onAppear{
+            let account = CheckPassword.GetUserAccountString(token: userInfo.token)
+            if !account.status{
+                return
+            }
+            if CheckPassword.checkPasswordExists(account: account.account){
+                print("있음")
+                isCreate = false
+                
+            }else{
+                isCreate = true
+            }
+        }
     }
 }
 struct NumberPad: View {
-    @ObservedObject var userInfo: UserInformation
+    @EnvironmentObject var userInfo: UserInformation
     @Binding var TitleString: String
     @Binding var password: String
     @Binding var FirstPassword: String
@@ -70,22 +86,24 @@ struct NumberPad: View {
     @Binding var statusBool: Bool
     @Binding var tabBool: Bool
     @Binding var isCreate: Bool
+    @Binding var isRequest: Bool
+    @Binding var unixTime: Int
+    @Binding var hospitalId: Int
     let appKeyChain = AppPasswordKeyChain()
     @Environment(\.dismiss) private var dissmiss
     @EnvironmentObject var router: GlobalViewRouter
+    let model = KNPWallet()
     @State var rows = [
         ["1", "2", "3"],
         ["4", "5", "6"],
         ["7", "8", "9"],
         ["Re", "0", "<"]
     ]
-    
     // 버튼 간의 수직 간격
     let buttonHeight: CGFloat = 70
     let spacing: CGFloat = 0
     // VStack에 적용될 상단 및 하단 패딩
     let verticalPadding: CGFloat = 0
-    
     var body: some View {
         let numberOfRows = rows.count
         // 계산된 전체 높이
@@ -114,7 +132,6 @@ struct NumberPad: View {
             rearrangeNumbers()
         }
     }
-    
     func buttonAction(_ item: String) {
         if item == "<" {
             password = String(password.dropLast())
@@ -155,8 +172,33 @@ struct NumberPad: View {
                     }
                     let check = appKeyChain.verifyPassword(password: password, account: account.account)
                     if check{
-                        dissmiss()
-                        router.currentView = .myWallet
+                        if isRequest{
+                            switch router.transactionManager?.ContractCase{
+                            case .edit:
+                                dissmiss()
+                                Task{
+                                    await router.transactionManager?.ConfirmToEdit(token: userInfo.token)
+                                }
+                            case .share:
+                                dissmiss()
+                                Task{
+                                    await router.transactionManager?.ConfirmToShare(token: userInfo.token)
+                                }
+                                print("share")
+                            case .notice:
+                                dissmiss()
+                                Task{
+                                    await router.transactionManager?.Confirm(token: userInfo.token)
+                                }
+                            default:
+                                print("Err")
+                            }
+                            print("HOSPITAL ID CHECK")
+                            
+                        }else{
+                            dissmiss()
+                            router.currentView = .myWallet
+                        }
                     }else{
                         status = "인증번호가 일치하지 않습니다."
                         password = ""

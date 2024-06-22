@@ -12,7 +12,9 @@ struct WalletDataStruct{
     struct AccessItem{
         var HospitalName: String
         var Purpose: String
-        var State: String
+        var State: Bool
         var Date: String
+        var blockHash: String
+        var unixTime: Int
     }
 }

@@ -30,7 +30,6 @@ class ChatSocketRequest: WebSocket{
                 to: to,
                 content_type: content_type,
                 content: content)
-            
         }
         guard let jsonData = try? JSONEncoder().encode(ChatMessage) else{
             print("JsonData 파싱 실패")
@@ -53,12 +52,35 @@ class ChatSocketRequest: WebSocket{
             })
         }
     }
+    func SendTransactionMsg(from: String, to: String,name: String, blockHash: String,message: String) async -> Bool{
+        let msg = SendChatDataModel.content(message: message)
+        let hash = SendChatDataModel.blockData(hash: blockHash)
+        let content = SendChatDataModel.Confirmed(msg_type: 9, from: from, to: to, content_type: "text",content: msg,block_data: hash)
+        
+        guard let jsonData = try? JSONEncoder().encode(content) else{
+            return false
+        }
+        guard let jsonString = String(data: jsonData, encoding: .utf8) else{
+            return false
+        }
+        let message = URLSessionWebSocketTask.Message.string(jsonString)
+        return await withCheckedContinuation { continuation in
+            webSocketTask?.send(message, completionHandler: { Error in
+                if let err = Error {
+                    print("Message Sending Err \(err.localizedDescription)")
+                    continuation.resume(returning: false)
+                }else{
+                    print("SendSuccess")
+                    continuation.resume(returning: true)
+                }
+            })
+        }
+    }
     func SendFileData(data: Data){
         let message = URLSessionWebSocketTask.Message.data(data)
         webSocketTask?.send(message, completionHandler: { Error in
             if let err = Error {
                 print("Message Sending Err \(err.localizedDescription)")
-                
             }else{
                 print("SendSuccess")
             }
@@ -274,3 +296,50 @@ func KPWalletApiCloser<RequestType: Codable, ReturnType: Codable>(HttpStructs: h
 }
 
 
+func StringJsonHttpRequest<RequestType: Codable, ReturnType: Codable>(HttpStructs: http<RequestType?, ReturnType>) async -> (success: Bool, data: ReturnType?){
+    let query = HttpStructs.urlParse
+    
+        let StringURL = "https://kp-medicals.com/api/common/\(query)"
+        print(StringURL)
+        if let url = URL(string: StringURL){
+            print("SendURL \(url)")
+            do{
+                var request = URLRequest(url: url)
+                print("request URL  \(String(describing: request.url))")
+                request.httpMethod = HttpStructs.method
+                request.setValue("Bearer \(HttpStructs.token)", forHTTPHeaderField: "Authorization")
+                request.setValue(HttpStructs.UUID, forHTTPHeaderField: "X-Device-UUID")
+                if HttpStructs.method != "GET"{
+                    let postData = try JSONEncoder().encode(HttpStructs.requestVal)
+                    request.httpBody = postData
+                    print("✅ \(String(describing: HttpStructs.requestVal))")
+                }
+                let (data,response) = try await URLSession.shared.data(for: request)
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else{
+                    let bodyString = String(data: data, encoding: .utf8)
+                    print("Response body: \(bodyString ?? "Null")")
+                    print("Request HTTP response Error \(String(describing: response))")
+                    return (false,nil)
+                }
+                let bodyString = String(data: data, encoding: .utf8)
+                print("👮🏼‍♂️Response body \(StringURL)")
+                print("👮🏼‍♂️Response body: \(bodyString ?? "Null")")
+                do {
+                    let jsonData = try JSONDecoder().decode(ReturnType.self, from: data)
+                    return (true, jsonData)
+                } catch let decodeError {
+                    print("👮🏼‍♂️Josn DecodingError \(StringURL)")
+                    print("JSON Decoding Error: \(decodeError)")
+                    return (false, nil)
+                }
+            }catch{
+                print("Request Error \(error)")
+                return (false,nil)
+            }
+        }
+        else{
+            return (false,nil)
+        }
+    
+}

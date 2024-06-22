@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct KeywordSearch: View {
-    @Environment var userInfo: UserInformation
+    @EnvironmentObject var userInfo: UserInformation
     @State private var searchText = ""
     @ObservedObject private var viewModel = keywordModel()
+    @EnvironmentObject var router: GlobalViewRouter
     // 태그 배열
     var body: some View {
         VStack(alignment: .leading) {
@@ -74,10 +75,14 @@ struct KeywordSearch: View {
                 }else if !viewModel.hospitals.isEmpty && !searchText.isEmpty && viewModel.showList{
                     List(viewModel.hospitals.indices, id: \.self) {index in
                         FindHosptialItem(hospital: $viewModel.hospitals[index])
-                            .background(
+                            
+                                .onTapGesture {
+                                    router.ReservationInit()
+                                    router.tabPush(to: Route.hospital(item: hospitalParseParam(id: viewModel.hospitals[index].hospital_id, name: "hospitalDitailView", hospital_id:viewModel.hospitals[index].hospital_id , startTiome: viewModel.hospitals[index].start_time, EndTime: viewModel.hospitals[index].end_time, MainImage: viewModel.hospitals[index].icon)))
+                                }
 //                                NavigationLink("",destination : HospitalDetailView(path: $path, userInfo:userInfo,StartTime: viewModel.hospitals[index].start_time,EndTime: viewModel.hospitals[index].end_time,HospitalId: viewModel.hospitals[index].hospital_id, MainImage: viewModel.hospitals[index].icon))
 //                                    .opacity(0)
-                            )
+                            
                     }
                     .listStyle(InsetListStyle())
                     .padding(.top, 10)

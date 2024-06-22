@@ -25,7 +25,15 @@ struct ReservationParseParam{
     let HospitalId: Int
     let reservation_id: Int
 }
-
+struct DetailMedicalRecord{
+    let id: Int
+    let recodeString: String
+    let diagnosString: String
+    let treatmentString: String
+    let imageFiles: [ReacoderModel.File]
+    let departCode: Int
+    let docName: String
+}
 protocol PathAddress: Hashable {
     var name: String { get }
     var page: Int { get }
@@ -37,6 +45,7 @@ enum Route{
     case hospital(item: hospitalParseParam)
     case reservation(item: ReservationParseParam)
     case pass(item: PassViewPathAddress)
+    case detail_medical(item: DetailMedicalRecord)
 }
 extension Route: Hashable {
     static func == (lhs: Route, rhs: Route) -> Bool {
@@ -51,6 +60,8 @@ extension Route: Hashable {
             return lhsData.item == rhsData.item && lhsData.HospitalId == rhsData.HospitalId && lhsData.reservation_id == rhsData.reservation_id
         case (.pass(let lhsItem), .pass(let rhsItem)):
             return lhsItem.token == rhsItem.token && lhsItem.page == rhsItem.page && lhsItem.id == rhsItem.id
+        case (.detail_medical(let lhsItem), .detail_medical(let rhsItem)):
+            return lhsItem.diagnosString == rhsItem.diagnosString && lhsItem.recodeString == rhsItem.recodeString && lhsItem.id == rhsItem.id && lhsItem.treatmentString == rhsItem.treatmentString && lhsItem.imageFiles == rhsItem.imageFiles && lhsItem.departCode == rhsItem.departCode && lhsItem.docName == rhsItem.docName
         default:
             return false
         }
@@ -80,7 +91,14 @@ extension Route: Hashable {
             hasher.combine(item.id)  // 예시로 id 사용
             hasher.combine(item.token)
             hasher.combine(item.page)
-        
+        case .detail_medical(let item):
+            hasher.combine(item.diagnosString)
+            hasher.combine(item.id)
+            hasher.combine(item.recodeString)
+            hasher.combine(item.treatmentString)
+            hasher.combine(item.imageFiles)
+            hasher.combine(item.departCode)
+            hasher.combine(item.docName)
         }
     }
 
